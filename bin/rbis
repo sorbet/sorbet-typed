@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'rbis/finder'
+if ARGV[0] == '--paths'
+  puts RBIs::Finder.paths
+  return
+end
+
+puts RBIs::Finder.rbis
