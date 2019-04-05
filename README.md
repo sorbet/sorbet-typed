@@ -7,8 +7,7 @@ Used in conjunction with [Sorbet](https://github.com/stripe/sorbet).
 
 ## Installation
 
-Use the Sorbet gem. `srb init` will automatically put the applicable files from
-this repository in `./sorbet/rbi/sorbet-typed`.
+Use the Sorbet gem. `srb init` will fetch the applicable files from this repository into your project.
 
 ## Adding .rbi files
 
