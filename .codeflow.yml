@@ -1,5 +1,0 @@
----
-build_engine: Gem
-secure:
-  required_reviews: 1
-  upstream_repository: coinbase/rbis
