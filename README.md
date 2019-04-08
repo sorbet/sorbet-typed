@@ -1,20 +1,13 @@
-# RBIs
+# `sorbet-typed`
 
-Database of `.rbi` files used for typing Gems and other Ruby classes.
+> A central repository for sharing type defintions for Ruby gems
+
 Inspired by [definitelytyped.org](http://definitelytyped.org/).
 Used in conjunction with [Sorbet](https://github.com/stripe/sorbet).
 
 ## Installation
 
-`gem install rbis --source <private gem source>`
-
-This is not yet a public gem: Coinbase currently mirrors this repo internally and builds to an internal gem server.
-
-## Project .rbi files
-
-To list all the `.rbi` files available to the current project, simply install this gem and run `rbis`.
-
-This makes running `sorbet` much easier, as you can simply pass the output of `rbis` to `sorbet` rather than manually collecting the relevant `.rbi` files.
+Use the Sorbet gem. `srb init` will fetch the applicable files from this repository into your project.
 
 ## Adding .rbi files
 
@@ -48,3 +41,9 @@ For `json-schema@2.5.2`, all of the `.rbi` files that exist in the following dir
  - `lib/json-schema/all`
  - `lib/json-schema/>1.0`
  - `lib/json-schema/~>2.5`
+
+# Contributors
+
+This repository was originally written by the fine folks at
+[Coinbase](https://www.coinbase.com). Thanks so much for starting the ball
+rolling!
