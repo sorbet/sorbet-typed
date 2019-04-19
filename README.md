@@ -1,9 +1,9 @@
-# `sorbet-typed`
+# sorbet-typed
 
 > A central repository for sharing type defintions for Ruby gems
 
 Inspired by [definitelytyped.org](http://definitelytyped.org/).
-Used in conjunction with [Sorbet](https://github.com/stripe/sorbet).
+Used in conjunction with [Sorbet](https://sorbet.org).
 
 ## Installation
 
