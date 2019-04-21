@@ -2,7 +2,7 @@
 
 > A central repository for sharing type definitions for Ruby gems
 
-Inspired by [definitelytyped.org](http://definitelytyped.org/).
+Inspired by [definitelytyped.org](https://definitelytyped.org/).
 Used in conjunction with [Sorbet](https://sorbet.org).
 
 ## Installation
