@@ -18,8 +18,8 @@ class Object
   sig {params(key: String).returns(String)}
   def to_query(key); end
 
-  sig {returns(T::Boolean)}
-  def in?; end
+  sig {params(another_object: Object).returns(T::Boolean)}
+  def in?(another_object); end
 
   sig {returns(T::Hash[String, T.untyped])}
   def instance_values; end
