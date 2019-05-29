@@ -1,3 +1,5 @@
+# typed: strong
+
 class StateMachines::StateContext < Module
   sig { params(args: T.untyped).void }
   def validate(*args); end
