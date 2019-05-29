@@ -1,3 +1,5 @@
+# typed: strong
+
 class ActiveRecord::Schema
   sig {params(info: Hash, blk: T.proc.bind(ActiveRecord::Schema).void).void}
   def self.define(info = nil, &blk); end

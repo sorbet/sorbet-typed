@@ -1,3 +1,5 @@
+# typed: strong
+
 module Rails
   sig {returns(Rails::Application)}
   def self.application; end
