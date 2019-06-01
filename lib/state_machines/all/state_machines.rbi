@@ -1,3 +1,5 @@
+# typed: strong
+
 module StateMachines::MacroMethods
   sig do
     params(
