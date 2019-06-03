@@ -1,3 +1,5 @@
+# typed: strong
+
 class Stripe::Card
   sig { returns(String) }
   def brand; end
