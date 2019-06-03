@@ -4,17 +4,17 @@ class ActiveRecord::Base
   sig do
     params(
       model: Symbol,
-      autosave: T::Boolean,
-      class_name: String,
-      counter_cache: T.any(T::Boolean, Symbol),
-      dependent: Symbol,
-      foreign_key: Symbol,
-      primary_key: Symbol,
-      inverse_of: Symbol,
-      polymorphic: T::Boolean,
-      touch: T.any(T::Boolean, Symbol),
-      validate: T::Boolean,
-      optional: T::Boolean
+      autosave: T.nilable(T::Boolean),
+      class_name: T.nilable(String),
+      counter_cache: T.nilable(T.any(T::Boolean, Symbol)),
+      dependent: T.nilable(Symbol),
+      foreign_key: T.nilable(Symbol),
+      primary_key: T.nilable(Symbol),
+      inverse_of: T.nilable(Symbol),
+      polymorphic: T.nilable(T::Boolean),
+      touch: T.nilable(T.any(T::Boolean, Symbol)),
+      validate: T.nilable(T::Boolean),
+      optional: T.nilable(T::Boolean)
     ).void
   end
   def self.belongs_to(
