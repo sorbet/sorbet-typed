@@ -43,7 +43,7 @@ class Object
     params(
       method_name: T.any(Symbol, String, NilClass),
       args: T.untyped,
-      b: T.proc.params(arg0: T.untyped).returns(T.untyped)
+      b: T.nilable(T.proc.params(arg0: T.untyped).returns(T.untyped))
     ).returns(T.untyped)
   end
   def try(method_name = nil, *args, &b); end
@@ -52,7 +52,7 @@ class Object
     params(
       method_name: T.any(Symbol, String, NilClass),
       args: T.untyped,
-      b: T.proc.params(arg0: T.untyped).returns(T.untyped)
+      b: T.nilable(T.proc.params(arg0: T.untyped).returns(T.untyped))
     ).returns(T.untyped)
   end
   def try!(method_name = nil, *args, &b); end
@@ -84,7 +84,7 @@ class NilClass
     params(
       method_name: T.any(Symbol, String, NilClass),
       args: T.untyped,
-      b: T.proc.params(arg0: T.untyped).returns(T.untyped)
+      b: T.nilable(T.proc.params(arg0: T.untyped).returns(T.untyped))
     ).returns(NilClass)
   end
   def try(method_name = nil, *args, &b) ; end
@@ -93,7 +93,7 @@ class NilClass
     params(
       method_name: T.any(Symbol, String, NilClass),
       args: T.untyped,
-      b: T.proc.params(arg0: T.untyped).returns(T.untyped)
+      b: T.nilable(T.proc.params(arg0: T.untyped).returns(T.untyped))
     ).returns(NilClass)
   end
   def try!(method_name = nil, *args, &b) ; end
