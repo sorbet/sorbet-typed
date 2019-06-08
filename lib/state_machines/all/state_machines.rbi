@@ -31,24 +31,26 @@ class StateMachines::StateContext
   sig do
     params(
       methods: Symbol,
+      from: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       to: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       do: T.proc.params(arg0: T.untyped).void,
       blk: T.any(NilClass, T.proc.params(arg0: T.untyped).void),
     ).void
   end
-  def before_transition(*methods, on: nil, to: nil, do: nil, &blk); end
+  def before_transition(*methods, from: nil, on: nil, to: nil, do: nil, &blk); end
 
   sig do
     params(
       methods: Symbol,
+      from: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       to: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       do: T.proc.params(arg0: T.untyped).void,
       blk: T.any(NilClass, T.proc.params(arg0: T.untyped).void),
     ).void
   end
-  def after_transition(*methods, on: nil, to: nil, do: nil, &blk); end
+  def after_transition(*methods, from: nil, on: nil, to: nil, do: nil, &blk); end
 end
 
 class StateMachines::Event
