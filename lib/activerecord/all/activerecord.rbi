@@ -31,6 +31,24 @@ class ActiveRecord::Base
     validate: nil,
     optional: nil
   ); end
+
+  sig { params(args: T.untyped).void }
+  def self.before_create(args); end
+
+  sig { params(args: T.untyped).void }
+  def run_callbacks(args); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).void }
+  def self.validates(*args, **kwargs); end
+
+  sig { params(args: T.untyped).void }
+  def update(args); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).void }
+  def update!(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).void }
+  def update_attributes(*args, **kwargs); end
 end
 
 class ActiveRecord::Schema
