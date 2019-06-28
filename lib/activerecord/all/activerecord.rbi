@@ -216,8 +216,9 @@ class ActiveRecord::Base
   extend ActiveRecord::Inheritance::ClassMethods
   extend ActiveRecord::Scoping::Named::ClassMethods
   extend ActiveRecord::NestedAttributes::ClassMethods
-  
- sig do
+  extend ActiveRecord::Persistence::ClassMethods
+
+  sig do
     params(
       arg: Symbol,
       if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
