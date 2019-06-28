@@ -224,3 +224,61 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   def create_table(table_name, options = nil); end
 end
 
+module ActiveRecord
+  class ActiveRecordError < StandardError; end
+  class SubclassNotFound < ActiveRecordError; end
+  class AssociationTypeMismatch < ActiveRecordError; end
+  class SerializationTypeMismatch < ActiveRecordError; end
+  class AdapterNotSpecified < ActiveRecordError; end
+  class TableNotSpecified < ActiveRecordError; end
+  class AdapterNotFound < ActiveRecordError; end
+  class ConnectionNotEstablished < ActiveRecordError; end
+  class ReadOnlyError < ActiveRecordError; end
+  class RecordNotFound < ActiveRecordError; end
+  class RecordNotSaved < ActiveRecordError;end
+  class RecordNotDestroyed < ActiveRecordError; end
+  class StatementInvalid < ActiveRecordError; end
+  class WrappedDatabaseException < StatementInvalid; end
+  class RecordNotUnique < WrappedDatabaseException; end
+  class InvalidForeignKey < WrappedDatabaseException; end
+  class MismatchedForeignKey < StatementInvalid; end
+  class NotNullViolation < StatementInvalid; end
+  class ValueTooLong < StatementInvalid; end
+  class RangeError < StatementInvalid; end
+  class PreparedStatementInvalid < ActiveRecordError; end
+  class NoDatabaseError < StatementInvalid; end
+  class PreparedStatementCacheExpired < StatementInvalid; end
+  class StaleObjectError < ActiveRecordError; end
+  class ConfigurationError < ActiveRecordError; end
+  class ReadOnlyRecord < ActiveRecordError; end
+  class Rollback < ActiveRecordError; end
+  class DangerousAttributeError < ActiveRecordError; end
+  UnknownAttributeError = ActiveModel::UnknownAttributeError
+  class AttributeAssignmentError < ActiveRecordError; end
+  class MultiparameterAssignmentErrors < ActiveRecordError; end
+  class UnknownPrimaryKey < ActiveRecordError; end
+  class ImmutableRelation < ActiveRecordError; end
+  class TransactionIsolationError < ActiveRecordError; end
+  class TransactionRollbackError < StatementInvalid; end
+  class SerializationFailure < TransactionRollbackError; end
+  class Deadlocked < TransactionRollbackError; end
+  class IrreversibleOrderError < ActiveRecordError; end
+  class LockWaitTimeout < StatementInvalid; end
+  class StatementTimeout < StatementInvalid; end
+  class QueryCanceled < StatementInvalid; end
+  class UnknownAttributeReference < ActiveRecordError; end
+  class MigrationError < ActiveRecordError; end
+  class IrreversibleMigration < MigrationError; end
+  class DuplicateMigrationVersionError < MigrationError; end
+  class MigrationError < ActiveRecordError; end
+  class IrreversibleMigration < MigrationError; end
+  class DuplicateMigrationVersionError < MigrationError; end
+  class DuplicateMigrationNameError < MigrationError; end
+  class UnknownMigrationVersionError < MigrationError; end
+  class IllegalMigrationNameError < MigrationError; end
+  class PendingMigrationError < MigrationError; end
+  class ConcurrentMigrationError < MigrationError; end
+  class NoEnvironmentInSchemaError < MigrationError; end
+  class ProtectedEnvironmentError < ActiveRecordError; end
+  class EnvironmentMismatchError < ActiveRecordError; end
+end
