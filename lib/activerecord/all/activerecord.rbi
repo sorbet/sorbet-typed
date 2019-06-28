@@ -191,7 +191,16 @@ end
 
 class ActiveRecord::Base
   extend ActiveRecord::Associations::ClassMethods
+  extend ActiveRecord::Inheritance::ClassMethods
   extend ActiveRecord::Scoping::Named::ClassMethods
+end
+
+module ActiveRecord::Inheritance::ClassMethods
+  sig { params(value: T::Boolean).void }
+  def abstract_class=(value); end
+
+  sig { returns(T::Boolean) }
+  def abstract_class; end
 end
 
 class ActiveRecord::Type::Value
