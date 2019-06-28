@@ -174,17 +174,39 @@ module ActiveRecord::Associations::ClassMethods
   ); end
 end
 
+module ActiveRecord::NestedAttributes::ClassMethods
+  sig do
+    params(
+      attr_names: T.any(T.any(Symbol, String), T::Array[T.any(Symbol, String)]),
+      allow_destroy: T.nilable(T::Boolean),
+      reject_if: T.any(Symbol, T.proc.returns(T::Boolean)),
+      limit: T.any(Integer, Symbol, T.proc.returns(Integer)),
+      update_only: T.nilable(T::Boolean),
+    ).void
+  end
+  def accepts_nested_attributes_for(
+    attr_names,
+    allow_destroy: nil,
+    reject_if: nil,
+    limit: nil,
+    update_only: nil
+  ); end
+end
+
 module ActiveRecord::Scoping::Named::ClassMethods
   sig do
     params(
       name: T.nilable(T.any(Symbol, String)),
-      body: T.proc.params(arg0: T.untyped).returns(T.untyped),
-      blk: T.nilable(T.proc.params(arg0: T.untyped).returns(T.untyped))
+      body: T.nilable(T.any(
+        T.proc.returns(T.untyped),
+        T.proc.params(args: T.nilable(T.untyped)).returns(T.untyped)
+      )),
+      blk: T.nilable(T.proc.params(args: T.nilable(T.untyped)).returns(T.untyped))
     ).void
   end
   def scope(
     name,
-    body,
+    body = nil,
     &blk
   ); end
 end
@@ -193,6 +215,217 @@ class ActiveRecord::Base
   extend ActiveRecord::Associations::ClassMethods
   extend ActiveRecord::Inheritance::ClassMethods
   extend ActiveRecord::Scoping::Named::ClassMethods
+  extend ActiveRecord::NestedAttributes::ClassMethods
+  
+ sig do
+    params(
+      arg: Symbol,
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.after_commit(
+    arg,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.after_create(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.after_destroy(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.after_rollback(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.after_save(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.after_update(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.after_validation(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.around_create(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.around_destroy(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.around_save(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.around_update(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.before_create(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.before_destroy(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.before_save(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+    ).void
+  end
+  def self.before_update(
+    arg = nil,
+    if: nil,
+    unless: nil
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      on: T.nilable(Symbol)
+    ).void
+  end
+  def self.before_validation(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    on: nil
+  ); end
 end
 
 module ActiveRecord::Inheritance::ClassMethods
@@ -202,6 +435,243 @@ module ActiveRecord::Inheritance::ClassMethods
   sig { returns(T::Boolean) }
   def abstract_class; end
 end
+
+module ActiveRecord::Persistence
+  mixes_in_class_methods(ActiveRecord::Persistence::ClassMethods)
+end
+
+module ActiveRecord::Persistence::ClassMethods
+  sig { params(klass: Class).returns(Class) }
+  def becomes!(klass); end
+
+  sig { params(klass: Class).returns(Class) }
+  def becomes(klass); end
+
+  sig do
+    params(
+      attributes: T.nilable(T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        T::Array[T::Hash[T.any(Symbol, String), T.untyped]]
+      )),
+      blk: T.nilable(T.proc.params(arg0: T.untyped).returns(T.untyped))
+    ).returns(T.any(Array, T.self_type))
+  end
+  def create!(attributes = nil, &blk); end
+
+  sig do
+    params(
+      attributes: T.nilable(T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        T::Array[T::Hash[T.any(Symbol, String), T.untyped]]
+      )),
+      blk: T.nilable(T.proc.params(arg0: T.untyped).returns(T.untyped))
+    ).returns(T.any(Array, T.self_type))
+  end
+  def create(attributes = nil, &blk); end
+
+  sig do
+    params(
+      attribute: T.any(Symbol, String),
+      by: T.nilable(Integer),
+      touch: T.nilable(T::Boolean)
+    ).returns(T.self_type)
+  end
+  def decrement!(attribute, by = 1, touch: nil); end
+
+  sig do
+    params(
+      attribute: T.any(Symbol, String),
+      by: T.nilable(Integer)
+    ).returns(T.self_type)
+  end
+  def decrement(attribute, by = 1); end
+
+  sig do
+    params(
+      id_or_array: T.any(T.untyped, T::Array[T.untyped])
+    ).returns(T.self_type)
+  end
+  def delete(id_or_array); end
+
+  sig do
+    params(
+      id_or_array: T.any(T.untyped, T::Array[T.untyped])
+    ).returns(T.self_type)
+  end
+  def destroy!(id_or_array); end
+
+  sig do
+    params(
+      id_or_array: T.any(T.untyped, T::Array[T.untyped])
+    ).returns(T.self_type)
+  end
+  def destroy(id_or_array); end
+
+  sig { returns(T::Boolean) }
+  def destroyed?(); end
+
+  sig do
+    params(
+      attribute: T.any(Symbol, String),
+      by: T.nilable(Integer),
+      touch: T.nilable(T::Boolean)
+    ).returns(T.self_type)
+  end
+  def increment!(attribute, by = 1, touch: nil); end
+
+  sig do
+    params(
+      attribute: T.any(Symbol, String),
+      by: T.nilable(Integer)
+    ).returns(T.self_type)
+  end
+  def increment(attribute, by = 1); end
+
+  sig do
+    params(
+      attributes: T::Array[T::Hash[T.any(Symbol, String), T.untyped]],
+      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)]))
+    ).returns(ActiveRecord::Result)
+  end
+  def insert_all!(attributes, returning: nil); end
+
+  sig do
+    params(
+      attributes: T::Array[T::Hash[T.any(Symbol, String), T.untyped]],
+      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+      unique_by: T.nilable(T.untyped)
+    ).returns(ActiveRecord::Result)
+  end
+  def insert_all(attributes, returning: nil, unique_by: nil); end
+
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped],
+      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+      unique_by: T.nilable(T.untyped)
+    ).returns(ActiveRecord::Result)
+  end
+  def insert!(attributes, returning: nil, unique_by: nil); end
+
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped],
+      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+      unique_by: T.nilable(T.untyped)
+    ).returns(ActiveRecord::Result)
+  end
+  def insert(attributes, returning: nil, unique_by: nil); end
+
+  def instantiate(attributes, column_types = {}, &blk); end
+
+  sig { returns(T::Boolean) }
+  def new_record?(); end
+
+  sig { returns(T::Boolean) }
+  def persisted?(); end
+
+  sig do
+    params(
+      options: T.nilable({ lock: T.nilable(T::Boolean) })
+    ).returns(T.self_type)
+  end
+  def reload(options = nil); end
+
+  sig do
+    params(
+      args: T.untyped,
+      blk: T.proc.void,
+    ).returns(T::Boolean)
+  end
+  def save!(*args, &blk); end
+
+  sig do
+    params(
+      args: T.untyped,
+      blk: T.proc.void,
+    ).returns(T::Boolean)
+  end
+  def save(*args, &blk); end
+
+  sig { params(attribute: T.any(Symbol, String)).returns(T.self_type) }
+  def toggle!(attribute); end
+
+  sig { params(attribute: T.any(Symbol, String)).returns(T::Boolean) }
+  def toggle(attribute); end
+
+  sig do
+    params(
+      names: T.any(
+        Symbol,
+        String,
+        T::Array[T.any(Symbol, String)]
+      ),
+      time: T.nilable(Time)
+    ).returns(T::Boolean)
+  end
+  def touch(*names, time: nil); end
+
+  sig do
+    params(
+      name: T.any(Symbol, String),
+      value: T.untyped,
+    ).returns(T::Boolean)
+  end
+  def update_attribute(name, value); end
+
+  sig do
+    params(
+      name: T.any(Symbol, String),
+      value: T.untyped,
+    ).returns(T::Boolean)
+  end
+  def update_column(name, value); end
+
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+    ).returns(T::Boolean)
+  end
+  def update_columns(attributes); end
+
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+    ).returns(T::Boolean)
+  end
+  def update!(attributes); end
+
+  sig do
+    params(
+      id: T.any(T.untyped, T::Array[T.untyped], Symbol),
+      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+    ).returns(T.any(Array, T.self_type))
+  end
+  def update(id = :all, attributes); end
+
+  sig do
+    params(
+      attributes: T::Array[T::Hash[T.any(Symbol, String), T.untyped]],
+      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+      unique_by: T.nilable(T.untyped)
+    ).returns(ActiveRecord::Result)
+  end
+  def upsert_all(attributes, returning: nil, unique_by: nil); end
+
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped],
+      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+      unique_by: T.nilable(T.untyped)
+    ).returns(ActiveRecord::Result)
+  end
+  def upsert(attributes, returning: nil, unique_by: nil); end
+
+  alias update_attributes update
+  alias update_attributes! update!
+end
+
+class ActiveRecord::Result; end
 
 class ActiveRecord::Type::Value
   extend T::Sig
@@ -221,16 +691,6 @@ class ActiveRecord::Type::Boolean < ActiveRecord::Type::Value
 
   sig { params(value: T.untyped).returns(T.nilable(T::Boolean)) }
   def cast(value: T.untyped); end
-end
-
-class ActiveRecord::Schema
-  sig {params(info: Hash, blk: T.proc.bind(ActiveRecord::Schema).void).void}
-  def self.define(info = nil, &blk); end
-end
-
-class ActiveRecord::Migration::Current < ActiveRecord::Migration
-  def change_column(table_name, column_name, type, options = nil); end
-  def create_table(table_name, options = nil); end
 end
 
 module ActiveRecord
@@ -309,4 +769,14 @@ module ActiveRecord
   class UnknownPrimaryKey < ActiveRecordError; end
   class ValueTooLong < StatementInvalid; end
   class WrappedDatabaseException < StatementInvalid; end
+end
+
+class ActiveRecord::Schema
+  sig {params(info: Hash, blk: T.proc.bind(ActiveRecord::Schema).void).void}
+  def self.define(info = nil, &blk); end
+end
+
+class ActiveRecord::Migration::Current < ActiveRecord::Migration
+  def change_column(table_name, column_name, type, options = nil); end
+  def create_table(table_name, options = nil); end
 end
