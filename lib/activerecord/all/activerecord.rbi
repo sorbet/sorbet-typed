@@ -226,59 +226,78 @@ end
 
 module ActiveRecord
   class ActiveRecordError < StandardError; end
-  class SubclassNotFound < ActiveRecordError; end
-  class AssociationTypeMismatch < ActiveRecordError; end
-  class SerializationTypeMismatch < ActiveRecordError; end
-  class AdapterNotSpecified < ActiveRecordError; end
-  class TableNotSpecified < ActiveRecordError; end
   class AdapterNotFound < ActiveRecordError; end
-  class ConnectionNotEstablished < ActiveRecordError; end
-  class ReadOnlyError < ActiveRecordError; end
-  class RecordNotFound < ActiveRecordError; end
-  class RecordNotSaved < ActiveRecordError;end
-  class RecordNotDestroyed < ActiveRecordError; end
-  class StatementInvalid < ActiveRecordError; end
-  class WrappedDatabaseException < StatementInvalid; end
-  class RecordNotUnique < WrappedDatabaseException; end
-  class InvalidForeignKey < WrappedDatabaseException; end
-  class MismatchedForeignKey < StatementInvalid; end
-  class NotNullViolation < StatementInvalid; end
-  class ValueTooLong < StatementInvalid; end
-  class RangeError < StatementInvalid; end
-  class PreparedStatementInvalid < ActiveRecordError; end
-  class NoDatabaseError < StatementInvalid; end
-  class PreparedStatementCacheExpired < StatementInvalid; end
-  class StaleObjectError < ActiveRecordError; end
-  class ConfigurationError < ActiveRecordError; end
-  class ReadOnlyRecord < ActiveRecordError; end
-  class Rollback < ActiveRecordError; end
-  class DangerousAttributeError < ActiveRecordError; end
-  UnknownAttributeError = ActiveModel::UnknownAttributeError
+  class AdapterNotSpecified < ActiveRecordError; end
+  class AmbiguousSourceReflectionForThroughAssociation < ActiveRecordError; end
+  class AssociationNotFoundError < ConfigurationError; end
+  class AssociationTypeMismatch < ActiveRecordError; end
   class AttributeAssignmentError < ActiveRecordError; end
-  class MultiparameterAssignmentErrors < ActiveRecordError; end
-  class UnknownPrimaryKey < ActiveRecordError; end
-  class ImmutableRelation < ActiveRecordError; end
-  class TransactionIsolationError < ActiveRecordError; end
-  class TransactionRollbackError < StatementInvalid; end
-  class SerializationFailure < TransactionRollbackError; end
+  class ConcurrentMigrationError < MigrationError; end
+  class ConfigurationError < ActiveRecordError; end
+  class ConnectionNotEstablished < ActiveRecordError; end
+  class ConnectionTimeoutError < ConnectionNotEstablished; end
+  class DangerousAttributeError < ActiveRecordError; end
   class Deadlocked < TransactionRollbackError; end
+  class DeleteRestrictionError < ActiveRecordError; end
+  class DuplicateMigrationNameError < MigrationError; end
+  class DuplicateMigrationVersionError < MigrationError; end
+  class EagerLoadPolymorphicError < ActiveRecordError; end
+  class EnvironmentMismatchError < ActiveRecordError; end
+  class ExclusiveConnectionTimeoutError < ConnectionTimeoutError; end
+  class FixtureClassNotFound < ActiveRecordError; end
+  class HasManyThroughAssociationNotFoundError < ActiveRecordError; end
+  class HasManyThroughAssociationPointlessSourceTypeError < ActiveRecordError; end
+  class HasManyThroughAssociationPolymorphicSourceError < ActiveRecordError; end
+  class HasManyThroughAssociationPolymorphicThroughError < ActiveRecordError; end
+  class HasManyThroughCantAssociateThroughHasOneOrManyReflection < ThroughCantAssociateThroughHasOneOrManyReflection; end
+  class HasManyThroughNestedAssociationsAreReadonly < ThroughNestedAssociationsAreReadonly; end
+  class HasManyThroughOrderError < ActiveRecordError; end
+  class HasManyThroughSourceAssociationNotFoundError < ActiveRecordError; end
+  class HasOneAssociationPolymorphicThroughError < ActiveRecordError; end
+  class HasOneThroughCantAssociateThroughCollection < ActiveRecordError; end
+  class HasOneThroughCantAssociateThroughHasOneOrManyReflection < ThroughCantAssociateThroughHasOneOrManyReflection; end
+  class HasOneThroughNestedAssociationsAreReadonly < ThroughNestedAssociationsAreReadonly; end
+  class IllegalMigrationNameError < MigrationError; end
+  class ImmutableRelation < ActiveRecordError; end
+  class InvalidForeignKey < WrappedDatabaseException; end
+  class InverseOfAssociationNotFoundError < ActiveRecordError; end
+  class IrreversibleMigration < MigrationError; end
   class IrreversibleOrderError < ActiveRecordError; end
   class LockWaitTimeout < StatementInvalid; end
-  class StatementTimeout < StatementInvalid; end
-  class QueryCanceled < StatementInvalid; end
-  class UnknownAttributeReference < ActiveRecordError; end
   class MigrationError < ActiveRecordError; end
-  class IrreversibleMigration < MigrationError; end
-  class DuplicateMigrationVersionError < MigrationError; end
-  class MigrationError < ActiveRecordError; end
-  class IrreversibleMigration < MigrationError; end
-  class DuplicateMigrationVersionError < MigrationError; end
-  class DuplicateMigrationNameError < MigrationError; end
-  class UnknownMigrationVersionError < MigrationError; end
-  class IllegalMigrationNameError < MigrationError; end
-  class PendingMigrationError < MigrationError; end
-  class ConcurrentMigrationError < MigrationError; end
+  class MismatchedForeignKey < StatementInvalid; end
+  class MultiparameterAssignmentErrors < ActiveRecordError; end
+  class NoDatabaseError < StatementInvalid; end
   class NoEnvironmentInSchemaError < MigrationError; end
+  class NotNullViolation < StatementInvalid; end
+  class PendingMigrationError < MigrationError; end
+  class PreparedStatementCacheExpired < StatementInvalid; end
+  class PreparedStatementInvalid < ActiveRecordError; end
   class ProtectedEnvironmentError < ActiveRecordError; end
-  class EnvironmentMismatchError < ActiveRecordError; end
+  class QueryCanceled < StatementInvalid; end
+  class RangeError < StatementInvalid; end
+  class ReadOnlyRecord < ActiveRecordError; end
+  class RecordInvalid < ActiveRecordError; end
+  class RecordNotDestroyed < ActiveRecordError; end
+  class RecordNotFound < ActiveRecordError; end
+  class RecordNotSaved < ActiveRecordError; end
+  class RecordNotUnique < WrappedDatabaseException; end
+  class Rollback < ActiveRecordError; end
+  class SerializationFailure < TransactionRollbackError; end
+  class SerializationTypeMismatch < ActiveRecordError; end
+  class StaleObjectError < ActiveRecordError; end
+  class StatementInvalid < ActiveRecordError; end
+  class StatementTimeout < StatementInvalid; end
+  class SubclassNotFound < ActiveRecordError; end
+  class ThroughCantAssociateThroughHasOneOrManyReflection < ActiveRecordError; end
+  class ThroughNestedAssociationsAreReadonly < ActiveRecordError; end
+  class TransactionIsolationError < ActiveRecordError; end
+  class TransactionRollbackError < StatementInvalid; end
+  class TypeConflictError < StandardError; end
+  class UnknownAttributeError < NoMethodError; end
+  class UnknownAttributeReference < ActiveRecordError; end
+  class UnknownMigrationVersionError < MigrationError; end
+  class UnknownPrimaryKey < ActiveRecordError; end
+  class ValueTooLong < StatementInvalid; end
+  class WrappedDatabaseException < StatementInvalid; end
 end
