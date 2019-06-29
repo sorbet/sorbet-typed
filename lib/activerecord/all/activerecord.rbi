@@ -197,16 +197,16 @@ module ActiveRecord::Scoping::Named::ClassMethods
   sig do
     params(
       name: T.nilable(T.any(Symbol, String)),
-      body: T.nilable(T.any(
+      body: T.any(
         T.proc.returns(T.untyped),
         T.proc.params(args: T.nilable(T.untyped)).returns(T.untyped)
-      )),
+      ),
       blk: T.nilable(T.proc.params(args: T.nilable(T.untyped)).returns(T.untyped))
     ).void
   end
   def scope(
     name,
-    body = nil,
+    body,
     &blk
   ); end
 end
