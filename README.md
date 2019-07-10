@@ -1,3 +1,5 @@
+[![BuildStatus](https://travis-ci.org/sorbet/sorbet-typed.svg?branch=master)](https://travis-ci.org/sorbet/sorbet-typed)
+
 # sorbet-typed
 
 > A central repository for sharing type definitions for Ruby gems
