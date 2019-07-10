@@ -1,0 +1,7 @@
+language: 'ruby'
+rvm:
+  - '2.5'
+install:
+  - 'bundle install sorbet'
+script:
+  - 'ruby .ci/run.rb'
