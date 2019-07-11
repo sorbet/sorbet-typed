@@ -441,6 +441,20 @@ class ActiveRecord::Base
     unless: nil,
     on: nil
   ); end
+
+  sig do
+    params(
+      name: Symbol,
+      presence: T.nilable(T::Boolean),
+      inclusion: T::Array[T.any(String, Symbol)]
+    ).void
+  end
+  def self.validates(
+    name,
+    presence: nil,
+    inclusion: nil
+  )
+  end
 end
 
 module ActiveRecord::Inheritance::ClassMethods
