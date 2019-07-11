@@ -236,12 +236,14 @@ class ActiveRecord::Base
     params(
       arg: Symbol,
       if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      on: T.nilable(Symbol),
       unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.after_commit(
     arg,
     if: nil,
+    on: nil,
     unless: nil
   ); end
 
@@ -444,15 +446,63 @@ class ActiveRecord::Base
 
   sig do
     params(
-      name: Symbol,
+      names: T.any(T::Array[Symbol], Symbol),
       presence: T.nilable(T::Boolean),
-      inclusion: T::Array[T.any(String, Symbol)]
+      inclusion: T.any(
+        T::Array[T.any(String, Symbol)],
+        { in: T::Array[T.any(Symbol, String, T::Boolean, NilClass)]}
+      ),
+      unless: T.nilable(Symbol),
+      if: T.nilable(Symbol),
+      allow_nil: T.nilable(T::Boolean),
+      on: T.nilable(Symbol)
     ).void
   end
   def self.validates(
-    name,
+    *names,
     presence: nil,
-    inclusion: nil
+    inclusion: nil,
+    on: nil,
+    unless: nil,
+    if: nil,
+    allow_nil: nil
+  )
+  end
+
+  sig do
+    params(
+      names: T.any(T::Array[Symbol], Symbol),
+      presence: T.nilable(T::Boolean),
+      inclusion: T.any(
+        T::Array[T.any(String, Symbol)],
+        { in: T::Array[T.any(Symbol, String, T::Boolean, NilClass)]}
+      ),
+      unless: T.nilable(Symbol),
+      if: T.nilable(Symbol),
+      allow_nil: T.nilable(T::Boolean),
+      on: T.nilable(Symbol)
+    ).void
+  end
+  def self.validate(
+    *names,
+    presence: nil,
+    inclusion: nil,
+    on: nil,
+    unless: nil,
+    if: nil,
+    allow_nil: nil
+  )
+  end
+
+  sig do
+    params(
+      name: Symbol,
+      type: T.class_of(Hash),
+    ).void
+  end
+  def self.serialize(
+    name,
+    type
   )
   end
 end
