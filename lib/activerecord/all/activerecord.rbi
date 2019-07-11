@@ -452,6 +452,13 @@ class ActiveRecord::Base
         T::Array[T.any(String, Symbol)],
         { in: T::Array[T.any(Symbol, String, T::Boolean, NilClass)]}
       ),
+      uniqueness: T.any(
+        T::Boolean,
+        {
+          scope: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
+          case_sensitive: T::Boolean
+        }
+      ),
       unless: T.nilable(Symbol),
       if: T.nilable(Symbol),
       allow_nil: T.nilable(T::Boolean),
@@ -462,6 +469,7 @@ class ActiveRecord::Base
     *names,
     presence: nil,
     inclusion: nil,
+    uniqueness: nil,
     on: nil,
     unless: nil,
     if: nil,
