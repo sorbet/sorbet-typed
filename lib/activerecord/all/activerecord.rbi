@@ -447,11 +447,19 @@ class ActiveRecord::Base
   sig do
     params(
       names: T.any(T::Array[Symbol], Symbol),
+      absence: T.nilable(T::Boolean),
+      acceptance: T.any(T::Boolean, Hash),
+      confirmation: T.any(T::Boolean, Hash),
+      exclusion: T.nilable(Hash),
+      format: T.nilable(Hash),
+      length: T.nilable(Hash),
+      numericality: T.any(T::Boolean, Hash),
       presence: T.nilable(T::Boolean),
       inclusion: T.any(
         T::Array[T.any(String, Symbol)],
         { in: T::Array[T.any(Symbol, String, T::Boolean, NilClass)]}
       ),
+      size: T.nilable(Hash),
       uniqueness: T.any(
         T::Boolean,
         {
@@ -467,8 +475,16 @@ class ActiveRecord::Base
   end
   def self.validates(
     *names,
+    absence: nil,
+    acceptance: nil,
+    confirmation: nil,
+    exclusion: nil,
+    format: nil,
+    length: nil,
+    numericality: nil,
     presence: nil,
     inclusion: nil,
+    size: nil,
     uniqueness: nil,
     on: nil,
     unless: nil,
