@@ -128,7 +128,7 @@ module ActiveRecord::Associations::ClassMethods
       foreign_type: T.nilable(T.any(Symbol, String)),
       inverse_of: T.nilable(T.any(Symbol, String)),
       optional: T.nilable(T::Boolean),
-      polymorphic: T.nilable(T.any(Symbol, String)),
+      polymorphic: T.nilable(T.any(Symbol, String, T::Boolean)),
       primary_key: T.nilable(T.any(Symbol, String)),
       required: T.nilable(T::Boolean),
       touch: T.nilable(T::Boolean),
