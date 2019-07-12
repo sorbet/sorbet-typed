@@ -17,7 +17,7 @@ end
 
 module ActiveModel::Validations
   module ClassMethods
-    # https://github.com/rails/rails/blob/c8910a90f/activemodel/lib/active_model/validations.rb#L131-L152
+    # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L131-L152
     sig do
       params(
         names: T.any(Symbol, String),
@@ -35,7 +35,7 @@ module ActiveModel::Validations
       unless: nil
     ); end
 
-    # https://github.com/rails/rails/blob/c8910a90f/activemodel/lib/active_model/validations/validates.rb#L75-L105
+    # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations/validates.rb#L75-L105
     sig do
       params(
         names: T.any(T::Array[Symbol], Symbol),
