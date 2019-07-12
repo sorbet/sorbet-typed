@@ -1,6 +1,6 @@
 [![BuildStatus](https://travis-ci.org/sorbet/sorbet-typed.svg?branch=master)](https://travis-ci.org/sorbet/sorbet-typed)
 
-hkhkhk
+hkhkhkhk
 
 # sorbet-typed
 
