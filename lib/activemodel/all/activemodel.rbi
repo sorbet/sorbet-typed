@@ -25,6 +25,7 @@ module ActiveModel::Validations
         on: T.any(Symbol, String),
         prepend: T::Boolean,
         unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+        blk: T.nilable(T.proc.params(arg0: T.untyped).void)
       ).void
     end
     def validate(
