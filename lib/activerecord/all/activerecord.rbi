@@ -191,6 +191,15 @@ module ActiveRecord::Associations::ClassMethods
   ); end
 end
 
+module ActiveRecord::AttributeMethods
+  include ActiveModel::AttributeMethods
+end
+
+module ActiveRecord::AttributeMethods::Serialization::ClassMethods
+  sig { params(attr_name: Symbol, class_name_or_coder: T.untyped).void }
+  def serialize(attr_name, class_name_or_coder = Object); end
+end
+
 module ActiveRecord::NestedAttributes::ClassMethods
   sig do
     params(
@@ -226,11 +235,68 @@ module ActiveRecord::Scoping::Named::ClassMethods
 end
 
 class ActiveRecord::Base
-  extend ActiveRecord::Associations::ClassMethods
-  extend ActiveRecord::Inheritance::ClassMethods
-  extend ActiveRecord::Scoping::Named::ClassMethods
-  extend ActiveRecord::NestedAttributes::ClassMethods
-  extend ActiveRecord::Persistence::ClassMethods
+  extend ActiveModel::Naming
+
+  extend ActiveSupport::Benchmarkable
+  extend ActiveSupport::DescendantsTracker
+
+  extend ActiveRecord::ConnectionHandling
+  extend ActiveRecord::QueryCache::ClassMethods
+  extend ActiveRecord::Querying
+  extend ActiveRecord::Translation
+  extend ActiveRecord::DynamicMatchers
+  extend ActiveRecord::Explain
+  extend ActiveRecord::Enum
+  extend ActiveRecord::Delegation::DelegateCache
+  extend ActiveRecord::CollectionCacheKey
+
+  include ActiveRecord::Core
+  include ActiveRecord::Persistence
+  include ActiveRecord::ReadonlyAttributes
+  include ActiveRecord::ModelSchema
+  include ActiveRecord::Inheritance
+  include ActiveRecord::Scoping
+  include ActiveRecord::Scoping::Default # via ActiveRecord::Scoping#included hook
+  extend ActiveRecord::Scoping::Default::ClassMethods # via ActiveRecord::Scoping::Default Concern inclusion
+  include ActiveRecord::Scoping::Named # via ActiveRecord::Scoping#included hook
+  extend ActiveRecord::Scoping::Named::ClassMethods # via ActiveRecord::Scoping::Named Concern inclusion
+  include ActiveRecord::Sanitization
+  include ActiveRecord::AttributeAssignment
+  include ActiveModel::Conversion
+  include ActiveRecord::Integration
+  include ActiveRecord::Validations
+  include ActiveRecord::CounterCache
+  include ActiveRecord::Attributes
+  include ActiveRecord::AttributeDecorators
+  include ActiveRecord::Locking::Optimistic
+  include ActiveRecord::Locking::Pessimistic
+  include ActiveRecord::DefineCallbacks
+  include ActiveRecord::AttributeMethods
+  include ActiveRecord::AttributeMethods::Read # via ActiveRecord::AttributeMethods#included hook
+  include ActiveRecord::AttributeMethods::Write # via ActiveRecord::AttributeMethods#included hook
+  include ActiveRecord::AttributeMethods::BeforeTypeCast # via ActiveRecord::AttributeMethods#included hook
+  include ActiveRecord::AttributeMethods::Query # via ActiveRecord::AttributeMethods#included hook
+  include ActiveRecord::AttributeMethods::PrimaryKey # via ActiveRecord::AttributeMethods#included hook
+  include ActiveRecord::AttributeMethods::TimeZoneConversion # via ActiveRecord::AttributeMethods#included hook
+  include ActiveRecord::AttributeMethods::Dirty # via ActiveRecord::AttributeMethods#included hook
+  include ActiveRecord::AttributeMethods::Serialization # via ActiveRecord::AttributeMethods#included hook
+  extend ActiveRecord::AttributeMethods::Serialization::ClassMethods # via ActiveRecord::AttributeMethods::Serialization Concern inclusion
+  include ActiveRecord::Callbacks
+  include ActiveRecord::Timestamp
+  include ActiveRecord::Associations
+  include ActiveModel::SecurePassword
+  include ActiveRecord::AutosaveAssociation
+  include ActiveRecord::NestedAttributes
+  extend ActiveRecord::NestedAttributes::ClassMethods # via ActiveRecord::NestedAttributes Concern inclusion
+  include ActiveRecord::Aggregations
+  include ActiveRecord::Transactions
+  include ActiveRecord::TouchLater
+  include ActiveRecord::NoTouching
+  include ActiveRecord::Reflection
+  include ActiveRecord::Serialization
+  include ActiveRecord::Store
+  include ActiveRecord::SecureToken
+  include ActiveRecord::Suppressor
 
   sig do
     params(
@@ -443,92 +509,6 @@ class ActiveRecord::Base
     unless: nil,
     on: nil
   ); end
-
-  sig do
-    params(
-      names: T.any(T::Array[Symbol], Symbol),
-      absence: T.nilable(T::Boolean),
-      acceptance: T.any(T::Boolean, Hash),
-      confirmation: T.any(T::Boolean, Hash),
-      exclusion: T.nilable(Hash),
-      format: T.nilable(Hash),
-      length: T.nilable(Hash),
-      numericality: T.any(T::Boolean, Hash),
-      presence: T.nilable(T::Boolean),
-      inclusion: T.any(
-        T::Array[T.any(String, Symbol)],
-        { in: T::Array[T.any(Symbol, String, T::Boolean, NilClass)]}
-      ),
-      size: T.nilable(Hash),
-      uniqueness: T.any(
-        T::Boolean,
-        {
-          scope: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
-          case_sensitive: T::Boolean
-        }
-      ),
-      unless: T.nilable(Symbol),
-      if: T.nilable(Symbol),
-      allow_nil: T.nilable(T::Boolean),
-      on: T.nilable(Symbol)
-    ).void
-  end
-  def self.validates(
-    *names,
-    absence: nil,
-    acceptance: nil,
-    confirmation: nil,
-    exclusion: nil,
-    format: nil,
-    length: nil,
-    numericality: nil,
-    presence: nil,
-    inclusion: nil,
-    size: nil,
-    uniqueness: nil,
-    on: nil,
-    unless: nil,
-    if: nil,
-    allow_nil: nil
-  )
-  end
-
-  sig do
-    params(
-      names: T.any(T::Array[Symbol], Symbol),
-      presence: T.nilable(T::Boolean),
-      inclusion: T.any(
-        T::Array[T.any(String, Symbol)],
-        { in: T::Array[T.any(Symbol, String, T::Boolean, NilClass)]}
-      ),
-      unless: T.nilable(Symbol),
-      if: T.nilable(Symbol),
-      allow_nil: T.nilable(T::Boolean),
-      on: T.nilable(Symbol)
-    ).void
-  end
-  def self.validate(
-    *names,
-    presence: nil,
-    inclusion: nil,
-    on: nil,
-    unless: nil,
-    if: nil,
-    allow_nil: nil
-  )
-  end
-
-  sig do
-    params(
-      name: Symbol,
-      type: T.class_of(Hash),
-    ).void
-  end
-  def self.serialize(
-    name,
-    type
-  )
-  end
 end
 
 module ActiveRecord::Inheritance::ClassMethods
@@ -888,4 +868,14 @@ module ActiveRecord::AttributeMethods::Dirty
   extend T::Sig
   sig { params(attr_name: Symbol, options: T.untyped).returns(T::Boolean) }
   def saved_change_to_attribute?(attr_name, **options); end
+end
+
+module ActiveRecord::Associations
+  mixes_in_class_methods(ActiveRecord::Associations::ClassMethods)
+end
+
+module ActiveRecord::Validations
+  include ActiveModel::Validations
+
+  mixes_in_class_methods(ActiveModel::Validations::ClassMethods)
 end
