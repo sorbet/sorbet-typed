@@ -25,14 +25,16 @@ module ActiveModel::Validations
         on: T.any(Symbol, String),
         prepend: T::Boolean,
         unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+        blk: T.nilable(T.proc.params(arg0: T.untyped).void)
       ).void
     end
     def validate(
       *names,
-      if: nil,
-      on: nil,
-      prepend: T::Boolean,
-      unless: nil
+      if: :_,
+      on: :_,
+      prepend: false,
+      unless: :_,
+      &blk
     ); end
 
     # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations/validates.rb#L75-L105
