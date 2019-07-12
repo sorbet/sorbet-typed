@@ -34,7 +34,7 @@ class StateMachines::StateContext
       from: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       to: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
-      do: T.proc.params(arg0: T.untyped).void,
+      do: T.any(Symbol, T.proc.params(arg0: T.untyped).void),
       blk: T.any(NilClass, T.proc.params(arg0: T.untyped).void),
     ).void
   end
@@ -46,7 +46,7 @@ class StateMachines::StateContext
       from: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       to: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
-      do: T.proc.params(arg0: T.untyped).void,
+      do: T.any(Symbol, T.proc.params(arg0: T.untyped).void),
       blk: T.any(NilClass, T.proc.params(arg0: T.untyped).void),
     ).void
   end
