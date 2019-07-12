@@ -17,7 +17,7 @@ end
 
 module ActiveModel::Validations
   module ClassMethods
-    # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L131-L152
+    # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L136-L154
     sig do
       params(
         names: T.any(Symbol, String),
