@@ -25,65 +25,68 @@ module ActiveModel::Validations
         on: T.any(Symbol, String),
         prepend: T::Boolean,
         unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-        blk: T.nilable(T.proc.params(arg0: T.untyped).void)
       ).void
     end
     def validate(
       *names,
-      if: :_,
-      on: :_,
-      prepend: false,
-      unless: :_,
-      &blk
+      if: nil,
+      on: nil,
+      prepend: T::Boolean,
+      unless: nil
     ); end
 
     # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations/validates.rb#L75-L105
     sig do
       params(
-        names: T.any(T::Array[Symbol], Symbol),
-        absence: T.nilable(T::Boolean),
+        names: T.any(Symbol, String), # a splat of at least one attribute name
+        absence: T.any(T::Boolean, Hash),
         acceptance: T.any(T::Boolean, Hash),
+        allow_blank: T::Boolean,
+        allow_nil: T::Boolean,
         confirmation: T.any(T::Boolean, Hash),
-        exclusion: T.nilable(Hash),
-        format: T.nilable(Hash),
-        length: T.nilable(Hash),
+        # `exclusion` and `inclusion` are tricky to type without better support
+        # for overloading and shapes. Value can be anything that responds to
+        # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
+        # like { in: [1, 2, 3], ... }
+        exclusion: T::Enumerable[T.untyped],
+        # `format` hash must additionally contain either :with or :without keys
+        format: Hash,
+        if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+        # `exclusion` and `inclusion` are tricky to type without better support
+        # for overloading and shapes. Value can be anything that responds to
+        # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
+        # like { in: [1, 2, 3], ... }
+        inclusion: T::Enumerable[T.untyped],
+        # if Hash, must contain :in, :within, :maximum, :minimum, or :is keys
+        length: T.any(T::Range, Hash),
         numericality: T.any(T::Boolean, Hash),
-        presence: T.nilable(T::Boolean),
-        inclusion: T.any(
-          T::Array[T.any(String, Symbol)],
-          { in: T::Array[T.any(Symbol, String, T::Boolean, NilClass)]}
-        ),
-        size: T.nilable(Hash),
-        uniqueness: T.any(
-          T::Boolean,
-          {
-            scope: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
-            case_sensitive: T::Boolean
-          }
-        ),
-        unless: T.nilable(Symbol),
-        if: T.nilable(Symbol),
-        allow_nil: T.nilable(T::Boolean),
-        on: T.nilable(Symbol)
+        on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
+        presence: T::Boolean,
+        size: T.any(T::Boolean, Hash),
+        strict: T::Boolean,
+        uniqueness: T.any(T::Boolean, Hash),
+        unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       ).void
     end
     def validates(
       *names,
-      absence: nil,
-      acceptance: nil,
-      confirmation: nil,
-      exclusion: nil,
-      format: nil,
-      length: nil,
-      numericality: nil,
-      presence: nil,
-      inclusion: nil,
-      size: nil,
-      uniqueness: nil,
-      on: nil,
-      unless: nil,
+      absence: false,
+      acceptance: {},
+      allow_blank: false,
+      allow_nil: false,
+      confirmation: false,
+      exclusion: [],
+      format: {},
       if: nil,
-      allow_nil: nil
+      inclusion: [],
+      length: {},
+      numericality: false,
+      on: :_,
+      presence: false,
+      size: false,
+      strict: false,
+      uniqueness: false,
+      unless: :_
     )
     end
   end
