@@ -29,10 +29,11 @@ module ActiveModel::Validations
     end
     def validate(
       *names,
-      if: nil,
-      on: nil,
-      prepend: T::Boolean,
-      unless: nil
+      if: :_,
+      on: :_,
+      prepend: false,
+      unless: :_,
+      &blk
     ); end
 
     # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations/validates.rb#L75-L105
