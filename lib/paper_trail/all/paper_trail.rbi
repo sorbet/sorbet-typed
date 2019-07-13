@@ -1,7 +1,7 @@
 # typed: strong
 
 module PaperTrail::Model::ClassMethods
-  def has_paper_trail
+  def has_paper_trail(options = {})
   end
 end
 
