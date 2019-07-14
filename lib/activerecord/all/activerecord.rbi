@@ -862,26 +862,39 @@ end
 
 class ActiveRecord::Migration::Current < ActiveRecord::Migration
   def create_table(table_name, options = nil); end
-  def drop_table(table_name, options = {}); end
   def change_table(table_name, options = {}); end
-  
+  def rename_table(table_name, new_name); end
+  def drop_table(table_name, options = {}); end
+
   def create_join_table(table_1, table_2, column_options: {}, **options); end
   def drop_join_table(table_1, table_2, options = {}); end
-  
+
   def add_foreign_key(to_table, options); end
   def drop_foreign_key(name); end
-  
+
   def add_column(name, type, options); end
   def change_column(table_name, column_name, type, options = nil); end
+  def change_column_null(table_name, column_name, null, default = nil); end
+  def change_column_default(table_name, column_name, default_or_changes); end
+  def rename_column(table_name, column_name, new_column_name); end
   def remove_column(table_name, column_name, type = nil, options = {}); end
   def remove_columns(table_name, *column_names); end
-  
+
   def add_index(table_name, column_name, options = {}); end
   def remove_index(table_name, options = {}); end
   def rename_index(table_name, old_name, new_name); end
-  
+
   def add_reference(table_name, ref_name, **options); end
   def remove_reference(table_name, ref_name, foreign_key: false, polymorphic: false, **options); end
+
+  def add_timestamps(table_name, options = {}); end
+  def remove_timestamps(table_name, options = {}); end
+
+  def enable_extension(name); end
+  def disable_extension(name); end
+
+  def reversible; end
+  def revert(*migration_classes); end
 end
 
 module ActiveRecord::AttributeMethods::Dirty
