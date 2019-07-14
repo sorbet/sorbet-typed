@@ -895,6 +895,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   def reversible; end
   def revert(*migration_classes); end
+  def execute(sql, name = nil); end
 end
 
 module ActiveRecord::AttributeMethods::Dirty
