@@ -1192,6 +1192,15 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   # Miscellaneous
 
+  sig { params(message: String, subitem: T.untyped).returns(T.untyped) }
+  def say(message, subitem = false); end
+
+  sig { params(message: String).returns(T.untyped) }
+  def say_with_time(message); end
+
+  sig { returns(T.untyped) }
+  def suppress_messages; end
+
   sig { returns(T.untyped) }
   def reversible(); end
 
