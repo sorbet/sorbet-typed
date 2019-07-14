@@ -3511,7 +3511,7 @@ class Bundler::HTTPError < Bundler::BundlerError
 end
 
 class Bundler::Index
-  include ::Enumerable
+  include T::Enumerable
   EMPTY_SEARCH = ::T.let(nil, ::T.untyped)
   NULL = ::T.let(nil, ::T.untyped)
   RUBY = ::T.let(nil, ::T.untyped)
@@ -3768,6 +3768,10 @@ end
 
 class Bundler::LazySpecification::Identifier < Struct
   include ::Comparable
+  extend ::T::Generic
+
+  Elem = type_member(fixed: T.untyped)
+
   sig do
     params(
       other: ::T.untyped,
@@ -4074,7 +4078,7 @@ end
 
 class Bundler::Molinillo::DependencyGraph
   include ::TSort
-  include ::Enumerable
+  include T::Enumerable
   sig do
     params(
       other: ::T.untyped,
@@ -4432,6 +4436,9 @@ class Bundler::Molinillo::DependencyGraph::DetachVertexNamed < Bundler::Molinill
 end
 
 class Bundler::Molinillo::DependencyGraph::Edge < Struct
+  extend T::Generic
+  Elem = type_member(fixed: T.untyped)
+
   sig {returns(::T.untyped)}
   def destination(); end
 
@@ -4486,7 +4493,7 @@ class Bundler::Molinillo::DependencyGraph::Edge < Struct
 end
 
 class Bundler::Molinillo::DependencyGraph::Log
-  extend ::Enumerable
+  extend T::Enumerable
   sig do
     params(
       graph: ::T.untyped,
@@ -4807,6 +4814,9 @@ class Bundler::Molinillo::DependencyGraph::Vertex
 end
 
 class Bundler::Molinillo::DependencyState < Bundler::Molinillo::ResolutionState
+  extend T::Generic
+  Elem = type_member(fixed: T.untyped)
+  
   sig {returns(::T.untyped)}
   def pop_possibility_state(); end
 end
@@ -4848,9 +4858,14 @@ class Bundler::Molinillo::NoSuchDependencyError < Bundler::Molinillo::ResolverEr
 end
 
 class Bundler::Molinillo::PossibilityState < Bundler::Molinillo::ResolutionState
+  extend T::Generic
+  Elem = type_member(fixed: T.untyped)
 end
 
 class Bundler::Molinillo::ResolutionState < Struct
+  extend T::Generic
+  Elem = type_member(fixed: T.untyped)
+
   sig {returns(::T.untyped)}
   def activated(); end
 
@@ -5043,6 +5058,9 @@ class Bundler::Molinillo::Resolver::Resolution
 end
 
 class Bundler::Molinillo::Resolver::Resolution::Conflict < Struct
+  extend T::Generic
+  Elem = type_member(fixed: T.untyped)
+  
   sig {returns(::T.untyped)}
   def activated_by_name(); end
 
@@ -5155,6 +5173,9 @@ class Bundler::Molinillo::Resolver::Resolution::Conflict < Struct
 end
 
 class Bundler::Molinillo::Resolver::Resolution::PossibilitySet < Struct
+  extend T::Generic
+  Elem = type_member(fixed: T.untyped)
+
   sig {returns(::T.untyped)}
   def dependencies(); end
 
@@ -5205,6 +5226,9 @@ end
 
 class Bundler::Molinillo::Resolver::Resolution::UnwindDetails < Struct
   include ::Comparable
+  extend T::Generic
+  Elem = type_member(fixed: T.untyped)
+
   sig do
     params(
       other: ::T.untyped,
@@ -6964,6 +6988,9 @@ class Bundler::Settings
 end
 
 class Bundler::Settings::Path < Struct
+  extend T::Generic
+  Elem = type_member(fixed: T.untyped)
+
   sig {returns(::T.untyped)}
   def append_ruby_scope(); end
 
@@ -8054,8 +8081,9 @@ end
 
 class Bundler::SpecSet
   include ::TSort
-  include ::Enumerable
+  include T::Enumerable
   extend ::Forwardable
+
   sig do
     params(
       args: ::T.untyped,

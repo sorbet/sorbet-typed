@@ -1,4 +1,5 @@
-exclude = ['lib/bundler/all/bundler.rbi']
+# Exclude files if necessary here.
+exclude = []
 
 file_paths = Dir.glob("**/*.rbi").select{|p| !exclude.include?(p)}.map{|p| "\"#{p}\""}.join(' ')
 
