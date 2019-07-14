@@ -905,7 +905,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig do
     params(
       table_name: T.any(String, Symbol),
-      force: T.any(Boolean, Symbol),
+      force: T.any(T::Boolean, Symbol),
       if_exists: T::Boolean
     ).returns(T.untyped)
   end
@@ -947,8 +947,8 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name,
-      column_name,
+      table_name: T.untyped,
+      column_name: T.untyped,
       type: T.untyped,
       limit: T.untyped,
       default: T.untyped,
