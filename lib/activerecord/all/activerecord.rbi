@@ -924,7 +924,6 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
       column_options: T.untyped,
       options: T.untyped,
       table_name: T.untyped,
-      options: T.untyped,
       temporary: T.untyped,
       force: T::Boolean
     ).returns(T.untyped)
@@ -935,7 +934,6 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     column_options: {},
     options: nil,
     table_name: nil,
-    options: nil,
     temporary: nil,
     force: false
   ); end
