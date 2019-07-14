@@ -1111,7 +1111,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig do
     params(
       table_name: Symbol,
-      column: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      column: T.any(Symbol, T::Array[Symbol]),
       name: T.nilable(Symbol)
     ).returns(T.untyped)
   end
@@ -1124,8 +1124,8 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig do
     params(
       table_name: T.any(String, Symbol),
-      old_name: String,
-      new_name: String
+      old_name: T.any(String, Symbol),
+      new_name: T.any(String, Symbol)
     ).returns(T.untyped)
   end
   def rename_index(
@@ -1138,7 +1138,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: T.untyped,
+      table_name: T.any(String, Symbol),
       ref_name: T.untyped,
       type: T.untyped,
       index: T.untyped,
@@ -1159,7 +1159,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: T.untyped,
+      table_name: T.any(String, Symbol),
       ref_name: T.untyped,
       foreign_key: T.untyped,
       polymorphic: T.untyped,
@@ -1184,21 +1184,21 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   # Extensions
 
-  sig { params(name: T.untyped).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol)).returns(T.untyped) }
   def enable_extension(name); end
 
-  sig { params(name: T.untyped).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol)).returns(T.untyped) }
   def disable_extension(name); end
 
   # Miscellaneous
 
-  sig { params(message: String, subitem: T.untyped).returns(T.untyped) }
+  sig { params(message: String, subitem: T.untyped).void }
   def say(message, subitem = false); end
 
   sig { params(message: String).returns(T.untyped) }
   def say_with_time(message); end
 
-  sig { returns(T.untyped) }
+  sig { void }
   def suppress_messages; end
 
   sig { returns(T.untyped) }
@@ -1207,7 +1207,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig { params(migration_classes: T.untyped).returns(T.untyped) }
   def revert(*migration_classes); end
 
-  sig { params(sql: T.untyped, name: T.untyped).returns(T.untyped) }
+  sig { params(sql: String, name: T.nilable(String)).returns(T.untyped) }
   def execute(sql, name = nil); end
 end
 
