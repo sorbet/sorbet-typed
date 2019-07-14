@@ -861,8 +861,27 @@ class ActiveRecord::Schema
 end
 
 class ActiveRecord::Migration::Current < ActiveRecord::Migration
-  def change_column(table_name, column_name, type, options = nil); end
   def create_table(table_name, options = nil); end
+  def drop_table(table_name, options = {}); end
+  def change_table(table_name, options = {}); end
+  
+  def create_join_table(table_1, table_2, column_options: {}, **options); end
+  def drop_join_table(table_1, table_2, options = {}); end
+  
+  def add_foreign_key(to_table, options); end
+  def drop_foreign_key(name); end
+  
+  def add_column(name, type, options); end
+  def change_column(table_name, column_name, type, options = nil); end
+  def remove_column(table_name, column_name, type = nil, options = {}); end
+  def remove_columns(table_name, *column_names); end
+  
+  def add_index(table_name, column_name, options = {}); end
+  def remove_index(table_name, options = {}); end
+  def rename_index(table_name, old_name, new_name); end
+  
+  def add_reference(table_name, ref_name, **options); end
+  def remove_reference(table_name, ref_name, foreign_key: false, polymorphic: false, **options); end
 end
 
 module ActiveRecord::AttributeMethods::Dirty
