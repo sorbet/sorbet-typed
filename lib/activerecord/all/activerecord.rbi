@@ -855,7 +855,7 @@ module ActiveRecord
   class WrappedDatabaseException < StatementInvalid; end
 end
 
-class ActiveRecord::Schema
+class ActiveRecord::Schema < ActiveRecord::Migration::Current
   sig {params(info: Hash, blk: T.proc.bind(ActiveRecord::Schema).void).void}
   def self.define(info = nil, &blk); end
 end
