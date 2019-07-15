@@ -774,7 +774,7 @@ class ActiveRecord::Type::Boolean < ActiveRecord::Type::Value
   def initialize(args = nil); end
 
   sig { params(value: T.untyped).returns(T.nilable(T::Boolean)) }
-  def cast(value: T.untyped); end
+  def cast(value); end
 end
 
 module ActiveRecord
