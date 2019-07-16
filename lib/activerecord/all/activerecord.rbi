@@ -855,14 +855,360 @@ module ActiveRecord
   class WrappedDatabaseException < StatementInvalid; end
 end
 
-class ActiveRecord::Schema
+class ActiveRecord::Schema < ActiveRecord::Migration::Current
   sig {params(info: Hash, blk: T.proc.bind(ActiveRecord::Schema).void).void}
   def self.define(info = nil, &blk); end
 end
 
+# Method definitions are documented here:
+# https://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html
 class ActiveRecord::Migration::Current < ActiveRecord::Migration
-  def change_column(table_name, column_name, type, options = nil); end
-  def create_table(table_name, options = nil); end
+  # Tables
+
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      comment: T.untyped,
+      id: T.untyped,
+      primary_key: T.untyped,
+      options: T.untyped,
+      temporary: T.untyped,
+      force: T.untyped,
+      as: T.untyped
+    ).returns(T.untyped)
+  end
+  def create_table(
+    table_name,
+    comment: nil,
+    id: nil,
+    primary_key: nil,
+    options: nil,
+    temporary: nil,
+    force: nil,
+    as: nil
+  ); end
+
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      bulk: T::Boolean
+    ).returns(T.untyped)
+  end
+  def change_table(
+    table_name,
+    bulk: false
+  ); end
+
+  sig { params(table_name: T.any(String, Symbol), new_name: T.any(String, Symbol)).returns(T.untyped) }
+  def rename_table(table_name, new_name); end
+
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      force: T.any(T::Boolean, Symbol),
+      if_exists: T::Boolean
+    ).returns(T.untyped)
+  end
+  def drop_table(
+    table_name,
+    force: false,
+    if_exists: false
+  ); end
+
+  # Join Tables
+
+  sig do
+    params(
+      table_1: T.any(String, Symbol),
+      table_2: T.any(String, Symbol),
+      column_options: T.untyped,
+      options: T.untyped,
+      table_name: T.untyped,
+      temporary: T.untyped,
+      force: T::Boolean
+    ).returns(T.untyped)
+  end
+  def create_join_table(
+    table_1,
+    table_2,
+    column_options: {},
+    options: nil,
+    table_name: nil,
+    temporary: nil,
+    force: false
+  ); end
+
+  sig { params(table_1: T.any(String, Symbol), table_2: T.any(String, Symbol), options: T.untyped).returns(T.untyped) }
+  def drop_join_table(table_1, table_2, options = {}); end
+
+  # Columns
+
+  sig do
+    params(
+      table_name: T.untyped,
+      column_name: T.untyped,
+      type: T.untyped,
+      limit: T.untyped,
+      default: T.untyped,
+      null: T.untyped,
+      precision: T.untyped,
+      scale: T.untyped,
+      comment: T.untyped
+    ).returns(T.untyped)
+  end
+  def add_column(
+    table_name,
+    column_name,
+    type,
+    limit: nil,
+    default: nil,
+    null: nil,
+    precision: nil,
+    scale: nil,
+    comment: nil
+  ); end
+
+  sig do
+    params(
+      table_name: T.untyped,
+      column_name: T.untyped,
+      type: T.untyped,
+      limit: T.untyped,
+      default: T.untyped,
+      null: T.untyped,
+      precision: T.untyped,
+      scale: T.untyped,
+      comment: T.untyped
+    ).returns(T.untyped)
+  end
+  def change_column(
+    table_name,
+    column_name,
+    type,
+    limit: nil,
+    default: nil,
+    null: nil,
+    precision: nil,
+    scale: nil,
+    comment: nil
+  ); end
+
+  sig do
+    params(
+      table_name: T.untyped,
+      column_name: T.untyped,
+      null: T.untyped,
+      default: T.untyped
+    ).returns(T.untyped)
+  end
+  def change_column_null(table_name, column_name, null, default = nil); end
+
+  sig { params(table_name: T.untyped, column_name: T.untyped, default_or_changes: T.untyped).returns(T.untyped) }
+  def change_column_default(table_name, column_name, default_or_changes); end
+
+  sig { params(table_name: T.untyped, column_name: T.untyped, new_column_name: T.untyped).returns(T.untyped) }
+  def rename_column(table_name, column_name, new_column_name); end
+
+  sig do
+    params(
+      table_name: T.untyped,
+      column_name: T.untyped,
+      type: T.untyped,
+      options: T.untyped
+    ).returns(T.untyped)
+  end
+  def remove_column(
+    table_name,
+    column_name,
+    type = nil,
+    options = {}
+  ); end
+
+  sig { params(table_name: T.any(String, Symbol), column_names: T.untyped).returns(T.untyped) }
+  def remove_columns(table_name, *column_names); end
+
+  # Foreign Keys
+
+  sig do
+    params(
+      from_table: T.untyped,
+      to_table: T.untyped,
+      column: T.untyped,
+      primary_key: T.untyped,
+      name: T.untyped,
+      on_delete: T.untyped,
+      on_update: T.untyped,
+      validate: T.untyped
+    ).returns(T.untyped)
+  end
+  def add_foreign_key(
+    from_table,
+    to_table,
+    column: nil,
+    primary_key: nil,
+    name: nil,
+    on_delete: nil,
+    on_update: nil,
+    validate: nil
+  ); end
+
+  sig do
+    params(
+      from_table: T.untyped,
+      to_table: T.untyped,
+      column: T.untyped,
+      primary_key: T.untyped,
+      name: T.untyped,
+      on_delete: T.untyped,
+      on_update: T.untyped,
+      validate: T.untyped
+    ).returns(T.untyped)
+  end
+  def remove_foreign_key(
+    from_table,
+    to_table,
+    column: nil,
+    primary_key: nil,
+    name: nil,
+    on_delete: nil,
+    on_update: nil,
+    validate: nil
+  ); end
+
+  # Indices 
+
+  sig do
+    params(
+      table_name: T.untyped,
+      column_name: T.untyped,
+      using: T.untyped,
+      unique: T.nilable(T::Boolean),
+      where: T.untyped,
+      order: T.untyped,
+      name: T.untyped,
+      length: T.untyped,
+      opclass: T.untyped,
+      type: T.untyped,
+      internal: T.untyped,
+      algorithm: T.untyped
+    ).returns(T.untyped)
+  end
+  def add_index(
+    table_name,
+    column_name,
+    using: nil,
+    unique: nil,
+    where: nil,
+    order: nil,
+    name: nil,
+    length: nil,
+    opclass: nil,
+    type: nil,
+    internal: nil,
+    algorithm: nil
+  ); end
+
+  sig do
+    params(
+      table_name: Symbol,
+      column: T.any(Symbol, T::Array[Symbol]),
+      name: T.nilable(Symbol)
+    ).returns(T.untyped)
+  end
+  def remove_index(
+    table_name,
+    column,
+    name: nil
+  ); end
+
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      old_name: T.any(String, Symbol),
+      new_name: T.any(String, Symbol)
+    ).returns(T.untyped)
+  end
+  def rename_index(
+    table_name,
+    old_name,
+    new_name
+  ); end
+
+  # References
+
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      ref_name: T.untyped,
+      type: T.untyped,
+      index: T.untyped,
+      foreign_key: T.untyped,
+      polymorphic: T.untyped,
+      null: T.untyped
+    ).returns(T.untyped)
+  end
+  def add_reference(
+    table_name,
+    ref_name,
+    type: nil,
+    index: nil,
+    foreign_key: nil,
+    polymorphic: nil,
+    null: nil
+  ); end
+
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      ref_name: T.untyped,
+      foreign_key: T.untyped,
+      polymorphic: T.untyped,
+      index: T.untyped
+    ).returns(T.untyped)
+  end
+  def remove_reference(
+    table_name,
+    ref_name,
+    foreign_key: false,
+    polymorphic: false,
+    index: nil
+  ); end
+
+  # Timestamps
+
+  sig { params(table_name: T.any(String, Symbol), options: T.untyped).returns(T.untyped) }
+  def add_timestamps(table_name, options = {}); end
+
+  sig { params(table_name: T.any(String, Symbol), options: T.untyped).returns(T.untyped) }
+  def remove_timestamps(table_name, options = {}); end
+
+  # Extensions
+
+  sig { params(name: T.any(String, Symbol)).returns(T.untyped) }
+  def enable_extension(name); end
+
+  sig { params(name: T.any(String, Symbol)).returns(T.untyped) }
+  def disable_extension(name); end
+
+  # Miscellaneous
+
+  sig { params(message: String, subitem: T.untyped).void }
+  def say(message, subitem = false); end
+
+  sig { params(message: String).returns(T.untyped) }
+  def say_with_time(message); end
+
+  sig { void }
+  def suppress_messages; end
+
+  sig { returns(T.untyped) }
+  def reversible(); end
+
+  sig { params(migration_classes: T.untyped).returns(T.untyped) }
+  def revert(*migration_classes); end
+
+  sig { params(sql: String, name: T.nilable(String)).returns(T.untyped) }
+  def execute(sql, name = nil); end
 end
 
 module ActiveRecord::AttributeMethods::Dirty
