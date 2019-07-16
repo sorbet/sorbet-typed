@@ -49,8 +49,9 @@ module ActiveModel::Validations
         # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
         # like { in: [1, 2, 3], ... }
         exclusion: T::Enumerable[T.untyped],
-        # `format` hash must additionally contain either :with or :without keys
-        format: Hash,
+        # `format` hash must additionally contain either :with or :without keys.
+        # Alternatively, it can be a Regexp.
+        format: T.any(Hash, Regexp),
         if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
         # `exclusion` and `inclusion` are tricky to type without better support
         # for overloading and shapes. Value can be anything that responds to
