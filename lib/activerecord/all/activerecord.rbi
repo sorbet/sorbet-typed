@@ -665,7 +665,7 @@ module ActiveRecord::Persistence::ClassMethods
     params(
       args: T.untyped,
       blk: T.proc.void,
-    ).returns(T::Boolean)
+    ).returns(TrueClass)
   end
   def save!(*args, &blk); end
 
