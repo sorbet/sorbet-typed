@@ -222,4 +222,3 @@ class Grape::API
   def self.format(format)
   end
 end
-
