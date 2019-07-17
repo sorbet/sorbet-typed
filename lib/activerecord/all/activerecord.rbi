@@ -639,9 +639,16 @@ module ActiveRecord::Persistence
   sig do
     params(
       attributes: T::Hash[T.any(Symbol, String), T.untyped]
-    ).returns(T::Boolean)
+    ).returns(TrueClass)
   end
   def update!(attributes); end
+
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+    ).returns(T::Boolean)
+  end
+  def update(attributes); end
 
   alias update_attributes update
   alias update_attributes! update!
