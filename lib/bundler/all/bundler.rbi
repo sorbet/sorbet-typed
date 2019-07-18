@@ -4816,7 +4816,7 @@ end
 class Bundler::Molinillo::DependencyState < Bundler::Molinillo::ResolutionState
   extend T::Generic
   Elem = type_member(fixed: T.untyped)
-  
+
   sig {returns(::T.untyped)}
   def pop_possibility_state(); end
 end
@@ -5060,7 +5060,7 @@ end
 class Bundler::Molinillo::Resolver::Resolution::Conflict < Struct
   extend T::Generic
   Elem = type_member(fixed: T.untyped)
-  
+
   sig {returns(::T.untyped)}
   def activated_by_name(); end
 
