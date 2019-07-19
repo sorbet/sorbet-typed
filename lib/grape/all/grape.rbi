@@ -221,4 +221,13 @@ class Grape::API
   end
   def self.format(format)
   end
+
+  sig do
+    params(
+      exception: T.class_of(Exception),
+      block: T.proc.void
+    ).void
+  end
+  def self.rescue_from(exception, &block)
+  end
 end
