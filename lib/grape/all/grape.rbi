@@ -65,7 +65,7 @@ class Grape::API
   sig do
     params(
       block: T.nilable(T.proc.void)
-    ).returns(Hash)
+    ).returns(T::Hash[T.untyped, T.untyped])
   end
   def self.params(&block)
   end
@@ -136,7 +136,7 @@ class Grape::API
   sig do
     params(
       space: T.any(T.nilable(Symbol), T.nilable(String)),
-      options: T.nilable(Hash)
+      options: T.nilable(T::Hash[T.untyped, T.untyped])
     ).void
   end
   def self.resource(space = nil, options = {})
@@ -145,7 +145,7 @@ class Grape::API
   sig do
     params(
       space: T.any(T.nilable(Symbol), T.nilable(String)),
-      options: T.nilable(Hash)
+      options: T.nilable(T::Hash[T.untyped, T.untyped])
     ).void
   end
   def self.namespace(space = nil, options = {})
@@ -156,7 +156,7 @@ class Grape::API
     params(
       space: T.any(T.nilable(Symbol), T.nilable(String)),
       options: T.any(
-        T.nilable(Hash),
+        T.nilable(T::Hash[T.untyped, T.untyped]),
         String,
       )
     ).void
@@ -167,7 +167,7 @@ class Grape::API
   sig do
     params(
       space: T.any(T.nilable(Symbol), T.nilable(String)),
-      options: T.nilable(Hash)
+      options: T.nilable(T::Hash[T.untyped, T.untyped])
     ).void
   end
   def self.resources(space = nil, options = {})
@@ -177,7 +177,7 @@ class Grape::API
     params(
       api_class: T.any(
         T.class_of(Grape::API),
-        Hash
+        T::Hash[T.untyped, T.untyped]
       )
     ).void
   end

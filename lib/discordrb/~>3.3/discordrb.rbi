@@ -67,10 +67,10 @@ module Discordrb
     sig { params(mutex: T.untyped).returns(T.untyped) }
     def self.mutex_wait(mutex); end
 
-    sig { params(type: Symbol, attributes: Array).returns(T.untyped) }
+    sig { params(type: Symbol, attributes: T::Array[T.untyped]).returns(T.untyped) }
     def raw_request(type, attributes); end
 
-    sig { params(type: Symbol, attributes: Array).returns(T.untyped) }
+    sig { params(type: Symbol, attributes: T::Array[T.untyped]).returns(T.untyped) }
     def self.raw_request(type, attributes); end
 
     sig do
@@ -1551,7 +1551,7 @@ module Discordrb
         channel: T.any(Channel, Integer, T.untyped),
         content: String,
         tts: T::Boolean,
-        embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))
+        embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))
       ).returns(Message)
     end
     def send_message(channel, content, tts = false, embed = nil); end
@@ -1562,7 +1562,7 @@ module Discordrb
         content: String,
         timeout: Float,
         tts: T::Boolean,
-        embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))
+        embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))
       ).returns(T.untyped)
     end
     def send_temporary_message(channel, content, timeout, tts = false, embed = nil); end
@@ -1645,13 +1645,13 @@ module Discordrb
       params(
         key: Symbol,
         type: Class,
-        attributes: Hash,
+        attributes: T::Hash[T.untyped, T.untyped],
         block: T.proc.params(event: Discordrb::Events::Event).void
       ).returns(Await)
     end
     def add_await(key, type, attributes = {}, &block); end
 
-    sig { params(type: Class, attributes: Hash).returns(T.nilable(Discordrb::Events::Event)) }
+    sig { params(type: Class, attributes: T::Hash[T.untyped, T.untyped]).returns(T.nilable(Discordrb::Events::Event)) }
     def add_await!(type, attributes = {}); end
 
     sig { params(user: T.any(User, Integer, T.untyped)).returns(T.untyped) }
@@ -1804,13 +1804,13 @@ module Discordrb
     sig { params(id: Integer).returns(Channel) }
     def pm_channel(id); end
 
-    sig { params(data: Hash).returns(User) }
+    sig { params(data: T::Hash[T.untyped, T.untyped]).returns(User) }
     def ensure_user(data); end
 
-    sig { params(data: Hash).returns(Server) }
+    sig { params(data: T::Hash[T.untyped, T.untyped]).returns(Server) }
     def ensure_server(data); end
 
-    sig { params(data: Hash, server: T.nilable(Server)).returns(Channel) }
+    sig { params(data: T::Hash[T.untyped, T.untyped], server: T.nilable(Server)).returns(Channel) }
     def ensure_channel(data, server = nil); end
 
     sig { params(id: Integer).returns(T.untyped) }
@@ -1828,121 +1828,121 @@ module Discordrb
     sig { params(username: T.untyped, discrim: T.untyped).returns(T.untyped) }
     def find_user(username, discrim = nil); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageEvent).void).returns(Discordrb::Events::MessageEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageEvent).void).returns(Discordrb::Events::MessageEventHandler) }
     def message(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReadyEvent).void).returns(Discordrb::Events::ReadyEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReadyEvent).void).returns(Discordrb::Events::ReadyEventHandler) }
     def ready(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::DisconnectEvent).void).returns(Discordrb::Events::DisconnectEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::DisconnectEvent).void).returns(Discordrb::Events::DisconnectEventHandler) }
     def disconnected(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::HeartbeatEvent).void).returns(Discordrb::Events::HeartbeatEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::HeartbeatEvent).void).returns(Discordrb::Events::HeartbeatEventHandler) }
     def heartbeat(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::TypingEvent).void).returns(Discordrb::Events::TypingEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::TypingEvent).void).returns(Discordrb::Events::TypingEventHandler) }
     def typing(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageEditEvent).void).returns(Discordrb::Events::MessageEditEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageEditEvent).void).returns(Discordrb::Events::MessageEditEventHandler) }
     def message_edit(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageDeleteEvent).void).returns(Discordrb::Events::MessageDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageDeleteEvent).void).returns(Discordrb::Events::MessageDeleteEventHandler) }
     def message_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionAddEvent).void).returns(Discordrb::Events::ReactionAddEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionAddEvent).void).returns(Discordrb::Events::ReactionAddEventHandler) }
     def reaction_add(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionRemoveEvent).void).returns(Discordrb::Events::ReactionRemoveEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionRemoveEvent).void).returns(Discordrb::Events::ReactionRemoveEventHandler) }
     def reaction_remove(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionRemoveAllEvent).void).returns(Discordrb::Events::ReactionRemoveAllEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionRemoveAllEvent).void).returns(Discordrb::Events::ReactionRemoveAllEventHandler) }
     def reaction_remove_all(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PresenceEvent).void).returns(Discordrb::Events::PresenceEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PresenceEvent).void).returns(Discordrb::Events::PresenceEventHandler) }
     def presence(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PlayingEvent).void).returns(Discordrb::Events::PlayingEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PlayingEvent).void).returns(Discordrb::Events::PlayingEventHandler) }
     def playing(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MentionEvent).void).returns(Discordrb::Events::MentionEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MentionEvent).void).returns(Discordrb::Events::MentionEventHandler) }
     def mention(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelCreateEvent).void).returns(Discordrb::Events::ChannelCreateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelCreateEvent).void).returns(Discordrb::Events::ChannelCreateEventHandler) }
     def channel_create(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelUpdateEvent).void).returns(Discordrb::Events::ChannelUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelUpdateEvent).void).returns(Discordrb::Events::ChannelUpdateEventHandler) }
     def channel_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelDeleteEvent).void).returns(Discordrb::Events::ChannelDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelDeleteEvent).void).returns(Discordrb::Events::ChannelDeleteEventHandler) }
     def channel_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelRecipientAddEvent).void).returns(T.untyped) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelRecipientAddEvent).void).returns(T.untyped) }
     def channel_recipient_add(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelRecipientRemoveEvent).void).returns(T.untyped) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelRecipientRemoveEvent).void).returns(T.untyped) }
     def channel_recipient_remove(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::VoiceStateUpdateEvent).void).returns(Discordrb::Events::VoiceStateUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::VoiceStateUpdateEvent).void).returns(Discordrb::Events::VoiceStateUpdateEventHandler) }
     def voice_state_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberAddEvent).void).returns(Discordrb::Events::ServerMemberAddEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberAddEvent).void).returns(Discordrb::Events::ServerMemberAddEventHandler) }
     def member_join(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberUpdateEvent).void).returns(Discordrb::Events::ServerMemberUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberUpdateEvent).void).returns(Discordrb::Events::ServerMemberUpdateEventHandler) }
     def member_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberDeleteEvent).void).returns(Discordrb::Events::ServerMemberDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberDeleteEvent).void).returns(Discordrb::Events::ServerMemberDeleteEventHandler) }
     def member_leave(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UserBanEvent).void).returns(Discordrb::Events::UserBanEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UserBanEvent).void).returns(Discordrb::Events::UserBanEventHandler) }
     def user_ban(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UserUnbanEvent).void).returns(Discordrb::Events::UserUnbanEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UserUnbanEvent).void).returns(Discordrb::Events::UserUnbanEventHandler) }
     def user_unban(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerCreateEvent).void).returns(Discordrb::Events::ServerCreateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerCreateEvent).void).returns(Discordrb::Events::ServerCreateEventHandler) }
     def server_create(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerUpdateEvent).void).returns(Discordrb::Events::ServerUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerUpdateEvent).void).returns(Discordrb::Events::ServerUpdateEventHandler) }
     def server_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerDeleteEvent).void).returns(Discordrb::Events::ServerDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerDeleteEvent).void).returns(Discordrb::Events::ServerDeleteEventHandler) }
     def server_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiChangeEvent).void).returns(Discordrb::Events::ServerEmojiChangeEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiChangeEvent).void).returns(Discordrb::Events::ServerEmojiChangeEventHandler) }
     def server_emoji(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiCreateEvent).void).returns(Discordrb::Events::ServerEmojiCreateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiCreateEvent).void).returns(Discordrb::Events::ServerEmojiCreateEventHandler) }
     def server_emoji_create(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiDeleteEvent).void).returns(Discordrb::Events::ServerEmojiDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiDeleteEvent).void).returns(Discordrb::Events::ServerEmojiDeleteEventHandler) }
     def server_emoji_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiUpdateEvent).void).returns(Discordrb::Events::ServerEmojiUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiUpdateEvent).void).returns(Discordrb::Events::ServerEmojiUpdateEventHandler) }
     def server_emoji_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleCreateEvent).void).returns(Discordrb::Events::ServerRoleCreateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleCreateEvent).void).returns(Discordrb::Events::ServerRoleCreateEventHandler) }
     def server_role_create(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleDeleteEvent).void).returns(Discordrb::Events::ServerRoleDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleDeleteEvent).void).returns(Discordrb::Events::ServerRoleDeleteEventHandler) }
     def server_role_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleUpdateEvent).void).returns(Discordrb::Events::ServerRoleUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleUpdateEvent).void).returns(Discordrb::Events::ServerRoleUpdateEventHandler) }
     def server_role_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::WebhookUpdateEvent).void).returns(Discordrb::Events::WebhookUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::WebhookUpdateEvent).void).returns(Discordrb::Events::WebhookUpdateEventHandler) }
     def webhook_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::AwaitEvent).void).returns(Discordrb::Events::AwaitEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::AwaitEvent).void).returns(Discordrb::Events::AwaitEventHandler) }
     def await(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PrivateMessageEvent).void).returns(Discordrb::Events::PrivateMessageEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PrivateMessageEvent).void).returns(Discordrb::Events::PrivateMessageEventHandler) }
     def pm(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::RawEvent).void).returns(Discordrb::Events::RawEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::RawEvent).void).returns(Discordrb::Events::RawEventHandler) }
     def raw(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UnknownEvent).void).returns(Discordrb::Events::UnknownEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UnknownEvent).void).returns(Discordrb::Events::UnknownEventHandler) }
     def unknown(attributes = {}, &block); end
 
     sig { params(handler: Discordrb::Events::EventHandler).returns(T.untyped) }
@@ -2832,7 +2832,7 @@ module Discordrb
     sig { params(other: T.untyped).returns(Overwrite) }
     def self.from_other(other); end
 
-    sig { returns(Hash) }
+    sig { returns(T::Hash[T.untyped, T.untyped]) }
     def to_hash; end
   end
 
@@ -2950,7 +2950,7 @@ module Discordrb
     sig { returns(T::Boolean) }
     def slowmode?; end
 
-    sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Message) }
+    sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Message) }
     def send_message(content, tts = false, embed = nil); end
 
     sig do
@@ -2958,7 +2958,7 @@ module Discordrb
         content: String,
         timeout: Float,
         tts: T::Boolean,
-        embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))
+        embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))
       ).returns(T.untyped)
     end
     def send_temporary_message(content, timeout, tts = false, embed = nil); end
@@ -3388,7 +3388,7 @@ module Discordrb
     sig { params(content: T.untyped).returns(T.untyped) }
     def reply(content); end
 
-    sig { params(new_content: String, new_embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Message) }
+    sig { params(new_content: String, new_embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Message) }
     def edit(new_content, new_embed = nil); end
 
     sig { returns(T.untyped) }
@@ -3976,7 +3976,7 @@ module Discordrb
     sig { params(name: String).returns(T.untyped) }
     def name=(name); end
 
-    sig { params(data: Hash).returns(T.untyped) }
+    sig { params(data: T::Hash[T.untyped, T.untyped]).returns(T.untyped) }
     def update(data); end
 
     sig { params(reason: String).returns(T.untyped) }
@@ -4187,7 +4187,7 @@ module Discordrb
     sig { returns(Class) }
     def type; end
 
-    sig { returns(Hash) }
+    sig { returns(T::Hash[T.untyped, T.untyped]) }
     def attributes; end
 
     sig do
@@ -4201,7 +4201,7 @@ module Discordrb
     end
     def initialize(bot, key, type, attributes, block = nil); end
 
-    sig { params(event: Discordrb::Events::Event).returns(Array) }
+    sig { params(event: Discordrb::Events::Event).returns(T::Array[T.untyped]) }
     def match(event); end
   end
 
@@ -4227,13 +4227,13 @@ module Discordrb
     sig { params(id: Integer).returns(Channel) }
     def pm_channel(id); end
 
-    sig { params(data: Hash).returns(User) }
+    sig { params(data: T::Hash[T.untyped, T.untyped]).returns(User) }
     def ensure_user(data); end
 
-    sig { params(data: Hash).returns(Server) }
+    sig { params(data: T::Hash[T.untyped, T.untyped]).returns(Server) }
     def ensure_server(data); end
 
-    sig { params(data: Hash, server: T.nilable(Server)).returns(Channel) }
+    sig { params(data: T::Hash[T.untyped, T.untyped], server: T.nilable(Server)).returns(Channel) }
     def ensure_channel(data, server = nil); end
 
     sig { params(id: Integer).returns(T.untyped) }
@@ -4813,7 +4813,7 @@ module Discordrb
       sig { params(value: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
       def fields=(value); end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def to_hash; end
     end
 
@@ -4833,7 +4833,7 @@ module Discordrb
       sig { params(text: T.untyped, icon_url: T.untyped).returns(T.untyped) }
       def initialize(text: nil, icon_url: nil); end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def to_hash; end
     end
 
@@ -4847,7 +4847,7 @@ module Discordrb
       sig { params(url: T.nilable(String)).returns(T.untyped) }
       def initialize(url: nil); end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def to_hash; end
     end
 
@@ -4861,7 +4861,7 @@ module Discordrb
       sig { params(url: T.nilable(String)).returns(T.untyped) }
       def initialize(url: nil); end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def to_hash; end
     end
 
@@ -4887,7 +4887,7 @@ module Discordrb
       sig { params(name: T.untyped, url: T.untyped, icon_url: T.untyped).returns(T.untyped) }
       def initialize(name: nil, url: nil, icon_url: nil); end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def to_hash; end
     end
 
@@ -4913,7 +4913,7 @@ module Discordrb
       sig { params(name: T.untyped, value: T.untyped, inline: T.untyped).returns(T.untyped) }
       def initialize(name: nil, value: nil, inline: false); end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def to_hash; end
     end
 
@@ -4969,10 +4969,10 @@ module Discordrb
       sig { returns(T::Array[T.untyped]) }
       def embeds; end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def to_json_hash; end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def to_multipart_hash; end
     end
   end
@@ -4980,121 +4980,121 @@ module Discordrb
   module EventContainer
     include Events
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageEvent).void).returns(Discordrb::Events::MessageEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageEvent).void).returns(Discordrb::Events::MessageEventHandler) }
     def message(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReadyEvent).void).returns(Discordrb::Events::ReadyEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReadyEvent).void).returns(Discordrb::Events::ReadyEventHandler) }
     def ready(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::DisconnectEvent).void).returns(Discordrb::Events::DisconnectEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::DisconnectEvent).void).returns(Discordrb::Events::DisconnectEventHandler) }
     def disconnected(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::HeartbeatEvent).void).returns(Discordrb::Events::HeartbeatEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::HeartbeatEvent).void).returns(Discordrb::Events::HeartbeatEventHandler) }
     def heartbeat(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::TypingEvent).void).returns(Discordrb::Events::TypingEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::TypingEvent).void).returns(Discordrb::Events::TypingEventHandler) }
     def typing(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageEditEvent).void).returns(Discordrb::Events::MessageEditEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageEditEvent).void).returns(Discordrb::Events::MessageEditEventHandler) }
     def message_edit(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageDeleteEvent).void).returns(Discordrb::Events::MessageDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageDeleteEvent).void).returns(Discordrb::Events::MessageDeleteEventHandler) }
     def message_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionAddEvent).void).returns(Discordrb::Events::ReactionAddEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionAddEvent).void).returns(Discordrb::Events::ReactionAddEventHandler) }
     def reaction_add(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionRemoveEvent).void).returns(Discordrb::Events::ReactionRemoveEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionRemoveEvent).void).returns(Discordrb::Events::ReactionRemoveEventHandler) }
     def reaction_remove(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionRemoveAllEvent).void).returns(Discordrb::Events::ReactionRemoveAllEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionRemoveAllEvent).void).returns(Discordrb::Events::ReactionRemoveAllEventHandler) }
     def reaction_remove_all(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PresenceEvent).void).returns(Discordrb::Events::PresenceEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PresenceEvent).void).returns(Discordrb::Events::PresenceEventHandler) }
     def presence(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PlayingEvent).void).returns(Discordrb::Events::PlayingEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PlayingEvent).void).returns(Discordrb::Events::PlayingEventHandler) }
     def playing(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MentionEvent).void).returns(Discordrb::Events::MentionEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MentionEvent).void).returns(Discordrb::Events::MentionEventHandler) }
     def mention(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelCreateEvent).void).returns(Discordrb::Events::ChannelCreateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelCreateEvent).void).returns(Discordrb::Events::ChannelCreateEventHandler) }
     def channel_create(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelUpdateEvent).void).returns(Discordrb::Events::ChannelUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelUpdateEvent).void).returns(Discordrb::Events::ChannelUpdateEventHandler) }
     def channel_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelDeleteEvent).void).returns(Discordrb::Events::ChannelDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelDeleteEvent).void).returns(Discordrb::Events::ChannelDeleteEventHandler) }
     def channel_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelRecipientAddEvent).void).returns(T.untyped) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelRecipientAddEvent).void).returns(T.untyped) }
     def channel_recipient_add(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelRecipientRemoveEvent).void).returns(T.untyped) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelRecipientRemoveEvent).void).returns(T.untyped) }
     def channel_recipient_remove(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::VoiceStateUpdateEvent).void).returns(Discordrb::Events::VoiceStateUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::VoiceStateUpdateEvent).void).returns(Discordrb::Events::VoiceStateUpdateEventHandler) }
     def voice_state_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberAddEvent).void).returns(Discordrb::Events::ServerMemberAddEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberAddEvent).void).returns(Discordrb::Events::ServerMemberAddEventHandler) }
     def member_join(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberUpdateEvent).void).returns(Discordrb::Events::ServerMemberUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberUpdateEvent).void).returns(Discordrb::Events::ServerMemberUpdateEventHandler) }
     def member_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberDeleteEvent).void).returns(Discordrb::Events::ServerMemberDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberDeleteEvent).void).returns(Discordrb::Events::ServerMemberDeleteEventHandler) }
     def member_leave(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UserBanEvent).void).returns(Discordrb::Events::UserBanEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UserBanEvent).void).returns(Discordrb::Events::UserBanEventHandler) }
     def user_ban(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UserUnbanEvent).void).returns(Discordrb::Events::UserUnbanEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UserUnbanEvent).void).returns(Discordrb::Events::UserUnbanEventHandler) }
     def user_unban(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerCreateEvent).void).returns(Discordrb::Events::ServerCreateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerCreateEvent).void).returns(Discordrb::Events::ServerCreateEventHandler) }
     def server_create(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerUpdateEvent).void).returns(Discordrb::Events::ServerUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerUpdateEvent).void).returns(Discordrb::Events::ServerUpdateEventHandler) }
     def server_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerDeleteEvent).void).returns(Discordrb::Events::ServerDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerDeleteEvent).void).returns(Discordrb::Events::ServerDeleteEventHandler) }
     def server_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiChangeEvent).void).returns(Discordrb::Events::ServerEmojiChangeEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiChangeEvent).void).returns(Discordrb::Events::ServerEmojiChangeEventHandler) }
     def server_emoji(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiCreateEvent).void).returns(Discordrb::Events::ServerEmojiCreateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiCreateEvent).void).returns(Discordrb::Events::ServerEmojiCreateEventHandler) }
     def server_emoji_create(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiDeleteEvent).void).returns(Discordrb::Events::ServerEmojiDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiDeleteEvent).void).returns(Discordrb::Events::ServerEmojiDeleteEventHandler) }
     def server_emoji_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiUpdateEvent).void).returns(Discordrb::Events::ServerEmojiUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiUpdateEvent).void).returns(Discordrb::Events::ServerEmojiUpdateEventHandler) }
     def server_emoji_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleCreateEvent).void).returns(Discordrb::Events::ServerRoleCreateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleCreateEvent).void).returns(Discordrb::Events::ServerRoleCreateEventHandler) }
     def server_role_create(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleDeleteEvent).void).returns(Discordrb::Events::ServerRoleDeleteEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleDeleteEvent).void).returns(Discordrb::Events::ServerRoleDeleteEventHandler) }
     def server_role_delete(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleUpdateEvent).void).returns(Discordrb::Events::ServerRoleUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleUpdateEvent).void).returns(Discordrb::Events::ServerRoleUpdateEventHandler) }
     def server_role_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::WebhookUpdateEvent).void).returns(Discordrb::Events::WebhookUpdateEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::WebhookUpdateEvent).void).returns(Discordrb::Events::WebhookUpdateEventHandler) }
     def webhook_update(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::AwaitEvent).void).returns(Discordrb::Events::AwaitEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::AwaitEvent).void).returns(Discordrb::Events::AwaitEventHandler) }
     def await(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PrivateMessageEvent).void).returns(Discordrb::Events::PrivateMessageEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PrivateMessageEvent).void).returns(Discordrb::Events::PrivateMessageEventHandler) }
     def pm(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::RawEvent).void).returns(Discordrb::Events::RawEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::RawEvent).void).returns(Discordrb::Events::RawEventHandler) }
     def raw(attributes = {}, &block); end
 
-    sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UnknownEvent).void).returns(Discordrb::Events::UnknownEventHandler) }
+    sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UnknownEvent).void).returns(Discordrb::Events::UnknownEventHandler) }
     def unknown(attributes = {}, &block); end
 
     sig { params(handler: Discordrb::Events::EventHandler).returns(T.untyped) }
@@ -5130,7 +5130,7 @@ module Discordrb
       sig { returns(Symbol) }
       def type; end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def data; end
 
       sig { params(type: T.untyped, data: T.untyped, bot: T.untyped).returns(RawEvent) }
@@ -5167,7 +5167,7 @@ module Discordrb
       sig { returns(Symbol) }
       def type; end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def data; end
 
       sig { params(type: T.untyped, data: T.untyped, bot: T.untyped).returns(RawEvent) }
@@ -5287,7 +5287,7 @@ module Discordrb
       sig { returns(Class) }
       def type; end
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def attributes; end
 
       sig { params(await: T.untyped, event: T.untyped, bot: T.untyped).returns(AwaitEvent) }
@@ -5813,7 +5813,7 @@ module Discordrb
       sig { params(data: T.untyped, bot: T.untyped).returns(TypingEvent) }
       def initialize(data, bot); end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -6102,7 +6102,7 @@ module Discordrb
       sig { returns(Channel) }
       def channel; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -6166,7 +6166,7 @@ module Discordrb
       sig { returns(T.nilable(Discordrb::Voice::VoiceBot)) }
       def voice; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -6254,7 +6254,7 @@ module Discordrb
       sig { returns(T.nilable(Discordrb::Voice::VoiceBot)) }
       def voice; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -6342,7 +6342,7 @@ module Discordrb
       sig { returns(T.nilable(Discordrb::Voice::VoiceBot)) }
       def voice; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -6399,7 +6399,7 @@ module Discordrb
       sig { returns(Channel) }
       def channel; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -6487,7 +6487,7 @@ module Discordrb
       sig { returns(T.nilable(Discordrb::Voice::VoiceBot)) }
       def voice; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -6542,7 +6542,7 @@ module Discordrb
       sig { returns(Channel) }
       def channel; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -7105,7 +7105,7 @@ module Discordrb
       sig { returns(T.nilable(Server)) }
       def server; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -7169,7 +7169,7 @@ module Discordrb
       sig { returns(T.nilable(Server)) }
       def server; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -7233,7 +7233,7 @@ module Discordrb
       sig { returns(T.nilable(Server)) }
       def server; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -7290,7 +7290,7 @@ module Discordrb
       sig { returns(Message) }
       def message; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -7708,7 +7708,7 @@ module Discordrb
       sig { returns(T.nilable(Discordrb::Voice::VoiceBot)) }
       def voice; end
 
-      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
+      sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
       def send_message(content, tts = false, embed = nil); end
 
       sig { params(message: String, embed: T.nilable(Discordrb::Webhooks::Embed), block: T.proc.params(embed: Discordrb::Webhooks::Embed).void).returns(Message) }
@@ -7731,7 +7731,7 @@ module Discordrb
     end
 
     class Command
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def attributes; end
 
       sig { returns(Symbol) }
@@ -7782,7 +7782,7 @@ module Discordrb
       sig { returns(T::Hash[Symbol, Command]) }
       def commands; end
 
-      sig { params(name: T.any(Symbol, T::Array[Symbol]), attributes: Hash, block: T.proc.params(event: CommandEvent).void).returns(Command) }
+      sig { params(name: T.any(Symbol, T::Array[Symbol]), attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: CommandEvent).void).returns(Command) }
       def command(name, attributes = {}, &block); end
 
       sig { params(name: Symbol).returns(T.untyped) }
@@ -7794,7 +7794,7 @@ module Discordrb
       sig { params(container: Module).returns(T.untyped) }
       def include!(container); end
 
-      sig { params(key: Symbol, attributes: Hash).returns(Bucket) }
+      sig { params(key: Symbol, attributes: T::Hash[T.untyped, T.untyped]).returns(Bucket) }
       def bucket(key, attributes); end
 
       sig { params(key: Symbol, thing: T.any(T.untyped, Integer, Symbol), increment: T.untyped).returns(T.any(Integer, T::Boolean)) }
@@ -7810,13 +7810,13 @@ module Discordrb
     class CommandBot < Bot
       include CommandContainer
 
-      sig { returns(Hash) }
+      sig { returns(T::Hash[T.untyped, T.untyped]) }
       def attributes; end
 
       sig { returns(T.any(String, T::Array[String], T.untyped)) }
       def prefix; end
 
-      sig { params(attributes: Hash).returns(CommandBot) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped]).returns(CommandBot) }
       def initialize(attributes = {}); end
 
       sig { params(name: Symbol).returns(T::Array[CommandAlias]) }
@@ -7893,7 +7893,7 @@ module Discordrb
       sig { returns(T::Hash[Symbol, Command]) }
       def commands; end
 
-      sig { params(name: T.any(Symbol, T::Array[Symbol]), attributes: Hash, block: T.proc.params(event: CommandEvent).void).returns(Command) }
+      sig { params(name: T.any(Symbol, T::Array[Symbol]), attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: CommandEvent).void).returns(Command) }
       def command(name, attributes = {}, &block); end
 
       sig { params(name: Symbol).returns(T.untyped) }
@@ -7905,7 +7905,7 @@ module Discordrb
       sig { params(container: Module).returns(T.untyped) }
       def include!(container); end
 
-      sig { params(key: Symbol, attributes: Hash).returns(Bucket) }
+      sig { params(key: Symbol, attributes: T::Hash[T.untyped, T.untyped]).returns(Bucket) }
       def bucket(key, attributes); end
 
       sig { params(key: Symbol, thing: T.any(T.untyped, Integer, Symbol), increment: T.untyped).returns(T.any(Integer, T::Boolean)) }
@@ -8003,7 +8003,7 @@ module Discordrb
           channel: T.any(Channel, Integer, T.untyped),
           content: String,
           tts: T::Boolean,
-          embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))
+          embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))
         ).returns(Message)
       end
       def send_message(channel, content, tts = false, embed = nil); end
@@ -8014,7 +8014,7 @@ module Discordrb
           content: String,
           timeout: Float,
           tts: T::Boolean,
-          embed: T.nilable(T.any(Hash, Discordrb::Webhooks::Embed))
+          embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))
         ).returns(T.untyped)
       end
       def send_temporary_message(channel, content, timeout, tts = false, embed = nil); end
@@ -8097,13 +8097,13 @@ module Discordrb
         params(
           key: Symbol,
           type: Class,
-          attributes: Hash,
+          attributes: T::Hash[T.untyped, T.untyped],
           block: T.proc.params(event: Discordrb::Events::Event).void
         ).returns(Await)
       end
       def add_await(key, type, attributes = {}, &block); end
 
-      sig { params(type: Class, attributes: Hash).returns(T.nilable(Discordrb::Events::Event)) }
+      sig { params(type: Class, attributes: T::Hash[T.untyped, T.untyped]).returns(T.nilable(Discordrb::Events::Event)) }
       def add_await!(type, attributes = {}); end
 
       sig { params(user: T.any(User, Integer, T.untyped)).returns(T.untyped) }
@@ -8253,13 +8253,13 @@ module Discordrb
       sig { params(id: Integer).returns(Channel) }
       def pm_channel(id); end
 
-      sig { params(data: Hash).returns(User) }
+      sig { params(data: T::Hash[T.untyped, T.untyped]).returns(User) }
       def ensure_user(data); end
 
-      sig { params(data: Hash).returns(Server) }
+      sig { params(data: T::Hash[T.untyped, T.untyped]).returns(Server) }
       def ensure_server(data); end
 
-      sig { params(data: Hash, server: T.nilable(Server)).returns(Channel) }
+      sig { params(data: T::Hash[T.untyped, T.untyped], server: T.nilable(Server)).returns(Channel) }
       def ensure_channel(data, server = nil); end
 
       sig { params(id: Integer).returns(T.untyped) }
@@ -8277,121 +8277,121 @@ module Discordrb
       sig { params(username: T.untyped, discrim: T.untyped).returns(T.untyped) }
       def find_user(username, discrim = nil); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageEvent).void).returns(Discordrb::Events::MessageEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageEvent).void).returns(Discordrb::Events::MessageEventHandler) }
       def message(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReadyEvent).void).returns(Discordrb::Events::ReadyEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReadyEvent).void).returns(Discordrb::Events::ReadyEventHandler) }
       def ready(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::DisconnectEvent).void).returns(Discordrb::Events::DisconnectEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::DisconnectEvent).void).returns(Discordrb::Events::DisconnectEventHandler) }
       def disconnected(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::HeartbeatEvent).void).returns(Discordrb::Events::HeartbeatEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::HeartbeatEvent).void).returns(Discordrb::Events::HeartbeatEventHandler) }
       def heartbeat(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::TypingEvent).void).returns(Discordrb::Events::TypingEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::TypingEvent).void).returns(Discordrb::Events::TypingEventHandler) }
       def typing(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageEditEvent).void).returns(Discordrb::Events::MessageEditEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageEditEvent).void).returns(Discordrb::Events::MessageEditEventHandler) }
       def message_edit(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MessageDeleteEvent).void).returns(Discordrb::Events::MessageDeleteEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MessageDeleteEvent).void).returns(Discordrb::Events::MessageDeleteEventHandler) }
       def message_delete(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionAddEvent).void).returns(Discordrb::Events::ReactionAddEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionAddEvent).void).returns(Discordrb::Events::ReactionAddEventHandler) }
       def reaction_add(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionRemoveEvent).void).returns(Discordrb::Events::ReactionRemoveEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionRemoveEvent).void).returns(Discordrb::Events::ReactionRemoveEventHandler) }
       def reaction_remove(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ReactionRemoveAllEvent).void).returns(Discordrb::Events::ReactionRemoveAllEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ReactionRemoveAllEvent).void).returns(Discordrb::Events::ReactionRemoveAllEventHandler) }
       def reaction_remove_all(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PresenceEvent).void).returns(Discordrb::Events::PresenceEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PresenceEvent).void).returns(Discordrb::Events::PresenceEventHandler) }
       def presence(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PlayingEvent).void).returns(Discordrb::Events::PlayingEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PlayingEvent).void).returns(Discordrb::Events::PlayingEventHandler) }
       def playing(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::MentionEvent).void).returns(Discordrb::Events::MentionEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::MentionEvent).void).returns(Discordrb::Events::MentionEventHandler) }
       def mention(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelCreateEvent).void).returns(Discordrb::Events::ChannelCreateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelCreateEvent).void).returns(Discordrb::Events::ChannelCreateEventHandler) }
       def channel_create(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelUpdateEvent).void).returns(Discordrb::Events::ChannelUpdateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelUpdateEvent).void).returns(Discordrb::Events::ChannelUpdateEventHandler) }
       def channel_update(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelDeleteEvent).void).returns(Discordrb::Events::ChannelDeleteEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelDeleteEvent).void).returns(Discordrb::Events::ChannelDeleteEventHandler) }
       def channel_delete(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelRecipientAddEvent).void).returns(T.untyped) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelRecipientAddEvent).void).returns(T.untyped) }
       def channel_recipient_add(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ChannelRecipientRemoveEvent).void).returns(T.untyped) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ChannelRecipientRemoveEvent).void).returns(T.untyped) }
       def channel_recipient_remove(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::VoiceStateUpdateEvent).void).returns(Discordrb::Events::VoiceStateUpdateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::VoiceStateUpdateEvent).void).returns(Discordrb::Events::VoiceStateUpdateEventHandler) }
       def voice_state_update(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberAddEvent).void).returns(Discordrb::Events::ServerMemberAddEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberAddEvent).void).returns(Discordrb::Events::ServerMemberAddEventHandler) }
       def member_join(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberUpdateEvent).void).returns(Discordrb::Events::ServerMemberUpdateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberUpdateEvent).void).returns(Discordrb::Events::ServerMemberUpdateEventHandler) }
       def member_update(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerMemberDeleteEvent).void).returns(Discordrb::Events::ServerMemberDeleteEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerMemberDeleteEvent).void).returns(Discordrb::Events::ServerMemberDeleteEventHandler) }
       def member_leave(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UserBanEvent).void).returns(Discordrb::Events::UserBanEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UserBanEvent).void).returns(Discordrb::Events::UserBanEventHandler) }
       def user_ban(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UserUnbanEvent).void).returns(Discordrb::Events::UserUnbanEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UserUnbanEvent).void).returns(Discordrb::Events::UserUnbanEventHandler) }
       def user_unban(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerCreateEvent).void).returns(Discordrb::Events::ServerCreateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerCreateEvent).void).returns(Discordrb::Events::ServerCreateEventHandler) }
       def server_create(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerUpdateEvent).void).returns(Discordrb::Events::ServerUpdateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerUpdateEvent).void).returns(Discordrb::Events::ServerUpdateEventHandler) }
       def server_update(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerDeleteEvent).void).returns(Discordrb::Events::ServerDeleteEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerDeleteEvent).void).returns(Discordrb::Events::ServerDeleteEventHandler) }
       def server_delete(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiChangeEvent).void).returns(Discordrb::Events::ServerEmojiChangeEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiChangeEvent).void).returns(Discordrb::Events::ServerEmojiChangeEventHandler) }
       def server_emoji(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiCreateEvent).void).returns(Discordrb::Events::ServerEmojiCreateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiCreateEvent).void).returns(Discordrb::Events::ServerEmojiCreateEventHandler) }
       def server_emoji_create(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiDeleteEvent).void).returns(Discordrb::Events::ServerEmojiDeleteEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiDeleteEvent).void).returns(Discordrb::Events::ServerEmojiDeleteEventHandler) }
       def server_emoji_delete(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerEmojiUpdateEvent).void).returns(Discordrb::Events::ServerEmojiUpdateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerEmojiUpdateEvent).void).returns(Discordrb::Events::ServerEmojiUpdateEventHandler) }
       def server_emoji_update(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleCreateEvent).void).returns(Discordrb::Events::ServerRoleCreateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleCreateEvent).void).returns(Discordrb::Events::ServerRoleCreateEventHandler) }
       def server_role_create(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleDeleteEvent).void).returns(Discordrb::Events::ServerRoleDeleteEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleDeleteEvent).void).returns(Discordrb::Events::ServerRoleDeleteEventHandler) }
       def server_role_delete(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::ServerRoleUpdateEvent).void).returns(Discordrb::Events::ServerRoleUpdateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::ServerRoleUpdateEvent).void).returns(Discordrb::Events::ServerRoleUpdateEventHandler) }
       def server_role_update(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::WebhookUpdateEvent).void).returns(Discordrb::Events::WebhookUpdateEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::WebhookUpdateEvent).void).returns(Discordrb::Events::WebhookUpdateEventHandler) }
       def webhook_update(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::AwaitEvent).void).returns(Discordrb::Events::AwaitEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::AwaitEvent).void).returns(Discordrb::Events::AwaitEventHandler) }
       def await(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::PrivateMessageEvent).void).returns(Discordrb::Events::PrivateMessageEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::PrivateMessageEvent).void).returns(Discordrb::Events::PrivateMessageEventHandler) }
       def pm(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::RawEvent).void).returns(Discordrb::Events::RawEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::RawEvent).void).returns(Discordrb::Events::RawEventHandler) }
       def raw(attributes = {}, &block); end
 
-      sig { params(attributes: Hash, block: T.proc.params(event: Discordrb::Events::UnknownEvent).void).returns(Discordrb::Events::UnknownEventHandler) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped], block: T.proc.params(event: Discordrb::Events::UnknownEvent).void).returns(Discordrb::Events::UnknownEventHandler) }
       def unknown(attributes = {}, &block); end
 
       sig { params(handler: Discordrb::Events::EventHandler).returns(T.untyped) }
@@ -8425,7 +8425,7 @@ module Discordrb
     end
 
     module RateLimiter
-      sig { params(key: Symbol, attributes: Hash).returns(Bucket) }
+      sig { params(key: Symbol, attributes: T::Hash[T.untyped, T.untyped]).returns(Bucket) }
       def bucket(key, attributes); end
 
       sig { params(key: Symbol, thing: T.any(T.untyped, Integer, Symbol), increment: T.untyped).returns(T.any(Integer, T::Boolean)) }
@@ -8444,7 +8444,7 @@ module Discordrb
       sig { returns(SimpleRateLimiter) }
       def initialize; end
 
-      sig { params(key: Symbol, attributes: Hash).returns(Bucket) }
+      sig { params(key: Symbol, attributes: T::Hash[T.untyped, T.untyped]).returns(Bucket) }
       def bucket(key, attributes); end
 
       sig { params(key: Symbol, thing: T.any(T.untyped, Integer, Symbol), increment: T.untyped).returns(T.any(Integer, T::Boolean)) }
