@@ -53,7 +53,7 @@ module Lhm::SqlHelper
 end
 
 class Lhm::Table
-  sig { returns(Hash) }
+  sig { returns(T::Hash[T.untyped, T.untyped]) }
   def columns; end
 
   sig { returns(T.untyped) }
@@ -62,7 +62,7 @@ class Lhm::Table
   sig { returns(String) }
   def destination_name; end
 
-  sig { returns(Hash) }
+  sig { returns(T::Hash[T.untyped, T.untyped]) }
   def indices; end
 
   sig do
@@ -324,7 +324,7 @@ class Lhm::Migrator
   end
   def rename_column(old, nu); end
 
-  sig { returns(Hash) }
+  sig { returns(T::Hash[T.untyped, T.untyped]) }
   def renames; end
 
   sig { returns(T::Array[String]) }
@@ -388,7 +388,7 @@ module Lhm::Throttler
   sig do
     params(
       type: T.any(Lhm::Command, Symbol, String, Class),
-      options: T.nilable(Hash)
+      options: T.nilable(T::Hash[T.untyped, T.untyped])
     ).void
   end
   def setup_throttler(type, options = nil); end
@@ -401,7 +401,7 @@ class Lhm::Throttler::Time
   sig { void }
   def execute; end
 
-  sig { params(options: T.nilable(Hash)).void }
+  sig { params(options: T.nilable(T::Hash[T.untyped, T.untyped])).void }
   def initialize(options = nil); end
 
   sig { returns(Integer) }
@@ -428,7 +428,7 @@ class Lhm::Throttler::Factory
   sig do
     params(
       type: T.any(Lhm::Command, Symbol, String, Class),
-      options: T.nilable(Hash)
+      options: T.nilable(T::Hash[T.untyped, T.untyped])
     ).returns(T.untyped)
   end
   def self.create_throttler(type, options = nil); end
