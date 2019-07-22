@@ -31,7 +31,7 @@ module ActiveModel::Validations
       *names,
       if: nil,
       on: nil,
-      prepend: T::Boolean,
+      prepend: false,
       unless: nil
     ); end
 
