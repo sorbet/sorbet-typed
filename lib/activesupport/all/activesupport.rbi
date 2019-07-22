@@ -231,3 +231,80 @@ class String
   sig { returns(String) }
   def upcase_first; end
 end
+
+class Array
+  sig { returns(T::Boolean) }
+  def blank?; end
+
+  sig { returns(T::Array[T.untyped]) }
+  def deep_dup; end
+
+  sig { returns(T::Hash[T.untyped, T.untyped]) }
+  def extract_options!; end
+
+  sig { returns(Elem) }
+  def fifth; end
+
+  sig { returns(Elem) }
+  def forty_two; end
+
+  sig { returns(Elem) }
+  def fourth; end
+
+  sig { params(position: Integer).returns(T::Array[T.untyped]) }
+  def from(position); end
+
+  sig { params(number: Integer, fill_with: T.untyped).returns(T.untyped) }
+  def in_groups(number, fill_with = nil); end
+
+  sig { params(number: Integer, fill_with: T.untyped).returns(T.untyped) }
+  def in_groups_of(number, fill_with = nil); end
+
+  sig { returns(T.untyped) }
+  def inquiry; end
+
+  sig { returns(Elem) }
+  def second; end
+
+  sig { returns(Elem) }
+  def second_to_last; end
+
+  sig { params(value: T.untyped).returns(T::Array[T.untyped]) }
+  def split(value = nil); end
+
+  sig { returns(Elem) }
+  def third; end
+
+  sig { returns(Elem) }
+  def third_to_last; end
+
+  sig { params(position: Integer).returns(T::Array[T.untyped]) }
+  def to(position); end
+
+  alias_method :to_default_s, :to_s
+
+  sig { params(format: Symbol).returns(String) }
+  def to_formatted_s(format = :default); end
+
+  sig { returns(String) }
+  def to_param; end
+
+  sig { params(key: String).returns(String) }
+  def to_query(key); end
+
+  sig do
+    params(
+      words_connector: String,
+      two_words_connector: String,
+      last_word_connector: String,
+      locale: T.untyped
+    ).returns(T.untyped)
+  end
+  def to_sentence(words_connector: ", ", two_words_connector: " and ", last_word_connector: ", and ", locale: nil); end
+
+  sig { params(options: T.untyped).returns(T.untyped) }
+  def to_xml(options = nil); end
+
+  sig { params(elements: T.untyped).returns(T.untyped) }
+  def without(*elements); end
+end
