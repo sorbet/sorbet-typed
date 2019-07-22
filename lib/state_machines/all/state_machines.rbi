@@ -26,7 +26,7 @@ class StateMachines::StateContext
       blk: T.proc.bind(StateMachines::StateContext).void,
     ).void
   end
-  def state(name, &blk); end
+  def state(*name, &blk); end
 
   sig do
     params(
