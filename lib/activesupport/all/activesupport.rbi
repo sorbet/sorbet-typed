@@ -103,7 +103,7 @@ class String
   sig { returns(T::Boolean) }
   def acts_like_string?; end
 
-  sig { params(position: T.any(Integer, String, Regexp)).returns(T.nilable(String)) }
+  sig { params(position: T.any(Integer, String, Regexp, T::Range[Integer])).returns(T.nilable(String)) }
   def at(position); end
 
   sig { returns(T::Boolean) }
