@@ -92,3 +92,8 @@ module ActiveModel::Validations
     end
   end
 end
+
+class ActiveModel::Type::Boolean
+  sig { params(arg0: T.untyped).returns(T.nilable(T::Boolean))}
+  def cast(arg0); end
+end
