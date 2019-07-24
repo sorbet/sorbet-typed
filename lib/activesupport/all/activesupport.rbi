@@ -128,7 +128,7 @@ class String
 
   sig { returns(String) }
   def demodulize; end
-  
+
   alias_method :ends_with?, :end_with?
 
   sig { params(string: String).returns(T::Boolean) }
