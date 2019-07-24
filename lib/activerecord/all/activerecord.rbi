@@ -873,27 +873,30 @@ end
 class ActiveRecord::Migration::Current < ActiveRecord::Migration
   # Tables
 
+  # https://github.com/rails/rails/blob/v5.2.3/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L151-L290
   sig do
     params(
       table_name: T.any(String, Symbol),
       comment: T.untyped,
-      id: T.untyped,
-      primary_key: T.untyped,
+      id: T.any(T::Boolean, Symbol),
+      primary_key: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       options: T.untyped,
-      temporary: T.untyped,
-      force: T.untyped,
-      as: T.untyped
+      temporary: T::Boolean,
+      force: T.any(T::Boolean, Symbol),
+      as: T.untyped,
+      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
     ).returns(T.untyped)
   end
   def create_table(
     table_name,
     comment: nil,
-    id: nil,
-    primary_key: nil,
+    id: :primary_key,
+    primary_key: :_,
     options: nil,
-    temporary: nil,
-    force: nil,
-    as: nil
+    temporary: false,
+    force: false,
+    as: nil,
+    &blk
   ); end
 
   sig do

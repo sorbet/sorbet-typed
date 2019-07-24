@@ -308,3 +308,97 @@ class Array
   sig { params(elements: T.untyped).returns(T.untyped) }
   def without(*elements); end
 end
+
+module ActiveSupport::NumberHelper
+  sig do
+    params(
+      number: T.any(Integer, Float, String),
+      locale: Symbol,
+      precision: T.nilable(Integer),
+      unit: String,
+      separator: String,
+      delimiter: String,
+      format: String,
+      negative_format: String
+    ).returns(String)
+  end
+  def number_to_currency(number, locale: :en, precision: 2, unit: "$", separator: ".", delimiter: ",", format: "%u%n", negative_format: "-%u%n"); end
+
+  sig do
+    params(
+      number: T.any(Integer, Float, String),
+      locale: Symbol,
+      delimiter: String,
+      separator: String,
+      delimiter_patter: T.nilable(Regexp)
+    ).returns(String)
+  end
+  def number_to_delimited(number, locale: :en, delimiter: ",", separator: ".", delimiter_patter: nil); end
+
+  sig do
+    params(
+      number: T.any(Integer, Float, String),
+      locale: Symbol,
+      precision: T.nilable(Integer),
+      significant: T::Boolean,
+      separator: String,
+      delimiter: String,
+      strip_insignificant_zeros: T::Boolean,
+      units: T.any(T::Hash[T.untyped, T.untyped], String),
+      format: String
+    ).returns(String)
+  end
+  def number_to_human(number, locale: :en, precision: 3, significant: true, separator: ".", delimiter: "", strip_insignificant_zeros: true, units: {}, format: "%n %u"); end
+
+  sig do
+    params(
+      number: T.any(Integer, Float, String),
+      locale: Symbol,
+      precision: T.nilable(Integer),
+      significant: T::Boolean,
+      separator: String,
+      delimiter: String,
+      strip_insignificant_zeros: T::Boolean
+    ).returns(String)
+  end
+  def number_to_human_size(number, locale: :en, precision: 3, significant: true, separator: ".", delimiter: "", strip_insignificant_zeros: true); end
+
+  sig do
+    params(
+      number: T.any(Integer, Float, String),
+      locale: Symbol,
+      precision: T.nilable(Integer),
+      significant: T::Boolean,
+      separator: String,
+      delimiter: String,
+      strip_insignificant_zeros: T::Boolean,
+      format: Symbol
+    ).returns(String)
+  end
+  def number_to_percentage(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false, format: "%n%"); end
+
+  sig do
+    params(
+      number: T.any(Integer, Float, String),
+      area_code: T::Boolean,
+      delimiter: String,
+      extension: T.nilable(Integer),
+      country_code: T.nilable(Integer),
+      pattern: T.nilable(Regexp)
+    ).returns(String)
+  end
+  def number_to_phone(number, area_code: false, delimiter: "-", extension: nil, country_code: nil, pattern: nil); end
+
+  sig do
+    params(
+      number: T.any(Integer, Float, String),
+      locale: Symbol,
+      precision: T.nilable(Integer),
+      significant: T::Boolean,
+      separator: String,
+      delimiter: String,
+      strip_insignificant_zeros: T::Boolean
+    ).returns(String)
+  end
+  def number_to_rounded(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false); end
+end
