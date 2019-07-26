@@ -18,32 +18,34 @@ VariadicUntypedFunction = T.type_alias(
 )
 
 module ActiveRecord::Associations::ClassMethods
+  extend T::Sig
+
   sig do
     params(
       name: Symbol,
-      scope: T.nilable(T.proc.void),
-      after_add: T.nilable(T.any(Symbol, String, T.proc.void)),
-      after_remove: T.nilable(T.any(Symbol, String, T.proc.void)),
-      anonymous_class: T.nilable(T.any(Symbol, String)),
-      as: T.nilable(T.any(Symbol, String)),
-      autosave: T.nilable(T::Boolean),
-      before_add: T.nilable(T.any(Symbol, String, T.proc.void)),
-      before_remove: T.nilable(T.any(Symbol, String, T.proc.void)),
-      class_name: T.nilable(T.any(Symbol, String)),
-      counter_cache: T.nilable(T.any(Symbol, String)),
-      dependent: T.nilable(T.any(Symbol, String)),
-      extend: T.nilable(T.any(Module, T::Array[Module])),
-      foreign_key: T.nilable(T.any(Symbol, String)),
-      foreign_type: T.nilable(T.any(Symbol, String)),
-      index_errors: T.nilable(T::Boolean),
-      inverse_of: T.nilable(T.any(Symbol, String)),
-      join_table: T.nilable(T.any(Symbol, String)),
-      primary_key: T.nilable(T.any(Symbol, String)),
-      source: T.nilable(T.any(Symbol, String)),
-      source_type: T.nilable(T.any(Symbol, String)),
-      table_name: T.nilable(T.any(Symbol, String)),
-      through: T.nilable(T.any(Symbol, String)),
-      validate: T.nilable(T::Boolean),
+      scope: T.proc.void,
+      after_add: T.any(Symbol, String, T.proc.void),
+      after_remove: T.any(Symbol, String, T.proc.void),
+      anonymous_class: T.any(Symbol, String),
+      as: T.any(Symbol, String),
+      autosave: T::Boolean,
+      before_add: T.any(Symbol, String, T.proc.void),
+      before_remove: T.any(Symbol, String, T.proc.void),
+      class_name: T.any(Symbol, String),
+      counter_cache: T.any(Symbol, String),
+      dependent: T.any(Symbol, String),
+      extend: T.any(Module, T::Array[Module]),
+      foreign_key: T.any(Symbol, String),
+      foreign_type: T.any(Symbol, String),
+      index_errors: T::Boolean,
+      inverse_of: T.any(Symbol, String),
+      join_table: T.any(Symbol, String),
+      primary_key: T.any(Symbol, String),
+      source: T.any(Symbol, String),
+      source_type: T.any(Symbol, String),
+      table_name: T.any(Symbol, String),
+      through: T.any(Symbol, String),
+      validate: T::Boolean,
       blk: T.nilable(T.proc.void)
     ).void
   end
@@ -78,21 +80,21 @@ module ActiveRecord::Associations::ClassMethods
   sig do
     params(
       name: Symbol,
-      scope: T.nilable(T.proc.void),
-      anonymous_class: T.nilable(T.any(Symbol, String)),
-      as: T.nilable(T.any(Symbol, String)),
-      autosave: T.nilable(T::Boolean),
-      class_name: T.nilable(T.any(Symbol, String)),
-      dependent: T.nilable(T.any(Symbol, String)),
-      foreign_key: T.nilable(T.any(Symbol, String)),
-      foreign_type: T.nilable(T.any(Symbol, String)),
-      inverse_of: T.nilable(T.any(Symbol, String)),
-      primary_key: T.nilable(T.any(Symbol, String)),
-      required: T.nilable(T::Boolean),
-      source: T.nilable(T.any(Symbol, String)),
-      source_type: T.nilable(T.any(Symbol, String)),
-      through: T.nilable(T.any(Symbol, String)),
-      validate: T.nilable(T::Boolean),
+      scope: T.proc.void,
+      anonymous_class: T.any(Symbol, String),
+      as: T.any(Symbol, String),
+      autosave: T::Boolean,
+      class_name: T.any(Symbol, String),
+      dependent: T.any(Symbol, String),
+      foreign_key: T.any(Symbol, String),
+      foreign_type: T.any(Symbol, String),
+      inverse_of: T.any(Symbol, String),
+      primary_key: T.any(Symbol, String),
+      required: T::Boolean,
+      source: T.any(Symbol, String),
+      source_type: T.any(Symbol, String),
+      through: T.any(Symbol, String),
+      validate: T::Boolean,
       blk: T.nilable(T.proc.void)
     ).void
   end
@@ -118,22 +120,22 @@ module ActiveRecord::Associations::ClassMethods
 
   sig do
     params(
-      name: T.nilable(T.any(Symbol, String)),
-      scope: T.nilable(T.proc.void),
-      autosave: T.nilable(T::Boolean),
-      class_name: T.nilable(T.any(Symbol, String)),
-      counter_cache: T.nilable(T::Boolean),
-      dependent: T.nilable(T.any(Symbol, String)),
-      foreign_key: T.nilable(T.any(Symbol, String)),
-      foreign_type: T.nilable(T.any(Symbol, String)),
-      inverse_of: T.nilable(T.any(Symbol, String)),
-      optional: T.nilable(T::Boolean),
-      polymorphic: T.nilable(T::Boolean),
-      primary_key: T.nilable(T.any(Symbol, String)),
-      required: T.nilable(T::Boolean),
-      touch: T.nilable(T::Boolean),
-      validate: T.nilable(T::Boolean),
-      default: T.nilable(T.proc.returns(T.untyped))
+      name: T.any(Symbol, String),
+      scope: T.proc.void,
+      autosave: T::Boolean,
+      class_name: T.any(Symbol, String),
+      counter_cache: T::Boolean,
+      dependent: T.any(Symbol, String),
+      foreign_key: T.any(Symbol, String),
+      foreign_type: T.any(Symbol, String),
+      inverse_of: T.any(Symbol, String),
+      optional: T::Boolean,
+      polymorphic: T::Boolean,
+      primary_key: T.any(Symbol, String),
+      required: T::Boolean,
+      touch: T::Boolean,
+      validate: T::Boolean,
+      default: T.proc.returns(T.untyped)
     ).void
   end
   def belongs_to(
@@ -157,20 +159,20 @@ module ActiveRecord::Associations::ClassMethods
 
   sig do
     params(
-      name: T.nilable(T.any(Symbol, String)),
-      scope: T.nilable(T.proc.void),
-      after_add: T.nilable(T.any(Symbol, String, T.proc.void)),
-      after_remove: T.nilable(T.any(Symbol, String, T.proc.void)),
-      association_foreign_key: T.nilable(T.any(Symbol, String)),
-      autosave: T.nilable(T::Boolean),
-      before_add: T.nilable(T.any(Symbol, String, T.proc.void)),
-      before_remove: T.nilable(T.any(Symbol, String, T.proc.void)),
-      blk: T.nilable(T.proc.void),
-      class_name: T.nilable(T.any(Symbol, String)),
-      extend: T.nilable(T.any(Module, T::Array[Module])),
-      foreign_key: T.nilable(T.any(Symbol, String)),
-      join_table: T.nilable(T.any(Symbol, String)),
-      validate: T.nilable(T::Boolean),
+      name: T.any(Symbol, String),
+      scope: T.proc.void,
+      after_add: T.any(Symbol, String, T.proc.void),
+      after_remove: T.any(Symbol, String, T.proc.void),
+      association_foreign_key: T.any(Symbol, String),
+      autosave: T::Boolean,
+      before_add: T.any(Symbol, String, T.proc.void),
+      before_remove: T.any(Symbol, String, T.proc.void),
+      blk: T.proc.void,
+      class_name: T.any(Symbol, String),
+      extend: T.any(Module, T::Array[Module]),
+      foreign_key: T.any(Symbol, String),
+      join_table: T.any(Symbol, String),
+      validate: T::Boolean,
     ).void
   end
   def has_and_belongs_to_many(
@@ -204,10 +206,10 @@ module ActiveRecord::NestedAttributes::ClassMethods
   sig do
     params(
       attr_names: T.any(T.any(Symbol, String), T::Array[T.any(Symbol, String)]),
-      allow_destroy: T.nilable(T::Boolean),
+      allow_destroy: T::Boolean,
       reject_if: T.any(Symbol, T.proc.returns(T::Boolean)),
       limit: T.any(Integer, Symbol, T.proc.returns(Integer)),
-      update_only: T.nilable(T::Boolean),
+      update_only: T::Boolean,
     ).void
   end
   def accepts_nested_attributes_for(
@@ -222,7 +224,7 @@ end
 module ActiveRecord::Scoping::Named::ClassMethods
   sig do
     params(
-      name: T.nilable(T.any(Symbol, String)),
+      name: T.any(Symbol, String),
       body: VariadicUntypedFunction,
       blk: T.nilable(VariadicUntypedFunction)
     ).void
@@ -299,216 +301,254 @@ class ActiveRecord::Base
   include ActiveRecord::Serialization
   include ActiveRecord::Store
 
+  UntypedCallbackProc = T.type_alias(
+    T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))
+  )
+
   sig do
     params(
-      arg: Symbol,
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      on: T.nilable(Symbol),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      on: Symbol, # only [:create, :destroy, :update] are allowed
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.after_commit(
     arg,
     if: nil,
     on: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.after_create(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.after_destroy(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      on: Symbol, # only [:create, :destroy, :update] are allowed
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.after_rollback(
     arg = nil,
     if: nil,
-    unless: nil
+    on: nil,
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.after_save(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.after_update(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.after_validation(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.around_create(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.around_destroy(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.around_save(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.around_update(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.before_create(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.before_destroy(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.before_save(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      arg: Symbol,
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.before_update(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    &blk
   ); end
 
   sig do
     params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      on: T.nilable(Symbol)
+      arg: T.any(Symbol, UntypedCallbackProc),
+      if: T.any(Symbol, UntypedCallbackProc),
+      unless: T.any(Symbol, UntypedCallbackProc),
+      on: Symbol, # only [:create, :destroy, :update] are allowed
+      blk: T.nilable(UntypedCallbackProc)
     ).void
   end
   def self.before_validation(
     arg = nil,
     if: nil,
+    on: nil,
     unless: nil,
-    on: nil
+    &blk
   ); end
 end
 
@@ -532,7 +572,7 @@ module ActiveRecord::Persistence
   sig do
     params(
       attribute: T.any(Symbol, String),
-      by: T.nilable(Integer),
+      by: Integer,
       touch: T.nilable(T::Boolean)
     ).returns(T.self_type)
   end
@@ -541,7 +581,7 @@ module ActiveRecord::Persistence
   sig do
     params(
       attribute: T.any(Symbol, String),
-      by: T.nilable(Integer)
+      by: Integer
     ).returns(T.self_type)
   end
   def decrement(attribute, by = 1); end
@@ -552,7 +592,7 @@ module ActiveRecord::Persistence
   sig do
     params(
       attribute: T.any(Symbol, String),
-      by: T.nilable(Integer),
+      by: Integer,
       touch: T.nilable(T::Boolean)
     ).returns(T.self_type)
   end
@@ -561,7 +601,7 @@ module ActiveRecord::Persistence
   sig do
     params(
       attribute: T.any(Symbol, String),
-      by: T.nilable(Integer)
+      by: Integer
     ).returns(T.self_type)
   end
   def increment(attribute, by = 1); end
@@ -701,37 +741,37 @@ module ActiveRecord::Persistence::ClassMethods
   sig do
     params(
       attributes: T::Array[T::Hash[T.any(Symbol, String), T.untyped]],
-      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)]))
+      returning: T.any(FalseClass, T::Array[T.any(Symbol, String)])
     ).returns(ActiveRecord::Result)
   end
-  def insert_all!(attributes, returning: nil); end
+  def insert_all!(attributes, returning: []); end
 
   sig do
     params(
       attributes: T::Array[T::Hash[T.any(Symbol, String), T.untyped]],
-      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
-      unique_by: T.nilable(T.untyped)
+      returning: T.any(FalseClass, T::Array[T.any(Symbol, String)]),
+      unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def insert_all(attributes, returning: nil, unique_by: nil); end
+  def insert_all(attributes, returning: [], unique_by: :_); end
 
   sig do
     params(
       attributes: T::Hash[T.any(Symbol, String), T.untyped],
-      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
-      unique_by: T.nilable(T.untyped)
+      returning: T.any(FalseClass, T::Array[T.any(Symbol, String)]),
+      unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def insert!(attributes, returning: nil, unique_by: nil); end
+  def insert!(attributes, returning: [], unique_by: :_); end
 
   sig do
     params(
       attributes: T::Hash[T.any(Symbol, String), T.untyped],
-      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
-      unique_by: T.nilable(T.untyped)
+      returning: T.any(FalseClass, T::Array[T.any(Symbol, String)]),
+      unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def insert(attributes, returning: nil, unique_by: nil); end
+  def insert(attributes, returning: [], unique_by: :_); end
 
   sig { params(attributes: T.untyped, column_types: T::Hash[T.untyped, T.untyped], blk: T.proc.void).returns(T.untyped) }
   def instantiate(attributes, column_types = {}, &blk); end
@@ -747,20 +787,20 @@ module ActiveRecord::Persistence::ClassMethods
   sig do
     params(
       attributes: T::Array[T::Hash[T.any(Symbol, String), T.untyped]],
-      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
-      unique_by: T.nilable(T.untyped)
+      returning: T.any(FalseClass, T::Array[T.any(Symbol, String)]),
+      unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def upsert_all(attributes, returning: nil, unique_by: nil); end
+  def upsert_all(attributes, returning: [], unique_by: :_); end
 
   sig do
     params(
       attributes: T::Hash[T.any(Symbol, String), T.untyped],
-      returning: T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
-      unique_by: T.nilable(T.untyped)
+      returning: T.any(FalseClass, T::Array[T.any(Symbol, String)]),
+      unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def upsert(attributes, returning: nil, unique_by: nil); end
+  def upsert(attributes, returning: [], unique_by: :_); end
 end
 
 class ActiveRecord::Result; end
@@ -891,7 +931,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     table_name,
     comment: nil,
     id: :primary_key,
-    primary_key: :_,
+    primary_key: nil,
     options: nil,
     temporary: false,
     force: false,
