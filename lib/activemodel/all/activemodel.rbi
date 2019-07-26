@@ -176,8 +176,8 @@ module ActiveModel::Validations::HelperMethods
     params(
       attr_names: T.any(String, Symbol),
       message: String,
-      in: T.nilable(T::Range[Integer]),
-      within: T.nilable(T::Range[Integer]),
+      in: T.nilable(T.any(T::Array[T.any(String, Symbol)], T::Range[Integer])),
+      within: T.nilable(T.any(T::Array[T.any(String, Symbol)], T::Range[Integer])),
       if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       on: T.any(Symbol, String),
@@ -232,8 +232,8 @@ module ActiveModel::Validations::HelperMethods
     params(
       attr_names: T.any(String, Symbol),
       message: String,
-      in: T.nilable(T::Range[Integer]),
-      within: T.nilable(T::Range[Integer]),
+      in: T.nilable(T.any(T::Array[T.any(String, Symbol)], T::Range[Integer])),
+      within: T.nilable(T.any(T::Array[T.any(String, Symbol)], T::Range[Integer])),
       if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       on: T.any(Symbol, String),
