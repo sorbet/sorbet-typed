@@ -744,7 +744,7 @@ module ActiveRecord::Persistence::ClassMethods
       returning: T.any(FalseClass, T::Array[T.any(Symbol, String)])
     ).returns(ActiveRecord::Result)
   end
-  def insert_all!(attributes, returning: []); end
+  def insert_all!(attributes, returning: nil); end
 
   sig do
     params(
@@ -753,7 +753,7 @@ module ActiveRecord::Persistence::ClassMethods
       unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def insert_all(attributes, returning: [], unique_by: :_); end
+  def insert_all(attributes, returning: nil, unique_by: nil); end
 
   sig do
     params(
@@ -762,7 +762,7 @@ module ActiveRecord::Persistence::ClassMethods
       unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def insert!(attributes, returning: [], unique_by: :_); end
+  def insert!(attributes, returning: nil, unique_by: nil); end
 
   sig do
     params(
@@ -771,7 +771,7 @@ module ActiveRecord::Persistence::ClassMethods
       unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def insert(attributes, returning: [], unique_by: :_); end
+  def insert(attributes, returning: nil, unique_by: nil); end
 
   sig { params(attributes: T.untyped, column_types: T::Hash[T.untyped, T.untyped], blk: T.proc.void).returns(T.untyped) }
   def instantiate(attributes, column_types = {}, &blk); end
@@ -791,7 +791,7 @@ module ActiveRecord::Persistence::ClassMethods
       unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def upsert_all(attributes, returning: [], unique_by: :_); end
+  def upsert_all(attributes, returning: nil, unique_by: nil); end
 
   sig do
     params(
@@ -800,7 +800,7 @@ module ActiveRecord::Persistence::ClassMethods
       unique_by: T.any(Symbol, T::Array[Symbol])
     ).returns(ActiveRecord::Result)
   end
-  def upsert(attributes, returning: [], unique_by: :_); end
+  def upsert(attributes, returning: nil, unique_by: nil); end
 end
 
 class ActiveRecord::Result; end
