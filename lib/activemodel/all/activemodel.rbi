@@ -172,12 +172,25 @@ module ActiveModel::Validations::HelperMethods
     strict: false
   ); end
 
+  # A type alias for the in/within parameters on the
+  # validates_(inclusion/exclusion)_of methods.
+  InWithinType = T.type_alias(
+    T.nilable(
+      T.any(
+        Symbol,
+        String,
+        T::Array[T.any(String, Symbol)],
+        T::Range[Integer],
+        T.proc.params(arg0: T.untyped).returns(T::Boolean)
+      )
+    )
+  )
   sig do
     params(
       attr_names: T.any(String, Symbol),
       message: String,
-      in: T.nilable(T.any(T::Array[T.any(String, Symbol)], T::Range[Integer])),
-      within: T.nilable(T.any(T::Array[T.any(String, Symbol)], T::Range[Integer])),
+      in: InWithinType,
+      within: InWithinType,
       if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       on: T.any(Symbol, String),
@@ -232,8 +245,8 @@ module ActiveModel::Validations::HelperMethods
     params(
       attr_names: T.any(String, Symbol),
       message: String,
-      in: T.nilable(T.any(T::Array[T.any(String, Symbol)], T::Range[Integer])),
-      within: T.nilable(T.any(T::Array[T.any(String, Symbol)], T::Range[Integer])),
+      in: InWithinType,
+      within: InWithinType,
       if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
       on: T.any(Symbol, String),
