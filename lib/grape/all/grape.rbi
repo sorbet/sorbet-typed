@@ -37,14 +37,14 @@ class Grape::API
     params(
       name: Symbol,
       type: T.untyped,
+      desc: String,
       allow_blank: T::Boolean,
       values: T::Array[T.untyped],
       date_parameter: T::Boolean,
       positive_number: T::Boolean,
       acord130_question_number: T::Boolean,
       percent_parameter: T::Boolean,
-      id_for_entity_type: T.untyped,
-      desc: String
+      id_for_entity_type: T.untyped
     ).void
   end
   def self.optional(
