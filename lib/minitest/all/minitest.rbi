@@ -3,7 +3,6 @@
 module Minitest
   class Test < Runnable
     include Minitest::Assertions
-    include Minitest::Reportable
   end
 end
 
