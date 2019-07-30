@@ -15,7 +15,7 @@ module Minitest::Assertions
 
   sig do
     params(
-      exp: Object,
+      exp: BasicObject,
       msg: T.nilable(String)
     ).returns(TrueClass)
   end
@@ -23,8 +23,8 @@ module Minitest::Assertions
 
   sig do
     params(
-      exp: Object,
-      act: Object,
+      exp: BasicObject,
+      act: BasicObject,
       msg: T.nilable(String)
     ).returns(TrueClass)
   end
@@ -33,7 +33,7 @@ module Minitest::Assertions
   sig do
     params(
       collection: T::Enumerable[T.untyped],
-      obj: Object,
+      obj: BasicObject,
       msg: T.nilable(String)
     ).returns(TrueClass)
   end
@@ -41,7 +41,7 @@ module Minitest::Assertions
 
   sig do
     params(
-      obj: Object,
+      obj: BasicObject,
       msg: T.nilable(String)
     ).returns(TrueClass)
   end
@@ -59,7 +59,7 @@ module Minitest::Assertions
 
   sig do
     params(
-      exp: Object,
+      exp: BasicObject,
       msg: T.nilable(String)
     ).returns(TrueClass)
   end
@@ -67,8 +67,8 @@ module Minitest::Assertions
 
   sig do
     params(
-      exp: Object,
-      act: Object,
+      exp: BasicObject,
+      act: BasicObject,
       msg: T.nilable(String)
     ).returns(TrueClass)
   end
@@ -77,7 +77,7 @@ module Minitest::Assertions
   sig do
     params(
       collection: T::Enumerable[T.untyped],
-      obj: Object,
+      obj: BasicObject,
       msg: T.nilable(String)
     ).returns(TrueClass)
   end
@@ -85,7 +85,7 @@ module Minitest::Assertions
 
   sig do
     params(
-      obj: Object,
+      obj: BasicObject,
       msg: T.nilable(String)
     ).returns(TrueClass)
   end
