@@ -278,6 +278,7 @@ module Gem
 
   class AvailableSet
     include Enumerable
+    Elem = type_member(fixed: T.untyped)
 
     sig { params(o: T.untyped).returns(T.untyped) }
     def <<(o); end
@@ -1127,6 +1128,7 @@ module Gem
   class DependencyList
     include Enumerable
     include TSort
+    Elem = type_member(fixed: T.untyped)
 
     sig { params(gemspecs: T.untyped).returns(T.untyped) }
     def add(*gemspecs); end
@@ -1149,7 +1151,7 @@ module Gem
     sig { params(full_name: T.untyped).returns(T.untyped) }
     def find_name(full_name); end
 
-    sig { params(development: T.untyped).returns(DependencyList) }
+    sig { params(development: T.untyped).returns(T.untyped) }
     def initialize(development = T.unsafe(nil)); end
 
     sig { returns(T::Boolean) }
@@ -1678,7 +1680,7 @@ module Gem
     sig { params(blk: T.untyped).returns(T.untyped) }
     def each(&blk); end
 
-    sig { params(value: T.untyped, tail: T.untyped).returns(List) }
+    sig { params(value: T.untyped, tail: T.untyped).returns(T.untyped) }
     def initialize(value = T.unsafe(nil), tail = T.unsafe(nil)); end
 
     sig { params(value: T.untyped).returns(T.untyped) }
@@ -2146,6 +2148,7 @@ module Gem
 
     class TarReader
       include Enumerable
+      Elem = type_member(fixed: T.untyped)
 
       sig { returns(T.untyped) }
       def close; end
@@ -2156,7 +2159,7 @@ module Gem
       sig { returns(T.untyped) }
       def each_entry; end
 
-      sig { params(io: T.untyped).returns(TarReader) }
+      sig { params(io: T.untyped).returns(T.untyped) }
       def initialize(io); end
 
       sig { returns(T.untyped) }
@@ -3314,7 +3317,7 @@ module Gem
       sig { params(other: T.untyped).returns(T.untyped) }
       def ==(other); end
 
-      sig { params(set: T.untyped, api_data: T.untyped).returns(APISpecification) }
+      sig { params(set: T.untyped, api_data: T.untyped).returns(T.untyped) }
       def initialize(set, api_data); end
 
       sig { params(q: T.untyped).returns(T.untyped) }
@@ -3735,6 +3738,7 @@ module Gem
       class DependencyGraph
         include Enumerable
         include TSort
+        Elem = type_member(fixed: T.untyped)
 
         sig { params(other: T.untyped).returns(T.untyped) }
         def ==(other); end
@@ -3900,7 +3904,8 @@ module Gem
         end
 
         class Log
-          extend Enumerable
+          extend T::Enumerable
+          Elem = type_member(fixed: T.untyped)
 
           sig do
             params(
@@ -4346,6 +4351,7 @@ module Gem
 
     class RequirementList
       include Enumerable
+      Elem = type_member(fixed: T.untyped)
 
       sig { params(req: T.untyped).returns(T.untyped) }
       def add(req); end
@@ -5193,6 +5199,7 @@ module Gem
 
   class SourceList
     include Enumerable
+    Elem = type_member(fixed: T.untyped)
 
     sig { params(obj: T.untyped).returns(T.untyped) }
     def <<(obj); end

@@ -1210,6 +1210,7 @@ end
 
 class Bundler::EndpointSpecification < Gem::Specification
   ILLFORMED_MESSAGE = ::T.let(nil, ::T.untyped)
+  Elem = type_member(fixed: T.untyped)
 
   sig do
     params(
