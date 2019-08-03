@@ -6,7 +6,7 @@ class Array
 
   sig do
     params(
-      blk: T.nilable(T.proc.params(arg0: Elem).returns(Elem))
+      blk: T.nilable(T.proc.params(arg0: Elem).void)
     ).returns(T.any(T::Array[Elem], T::Enumerable))
   end
   def extract!(&blk); end
