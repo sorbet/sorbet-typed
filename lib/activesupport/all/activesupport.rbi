@@ -275,9 +275,9 @@ class Array
 
   sig do
     params(
-      value: T.nilable(Elem),
+      value: T.untyped,
       blk: T.proc.params(arg0: Elem).void
-    ).returns(T::Array[T.untyped])
+    ).returns(T::Array[Elem])
   end
   def split(value = nil, &blk); end
 
