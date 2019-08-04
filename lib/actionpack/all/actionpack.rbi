@@ -3,12 +3,27 @@
 class ActionController::Base < ActionController::Metal
 end
 
-class ActionController::Metal
+class AbstractController::Base < Object
+end
+
+class ActionController::Metal < AbstractController::Base
   sig { returns(ActionDispatch::Request) }
   def request(); end
 
   sig { returns(ActionDispatch::Response) }
   def response(); end
+
+  sig { returns(ActionController::Parameters) }
+  def params(); end
+end
+
+module ActionDispatch::Http::Parameters
+  sig { returns(ActionController::Parameters) }
+  def parameters(); end
+
+  # params is an alias of parameters
+  sig { returns(ActionController::Parameters) }
+  def params(); end
 end
 
 class ActionDispatch::Request
@@ -28,11 +43,11 @@ class ActionController::Parameters
   sig { returns(T::Boolean) }
   def permitted?; end
 
-  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(T.nilable(ActionController::Parameters)) }
+  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(ActionController::Parameters) }
   def require(key); end
 
   # required is an alias of require
-  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(T.nilable(ActionController::Parameters)) }
+  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(ActionController::Parameters) }
   def required(key); end
 
   sig { returns(ActiveSupport::HashWithIndifferentAccess) }
@@ -47,6 +62,11 @@ class ActionController::Parameters
   # to_param is an alias of to_query
   sig { params(args: String).returns(T.nilable(String)) }
   def to_param(*args); end
+end
+
+module ActionController::StrongParameters
+  sig { returns(ActionController::Parameters) }
+  def params; end
 end
 
 class ActionDispatch::Routing::RouteSet
