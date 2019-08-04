@@ -18,6 +18,35 @@ class ActionDispatch::Response
 end
 
 class ActionController::Parameters
+  sig { returns(T.self_type) }
+  def permit!; end
+
+  # You can pass _a lot_ of stuff to permit, so filters is left untyped for now.
+  sig { params(filters: T.untyped).returns(ActionController::Parameters) }
+  def permit(*filters); end
+
+  sig { returns(T::Boolean) }
+  def permitted?; end
+
+  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(T.nilable(ActionController::Parameters)) }
+  def require(key); end
+
+  # required is an alias of require
+  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(T.nilable(ActionController::Parameters)) }
+  def required(key); end
+
+  sig { returns(ActiveSupport::HashWithIndifferentAccess) }
+  def to_h; end
+
+  sig { returns(T::Hash[T.untyped, T.untyped]) }
+  def to_hash; end
+
+  sig { params(args: String).returns(T.nilable(String)) }
+  def to_query(*args); end
+
+  # to_param is an alias of to_query
+  sig { params(args: String).returns(T.nilable(String)) }
+  def to_param(*args); end
 end
 
 class ActionDispatch::Routing::RouteSet
