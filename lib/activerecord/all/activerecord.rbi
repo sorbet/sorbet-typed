@@ -736,10 +736,14 @@ module ActiveRecord::Persistence::ClassMethods
   sig { params(attributes: T.untyped, column_types: T::Hash[T.untyped, T.untyped], blk: T.proc.void).returns(T.untyped) }
   def instantiate(attributes, column_types = {}, &blk); end
 
+  # The 'attributes' parameter can take either a hash or an array of hashes.
   sig do
     params(
       id: T.any(T.untyped, T::Array[T.untyped], Symbol),
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        T::Array[T::Hash[T.any(Symbol, String), T.untyped]]
+      )
     ).returns(T.any(T::Array[T.untyped], T.untyped))
   end
   def update(id = :all, attributes); end
