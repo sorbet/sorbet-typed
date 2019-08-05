@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # Exclude files if necessary here.
 exclude = []
 
