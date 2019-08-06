@@ -643,6 +643,14 @@ module ActiveRecord::Persistence
   end
   def update!(attributes); end
 
+  # update_attributes! is an alias of update!
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+    ).returns(TrueClass)
+  end
+  def update_attributes!(attributes); end
+
   sig do
     params(
       attributes: T::Hash[T.any(Symbol, String), T.untyped]
@@ -650,8 +658,13 @@ module ActiveRecord::Persistence
   end
   def update(attributes); end
 
-  alias update_attributes update
-  alias update_attributes! update!
+  # update_attributes is an alias of update
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+    ).returns(T::Boolean)
+  end
+  def update_attributes(attributes); end
 end
 
 module ActiveRecord::Persistence::ClassMethods
