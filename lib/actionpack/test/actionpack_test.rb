@@ -7,8 +7,7 @@ module ActionPackTest
   root 'home#index'
   get 'home/index'
 
-  # This is meant to fail, to show that this works.
-  resources :games, invalid: 'test' do
+  resources :games do
     get :search, on: :collection
   end
 
