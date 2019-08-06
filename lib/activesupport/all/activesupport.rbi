@@ -417,3 +417,35 @@ module ActiveSupport::NumberHelper
   end
   def number_to_rounded(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false); end
 end
+
+class Hash
+  sig { returns(T.self_type) }
+  def deep_stringify_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_stringify_keys!; end
+
+  sig { returns(T.self_type) }
+  def deep_symbolize_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_symbolize_keys!; end
+
+  sig { returns(T.self_type) }
+  def deep_transform_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_transform_keys!; end
+
+  sig { returns(T.self_type) }
+  def stringify_keys; end
+
+  sig { returns(T.self_type) }
+  def stringify_keys!; end
+
+  sig { returns(T.self_type) }
+  def symbolize_keys; end
+
+  sig { returns(T.self_type) }
+  def symbolize_keys!; end
+end
