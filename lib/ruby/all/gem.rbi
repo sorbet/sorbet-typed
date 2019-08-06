@@ -3881,7 +3881,6 @@ module Gem
   class Specification
     include Bundler::MatchPlatform
     include Bundler::GemHelpers
-    extend Enumerable
     extend Gem::Deprecate
     DateLike = T.let(nil, T.untyped)
     DateTimeFormat = T.let(nil, T.untyped)
