@@ -43,12 +43,57 @@ class ActionController::Parameters
   sig { returns(T::Boolean) }
   def permitted?; end
 
-  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(ActionController::Parameters) }
+  sig do
+    params(
+      key: T.any(String, Symbol),
+    ).returns(
+      T.nilable(
+        T.any(
+          String,
+          Numeric,
+          ActionController::Parameters,
+        ),
+      ),
+    )
+  end
+  def [](key); end
+
+  sig do
+    params(
+      key: T.any(
+        String,
+        Symbol,
+        T::Array[T.any(String, Symbol)],
+      ),
+    ).returns(
+      T.any(
+        String,
+        Numeric,
+        T::Array[T.untyped],
+        ActionController::Parameters,
+      ),
+    )
+  end
   def require(key); end
 
   # required is an alias of require
-  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(ActionController::Parameters) }
-  def required(key); end
+  sig do
+    params(
+      key: T.any(
+        String,
+        Symbol,
+        T::Array[T.any(String, Symbol)],
+      ),
+    ).returns(
+      T.any(
+        String,
+        Numeric,
+        T::Array[T.untyped],
+        ActionController::Parameters,
+      ),
+    )
+  end
+  def require(key); end
 
   sig { returns(ActiveSupport::HashWithIndifferentAccess) }
   def to_h; end
