@@ -367,6 +367,10 @@ module ActionDispatch::Routing::Mapper::Resources
   sig do
     params(
       resources: T.any(String, Symbol),
+      as: T.nilable(T.any(String, Symbol)),
+      controller: T.nilable(T.any(String, Symbol)),
+      concerns: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      param: T.nilable(Symbol),
       path_names: T.untyped,
       path: T.untyped,
       only: T.nilable(T.any(
@@ -388,6 +392,10 @@ module ActionDispatch::Routing::Mapper::Resources
   end
   def resource(
     *resources,
+    as: nil,
+    controller: nil,
+    concerns: nil,
+    param: nil,
     path_names: nil,
     path: nil,
     only: nil,
@@ -402,6 +410,10 @@ module ActionDispatch::Routing::Mapper::Resources
   sig do
     params(
       resources: T.any(String, Symbol),
+      as: T.nilable(T.any(String, Symbol)),
+      controller: T.nilable(T.any(String, Symbol)),
+      concerns: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      param: T.nilable(Symbol),
       path_names: T.untyped,
       path: T.untyped,
       only: T.nilable(T.any(
@@ -423,6 +435,10 @@ module ActionDispatch::Routing::Mapper::Resources
   end
   def resources(
     *resources,
+    as: nil,
+    controller: nil,
+    concerns: nil,
+    param: nil,
     path_names: nil,
     path: nil,
     only: nil,
