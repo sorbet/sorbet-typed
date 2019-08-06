@@ -643,6 +643,14 @@ module ActiveRecord::Persistence
   end
   def update!(attributes); end
 
+  # update_attributes! is an alias of update!
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+    ).returns(TrueClass)
+  end
+  def update_attributes!(attributes); end
+
   sig do
     params(
       attributes: T::Hash[T.any(Symbol, String), T.untyped]
@@ -650,8 +658,13 @@ module ActiveRecord::Persistence
   end
   def update(attributes); end
 
-  alias update_attributes update
-  alias update_attributes! update!
+  # update_attributes is an alias of update
+  sig do
+    params(
+      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+    ).returns(T::Boolean)
+  end
+  def update_attributes(attributes); end
 end
 
 module ActiveRecord::Persistence::ClassMethods
@@ -736,10 +749,14 @@ module ActiveRecord::Persistence::ClassMethods
   sig { params(attributes: T.untyped, column_types: T::Hash[T.untyped, T.untyped], blk: T.proc.void).returns(T.untyped) }
   def instantiate(attributes, column_types = {}, &blk); end
 
+  # The 'attributes' parameter can take either a hash or an array of hashes.
   sig do
     params(
       id: T.any(T.untyped, T::Array[T.untyped], Symbol),
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        T::Array[T::Hash[T.any(Symbol, String), T.untyped]]
+      )
     ).returns(T.any(T::Array[T.untyped], T.untyped))
   end
   def update(id = :all, attributes); end
