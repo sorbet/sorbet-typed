@@ -35,4 +35,11 @@ module ActionPackTest
   end
 
   get '/about', to: 'static_pages#about'
+
+  delete 'about' => 'static_pages#about'
+  get 'about' => 'static_pages#about'
+  match 'about' => 'static_pages#about'
+  patch 'about' => 'static_pages#about'
+  post 'about' => 'static_pages#about'
+  put 'about' => 'static_pages#about'
 end
