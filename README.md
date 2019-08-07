@@ -79,6 +79,8 @@ end
 
 This tests a few of the parameters available on the `validates` method based on existing code from the ActiveModel documentation or active codebases using the gem.
 
+The tests can be run locally by installing Sorbet with `gem install sorbet` and then running `ruby .ci/run.rb`.
+
 # Contributors
 
 This repository was originally written by the fine folks at
