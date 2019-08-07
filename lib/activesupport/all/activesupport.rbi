@@ -345,10 +345,10 @@ module ActiveSupport::NumberHelper
       locale: Symbol,
       delimiter: String,
       separator: String,
-      delimiter_patter: T.nilable(Regexp)
+      delimiter_pattern: T.nilable(Regexp)
     ).returns(String)
   end
-  def number_to_delimited(number, locale: :en, delimiter: ",", separator: ".", delimiter_patter: nil); end
+  def number_to_delimited(number, locale: :en, delimiter: ",", separator: ".", delimiter_pattern: nil); end
 
   sig do
     params(
@@ -359,7 +359,7 @@ module ActiveSupport::NumberHelper
       separator: String,
       delimiter: String,
       strip_insignificant_zeros: T::Boolean,
-      units: T.any(T::Hash[T.untyped, T.untyped], String),
+      units: T.any(T::Hash[T.untyped, T.untyped], String, Symbol),
       format: String
     ).returns(String)
   end
@@ -387,7 +387,7 @@ module ActiveSupport::NumberHelper
       separator: String,
       delimiter: String,
       strip_insignificant_zeros: T::Boolean,
-      format: Symbol
+      format: String
     ).returns(String)
   end
   def number_to_percentage(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false, format: "%n%"); end

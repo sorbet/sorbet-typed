@@ -17,6 +17,7 @@ To add `.rbi` files for a particular gem:
 1. Add a subdirectory to `lib` with the same name as the gem.
 2. Add a subdirectory to the gem subdirectory with a name matching the version you are adding signatures to. (See [Version Constraints](#version-constraints) below for a more thorough explanation)
 3. Create the `json-schema.rbi` file in the version directory you've chosen.
+4. Optional, but encouraged: Add a test file in `lib/gem_name/test/gem_name_test.rb`. See the [Testing section](#testing) for details.
 
 ### Version Constraints
 
@@ -58,6 +59,27 @@ Once you've made any changes you wanted, you can copy the contents of the file i
 Right now, there's no standard formatting for the `.rbi` files in this repository, but you should try to at least keep it consistent within a given file.
 
 You can make sure your `.rbi` passes typechecking by installing the latest version of Sorbet (`gem install sorbet`) and running `ruby .ci/run.rb` in this repository.
+
+### Tests
+
+There's basic support in sorbet-typed for testing of type signatures. Right now, you can only have valid usage of your methods in tests. This can be used to ensure the type signatures aren't causing typecheck failures on valid code. The test file for a gem should be placed at `lib/gem_name/test/gem_name_test.rb`.
+
+For example, if you wanted to test the signatures for the `validates` method in the Rails gem `activemodel`, you could create a file at `lib/activemodel/test/activemodel_test.rb` like this:
+
+```ruby
+# typed: true
+
+module ActiveModelTest
+  extend ActiveModel::Validations::ClassMethods
+
+  validates :name, length: { minimum: 2 }
+  validates :age, numericality: true, on: :update
+end
+```
+
+This tests a few of the parameters available on the `validates` method based on existing code from the ActiveModel documentation or active codebases using the gem.
+
+The tests can be run locally by installing Sorbet with `gem install sorbet` and then running `ruby .ci/run.rb`.
 
 # Contributors
 
