@@ -131,7 +131,7 @@ module ActiveRecord::Associations::ClassMethods
       polymorphic: T.nilable(T::Boolean),
       primary_key: T.nilable(T.any(Symbol, String)),
       required: T.nilable(T::Boolean),
-      touch: T.nilable(T::Boolean),
+      touch: T.nilable(T.any(T::Boolean, Symbol)),
       validate: T.nilable(T::Boolean),
       default: T.nilable(T.proc.returns(T.untyped))
     ).void
