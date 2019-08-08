@@ -88,3 +88,17 @@ module ActionPackFlashTest
   add_flash_types :error, :warning, :success
   add_flash_types :foobar
 end
+
+class ActionPackMetalTest < ActionController::Metal
+  def person_params
+    params.require(:person).permit(:name, :age)
+
+    params.require(:person).permit(ids: [])
+
+    params.require(:person).permit(
+      :name,
+      person_ids: [],
+      child_ids: []
+    )
+  end
+end
