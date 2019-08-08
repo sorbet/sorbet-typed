@@ -109,3 +109,29 @@ module ActiveRecordAssociationsTest
   belongs_to :user, optional: true
   belongs_to :account, default: -> { true }
 end
+
+class ApplicationRecord < ActiveRecord::Base; end
+class ActiveRecordCallbacksTest < ApplicationRecord
+  before_save :normalize_card_number, if: :paid_with_card?
+  before_save :normalize_card_number, if: Proc.new { |order| order.paid_with_card? }
+  before_save :log_save_action
+  around_save :log_save_action
+  after_save :log_save_action
+
+  before_destroy :log_destroy_action
+  around_destroy :log_destroy_action
+  after_destroy :log_destroy_action
+
+  before_update :log_update_action
+  around_update :log_update_action
+  after_update :log_update_action
+
+  before_create :log_create_action
+  around_create :log_create_action
+  after_create :log_create_action
+  after_create :send_email_to_author, if: :author_wants_emails?, unless: Proc.new { |comment| comment.article.ignore_comments? }
+
+  after_commit :log_commit_action
+  after_commit :log_user_saved_to_db, on: :create
+  after_commit :log_user_saved_to_db, on: [:create, :update]
+end
