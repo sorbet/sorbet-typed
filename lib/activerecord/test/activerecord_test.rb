@@ -134,4 +134,9 @@ class ActiveRecordCallbacksTest < ApplicationRecord
   after_commit :log_commit_action
   after_commit :log_user_saved_to_db, on: :create
   after_commit :log_user_saved_to_db, on: [:create, :update]
+
+  before_validation :validation_setup
+  before_validation :validation_setup, on: :create
+  after_validation :validation_teardown
+  after_validation :validation_teardown, on: [:create, :update]
 end

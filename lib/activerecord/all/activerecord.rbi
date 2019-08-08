@@ -383,13 +383,15 @@ class ActiveRecord::Base
     params(
       arg: T.nilable(Symbol),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      on: T.nilable(T.any(Symbol, T::Array[Symbol]))
     ).void
   end
   def self.after_validation(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    on: nil
   ); end
 
   sig do
@@ -501,7 +503,7 @@ class ActiveRecord::Base
       arg: T.nilable(Symbol),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      on: T.nilable(Symbol)
+      on: T.nilable(T.any(Symbol, T::Array[Symbol]))
     ).void
   end
   def self.before_validation(
