@@ -3,7 +3,7 @@
 # Exclude files if necessary here.
 exclude = []
 
-file_paths = Dir.glob("**/*.rbi").select{|p| !exclude.include?(p)}.map{|p| "\"#{p}\""}.join(' ')
+file_paths = Dir.glob("**/*.rb{i,}").select{|p| !exclude.include?(p)}.map{|p| "\"#{p}\""}.join(' ')
 
 srb_cmd = 'tc'
 
