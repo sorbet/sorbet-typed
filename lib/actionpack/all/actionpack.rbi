@@ -111,7 +111,7 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
   # ActionDispatch::Routing::Mapper::Resources#match
   sig do
     params(
-      name: T.any(String, Symbol),
+      name: T.any(String, Symbol, T::Hash[String, String]),
       controller: T.nilable(T.any(String, Symbol)),
       action: T.nilable(T.any(String, Symbol)),
       param: T.nilable(Symbol),
@@ -148,7 +148,7 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
 
   sig do
     params(
-      name: T.any(String, Symbol),
+      name: T.any(String, Symbol, T::Hash[String, String]),
       controller: T.nilable(T.any(String, Symbol)),
       action: T.nilable(T.any(String, Symbol)),
       param: T.nilable(Symbol),
@@ -185,7 +185,7 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
 
   sig do
     params(
-      name: T.any(String, Symbol),
+      name: T.any(String, Symbol, T::Hash[String, String]),
       controller: T.nilable(T.any(String, Symbol)),
       action: T.nilable(T.any(String, Symbol)),
       param: T.nilable(Symbol),
@@ -222,7 +222,7 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
 
   sig do
     params(
-      name: T.any(String, Symbol),
+      name: T.any(String, Symbol, T::Hash[String, String]),
       controller: T.nilable(T.any(String, Symbol)),
       action: T.nilable(T.any(String, Symbol)),
       param: T.nilable(Symbol),
@@ -259,7 +259,7 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
 
   sig do
     params(
-      name: T.any(String, Symbol),
+      name: T.any(String, Symbol, T::Hash[String, String]),
       controller: T.nilable(T.any(String, Symbol)),
       action: T.nilable(T.any(String, Symbol)),
       param: T.nilable(Symbol),
@@ -304,7 +304,7 @@ module ActionDispatch::Routing::Mapper::Resources
 
   sig do
     params(
-      name: T.any(String, Symbol),
+      name: T.any(String, Symbol, T::Hash[String, String]),
       controller: T.nilable(T.any(String, Symbol)),
       action: T.nilable(T.any(String, Symbol)),
       param: T.nilable(Symbol),
