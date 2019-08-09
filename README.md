@@ -17,7 +17,7 @@ To add `.rbi` files for a particular gem:
 1. Add a subdirectory to `lib` with the same name as the gem.
 2. Add a subdirectory to the gem subdirectory with a name matching the version you are adding signatures to. (See [Version Constraints](#version-constraints) below for a more thorough explanation)
 3. Create the `json-schema.rbi` file in the version directory you've chosen.
-4. Optional, but encouraged: Add a test file in `lib/gem_name/test/gem_name_test.rb`. See the [Testing section](#testing) for details.
+4. Optional, but encouraged: Add a test file in `lib/gem_name/version/gem_name_test.rb`. See the [Testing section](#testing) for details.
 
 ### Version Constraints
 
@@ -62,9 +62,9 @@ You can make sure your `.rbi` passes typechecking by installing the latest versi
 
 ### Tests
 
-There's basic support in sorbet-typed for testing of type signatures. Right now, you can only have valid usage of your methods in tests. This can be used to ensure the type signatures aren't causing typecheck failures on valid code. The test file for a gem should be placed at `lib/gem_name/test/gem_name_test.rb`.
+There's basic support in sorbet-typed for testing of type signatures. Right now, you can only have valid usage of your methods in tests. This can be used to ensure the type signatures aren't causing typecheck failures on valid code. The test file for a gem should be placed at `lib/gem_name/version/gem_name_test.rb`.
 
-For example, if you wanted to test the signatures for the `validates` method in the Rails gem `activemodel`, you could create a file at `lib/activemodel/test/activemodel_test.rb` like this:
+For example, if you wanted to test the signatures for the `validates` method in all versions of the Rails gem `activemodel`, you could create a file at `lib/activemodel/all/activemodel_test.rb` like this:
 
 ```ruby
 # typed: true
@@ -77,7 +77,7 @@ module ActiveModelTest
 end
 ```
 
-This tests a few of the parameters available on the `validates` method based on existing code from the ActiveModel documentation or active codebases using the gem.
+This tests a few of the parameters available on the `validates` method based on existing code from the ActiveModel documentation or active codebases using the gem. If you wanted to restrict your test to a type signature for a specific version of the gem, for example `activerecord ~> 5.2.0`, you would add your tests to that directory (`lib/activerecord/~>5.2.0/activerecord_test.rb` insead of the `all` one.
 
 The tests can be run locally by installing Sorbet with `gem install sorbet` and then running `ruby .ci/run.rb`.
 
