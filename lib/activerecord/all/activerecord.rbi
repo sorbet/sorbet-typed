@@ -638,7 +638,10 @@ module ActiveRecord::Persistence
 
   sig do
     params(
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        ActionController::Parameters
+      )
     ).returns(TrueClass)
   end
   def update!(attributes); end
@@ -646,14 +649,20 @@ module ActiveRecord::Persistence
   # update_attributes! is an alias of update!
   sig do
     params(
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        ActionController::Parameters
+      )
     ).returns(TrueClass)
   end
   def update_attributes!(attributes); end
 
   sig do
     params(
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        ActionController::Parameters
+      )
     ).returns(T::Boolean)
   end
   def update(attributes); end
@@ -661,7 +670,10 @@ module ActiveRecord::Persistence
   # update_attributes is an alias of update
   sig do
     params(
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        ActionController::Parameters
+      )
     ).returns(T::Boolean)
   end
   def update_attributes(attributes); end
