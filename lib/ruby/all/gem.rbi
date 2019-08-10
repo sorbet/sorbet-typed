@@ -379,16 +379,6 @@ module Gem
 
     def show_help; end
 
-    sig do
-      params(
-        gem_name: T.untyped,
-        version: T.untyped,
-        errors: T.untyped,
-        domain: T.untyped,
-        required_by: T.untyped
-      ).returns(T.untyped)
-    end
-
     def show_lookup_failure(gem_name, version, errors, domain, required_by = T.unsafe(nil)); end
 
     def summary; end
@@ -824,14 +814,6 @@ module Gem
   end
 
   module Deprecate
-    sig do
-      params(
-        name: T.untyped,
-        repl: T.untyped,
-        year: T.untyped,
-        month: T.untyped
-      ).returns(T.untyped)
-    end
     def self.deprecate(name, repl, year, month); end
 
     def self.skip; end
@@ -924,56 +906,20 @@ module Gem
     end
 
     class CmakeBuilder
-      sig do
-        params(
-          extension: T.untyped,
-          dest_path: T.untyped,
-          results: T.untyped,
-          args: T.untyped,
-          lib_dir: T.untyped
-        ).returns(T.untyped)
-      end
       def self.build(extension, dest_path, results, args = T.unsafe(nil), lib_dir = T.unsafe(nil)); end
     end
 
     class ConfigureBuilder
-      sig do
-        params(
-          extension: T.untyped,
-          dest_path: T.untyped,
-          results: T.untyped,
-          args: T.untyped,
-          lib_dir: T.untyped
-        ).returns(T.untyped)
-      end
       def self.build(extension, dest_path, results, args = T.unsafe(nil), lib_dir = T.unsafe(nil)); end
     end
 
     class ExtConfBuilder
-      sig do
-        params(
-          extension: T.untyped,
-          dest_path: T.untyped,
-          results: T.untyped,
-          args: T.untyped,
-          lib_dir: T.untyped
-        ).returns(T.untyped)
-      end
       def self.build(extension, dest_path, results, args = T.unsafe(nil), lib_dir = T.unsafe(nil)); end
 
       def self.get_relative_path(path); end
     end
 
     class RakeBuilder
-      sig do
-        params(
-          extension: T.untyped,
-          dest_path: T.untyped,
-          results: T.untyped,
-          args: T.untyped,
-          lib_dir: T.untyped
-        ).returns(T.untyped)
-      end
       def self.build(extension, dest_path, results, args = T.unsafe(nil), lib_dir = T.unsafe(nil)); end
     end
   end
@@ -1305,15 +1251,6 @@ module Gem
 
     def load_spec(entry); end
 
-    sig do
-      params(
-        mkdir: T.untyped,
-        mkdir_options: T.untyped,
-        destination_dir: T.untyped,
-        file_name: T.untyped
-      ).returns(T.untyped)
-    end
-
     def mkdir_p_safe(mkdir, mkdir_options, destination_dir, file_name); end
 
     def normalize_path(pathname); end
@@ -1346,14 +1283,6 @@ module Gem
 
     def verify_gz(entry); end
 
-    sig do
-      params(
-        spec: T.untyped,
-        skip_validation: T.untyped,
-        strict_validation: T.untyped,
-        file_name: T.untyped
-      ).returns(T.untyped)
-    end
     def self.build(spec, skip_validation = T.unsafe(nil), strict_validation = T.unsafe(nil), file_name = T.unsafe(nil)); end
 
     def self.new(gem, security_policy = T.unsafe(nil)); end
@@ -1710,25 +1639,7 @@ module Gem
 
     def fetch_file(uri, *_); end
 
-    sig do
-      params(
-        uri: T.untyped,
-        last_modified: T.untyped,
-        head: T.untyped,
-        depth: T.untyped
-      ).returns(T.untyped)
-    end
-
     def fetch_http(uri, last_modified = T.unsafe(nil), head = T.unsafe(nil), depth = T.unsafe(nil)); end
-
-    sig do
-      params(
-        uri: T.untyped,
-        last_modified: T.untyped,
-        head: T.untyped,
-        depth: T.untyped
-      ).returns(T.untyped)
-    end
 
     def fetch_https(uri, last_modified = T.unsafe(nil), head = T.unsafe(nil), depth = T.unsafe(nil)); end
 
@@ -1805,15 +1716,6 @@ module Gem
 
     def fetch; end
 
-    sig do
-      params(
-        uri: T.untyped,
-        request_class: T.untyped,
-        last_modified: T.untyped,
-        pool: T.untyped
-      ).returns(Request)
-    end
-
     def initialize(uri, request_class, last_modified, pool); end
 
     def perform_request(request); end
@@ -1826,14 +1728,6 @@ module Gem
 
     def self.configure_connection_for_https(connection, cert_files); end
 
-    sig do
-      params(
-        uri: T.untyped,
-        request_class: T.untyped,
-        last_modified: T.untyped,
-        proxy: T.untyped
-      ).returns(T.untyped)
-    end
     def self.create_with_proxy(uri, request_class, last_modified, proxy); end
 
     def self.get_cert_files; end
@@ -2102,15 +1996,6 @@ module Gem
       class ParseError
         def column; end
 
-        sig do
-          params(
-            message: T.untyped,
-            column: T.untyped,
-            line: T.untyped,
-            path: T.untyped
-          ).returns(ParseError)
-        end
-
         def initialize(message, column, line, path); end
 
         def line; end
@@ -2120,15 +2005,6 @@ module Gem
 
       class Parser
         def get(expected_types = T.unsafe(nil), expected_value = T.unsafe(nil)); end
-
-        sig do
-          params(
-            tokenizer: T.untyped,
-            set: T.untyped,
-            platforms: T.untyped,
-            filename: T.untyped
-          ).returns(Parser)
-        end
 
         def initialize(tokenizer, set, platforms, filename = T.unsafe(nil)); end
 
@@ -2151,15 +2027,6 @@ module Gem
         EOF = T.let(nil, T.untyped)
 
         def empty?; end
-
-        sig do
-          params(
-            input: T.untyped,
-            filename: T.untyped,
-            line: T.untyped,
-            pos: T.untyped
-          ).returns(Tokenizer)
-        end
 
         def initialize(input, filename = T.unsafe(nil), line = T.unsafe(nil), pos = T.unsafe(nil)); end
 
@@ -2473,26 +2340,7 @@ module Gem
     end
 
     class GitSet
-      sig do
-        params(
-          name: T.untyped,
-          repository: T.untyped,
-          reference: T.untyped,
-          submodules: T.untyped
-        ).returns(T.untyped)
-      end
-
       def add_git_gem(name, repository, reference, submodules); end
-
-      sig do
-        params(
-          name: T.untyped,
-          version: T.untyped,
-          repository: T.untyped,
-          reference: T.untyped,
-          submodules: T.untyped
-        ).returns(T.untyped)
-      end
 
       def add_git_spec(name, version, repository, reference, submodules); end
 
@@ -2524,16 +2372,6 @@ module Gem
     end
 
     class IndexSpecification
-      sig do
-        params(
-          set: T.untyped,
-          name: T.untyped,
-          version: T.untyped,
-          source: T.untyped,
-          platform: T.untyped
-        ).returns(IndexSpecification)
-      end
-
       def initialize(set, name, version, source, platform); end
 
       def pretty_print(q); end
@@ -2566,15 +2404,6 @@ module Gem
 
       def initialize(domain); end
 
-      sig do
-        params(
-          name: T.untyped,
-          ver: T.untyped,
-          platform: T.untyped,
-          source: T.untyped
-        ).returns(T.untyped)
-      end
-
       def load_spec(name, ver, platform, source); end
 
       def local?(dep_name); end
@@ -2597,15 +2426,6 @@ module Gem
 
       def initialize(sources); end
 
-      sig do
-        params(
-          name: T.untyped,
-          version: T.untyped,
-          platform: T.untyped,
-          source: T.untyped
-        ).returns(T.untyped)
-      end
-
       def load_spec(name, version, platform, source); end
 
       def pretty_print(q); end
@@ -2615,16 +2435,6 @@ module Gem
 
     class LockSpecification
       def add_dependency(dependency); end
-
-      sig do
-        params(
-          set: T.untyped,
-          name: T.untyped,
-          version: T.untyped,
-          sources: T.untyped,
-          platform: T.untyped
-        ).returns(LockSpecification)
-      end
 
       def initialize(set, name, version, sources, platform); end
 
@@ -2684,15 +2494,6 @@ module Gem
         Elem = type_member(fixed: T.untyped)
 
         def ==(other); end
-
-        sig do
-          params(
-            name: T.untyped,
-            payload: T.untyped,
-            parent_names: T.untyped,
-            requirement: T.untyped
-          ).returns(T.untyped)
-        end
 
         def add_child_vertex(name, payload, parent_names, requirement); end
 
@@ -2804,36 +2605,9 @@ module Gem
           extend T::Enumerable
           Elem = type_member(fixed: T.untyped)
 
-          sig do
-            params(
-              graph: T.untyped,
-              origin: T.untyped,
-              destination: T.untyped,
-              requirement: T.untyped
-            ).returns(T.untyped)
-          end
-
           def add_edge_no_circular(graph, origin, destination, requirement); end
 
-          sig do
-            params(
-              graph: T.untyped,
-              name: T.untyped,
-              payload: T.untyped,
-              root: T.untyped
-            ).returns(T.untyped)
-          end
-
           def add_vertex(graph, name, payload, root); end
-
-          sig do
-            params(
-              graph: T.untyped,
-              origin_name: T.untyped,
-              destination_name: T.untyped,
-              requirement: T.untyped
-            ).returns(T.untyped)
-          end
 
           def delete_edge(graph, origin_name, destination_name, requirement); end
 
@@ -2992,15 +2766,6 @@ module Gem
           include Gem::Resolver::Molinillo::Delegates::SpecificationProvider
 
           def base; end
-
-          sig do
-            params(
-              specification_provider: T.untyped,
-              resolver_ui: T.untyped,
-              requested: T.untyped,
-              base: T.untyped
-            ).returns(Resolution)
-          end
 
           def initialize(specification_provider, resolver_ui, requested, base); end
 
@@ -3220,15 +2985,6 @@ module Gem
     class VendorSet
       def add_vendor_gem(name, directory); end
 
-      sig do
-        params(
-          name: T.untyped,
-          version: T.untyped,
-          platform: T.untyped,
-          source: T.untyped
-        ).returns(T.untyped)
-      end
-
       def load_spec(name, version, platform, source); end
 
       def pretty_print(q); end
@@ -3264,79 +3020,26 @@ module Gem
 
     def self.alt_name_or_x509_entry(certificate, x509_entry); end
 
-    sig do
-      params(
-        subject: T.untyped,
-        key: T.untyped,
-        age: T.untyped,
-        extensions: T.untyped,
-        serial: T.untyped
-      ).returns(T.untyped)
-    end
     def self.create_cert(subject, key, age = T.unsafe(nil), extensions = T.unsafe(nil), serial = T.unsafe(nil)); end
 
-    sig do
-      params(
-        email: T.untyped,
-        key: T.untyped,
-        age: T.untyped,
-        extensions: T.untyped
-      ).returns(T.untyped)
-    end
     def self.create_cert_email(email, key, age = T.unsafe(nil), extensions = T.unsafe(nil)); end
 
-    sig do
-      params(
-        subject: T.untyped,
-        key: T.untyped,
-        age: T.untyped,
-        extensions: T.untyped,
-        serial: T.untyped
-      ).returns(T.untyped)
-    end
     def self.create_cert_self_signed(subject, key, age = T.unsafe(nil), extensions = T.unsafe(nil), serial = T.unsafe(nil)); end
 
     def self.create_key(length = T.unsafe(nil), algorithm = T.unsafe(nil)); end
 
     def self.email_to_name(email_address); end
 
-    sig do
-      params(
-        expired_certificate: T.untyped,
-        private_key: T.untyped,
-        age: T.untyped,
-        extensions: T.untyped
-      ).returns(T.untyped)
-    end
     def self.re_sign(expired_certificate, private_key, age = T.unsafe(nil), extensions = T.unsafe(nil)); end
 
     def self.reset; end
 
-    sig do
-      params(
-        certificate: T.untyped,
-        signing_key: T.untyped,
-        signing_cert: T.untyped,
-        age: T.untyped,
-        extensions: T.untyped,
-        serial: T.untyped
-      ).returns(T.untyped)
-    end
     def self.sign(certificate, signing_key, signing_cert, age = T.unsafe(nil), extensions = T.unsafe(nil), serial = T.unsafe(nil)); end
 
     def self.trust_dir; end
 
     def self.trusted_certificates(&block); end
 
-    sig do
-      params(
-        pemmable: T.untyped,
-        path: T.untyped,
-        permissions: T.untyped,
-        passphrase: T.untyped,
-        cipher: T.untyped
-      ).returns(T.untyped)
-    end
     def self.write(pemmable, path, permissions = T.unsafe(nil), passphrase = T.unsafe(nil), cipher = T.unsafe(nil)); end
 
     class DIGEST_ALGORITHM
@@ -3438,15 +3141,6 @@ module Gem
 
       def check_chain(chain, time); end
 
-      sig do
-        params(
-          public_key: T.untyped,
-          digest: T.untyped,
-          signature: T.untyped,
-          data: T.untyped
-        ).returns(T.untyped)
-      end
-
       def check_data(public_key, digest, signature, data); end
 
       def check_key(signer, key); end
@@ -3468,16 +3162,6 @@ module Gem
       def only_trusted=(only_trusted); end
 
       def subject(certificate); end
-
-      sig do
-        params(
-          chain: T.untyped,
-          key: T.untyped,
-          digests: T.untyped,
-          signatures: T.untyped,
-          full_name: T.untyped
-        ).returns(T.untyped)
-      end
 
       def verify(chain, key = T.unsafe(nil), digests = T.unsafe(nil), signatures = T.unsafe(nil), full_name = T.unsafe(nil)); end
 
@@ -3551,15 +3235,6 @@ module Gem
       def digest_name; end
 
       def extract_name(cert); end
-
-      sig do
-        params(
-          key: T.untyped,
-          cert_chain: T.untyped,
-          passphrase: T.untyped,
-          options: T.untyped
-        ).returns(Signer)
-      end
 
       def initialize(key, cert_chain, passphrase = T.unsafe(nil), options = T.unsafe(nil)); end
 
@@ -3677,15 +3352,6 @@ module Gem
       def dir_shortref; end
 
       def download(full_spec, path); end
-
-      sig do
-        params(
-          name: T.untyped,
-          repository: T.untyped,
-          reference: T.untyped,
-          submodules: T.untyped
-        ).returns(Git)
-      end
 
       def initialize(name, repository, reference, submodules = T.unsafe(nil)); end
 
@@ -4340,15 +4006,6 @@ module Gem
 
     def errs; end
 
-    sig do
-      params(
-        in_stream: T.untyped,
-        out_stream: T.untyped,
-        err_stream: T.untyped,
-        usetty: T.untyped
-      ).returns(StreamUI)
-    end
-
     def initialize(in_stream, out_stream, err_stream = T.unsafe(nil), usetty = T.unsafe(nil)); end
 
     def ins; end
@@ -4370,15 +4027,6 @@ module Gem
     def build_extensions; end
 
     def extensions; end
-
-    sig do
-      params(
-        filename: T.untyped,
-        base_dir: T.untyped,
-        gems_dir: T.untyped,
-        default_gem: T.untyped
-      ).returns(StubSpecification)
-    end
 
     def initialize(filename, base_dir, gems_dir, default_gem); end
 
