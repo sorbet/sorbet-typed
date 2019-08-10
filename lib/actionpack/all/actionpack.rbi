@@ -42,7 +42,7 @@ class ActionController::Parameters
   sig { params(key: T.any(String, Symbol), value: T.untyped).void }
   def []=(key, value); end
 
-  sig { returns(T.nilable(T::Array[T.any(String, Symbol)]))) }
+  sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
   def always_permitted_parameters; end
 
   sig { params(obj: T.nilable(T::Array[T.any(String, Symbol)])).void }
