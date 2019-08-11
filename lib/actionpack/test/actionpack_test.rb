@@ -102,3 +102,88 @@ class ActionPackMetalTest < ActionController::Metal
     )
   end
 end
+
+module ActionPackCallbacksTest
+  extend AbstractController::Callbacks::ClassMethods
+
+  # Test without any options.
+  prepend_before_action :action_name
+  before_action :action_name
+  append_before_action :action_name
+  skip_before_action :action_name
+
+  prepend_around_action :action_name
+  around_action :action_name
+  append_around_action :action_name
+  skip_around_action :action_name
+
+  prepend_after_action :action_name
+  after_action :action_name
+  append_after_action :action_name
+  skip_after_action :action_name
+
+
+  # Test with multiple actions.
+  prepend_before_action :action_name, :action_name_2
+  before_action :action_name, :action_name_2
+  append_before_action :action_name, :action_name_2
+  skip_before_action :action_name, :action_name_2
+
+  prepend_around_action :action_name, :action_name_2
+  around_action :action_name, :action_name_2
+  append_around_action :action_name, :action_name_2
+  skip_around_action :action_name, :action_name_2
+
+  prepend_after_action :action_name, :action_name_2
+  after_action :action_name, :action_name_2
+  append_after_action :action_name, :action_name_2
+  skip_after_action :action_name, :action_name_2
+
+
+  # Test using a block. (skip_* methods don't accept a block)
+  prepend_before_action :action_name, only: :show { |controller| puts controller }
+  before_action :action_name, only: :show { |controller| puts controller }
+  append_before_action :action_name, only: :show { |controller| puts controller }
+
+  prepend_around_action :action_name, only: :show { |controller| puts controller }
+  around_action :action_name, only: :show { |controller| puts controller }
+  append_around_action :action_name, only: :show { |controller| puts controller }
+
+  prepend_after_action :action_name, only: :show { |controller| puts controller }
+  after_action :action_name, only: :show { |controller| puts controller }
+  append_after_action :action_name, only: :show { |controller| puts controller }
+
+
+  # Test proc for `if`, symbol for `only`, symbol array for `except`.
+  prepend_before_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  before_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  append_before_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  skip_before_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+
+  prepend_around_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  around_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  append_around_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  skip_around_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+
+  prepend_after_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  after_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  append_after_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+  skip_after_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
+
+
+  # Test symbol for `if`, symbol array for `only`, symbol for `except`.
+  prepend_before_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  before_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  append_before_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  skip_before_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+
+  prepend_around_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  around_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  append_around_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  skip_around_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+
+  prepend_after_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  after_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  append_after_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+  skip_after_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
+end
