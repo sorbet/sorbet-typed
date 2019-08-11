@@ -608,3 +608,17 @@ module AbstractController::Callbacks::ClassMethods
   end
   def skip_before_action(*names, except: nil, only: nil, if: nil, unless: nil); end
 end
+
+# https://api.rubyonrails.org/classes/ActionController/MimeResponds.html
+module ActionController::MimeResponds
+  sig do
+    params(
+      mimes: T.nilable(Symbol),
+      block: T.nilable(T.proc.params(arg0: ActionController::MimeResponds::Collector).void)
+    ).void
+  end
+  def respond_to(*mimes, &block); end
+end
+
+class ActionController::MimeResponds::Collector
+end

@@ -187,3 +187,16 @@ module ActionPackCallbacksTest
   append_after_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
   skip_after_action :action_name, if: :method_name?, only: [:show, :delete], except: :edit
 end
+
+module ActionPackMimeRespondsTest
+  extend ActionController::MimeResponds
+
+  respond_to :html, :js
+
+  # Don't call any methods on format because the class it returns has methods
+  # generated dynamically based on what mime types have been registered,
+  # and we can't type those statically.
+  respond_to do |format|
+    format
+  end
+end
