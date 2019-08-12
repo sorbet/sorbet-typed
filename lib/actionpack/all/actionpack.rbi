@@ -93,7 +93,7 @@ class ActionController::Parameters
       ),
     )
   end
-  def require(key); end
+  def required(key); end
 
   sig { returns(ActiveSupport::HashWithIndifferentAccess) }
   def to_h; end
