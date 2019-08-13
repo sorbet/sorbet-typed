@@ -122,7 +122,16 @@ class ActionController::Parameters
   sig { returns(T::Boolean) }
   def permitted?; end
 
-<<<<<<< HEAD
+  sig { params(block: T.untyped).returns(T.untyped) }
+  def reject!(&block); end
+
+  # delete_if is an alias of reject!
+  sig { params(block: T.untyped).returns(T.untyped) }
+  def delete_if(&block); end
+
+  sig { params(block: T.untyped).returns(T.untyped) }
+  def reject(&block); end
+
   sig do
     params(
       key: T.any(String, Symbol),
@@ -154,20 +163,6 @@ class ActionController::Parameters
       ),
     )
   end
-=======
-  sig { params(block: T.untyped).returns(T.untyped) }
-  def reject!(&block); end
-
-  # delete_if is an alias of reject!
-  sig { params(block: T.untyped).returns(T.untyped) }
-  def delete_if(&block); end
-
-  sig { params(block: T.untyped).returns(T.untyped) }
-  def reject(&block); end
-
-  sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(ActionController::Parameters) }
->>>>>>> origin/master
-  def require(key); end
 
   # required is an alias of require
   sig do
@@ -204,7 +199,7 @@ class ActionController::Parameters
 
   sig { params(block: T.untyped).returns(T.nilable(ActionController::Parameters)) }
   def select!(&block); end
-  
+
   # keep_if is an alias of select!
   sig { params(block: T.untyped).returns(T.nilable(ActionController::Parameters)) }
   def keep_if(&block); end
