@@ -91,15 +91,19 @@ end
 
 class ActionPackMetalTest < ActionController::Metal
   def person_params
-    params.require(:person).permit(:name, :age)
+    person = params.require(:person)
 
-    params.require(:person).permit(ids: [])
+    if person.is_a?(ActionController::Parameters)
+      person.permit(:name, :age)
 
-    params.require(:person).permit(
-      :name,
-      person_ids: [],
-      child_ids: []
-    )
+      person.permit(ids: [])
+
+      person.permit(
+        :name,
+        person_ids: [],
+        child_ids: []
+      )
+    end
   end
 end
 
