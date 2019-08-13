@@ -186,7 +186,7 @@ class String
   sig { params(patterns: T.untyped).returns(T.untyped) }
   def remove(*patterns); end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(T.untyped) }
   def safe_constantize; end
 
   sig { params(locale: Symbol).returns(T.nilable(String)) }
@@ -345,10 +345,10 @@ module ActiveSupport::NumberHelper
       locale: Symbol,
       delimiter: String,
       separator: String,
-      delimiter_patter: T.nilable(Regexp)
+      delimiter_pattern: T.nilable(Regexp)
     ).returns(String)
   end
-  def number_to_delimited(number, locale: :en, delimiter: ",", separator: ".", delimiter_patter: nil); end
+  def number_to_delimited(number, locale: :en, delimiter: ",", separator: ".", delimiter_pattern: nil); end
 
   sig do
     params(
@@ -359,7 +359,7 @@ module ActiveSupport::NumberHelper
       separator: String,
       delimiter: String,
       strip_insignificant_zeros: T::Boolean,
-      units: T.any(T::Hash[T.untyped, T.untyped], String),
+      units: T.any(T::Hash[T.untyped, T.untyped], String, Symbol),
       format: String
     ).returns(String)
   end
@@ -387,7 +387,7 @@ module ActiveSupport::NumberHelper
       separator: String,
       delimiter: String,
       strip_insignificant_zeros: T::Boolean,
-      format: Symbol
+      format: String
     ).returns(String)
   end
   def number_to_percentage(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false, format: "%n%"); end
@@ -416,4 +416,36 @@ module ActiveSupport::NumberHelper
     ).returns(String)
   end
   def number_to_rounded(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false); end
+end
+
+class Hash
+  sig { returns(T.self_type) }
+  def deep_stringify_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_stringify_keys!; end
+
+  sig { returns(T.self_type) }
+  def deep_symbolize_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_symbolize_keys!; end
+
+  sig { returns(T.self_type) }
+  def deep_transform_keys; end
+
+  sig { returns(T.self_type) }
+  def deep_transform_keys!; end
+
+  sig { returns(T.self_type) }
+  def stringify_keys; end
+
+  sig { returns(T.self_type) }
+  def stringify_keys!; end
+
+  sig { returns(T.self_type) }
+  def symbolize_keys; end
+
+  sig { returns(T.self_type) }
+  def symbolize_keys!; end
 end

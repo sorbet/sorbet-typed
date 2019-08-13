@@ -131,7 +131,7 @@ module ActiveRecord::Associations::ClassMethods
       polymorphic: T.nilable(T::Boolean),
       primary_key: T.nilable(T.any(Symbol, String)),
       required: T.nilable(T::Boolean),
-      touch: T.nilable(T::Boolean),
+      touch: T.nilable(T.any(T::Boolean, Symbol)),
       validate: T.nilable(T::Boolean),
       default: T.nilable(T.proc.returns(T.untyped))
     ).void
@@ -302,9 +302,9 @@ class ActiveRecord::Base
   sig do
     params(
       arg: Symbol,
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      on: T.nilable(Symbol),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      on: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.after_commit(
@@ -317,8 +317,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.after_create(
@@ -330,8 +330,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.after_destroy(
@@ -343,8 +343,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.after_rollback(
@@ -356,8 +356,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.after_save(
@@ -369,8 +369,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.after_update(
@@ -382,21 +382,23 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      on: T.nilable(T.any(Symbol, T::Array[Symbol]))
     ).void
   end
   def self.after_validation(
     arg = nil,
     if: nil,
-    unless: nil
+    unless: nil,
+    on: nil
   ); end
 
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.around_create(
@@ -408,8 +410,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.around_destroy(
@@ -421,8 +423,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.around_save(
@@ -434,8 +436,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.around_update(
@@ -447,8 +449,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.before_create(
@@ -460,8 +462,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.before_destroy(
@@ -473,8 +475,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.before_save(
@@ -486,8 +488,8 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
     ).void
   end
   def self.before_update(
@@ -499,9 +501,9 @@ class ActiveRecord::Base
   sig do
     params(
       arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      on: T.nilable(Symbol)
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      on: T.nilable(T.any(Symbol, T::Array[Symbol]))
     ).void
   end
   def self.before_validation(
@@ -638,7 +640,10 @@ module ActiveRecord::Persistence
 
   sig do
     params(
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        ActionController::Parameters
+      )
     ).returns(TrueClass)
   end
   def update!(attributes); end
@@ -646,14 +651,20 @@ module ActiveRecord::Persistence
   # update_attributes! is an alias of update!
   sig do
     params(
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        ActionController::Parameters
+      )
     ).returns(TrueClass)
   end
   def update_attributes!(attributes); end
 
   sig do
     params(
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        ActionController::Parameters
+      )
     ).returns(T::Boolean)
   end
   def update(attributes); end
@@ -661,7 +672,10 @@ module ActiveRecord::Persistence
   # update_attributes is an alias of update
   sig do
     params(
-      attributes: T::Hash[T.any(Symbol, String), T.untyped]
+      attributes: T.any(
+        T::Hash[T.any(Symbol, String), T.untyped],
+        ActionController::Parameters
+      )
     ).returns(T::Boolean)
   end
   def update_attributes(attributes); end
