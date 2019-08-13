@@ -163,6 +163,7 @@ class ActionController::Parameters
       ),
     )
   end
+  def require(key); end
 
   # required is an alias of require
   sig do
