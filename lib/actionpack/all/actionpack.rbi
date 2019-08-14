@@ -33,6 +33,82 @@ class ActionDispatch::Response
 end
 
 class ActionController::Parameters
+  sig { params(other: ActionController::Parameters).returns(T::Boolean) }
+  def ==(other); end
+
+  sig { params(key: T.any(String, Symbol)).returns(T.untyped) }
+  def [](key); end
+
+  sig { params(key: T.any(String, Symbol), value: T.untyped).void }
+  def []=(key, value); end
+
+  sig { returns(T.nilable(T::Array[T.any(String, Symbol)])) }
+  def always_permitted_parameters; end
+
+  sig { params(obj: T.nilable(T::Array[T.any(String, Symbol)])).void }
+  def always_permitted_parameters=(obj); end
+
+  sig { params(options: T.untyped).returns(T.untyped) }
+  def as_json(options = nil); end
+
+  sig { returns(T.untyped) }
+  def deep_dup; end
+
+  sig { params(key: T.any(String, Symbol), block: T.untyped).returns(T.untyped) }
+  def delete(key, &block); end
+
+  sig { params(keys: T.any(String, Symbol)).returns(T.untyped) }
+  def dig(*keys); end
+
+  sig { params(block: T.untyped).returns(T.untyped) }
+  def each_pair(&block); end
+  
+  # each is an alias of each_pair
+  sig { params(block: T.untyped).returns(T.untyped) }
+  def each(&block); end
+
+  sig { returns(T::Boolean) }
+  def empty?; end
+
+  sig { params(keys: T.any(String, Symbol)).returns(ActionController::Parameters) }
+  def except(*keys); end
+
+  sig { params(keys: T.any(String, Symbol)).returns(T.untyped) }
+  def extract!(*keys); end
+
+  sig { params(key: T.any(String, Symbol), args: T.untyped).returns(T.untyped) }
+  def fetch(key, *args); end
+
+  sig { params(key: T.any(String, Symbol)).returns(T::Boolean) }
+  def has_key?(key); end
+
+  sig { params(value: T.untyped).returns(T::Boolean) }
+  def has_value?(value); end
+
+  sig { params(key: T.any(String, Symbol)).returns(T::Boolean) }
+  def include?(key); end
+
+  sig { params(parameters: T.untyped).void }
+  def initialize(parameters = nil); end
+
+  sig { returns(String) }
+  def inspect; end
+
+  sig { params(key: T.any(String, Symbol)).returns(T::Boolean) }
+  def key?(key); end
+
+  sig { params(key: T.any(String, Symbol)).returns(T.untyped) }
+  def keys(key); end
+
+  sig { params(other_hash: T.untyped).returns(ActionController::Parameters) }
+  def merge!(other_hash); end
+
+  sig { params(other_hash: T.untyped).returns(ActionController::Parameters) }
+  def merge(other_hash); end
+
+  sig { returns(T.untyped) }
+  def parameters; end
+
   sig { returns(T.self_type) }
   def permit!; end
 
@@ -40,8 +116,21 @@ class ActionController::Parameters
   sig { params(filters: T.untyped).returns(ActionController::Parameters) }
   def permit(*filters); end
 
+  sig { params(new_permitted: T.untyped).void }
+  def permitted=(new_permitted); end
+
   sig { returns(T::Boolean) }
   def permitted?; end
+
+  sig { params(block: T.untyped).returns(T.untyped) }
+  def reject!(&block); end
+
+  # delete_if is an alias of reject!
+  sig { params(block: T.untyped).returns(T.untyped) }
+  def delete_if(&block); end
+
+  sig { params(block: T.untyped).returns(T.untyped) }
+  def reject(&block); end
 
   sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(ActionController::Parameters) }
   def require(key); end
@@ -50,18 +139,97 @@ class ActionController::Parameters
   sig { params(key: T.any(Symbol, T::Array[Symbol])).returns(ActionController::Parameters) }
   def required(key); end
 
-  sig { returns(ActiveSupport::HashWithIndifferentAccess) }
+  sig { params(other_hash: T.untyped).returns(ActionController::Parameters) }
+  def reverse_merge!(other_hash); end
+
+  # with_defaults! is an alias of reverse_merge!
+  sig { params(other_hash: T.untyped).returns(ActionController::Parameters) }
+  def with_defaults!(other_hash); end
+
+  sig { params(other_hash: T.untyped).returns(ActionController::Parameters) }
+  def reverse_merge(other_hash); end
+
+  # with_defaults is an alias of reverse_merge
+  sig { params(other_hash: T.untyped).returns(ActionController::Parameters) }
+  def with_defaults(other_hash); end
+
+  sig { params(block: T.untyped).returns(T.nilable(ActionController::Parameters)) }
+  def select!(&block); end
+  
+  # keep_if is an alias of select!
+  sig { params(block: T.untyped).returns(T.nilable(ActionController::Parameters)) }
+  def keep_if(&block); end
+
+  sig { params(block: T.untyped).returns(ActionController::Parameters) }
+  def select(&block); end
+
+  sig { returns(T.any(Symbol, T::Boolean)) }
+  def self.action_on_unpermitted_parameters; end
+
+  sig { params(obj: T.any(Symbol, T::Boolean)).void }
+  def self.action_on_unpermitted_parameters=(obj); end
+
+  sig { returns(T::Array[T.any(String, Symbol)]) }
+  def self.always_permitted_parameters; end
+
+  sig { params(obj: T::Array[T.any(String, Symbol)]).void }
+  def self.always_permitted_parameters=(obj); end
+
+  sig { returns(T::Boolean) }
+  def self.permit_all_parameters; end
+
+  sig { params(obj: T::Boolean).void }
+  def self.permit_all_parameters=(obj); end
+
+  sig { params(keys: T.any(String, Symbol)).returns(ActionController::Parameters) }
+  def slice!(*keys); end
+
+  sig { params(keys: T.any(String, Symbol)).returns(ActionController::Parameters) }
+  def slice(*keys); end
+
+  sig { returns(T.nilable(ActiveSupport::HashWithIndifferentAccess)) }
   def to_h; end
 
-  sig { returns(T::Hash[T.untyped, T.untyped]) }
+  sig { returns(T.nilable(T::Hash[T.untyped, T.untyped])) }
   def to_hash; end
-
-  sig { params(args: String).returns(T.nilable(String)) }
-  def to_query(*args); end
 
   # to_param is an alias of to_query
   sig { params(args: String).returns(T.nilable(String)) }
   def to_param(*args); end
+
+  sig { params(args: String).returns(T.nilable(String)) }
+  def to_query(*args); end
+
+  sig { returns(String) }
+  def to_s; end
+
+  sig { returns(ActiveSupport::HashWithIndifferentAccess) }
+  def to_unsafe_h; end
+
+  # to_unsafe_hash is an alias of to_unsafe_h
+  sig { returns(ActiveSupport::HashWithIndifferentAccess) }
+  def to_unsafe_hash; end
+
+  sig { params(block: T.untyped).returns(ActionController::Parameters) }
+  def transform_keys!(&block); end
+
+  sig { params(block: T.untyped).returns(ActionController::Parameters) }
+  def transform_keys(&block); end
+
+  sig { returns(ActionController::Parameters) }
+  def transform_values!; end
+
+  sig { returns(ActionController::Parameters) }
+  def transform_values; end
+
+  sig { params(value: T.untyped).returns(T::Boolean) }
+  def value?(value); end
+
+  sig { returns(T::Array[T.untyped]) }
+  def values; end
+
+  sig { params(keys: T.any(String, Symbol)).returns(T.untyped) }
+  def values_at(*keys); end
 end
 
 module ActionController::StrongParameters
