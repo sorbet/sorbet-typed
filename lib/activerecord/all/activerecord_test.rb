@@ -8,7 +8,7 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     create_table :products do |t|
       t.string :name
       t.text :description
- 
+
       t.timestamps
     end
 
@@ -46,7 +46,7 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     remove_foreign_key :accounts, :branches
     remove_foreign_key :accounts, column: :owner_id
     remove_foreign_key :accounts, name: :special_fk_name
-    
+
     execute <<-SQL
       ALTER TABLE distributors
         DROP CONSTRAINT zipchk
@@ -61,14 +61,13 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
         t.timestamps
       end
     end
- 
+
     say "Created a table"
- 
+
     suppress_messages { add_index :products, :name }
     say "and an index!", true
- 
+
     say_with_time 'Waiting for a while' do
-      sleep 10
       250
     end
   end

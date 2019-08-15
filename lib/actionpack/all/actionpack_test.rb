@@ -37,16 +37,16 @@ module ActionPackRoutesTest
   resources :articles do
     resources :comments, shallow: true
   end
-  
+
   resources :articles, shallow: true do
     resources :comments
   end
-  
+
   resources :photos do
     member do
       get 'preview'
     end
-  
+
     collection do
       get 'search'
     end
@@ -62,11 +62,11 @@ module ActionPackRoutesTest
   put 'about' => 'static_pages#about'
 
   get 'profile', action: :show, controller: 'users'
-  
+
   get 'photos(/:id)', to: :display
   get 'photos/:id', to: 'photos#show', defaults: { format: 'jpg' }
   get 'exit', to: 'sessions#destroy', as: :logout
-  
+
   match 'photos', to: 'photos#show', via: [:get, :post]
   match 'photos', to: 'photos#show', via: :all
   match 'path', to: 'controller#action', via: :post

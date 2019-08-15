@@ -17,7 +17,7 @@ module ActiveModelTest
 
   validates :name, :login, :email, presence: true
   validates :order, presence: true
-  
+
   validates :name, :login, :email, absence: true
 
   validates :email, uniqueness: true
@@ -37,7 +37,7 @@ module ActiveModelTest
   validates :age, numericality: true, on: :update
 
   validates :token, presence: true, uniqueness: true, strict: TokenGenerationException
-  
+
   validates :card_number, presence: true, if: :paid_with_card?
 
   # TODO: These are valid but currently fail typechecking.
