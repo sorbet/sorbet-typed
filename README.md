@@ -79,7 +79,7 @@ end
 
 This tests a few of the parameters available on the `validates` method based on existing code from the ActiveModel documentation or active codebases using the gem. If you wanted to restrict your test to a type signature for a specific version of the gem, for example `activerecord ~> 5.2.0`, you would add your tests to that directory (`lib/activerecord/~>5.2.0/activerecord_test.rb` insead of the `all` one.
 
-The tests can be run locally by installing Sorbet with `gem install sorbet` and then running `ruby .ci/run.rb`.
+The tests can be run locally by installing Sorbet with `gem install sorbet` and then running `rake`.
 
 # Contributors
 
