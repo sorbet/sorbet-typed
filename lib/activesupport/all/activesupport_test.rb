@@ -40,7 +40,7 @@ module ActiveSupportNumberHelperTest
   number_to_percentage('98a')
   number_to_percentage(100, format: '%n  %')
 
-  number_to_phone(5551234) 
+  number_to_phone(5551234)
   number_to_phone('5551234')
   number_to_phone(1235551234, area_code: true, extension: 555)
   number_to_phone(1235551234, country_code: 1, extension: 1343, delimiter: '.')
