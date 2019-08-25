@@ -43,6 +43,10 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     add_reference :products, :supplier, foreign_key: true
     add_reference :products, :supplier, foreign_key: { to_table: :firms }
 
+    remove_reference :products, :user, index: true
+    remove_reference :products, :supplier, polymorphic: true
+    remove_reference :products, :user, index: true, foreign_key: true
+
     add_column :products, :price, :decimal, precision: 5, scale: 2
     add_column :articles, :status, :string, limit: 20, default: 'draft', null: false
     add_column :answers, :bill_gates_money, :decimal, precision: 15, scale: 2

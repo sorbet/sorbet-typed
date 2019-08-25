@@ -347,18 +347,22 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig do
     params(
       table_name: T.any(String, Symbol),
-      ref_name: T.untyped,
-      foreign_key: T.untyped,
-      polymorphic: T.untyped,
-      index: T.untyped
+      ref_name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
+      index: T.any(T::Boolean, T::Hash[Symbol, T.untyped]),
+      foreign_key: T.any(T::Boolean, T::Hash[Symbol, T.untyped]),
+      polymorphic: T::Boolean,
+      null: T.untyped
     ).void
   end
   def remove_reference(
     table_name,
     ref_name,
+    type: :bigint,
+    index: true,
     foreign_key: false,
     polymorphic: false,
-    index: nil
+    null: nil
   ); end
 
   # Timestamps
@@ -382,11 +386,11 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig { params(message: String, subitem: T.untyped).void }
   def say(message, subitem = false); end
 
-  sig { params(message: String).returns(T.untyped) }
-  def say_with_time(message); end
+  sig { params(message: String, blk: T.untyped).returns(T.untyped) }
+  def say_with_time(message, &blk); end
 
-  sig { void }
-  def suppress_messages; end
+  sig { params(blk: T.untyped).void }
+  def suppress_messages(&blk); end
 
   sig { returns(T.untyped) }
   def reversible(); end
