@@ -2,7 +2,7 @@
 
 class ActiveRecord::Migration::Compatibility::V5_1 < ActiveRecord::Migration::Compatibility::V5_2; end
 
-# 5.2 has a difference definition for create_table, because 6.0 adds a new option.
+# 5.2 has a different definition for create_table because 6.0 adds a new option.
 # This is the only difference between 5.2 and 6.0.
 class ActiveRecord::Migration::Compatibility::V5_2 < ActiveRecord::Migration::Current
   # https://github.com/rails/rails/blob/v5.2.3/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L151-L290
