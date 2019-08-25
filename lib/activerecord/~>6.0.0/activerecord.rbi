@@ -142,15 +142,15 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
-      type: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
       limit: T.untyped,
       default: T.untyped,
-      null: T.untyped,
-      precision: T.untyped,
-      scale: T.untyped,
-      comment: T.untyped
+      null: T::Boolean,
+      precision: Integer,
+      scale: Integer,
+      comment: String
     ).void
   end
   def add_column(
@@ -167,15 +167,15 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
-      type: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
       limit: T.untyped,
       default: T.untyped,
-      null: T.untyped,
-      precision: T.untyped,
-      scale: T.untyped,
-      comment: T.untyped
+      null: T::Boolean,
+      precision: Integer,
+      scale: Integer,
+      comment: String
     ).void
   end
   def change_column(
@@ -192,25 +192,25 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
-      null: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      null: T::Boolean,
       default: T.untyped
     ).void
   end
   def change_column_null(table_name, column_name, null, default = nil); end
 
-  sig { params(table_name: T.untyped, column_name: T.untyped, default_or_changes: T.untyped).void }
+  sig { params(table_name: T.any(String, Symbol), column_name: T.any(String, Symbol), default_or_changes: T.untyped).void }
   def change_column_default(table_name, column_name, default_or_changes); end
 
-  sig { params(table_name: T.untyped, column_name: T.untyped, new_column_name: T.untyped).void }
+  sig { params(table_name: T.any(String, Symbol), column_name: T.any(String, Symbol), new_column_name: T.any(String, Symbol)).void }
   def rename_column(table_name, column_name, new_column_name); end
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
-      type: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      type: T.nilable(T.any(String, Symbol)),
       options: T.untyped
     ).void
   end
@@ -221,21 +221,21 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     options = {}
   ); end
 
-  sig { params(table_name: T.any(String, Symbol), column_names: T.untyped).void }
+  sig { params(table_name: T.any(String, Symbol), column_names: T.any(String, Symbol)).void }
   def remove_columns(table_name, *column_names); end
 
   # Foreign Keys
 
   sig do
     params(
-      from_table: T.untyped,
-      to_table: T.untyped,
-      column: T.untyped,
-      primary_key: T.untyped,
-      name: T.untyped,
-      on_delete: T.untyped,
-      on_update: T.untyped,
-      validate: T.untyped
+      from_table: T.any(String, Symbol),
+      to_table: T.any(String, Symbol),
+      column: T.any(String, Symbol),
+      primary_key: T.any(String, Symbol),
+      name: T.any(String, Symbol),
+      on_delete: Symbol,
+      on_update: Symbol,
+      validate: T::Boolean
     ).void
   end
   def add_foreign_key(
@@ -246,19 +246,23 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     name: nil,
     on_delete: nil,
     on_update: nil,
-    validate: nil
+    validate: true
   ); end
 
+  # Technically, `remove_foreign_key` doesn't necessarily require that a
+  # `to_table` parameter be passed. However, Sorbet doesn't let us define
+  # more than one sig, so we instead choose to make the reversible
+  # `remove_foreign_key` the 'supported' method.
   sig do
     params(
-      from_table: T.untyped,
-      to_table: T.untyped,
-      column: T.untyped,
-      primary_key: T.untyped,
-      name: T.untyped,
-      on_delete: T.untyped,
-      on_update: T.untyped,
-      validate: T.untyped
+      from_table: T.any(String, Symbol),
+      to_table: T.any(String, Symbol),
+      column: T.any(String, Symbol),
+      primary_key: T.any(String, Symbol),
+      name: T.any(String, Symbol),
+      on_delete: Symbol,
+      on_update: Symbol,
+      validate: T::Boolean
     ).void
   end
   def remove_foreign_key(
@@ -269,17 +273,17 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     name: nil,
     on_delete: nil,
     on_update: nil,
-    validate: nil
+    validate: true
   ); end
 
   # Indices
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       using: T.untyped,
-      unique: T.nilable(T::Boolean),
+      unique: T::Boolean,
       where: T.untyped,
       order: T.untyped,
       name: T.untyped,
@@ -294,7 +298,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     table_name,
     column_name,
     using: nil,
-    unique: nil,
+    unique: false,
     where: nil,
     order: nil,
     name: nil,

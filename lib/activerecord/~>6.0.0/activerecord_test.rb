@@ -21,10 +21,22 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     remove_column :products, :part_number, :string
 
     add_index :products, :part_number
+    add_index :accounts, [:branch_id, :party_id], unique: true
+    add_index :accounts, [:branch_id, :party_id], unique: true, name: 'by_branch_party'
+    add_index :accounts, :name, name: 'by_name', length: 10
+    add_index :accounts, [:name, :surname], name: 'by_name_surname', length: { name: 10, surname: 15 }
+    add_index :accounts, [:branch_id, :party_id, :surname], order: { branch_id: :desc, party_id: :asc }
+
     add_reference :products, :user, foreign_key: true
 
     add_column :products, :price, :decimal, precision: 5, scale: 2
     add_reference :products, :supplier, polymorphic: true
+
+    add_column :articles, :status, :string, limit: 20, default: 'draft', null: false
+    add_column :answers, :bill_gates_money, :decimal, precision: 15, scale: 2
+    add_column :measurements, :sensor_reading, :decimal, precision: 30, scale: 20
+    add_column :measurements, :huge_integer, :decimal, precision: 30
+    add_column :shapes, :triangle, 'polygon'
 
     create_join_table :products, :categories, column_options: { null: true }
     create_join_table :products, :categories, table_name: :categorization
@@ -47,9 +59,11 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     change_column_default :products, :approved, from: true, to: false
 
     add_foreign_key :articles, :authors
+    add_foreign_key :articles, :users, column: :author_id, primary_key: "lng_id"
+    add_foreign_key :articles, :authors, on_delete: :cascade
     remove_foreign_key :accounts, :branches
-    remove_foreign_key :accounts, column: :owner_id
-    remove_foreign_key :accounts, name: :special_fk_name
+    remove_foreign_key :accounts, :branches, column: :owner_id
+    remove_foreign_key :accounts, :branches, name: :special_fk_name
 
     execute <<-SQL
       ALTER TABLE distributors
