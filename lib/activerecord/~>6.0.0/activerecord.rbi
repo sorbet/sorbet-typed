@@ -286,7 +286,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
       unique: T::Boolean,
       where: T.untyped,
       order: T.untyped,
-      name: T.untyped,
+      name: T.any(String, Symbol),
       length: T.untyped,
       opclass: T.untyped,
       type: T.untyped,
@@ -311,15 +311,33 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: Symbol,
-      column: T.any(Symbol, T::Array[Symbol]),
-      name: T.nilable(Symbol)
+      table_name: T.any(String, Symbol),
+      column: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      using: T.untyped,
+      unique: T::Boolean,
+      where: T.untyped,
+      order: T.untyped,
+      name: T.any(String, Symbol),
+      length: T.untyped,
+      opclass: T.untyped,
+      type: T.untyped,
+      internal: T.untyped,
+      algorithm: T.untyped
     ).void
   end
   def remove_index(
     table_name,
     column,
-    name: nil
+    using: nil,
+    unique: false,
+    where: nil,
+    order: nil,
+    name: nil,
+    length: nil,
+    opclass: nil,
+    type: nil,
+    internal: nil,
+    algorithm: nil
   ); end
 
   sig do

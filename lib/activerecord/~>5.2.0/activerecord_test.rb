@@ -23,6 +23,13 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     add_index :accounts, [:name, :surname], name: 'by_name_surname', length: { name: 10, surname: 15 }
     add_index :accounts, [:branch_id, :party_id, :surname], order: { branch_id: :desc, party_id: :asc }
 
+    remove_index :accounts, :branch_id
+    remove_index :accounts, [:branch_id, :party_id]
+    remove_index :accounts, :branch_id, name: :by_branch_party
+
+    rename_index :people, 'index_people_on_last_name', 'index_users_on_last_name'
+    rename_index :people, :index_people_on_last_name, :index_users_on_last_name
+
     add_reference :products, :user, foreign_key: true
     add_reference :products, :supplier, polymorphic: true
     add_reference :products, :user, type: :string
