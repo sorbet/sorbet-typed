@@ -247,14 +247,10 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     validate: true
   ); end
 
-  # Technically, `remove_foreign_key` doesn't necessarily require that a
-  # `to_table` parameter be passed. However, Sorbet doesn't let us define
-  # more than one sig, so we instead choose to make the reversible
-  # `remove_foreign_key` the 'supported' method.
   sig do
     params(
       from_table: T.any(String, Symbol),
-      to_table: T.any(String, Symbol),
+      to_table: T.nilable(T.any(String, Symbol)),
       column: T.any(String, Symbol),
       primary_key: T.any(String, Symbol),
       name: T.any(String, Symbol),
@@ -265,7 +261,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   end
   def remove_foreign_key(
     from_table,
-    to_table,
+    to_table = nil,
     column: nil,
     primary_key: nil,
     name: nil,

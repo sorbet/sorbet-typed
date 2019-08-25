@@ -74,7 +74,7 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     add_foreign_key :articles, :users, column: :author_id, primary_key: "lng_id"
     add_foreign_key :articles, :authors, on_delete: :cascade
     remove_foreign_key :accounts, :branches
-    remove_foreign_key :accounts, :branches, column: :owner_id
+    remove_foreign_key :accounts, column: :owner_id
     remove_foreign_key :accounts, :branches, name: :special_fk_name
 
     execute <<-SQL
