@@ -386,11 +386,11 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig { params(blk: T.untyped).void }
   def suppress_messages(&blk); end
 
-  sig { returns(T.untyped) }
-  def reversible(); end
+  sig { params(blk: T.proc.params(arg0: T.untyped).void).void }
+  def reversible(&blk); end
 
-  sig { params(migration_classes: T.untyped).returns(T.untyped) }
-  def revert(*migration_classes); end
+  sig { params(migration_classes: T.untyped, blk: T.nilable(T.proc.params(arg0: T.untyped).void)).void }
+  def revert(*migration_classes, &blk); end
 
   sig { params(sql: String, name: T.nilable(String)).returns(T.untyped) }
   def execute(sql, name = nil); end
