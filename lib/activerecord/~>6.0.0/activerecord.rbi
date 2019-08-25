@@ -105,8 +105,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
       table_1: T.any(String, Symbol),
       table_2: T.any(String, Symbol),
       column_options: T.untyped,
-      options: T.untyped,
-      table_name: T.untyped,
+      table_name: T.any(String, Symbol),
       temporary: T.untyped,
       force: T::Boolean,
       blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
@@ -116,7 +115,6 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     table_1,
     table_2,
     column_options: {},
-    options: nil,
     table_name: nil,
     temporary: nil,
     force: false,
