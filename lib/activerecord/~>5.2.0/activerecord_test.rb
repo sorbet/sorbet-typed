@@ -24,10 +24,15 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     add_index :accounts, [:branch_id, :party_id, :surname], order: { branch_id: :desc, party_id: :asc }
 
     add_reference :products, :user, foreign_key: true
-
-    add_column :products, :price, :decimal, precision: 5, scale: 2
     add_reference :products, :supplier, polymorphic: true
-
+    add_reference :products, :user, type: :string
+    add_reference :products, :supplier, polymorphic: true, index: true
+    add_reference :products, :supplier, index: { unique: true }
+    add_reference :products, :supplier, index: { name: "my_supplier_index" }
+    add_reference :products, :supplier, foreign_key: true
+    add_reference :products, :supplier, foreign_key: { to_table: :firms }
+    
+    add_column :products, :price, :decimal, precision: 5, scale: 2
     add_column :articles, :status, :string, limit: 20, default: 'draft', null: false
     add_column :answers, :bill_gates_money, :decimal, precision: 15, scale: 2
     add_column :measurements, :sensor_reading, :decimal, precision: 30, scale: 20

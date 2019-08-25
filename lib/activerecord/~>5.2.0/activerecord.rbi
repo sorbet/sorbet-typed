@@ -308,21 +308,21 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig do
     params(
       table_name: T.any(String, Symbol),
-      ref_name: T.untyped,
-      type: T.untyped,
-      index: T.untyped,
-      foreign_key: T.untyped,
-      polymorphic: T.untyped,
+      ref_name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
+      index: T.any(T::Boolean, T::Hash[Symbol, T.untyped]),
+      foreign_key: T.any(T::Boolean, T::Hash[Symbol, T.untyped]),
+      polymorphic: T::Boolean,
       null: T.untyped
     ).void
   end
   def add_reference(
     table_name,
     ref_name,
-    type: nil,
-    index: nil,
-    foreign_key: nil,
-    polymorphic: nil,
+    type: :bigint,
+    index: true,
+    foreign_key: false,
+    polymorphic: false,
     null: nil
   ); end
 
