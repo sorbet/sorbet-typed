@@ -38,28 +38,32 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig do
     params(
       table_name: T.any(String, Symbol),
-      bulk: T::Boolean
-    ).returns(T.untyped)
+      bulk: T::Boolean,
+      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
+    ).void
   end
   def change_table(
     table_name,
-    bulk: false
+    bulk: false,
+    &blk
   ); end
 
-  sig { params(table_name: T.any(String, Symbol), new_name: T.any(String, Symbol)).returns(T.untyped) }
+  sig { params(table_name: T.any(String, Symbol), new_name: T.any(String, Symbol)).void }
   def rename_table(table_name, new_name); end
 
   sig do
     params(
       table_name: T.any(String, Symbol),
       force: T.any(T::Boolean, Symbol),
-      if_exists: T::Boolean
-    ).returns(T.untyped)
+      if_exists: T::Boolean,
+      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
+    ).void
   end
   def drop_table(
     table_name,
     force: false,
-    if_exists: false
+    if_exists: false,
+    &blk
   ); end
 
   # Join Tables
@@ -69,39 +73,51 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
       table_1: T.any(String, Symbol),
       table_2: T.any(String, Symbol),
       column_options: T.untyped,
-      options: T.untyped,
-      table_name: T.untyped,
+      table_name: T.any(String, Symbol),
       temporary: T.untyped,
-      force: T::Boolean
-    ).returns(T.untyped)
+      force: T::Boolean,
+      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
+    ).void
   end
   def create_join_table(
     table_1,
     table_2,
     column_options: {},
-    options: nil,
     table_name: nil,
     temporary: nil,
-    force: false
+    force: false,
+    &blk
   ); end
 
-  sig { params(table_1: T.any(String, Symbol), table_2: T.any(String, Symbol), options: T.untyped).returns(T.untyped) }
-  def drop_join_table(table_1, table_2, options = {}); end
+  sig do
+    params(
+      table_1: T.any(String, Symbol),
+      table_2: T.any(String, Symbol),
+      options: T.untyped,
+      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
+    ).void
+  end
+  def drop_join_table(
+    table_1,
+    table_2,
+    options = {},
+    &blk
+  ); end
 
   # Columns
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
-      type: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
       limit: T.untyped,
       default: T.untyped,
-      null: T.untyped,
-      precision: T.untyped,
-      scale: T.untyped,
-      comment: T.untyped
-    ).returns(T.untyped)
+      null: T::Boolean,
+      precision: Integer,
+      scale: Integer,
+      comment: String
+    ).void
   end
   def add_column(
     table_name,
@@ -117,16 +133,16 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
-      type: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
       limit: T.untyped,
       default: T.untyped,
-      null: T.untyped,
-      precision: T.untyped,
-      scale: T.untyped,
-      comment: T.untyped
-    ).returns(T.untyped)
+      null: T::Boolean,
+      precision: Integer,
+      scale: Integer,
+      comment: String
+    ).void
   end
   def change_column(
     table_name,
@@ -142,27 +158,27 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
-      null: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      null: T::Boolean,
       default: T.untyped
-    ).returns(T.untyped)
+    ).void
   end
   def change_column_null(table_name, column_name, null, default = nil); end
 
-  sig { params(table_name: T.untyped, column_name: T.untyped, default_or_changes: T.untyped).returns(T.untyped) }
+  sig { params(table_name: T.any(String, Symbol), column_name: T.any(String, Symbol), default_or_changes: T.untyped).void }
   def change_column_default(table_name, column_name, default_or_changes); end
 
-  sig { params(table_name: T.untyped, column_name: T.untyped, new_column_name: T.untyped).returns(T.untyped) }
+  sig { params(table_name: T.any(String, Symbol), column_name: T.any(String, Symbol), new_column_name: T.any(String, Symbol)).void }
   def rename_column(table_name, column_name, new_column_name); end
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
-      type: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      type: T.nilable(T.any(String, Symbol)),
       options: T.untyped
-    ).returns(T.untyped)
+    ).void
   end
   def remove_column(
     table_name,
@@ -171,22 +187,22 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     options = {}
   ); end
 
-  sig { params(table_name: T.any(String, Symbol), column_names: T.untyped).returns(T.untyped) }
+  sig { params(table_name: T.any(String, Symbol), column_names: T.any(String, Symbol)).void }
   def remove_columns(table_name, *column_names); end
 
   # Foreign Keys
 
   sig do
     params(
-      from_table: T.untyped,
-      to_table: T.untyped,
-      column: T.untyped,
-      primary_key: T.untyped,
-      name: T.untyped,
-      on_delete: T.untyped,
-      on_update: T.untyped,
-      validate: T.untyped
-    ).returns(T.untyped)
+      from_table: T.any(String, Symbol),
+      to_table: T.any(String, Symbol),
+      column: T.any(String, Symbol),
+      primary_key: T.any(String, Symbol),
+      name: T.any(String, Symbol),
+      on_delete: Symbol,
+      on_update: Symbol,
+      validate: T::Boolean
+    ).void
   end
   def add_foreign_key(
     from_table,
@@ -196,55 +212,55 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     name: nil,
     on_delete: nil,
     on_update: nil,
-    validate: nil
+    validate: true
   ); end
 
   sig do
     params(
-      from_table: T.untyped,
-      to_table: T.untyped,
-      column: T.untyped,
-      primary_key: T.untyped,
-      name: T.untyped,
-      on_delete: T.untyped,
-      on_update: T.untyped,
-      validate: T.untyped
-    ).returns(T.untyped)
+      from_table: T.any(String, Symbol),
+      to_table: T.nilable(T.any(String, Symbol)),
+      column: T.any(String, Symbol),
+      primary_key: T.any(String, Symbol),
+      name: T.any(String, Symbol),
+      on_delete: Symbol,
+      on_update: Symbol,
+      validate: T::Boolean
+    ).void
   end
   def remove_foreign_key(
     from_table,
-    to_table,
+    to_table = nil,
     column: nil,
     primary_key: nil,
     name: nil,
     on_delete: nil,
     on_update: nil,
-    validate: nil
+    validate: true
   ); end
 
   # Indices
 
   sig do
     params(
-      table_name: T.untyped,
-      column_name: T.untyped,
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
       using: T.untyped,
-      unique: T.nilable(T::Boolean),
+      unique: T::Boolean,
       where: T.untyped,
       order: T.untyped,
-      name: T.untyped,
+      name: T.any(String, Symbol),
       length: T.untyped,
       opclass: T.untyped,
       type: T.untyped,
       internal: T.untyped,
       algorithm: T.untyped
-    ).returns(T.untyped)
+    ).void
   end
   def add_index(
     table_name,
     column_name,
     using: nil,
-    unique: nil,
+    unique: false,
     where: nil,
     order: nil,
     name: nil,
@@ -257,15 +273,33 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig do
     params(
-      table_name: Symbol,
-      column: T.any(Symbol, T::Array[Symbol]),
-      name: T.nilable(Symbol)
-    ).returns(T.untyped)
+      table_name: T.any(String, Symbol),
+      column: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      using: T.untyped,
+      unique: T::Boolean,
+      where: T.untyped,
+      order: T.untyped,
+      name: T.any(String, Symbol),
+      length: T.untyped,
+      opclass: T.untyped,
+      type: T.untyped,
+      internal: T.untyped,
+      algorithm: T.untyped
+    ).void
   end
   def remove_index(
     table_name,
     column,
-    name: nil
+    using: nil,
+    unique: false,
+    where: nil,
+    order: nil,
+    name: nil,
+    length: nil,
+    opclass: nil,
+    type: nil,
+    internal: nil,
+    algorithm: nil
   ); end
 
   sig do
@@ -273,7 +307,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
       table_name: T.any(String, Symbol),
       old_name: T.any(String, Symbol),
       new_name: T.any(String, Symbol)
-    ).returns(T.untyped)
+    ).void
   end
   def rename_index(
     table_name,
@@ -286,55 +320,59 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig do
     params(
       table_name: T.any(String, Symbol),
-      ref_name: T.untyped,
-      type: T.untyped,
-      index: T.untyped,
-      foreign_key: T.untyped,
-      polymorphic: T.untyped,
+      ref_name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
+      index: T.any(T::Boolean, T::Hash[Symbol, T.untyped]),
+      foreign_key: T.any(T::Boolean, T::Hash[Symbol, T.untyped]),
+      polymorphic: T::Boolean,
       null: T.untyped
-    ).returns(T.untyped)
+    ).void
   end
   def add_reference(
     table_name,
     ref_name,
-    type: nil,
-    index: nil,
-    foreign_key: nil,
-    polymorphic: nil,
+    type: :bigint,
+    index: true,
+    foreign_key: false,
+    polymorphic: false,
     null: nil
   ); end
 
   sig do
     params(
       table_name: T.any(String, Symbol),
-      ref_name: T.untyped,
-      foreign_key: T.untyped,
-      polymorphic: T.untyped,
-      index: T.untyped
-    ).returns(T.untyped)
+      ref_name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
+      index: T.any(T::Boolean, T::Hash[Symbol, T.untyped]),
+      foreign_key: T.any(T::Boolean, T::Hash[Symbol, T.untyped]),
+      polymorphic: T::Boolean,
+      null: T.untyped
+    ).void
   end
   def remove_reference(
     table_name,
     ref_name,
+    type: :bigint,
+    index: true,
     foreign_key: false,
     polymorphic: false,
-    index: nil
+    null: nil
   ); end
 
   # Timestamps
 
-  sig { params(table_name: T.any(String, Symbol), options: T.untyped).returns(T.untyped) }
+  sig { params(table_name: T.any(String, Symbol), options: T.untyped).void }
   def add_timestamps(table_name, options = {}); end
 
-  sig { params(table_name: T.any(String, Symbol), options: T.untyped).returns(T.untyped) }
+  sig { params(table_name: T.any(String, Symbol), options: T.untyped).void }
   def remove_timestamps(table_name, options = {}); end
 
   # Extensions
 
-  sig { params(name: T.any(String, Symbol)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol)).void }
   def enable_extension(name); end
 
-  sig { params(name: T.any(String, Symbol)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol)).void }
   def disable_extension(name); end
 
   # Miscellaneous
@@ -342,17 +380,17 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig { params(message: String, subitem: T.untyped).void }
   def say(message, subitem = false); end
 
-  sig { params(message: String).returns(T.untyped) }
-  def say_with_time(message); end
+  sig { params(message: String, blk: T.untyped).returns(T.untyped) }
+  def say_with_time(message, &blk); end
 
-  sig { void }
-  def suppress_messages; end
+  sig { params(blk: T.untyped).void }
+  def suppress_messages(&blk); end
 
-  sig { returns(T.untyped) }
-  def reversible(); end
+  sig { params(blk: T.proc.params(arg0: T.untyped).void).void }
+  def reversible(&blk); end
 
-  sig { params(migration_classes: T.untyped).returns(T.untyped) }
-  def revert(*migration_classes); end
+  sig { params(migration_classes: T.untyped, blk: T.nilable(T.proc.params(arg0: T.untyped).void)).void }
+  def revert(*migration_classes, &blk); end
 
   sig { params(sql: String, name: T.nilable(String)).returns(T.untyped) }
   def execute(sql, name = nil); end
