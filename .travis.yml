@@ -1,7 +1,5 @@
 language: 'ruby'
 rvm:
-  - '2.5'
-install:
-  - 'gem install sorbet'
+  - '2.5.6'
 script:
   - 'ruby .ci/run.rb'
