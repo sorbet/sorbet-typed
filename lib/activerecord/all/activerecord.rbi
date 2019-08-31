@@ -1177,3 +1177,129 @@ module ActiveRecord::ConnectionAdapters::ColumnMethods
   end
   def virtual(*names, index: nil, default: nil, **options); end
 end
+
+class ActiveRecord::ConnectionAdapters::Table
+  # Checks to see if a column exists.
+  #
+  # ```ruby
+  # t.string(:name) unless t.column_exists?(:name, :string)
+  # ```
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, options: T.untyped).returns(T::Boolean) }
+  def column_exists?(column_name, type = nil, options = {}); end
+
+  # Checks to see if an index exists.
+  #
+  # ```ruby
+  # unless t.index_exists?(:branch_id)
+  #   t.index(:branch_id)
+  # end
+  # ```
+  sig { params(column_name: T.any(String, Symbol), options: T.untyped).returns(T::Boolean) }
+  def index_exists?(column_name, options = {}); end
+
+  # Renames the given index on the table.
+  #
+  # ```ruby
+  # t.rename_index(:user_id, :account_id)
+  # ```
+  sig { params(index_name: T.any(String, Symbol), new_index_name: T.any(String, Symbol)).void }
+  def rename_index(index_name, new_index_name); end
+
+  # Changes the column's definition according to the new options.
+  #
+  # ```ruby
+  # t.change(:name, :string, limit: 80)
+  # t.change(:description, :text)
+  # ```
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, options: T.untyped).void }
+  def change(column_name, type, options = {}); end
+
+  # Sets a new default value for a column.
+  #
+  # ```ruby
+  # t.change_default(:qualification, 'new')
+  # t.change_default(:authorized, 1)
+  # t.change_default(:status, from: nil, to: "draft")
+  # ```
+  sig { params(column_name: T.any(String, Symbol), default_or_changes: T.untyped).void }
+  def change_default(column_name, default_or_changes); end
+
+  # Removes the column(s) from the table definition.
+  #
+  # ```ruby
+  # t.remove(:qualification)
+  # t.remove(:qualification, :experience)
+  # ```
+  sig { params(column_names: T.any(String, Symbol)).void }
+  def remove(*column_names); end
+
+  # Removes the given index from the table.
+  #
+  # ```ruby
+  # t.remove_index(:branch_id)
+  # t.remove_index(column: [:branch_id, :party_id])
+  # t.remove_index(name: :by_branch_party)
+  # ```
+  sig { params(options: T.untyped).void }
+  def remove_index(options = {}); end
+
+  # Removes the timestamp columns (`created_at` and `updated_at`) from the table.
+  #
+  # ```ruby
+  # t.remove_timestamps
+  # ```
+  sig { params(options: T.untyped).void }
+  def remove_timestamps(options = {}); end
+
+  # Renames a column.
+  #
+  # ```ruby
+  # t.rename(:description, :name)
+  # ```
+  sig { params(column_name: T.any(String, Symbol), new_column_name: T.any(String, Symbol)).void }
+  def rename(column_name, new_column_name); end
+
+  # Removes a reference. Optionally removes a `type` column.
+  #
+  # ```ruby
+  # t.remove_references(:user)
+  # t.remove_belongs_to(:supplier, polymorphic: true)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def remove_references(*args, **options); end
+
+  # Removes a reference. Optionally removes a `type` column.
+  #
+  # ```ruby
+  # t.remove_references(:user)
+  # t.remove_belongs_to(:supplier, polymorphic: true)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def remove_belongs_to(*args, **options); end
+
+  # Adds a foreign key to the table using a supplied table name.
+  #
+  # ```ruby
+  # t.foreign_key(:authors)
+  # t.foreign_key(:authors, column: :author_id, primary_key: "id")
+  # ```
+  sig { params(args: T.untyped).void }
+  def foreign_key(*args); end
+
+  # Removes the given foreign key from the table.
+  #
+  # ```ruby
+  # t.remove_foreign_key(:authors)
+  # t.remove_foreign_key(column: :author_id)
+  # ```
+  sig { params(args: T.untyped).void }
+  def remove_foreign_key(*args); end
+
+  # Checks to see if a foreign key exists.
+  #
+  # ```ruby
+  # t.foreign_key(:authors) unless t.foreign_key_exists?(:authors)
+  # ```
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def foreign_key_exists?(*args); end
+end

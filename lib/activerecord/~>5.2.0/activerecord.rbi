@@ -39,7 +39,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     params(
       table_name: T.any(String, Symbol),
       bulk: T::Boolean,
-      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
+      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::Table).void)
     ).void
   end
   def change_table(
