@@ -914,3 +914,266 @@ module ActiveRecord::Validations
 
   mixes_in_class_methods(ActiveModel::Validations::ClassMethods)
 end
+
+
+# Represents the schema of an SQL table in an abstract way. This class
+# provides methods for manipulating the schema representation.
+#
+# Inside migration files, the +t+ object in {create_table}[rdoc-ref:SchemaStatements#create_table]
+# is actually of this type:
+#
+# ```ruby
+# class SomeMigration < ActiveRecord::Migration[5.0]
+#   def up
+#     create_table :foo do |t|
+#       puts t.class  # => "ActiveRecord::ConnectionAdapters::TableDefinition"
+#     end
+#   end
+#
+#   def down
+#     ...
+#   end
+# end
+# ```
+class ActiveRecord::ConnectionAdapters::TableDefinition
+  include ActiveRecord::ConnectionAdapters::ColumnMethods
+
+  # Returns an array of ColumnDefinition objects for the columns of the table.
+  sig { returns(T::Array[ActiveRecord::ConnectionAdapters::ColumnDefinition]) }
+  def columns; end
+
+  # Returns a ColumnDefinition for the column with name +name+.
+  sig { params(name: T.any(String, Symbol)).returns(ActiveRecord::ConnectionAdapters::ColumnDefinition) }
+  def [](name); end
+
+  sig do
+    params(
+      name: T.any(String, Symbol),
+      type: T.untyped,
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).returns(T.self_type)
+  end
+  def column(
+    name,
+    type,
+    index: nil,
+    default: nil,
+    **options
+  ); end
+
+  # Remove the column `name` from the table.
+  #
+  # ```ruby
+  # remove_column(:account_id)
+  # ```
+  sig { params(name: T.any(String, Symbol)).void }
+  def remove_column(name); end
+
+  # Adds index options to the indexes hash, keyed by column name
+  # This is primarily used to track indexes that need to be created after the table
+  #
+  # ```ruby
+  # index(:account_id, name: 'index_projects_on_account_id')
+  # ```
+  sig { params(column_name: T.any(String, Symbol), options: T.untyped).void }
+  def index(column_name, options = {}); end
+
+  # Appends `:datetime` columns `:created_at` and
+  # `:updated_at` to the table.
+  #
+  # ```ruby
+  # t.timestamps null: false
+  # ```
+  sig { params(options: T.untyped).void }
+  def timestamps(**options); end
+
+  # Adds a reference.
+  #
+  # ```ruby
+  # t.references(:user)
+  # t.belongs_to(:supplier, foreign_key: true)
+  # t.belongs_to(:supplier, foreign_key: true, type: :integer)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def references(*args, **options); end
+
+  # Adds a reference.
+  #
+  # ```ruby
+  # t.references(:user)
+  # t.belongs_to(:supplier, foreign_key: true)
+  # t.belongs_to(:supplier, foreign_key: true, type: :integer)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def belongs_to(*args, **options); end
+end
+
+module ActiveRecord::ConnectionAdapters::ColumnMethods
+  # Appends a primary key definition to the table definition.
+  # Can be called multiple times, but this is probably not a good idea.
+  sig do
+    params(
+      name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
+      options: T.untyped
+    ).void
+  end
+  def primary_key(name, type = :primary_key, **options); end
+
+  ########
+  # NOTE: The following methods are all generated dynamically and have the same parameters.
+  # See https://github.com/rails/rails/blob/v6.0.0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L217
+  ########
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def bigint(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def binary(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def boolean(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def date(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def datetime(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def decimal(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def numeric(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def float(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def integer(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def json(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def string(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def text(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def time(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def timestamp(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def virtual(*names, index: nil, default: nil, **options); end
+end
