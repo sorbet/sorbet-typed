@@ -73,7 +73,7 @@ class ActiveStorage::Attached::Many
   sig { params(attachables: T.untyped).void }
   def attach(*attachables); end
 
-  # Returns `true` if any attachments has been made.
+  # Returns `true` if any attachments have been made.
   #
   # ```ruby
   # class Gallery < ApplicationRecord
