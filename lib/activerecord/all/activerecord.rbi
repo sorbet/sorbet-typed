@@ -915,7 +915,6 @@ module ActiveRecord::Validations
   mixes_in_class_methods(ActiveModel::Validations::ClassMethods)
 end
 
-
 # Represents the schema of an SQL table in an abstract way. This class
 # provides methods for manipulating the schema representation.
 #
@@ -1245,7 +1244,12 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.index([:branch_id, :party_id], unique: true)
   # t.index([:branch_id, :party_id], unique: true, name: 'by_branch_party')
   # ```
-  sig { params(column_name: T.any(String, Symbol), options: T.untyped).void }
+  sig do
+    params(
+      column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      options: T.untyped
+    ).void
+  end
   def index(column_name, options = {}); end
 
   # Checks to see if an index exists.
