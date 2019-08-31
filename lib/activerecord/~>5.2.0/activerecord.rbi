@@ -238,6 +238,20 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     validate: true
   ); end
 
+  sig do
+    params(
+      from_table: T.any(String, Symbol),
+      to_table: T.any(String, Symbol),
+      name: T.any(String, Symbol),
+      column: T.any(String, Symbol),
+      options: T.untyped
+    ).returns(T::Boolean)
+  end
+  def foreign_key_exists?(from_table, to_table = nil, name: nil, column: nil, **options); end
+
+  sig { params(table_name: T.any(String, Symbol)).returns(T::Array[T.untyped]) }
+  def foreign_keys(table_name); end
+
   # Indices
 
   sig do
