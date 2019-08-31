@@ -449,3 +449,88 @@ class Hash
   sig { returns(T.self_type) }
   def symbolize_keys!; end
 end
+
+module ActiveSupport::Inflector
+  sig do
+    params(
+      term: String,
+      uppercase_first_letter: T::Boolean
+    ).returns(String)
+  end
+  def camelize(term, uppercase_first_letter = true); end
+
+  sig { params(table_name: String).returns(String) }
+  def classify(table_name); end
+
+  sig { params(camel_cased_word: String).returns(T.untyped) }
+  def constantize(camel_cased_word); end
+
+  sig { params(underscored_word: String).returns(String) }
+  def dasherize(underscored_word); end
+
+  sig { params(path: String).returns(String) }
+  def deconstantize(path); end
+
+  sig { params(path: String).returns(String) }
+  def demodulize(path); end
+
+  sig do
+    params(
+      class_name: String,
+      separate_class_name_and_id_with_underscore: T::Boolean
+    ).returns(String)
+  end
+  def foreign_key(class_name, separate_class_name_and_id_with_underscore = true); end
+
+  sig do
+    params(
+      lower_case_and_underscored_word: String,
+      capitalize: T::Boolean,
+      keep_id_suffix: T::Boolean
+    ).returns(String)
+  end
+  def humanize(lower_case_and_underscored_word, capitalize: true, keep_id_suffix: false); end
+
+  sig { params(locale: Symbol, blk: T.untyped).returns(T.untyped) }
+  def inflections(locale = :en, &blk); end
+
+  sig { params(number: Integer).returns(String) }
+  def ordinal(number); end
+
+  sig { params(number: Integer).returns(String) }
+  def ordinalize(number); end
+
+  sig do
+    params(
+      string: String,
+      separator: String,
+      preserve_case: T::Boolean,
+      locale: Symbol
+    ).returns(String)
+  end
+  def parameterize(string, separator: '-', preserve_case: false, locale: nil); end
+
+  sig { params(word: String, locale: Symbol).returns(String) }
+  def pluralize(word, locale = :en); end
+
+  sig { params(camel_cased_word: String).returns(T.untyped) }
+  def safe_constantize(camel_cased_word); end
+
+  sig { params(word: String, locale: Symbol).returns(String) }
+  def singularize(word, locale = :en); end
+
+  sig { params(class_name: String).returns(String) }
+  def tableize(class_name); end
+
+  sig { params(word: String, keep_id_suffix: T::Boolean).returns(String) }
+  def titleize(word, keep_id_suffix: false); end
+
+  sig { params(string: String, replacement: String, locale: Symbol).returns(String) }
+  def transliterate(string, replacement = '?', locale: nil); end
+
+  sig { params(camel_cased_word: String).returns(String) }
+  def underscore(camel_cased_word); end
+
+  sig { params(string: String).returns(String) }
+  def upcase_first(string); end
+end
