@@ -329,6 +329,21 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     new_name
   ); end
 
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      index_name: T.any(String, Symbol),
+      options: T.untyped
+    ).returns(T::Boolean)
+  end
+  def index_exists?(table_name, column_name, options = {}); end
+
+  sig { params(table_name: T.any(String, Symbol), index_name: T.any(String, Symbol)).returns(T::Boolean) }
+  def index_name_exists?(table_name, index_name); end
+
+  sig { params(table_name: T.any(String, Symbol)).returns(T::Array[T.untyped]) }
+  def indexes(table_name); end
+
   # References
 
   sig do
