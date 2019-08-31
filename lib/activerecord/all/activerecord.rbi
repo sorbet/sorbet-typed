@@ -918,7 +918,7 @@ end
 # Represents the schema of an SQL table in an abstract way. This class
 # provides methods for manipulating the schema representation.
 #
-# Inside migration files, the +t+ object in {create_table}[rdoc-ref:SchemaStatements#create_table]
+# Inside migration files, the `t` object in `create_table`
 # is actually of this type:
 #
 # ```ruby
@@ -930,7 +930,7 @@ end
 #   end
 #
 #   def down
-#     ...
+#     # ...
 #   end
 # end
 # ```
@@ -941,7 +941,7 @@ class ActiveRecord::ConnectionAdapters::TableDefinition
   sig { returns(T::Array[ActiveRecord::ConnectionAdapters::ColumnDefinition]) }
   def columns; end
 
-  # Returns a ColumnDefinition for the column with name +name+.
+  # Returns a ColumnDefinition for the column with name `name`.
   sig { params(name: T.any(String, Symbol)).returns(ActiveRecord::ConnectionAdapters::ColumnDefinition) }
   def [](name); end
 
@@ -1241,7 +1241,7 @@ class ActiveRecord::ConnectionAdapters::Table
   sig { params(column_name: T.any(String, Symbol), type: Symbol, options: T.untyped).returns(T::Boolean) }
   def column_exists?(column_name, type = nil, options = {}); end
 
-  # Adds a new index to the table. +column_name+ can be a single Symbol, or
+  # Adds a new index to the table. `column_name` can be a single Symbol, or
   # an Array of Symbols.
   #
   # ```ruby
@@ -1275,7 +1275,7 @@ class ActiveRecord::ConnectionAdapters::Table
   sig { params(index_name: T.any(String, Symbol), new_index_name: T.any(String, Symbol)).void }
   def rename_index(index_name, new_index_name); end
 
-  # Adds timestamps (+created_at+ and +updated_at+) columns to the table.
+  # Adds timestamps (`created_at` and `updated_at`) columns to the table.
   #
   # ```ruby
   # t.timestamps(null: false)
