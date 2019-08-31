@@ -1178,7 +1178,57 @@ module ActiveRecord::ConnectionAdapters::ColumnMethods
   def virtual(*names, index: nil, default: nil, **options); end
 end
 
+# Represents an SQL table in an abstract way for updating a table.
+#
+# Available transformations are:
+#
+# ```ruby
+# change_table :table do |t|
+#   t.primary_key
+#   t.column
+#   t.index
+#   t.rename_index
+#   t.timestamps
+#   t.change
+#   t.change_default
+#   t.rename
+#   t.references
+#   t.belongs_to
+#   t.string
+#   t.text
+#   t.integer
+#   t.bigint
+#   t.float
+#   t.decimal
+#   t.numeric
+#   t.datetime
+#   t.timestamp
+#   t.time
+#   t.date
+#   t.binary
+#   t.boolean
+#   t.foreign_key
+#   t.json
+#   t.virtual
+#   t.remove
+#   t.remove_foreign_key
+#   t.remove_references
+#   t.remove_belongs_to
+#   t.remove_index
+#   t.remove_timestamps
+# end
+# ```
 class ActiveRecord::ConnectionAdapters::Table
+  include ActiveRecord::ConnectionAdapters::ColumnMethods
+
+  # Adds a new column to the named table.
+  #
+  # ```ruby
+  # t.column(:name, :string)
+  # ```
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, options: T.untyped).void }
+  def column(column_name, type, **options); end
+
   # Checks to see if a column exists.
   #
   # ```ruby
@@ -1186,6 +1236,17 @@ class ActiveRecord::ConnectionAdapters::Table
   # ```
   sig { params(column_name: T.any(String, Symbol), type: Symbol, options: T.untyped).returns(T::Boolean) }
   def column_exists?(column_name, type = nil, options = {}); end
+
+  # Adds a new index to the table. +column_name+ can be a single Symbol, or
+  # an Array of Symbols.
+  #
+  # ```ruby
+  # t.index(:name)
+  # t.index([:branch_id, :party_id], unique: true)
+  # t.index([:branch_id, :party_id], unique: true, name: 'by_branch_party')
+  # ```
+  sig { params(column_name: T.any(String, Symbol), options: T.untyped).void }
+  def index(column_name, options = {}); end
 
   # Checks to see if an index exists.
   #
@@ -1204,6 +1265,13 @@ class ActiveRecord::ConnectionAdapters::Table
   # ```
   sig { params(index_name: T.any(String, Symbol), new_index_name: T.any(String, Symbol)).void }
   def rename_index(index_name, new_index_name); end
+
+  # Adds timestamps (+created_at+ and +updated_at+) columns to the table.
+  #
+  # ```ruby
+  # t.timestamps(null: false)
+  # ```
+  def timestamps(options = {}); end
 
   # Changes the column's definition according to the new options.
   #
@@ -1258,6 +1326,24 @@ class ActiveRecord::ConnectionAdapters::Table
   # ```
   sig { params(column_name: T.any(String, Symbol), new_column_name: T.any(String, Symbol)).void }
   def rename(column_name, new_column_name); end
+
+  # Adds a reference.
+  #
+  # ```ruby
+  # t.references(:user)
+  # t.belongs_to(:supplier, foreign_key: true)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def references(*args, **options); end
+
+  # Adds a reference.
+  #
+  # ```ruby
+  # t.references(:user)
+  # t.belongs_to(:supplier, foreign_key: true)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def belongs_to(*args, **options); end
 
   # Removes a reference. Optionally removes a `type` column.
   #
