@@ -976,7 +976,12 @@ class ActiveRecord::ConnectionAdapters::TableDefinition
   # ```ruby
   # index(:account_id, name: 'index_projects_on_account_id')
   # ```
-  sig { params(column_name: T.any(String, Symbol), options: T.untyped).void }
+  sig do
+    params(
+      column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      options: T.untyped
+    ).void
+  end
   def index(column_name, options = {}); end
 
   # Appends `:datetime` columns `:created_at` and

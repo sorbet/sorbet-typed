@@ -68,7 +68,7 @@ class ActiveRecordCallbacksTest < ApplicationRecord
 end
 
 class ActiveRecordMigrationsTest
-  def test
+  def test_table
     # Hack around the fact that change_table isn't included in the all/activerecord.rbi.
     # Normally this'd be more like `change_table :foo do |t|`.
     t = ActiveRecord::ConnectionAdapters::Table.new
@@ -120,5 +120,29 @@ class ActiveRecordMigrationsTest
     t.remove_foreign_key(column: :author_id)
 
     t.foreign_key(:authors) unless t.foreign_key_exists?(:authors)
+  end
+
+  def test_table_definitions
+    # Hack around the fact that create_table isn't included in the all/activerecord.rbi.
+    # Normally this'd be more like `create_table :foo do |t|`.
+    t = ActiveRecord::ConnectionAdapters::TableDefinition.new
+
+    t.string :foo
+    t.text :foo
+    t.integer :foo
+    t.bigint :foo
+    t.float :foo
+    t.decimal :foo
+    t.numeric :foo
+    t.datetime :foo
+    t.timestamp :foo
+    t.time :foo
+    t.date :foo
+    t.binary :foo
+    t.boolean :foo
+    t.json :foo
+    t.virtual :foo
+
+    t.index [:foo, :bar], name: "index_foo_bar", unique: true
   end
 end
