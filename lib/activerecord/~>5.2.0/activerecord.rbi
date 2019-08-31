@@ -332,7 +332,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig do
     params(
       table_name: T.any(String, Symbol),
-      index_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
       options: T.untyped
     ).returns(T::Boolean)
   end
