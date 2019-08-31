@@ -27,7 +27,7 @@ class ActiveStorage::Attached::One
   # Returns `true` if an attachment has been made.
   #
   # ```ruby
-  # class User < ActiveRecord::Base
+  # class User < ApplicationRecord
   #   has_one_attached :avatar
   # end
   #
@@ -76,7 +76,7 @@ class ActiveStorage::Attached::Many
   # Returns `true` if any attachments has been made.
   #
   # ```ruby
-  # class Gallery < ActiveRecord::Base
+  # class Gallery < ApplicationRecord
   #   has_many_attached :photos
   # end
   #
