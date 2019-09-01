@@ -345,6 +345,9 @@ class Bundler::CurrentRuby
   def jruby_26?(); end
 
   sig {returns(T.untyped)}
+  def jruby_27?(); end
+
+  sig {returns(T.untyped)}
   def jruby_2?(); end
 
   sig {returns(T.untyped)}
@@ -379,6 +382,9 @@ class Bundler::CurrentRuby
 
   sig {returns(T.untyped)}
   def maglev_26?(); end
+
+  sig {returns(T.untyped)}
+  def maglev_27?(); end
 
   sig {returns(T.untyped)}
   def maglev_2?(); end
@@ -417,6 +423,9 @@ class Bundler::CurrentRuby
   def mingw_26?(); end
 
   sig {returns(T.untyped)}
+  def mingw_27?(); end
+
+  sig {returns(T.untyped)}
   def mingw_2?(); end
 
   sig {returns(T.untyped)}
@@ -451,6 +460,9 @@ class Bundler::CurrentRuby
 
   sig {returns(T.untyped)}
   def mri_26?(); end
+
+  sig {returns(T.untyped)}
+  def mri_27?(); end
 
   sig {returns(T.untyped)}
   def mri_2?(); end
@@ -489,6 +501,9 @@ class Bundler::CurrentRuby
   def mswin64_26?(); end
 
   sig {returns(T.untyped)}
+  def mswin64_27?(); end
+
+  sig {returns(T.untyped)}
   def mswin64_2?(); end
 
   sig {returns(T.untyped)}
@@ -525,6 +540,9 @@ class Bundler::CurrentRuby
   def mswin_26?(); end
 
   sig {returns(T.untyped)}
+  def mswin_27?(); end
+
+  sig {returns(T.untyped)}
   def mswin_2?(); end
 
   sig {returns(T.untyped)}
@@ -556,6 +574,9 @@ class Bundler::CurrentRuby
 
   sig {returns(T.untyped)}
   def on_26?(); end
+
+  sig {returns(T.untyped)}
+  def on_27?(); end
 
   sig {returns(T.untyped)}
   def on_2?(); end
@@ -594,6 +615,9 @@ class Bundler::CurrentRuby
   def rbx_26?(); end
 
   sig {returns(T.untyped)}
+  def rbx_27?(); end
+
+  sig {returns(T.untyped)}
   def rbx_2?(); end
 
   sig {returns(T.untyped)}
@@ -628,6 +652,9 @@ class Bundler::CurrentRuby
 
   sig {returns(T.untyped)}
   def ruby_26?(); end
+
+  sig {returns(T.untyped)}
+  def ruby_27?(); end
 
   sig {returns(T.untyped)}
   def ruby_2?(); end
@@ -666,6 +693,9 @@ class Bundler::CurrentRuby
   def truffleruby_26?(); end
 
   sig {returns(T.untyped)}
+  def truffleruby_27?(); end
+
+  sig {returns(T.untyped)}
   def truffleruby_2?(); end
 
   sig {returns(T.untyped)}
@@ -700,6 +730,9 @@ class Bundler::CurrentRuby
 
   sig {returns(T.untyped)}
   def x64_mingw_26?(); end
+
+  sig {returns(T.untyped)}
+  def x64_mingw_27?(); end
 
   sig {returns(T.untyped)}
   def x64_mingw_2?(); end
