@@ -3543,6 +3543,24 @@ class Bundler::HTTPError < Bundler::BundlerError
   def status_code(); end
 end
 
+class Bundler::Fetcher::AuthenticationRequiredError < Bundler::HTTPError
+end
+
+class Bundler::Fetcher::BadAuthenticationError < Bundler::HTTPError
+end
+
+class Bundler::Fetcher::CertificateFailureError < Bundler::HTTPError
+end
+
+class Bundler::Fetcher::FallbackError < Bundler::HTTPError
+end
+
+class Bundler::Fetcher::NetworkDownError < Bundler::HTTPError
+end
+
+class Bundler::Fetcher::SSLError < Bundler::HTTPError
+end
+
 class Bundler::Index
   include T::Enumerable
   EMPTY_SEARCH = ::T.let(nil, T.untyped)
