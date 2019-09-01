@@ -5669,6 +5669,59 @@ class Bundler::Plugin::API
   def self.source(source, cls=T.unsafe(nil)); end
 end
 
+class Bundler::Plugin::DSL
+  sig do
+    params(
+      name: ::T.untyped,
+      args: ::T.untyped
+    )
+    .returns(::T.untyped)
+  end
+  def _gem(name, *args); end
+
+  sig { returns(::T.untyped) }
+  def inferred_plugins(); end
+
+  sig do
+    params(
+      name: ::T.untyped,
+      args: ::T.untyped
+    )
+    .returns(::T.untyped)
+  end
+  def plugin(name, *args); end
+end
+
+module Bundler::Plugin::Events
+  def self.defined_event?(event); end
+end
+
+class Bundler::Plugin::Index
+  def command_plugin(command); end
+
+  def commands(); end
+
+  def global_index_file(); end
+
+  def hook_plugins(event); end
+
+  def index_file(); end
+
+  def installed?(name); end
+
+  def load_paths(name); end
+
+  def local_index_file(); end
+
+  def plugin_path(name); end
+
+  def register_plugin(name, path, load_paths, commands, sources, hooks); end
+
+  def source?(source); end
+
+  def source_plugin(name); end
+end
+
 class Bundler::Plugin::MalformattedPlugin < Bundler::PluginError
 end
 
@@ -5676,6 +5729,9 @@ class Bundler::Plugin::UndefinedCommandError < Bundler::PluginError
 end
 
 class Bundler::Plugin::UnknownSourceError < Bundler::PluginError
+end
+
+class Bundler::Plugin::DSL::PluginGemfileError < Bundler::PluginError
 end
 
 class Bundler::PluginError < Bundler::BundlerError
