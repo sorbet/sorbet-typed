@@ -40,7 +40,7 @@ class ActiveStorage::Attached::One
   #
   # You don't have to call this method to access the attachment's methods as
   # they are all available at the model level.
-  sig { returns(T.untyped) }
+  sig { returns(T.nilable(ActiveStorage::Attachment)) }
   def attachment; end
 
   # Deletes the attachment without purging it, leaving its blob in place.
@@ -88,7 +88,7 @@ class ActiveStorage::Attached::Many
   # Returns all the associated attachment records.
   #
   # All methods called on this proxy object that aren't listed here will automatically be delegated to `attachments`.
-  sig { returns(T.nilable(T::Array[T.untyped])) }
+  sig { returns(T.nilable(T::Array[ActiveStorage::Attachment])) }
   def attachments; end
 
   # Deletes associated attachments without purging them, leaving their respective blobs in place.
