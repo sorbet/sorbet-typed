@@ -62,7 +62,7 @@ class ActionController::Parameters
 
   sig { params(block: T.untyped).returns(T.untyped) }
   def each_pair(&block); end
-  
+
   # each is an alias of each_pair
   sig { params(block: T.untyped).returns(T.untyped) }
   def each(&block); end
