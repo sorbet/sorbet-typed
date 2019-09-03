@@ -66,3 +66,83 @@ class ActiveRecordCallbacksTest < ApplicationRecord
   after_validation :validation_teardown
   after_validation :validation_teardown, on: [:create, :update]
 end
+
+class ActiveRecordMigrationsTest
+  def test_table
+    # Hack around the fact that change_table isn't included in the all/activerecord.rbi.
+    # Normally this'd be more like `change_table :foo do |t|`.
+    t = ActiveRecord::ConnectionAdapters::Table.new
+
+    t.column(:name, :string)
+
+    t.string(:name) unless t.column_exists?(:name, :string)
+
+    t.index(:name)
+    t.index([:branch_id, :party_id], unique: true)
+    t.index([:branch_id, :party_id], unique: true, name: 'by_branch_party')
+
+    unless t.index_exists?(:branch_id)
+      t.index(:branch_id)
+    end
+
+    t.rename_index(:user_id, :account_id)
+
+    t.timestamps(null: false)
+
+    t.change(:name, :string, limit: 80)
+    t.change(:description, :text)
+
+    t.change_default(:qualification, 'new')
+    t.change_default(:authorized, 1)
+    t.change_default(:status, from: nil, to: "draft")
+
+    t.remove(:qualification)
+    t.remove(:qualification, :experience)
+
+    t.remove_index(:branch_id)
+    t.remove_index(column: [:branch_id, :party_id])
+    t.remove_index(name: :by_branch_party)
+
+    t.remove_timestamps
+
+    t.rename(:description, :name)
+
+    t.references(:user)
+    t.belongs_to(:supplier, foreign_key: true)
+
+    t.remove_references(:user)
+    t.remove_belongs_to(:supplier, polymorphic: true)
+
+    t.foreign_key(:authors)
+    t.foreign_key(:authors, column: :author_id, primary_key: "id")
+
+    t.remove_foreign_key(:authors)
+    t.remove_foreign_key(column: :author_id)
+
+    t.foreign_key(:authors) unless t.foreign_key_exists?(:authors)
+  end
+
+  def test_table_definitions
+    # Hack around the fact that create_table isn't included in the all/activerecord.rbi.
+    # Normally this'd be more like `create_table :foo do |t|`.
+    t = ActiveRecord::ConnectionAdapters::TableDefinition.new
+
+    t.string :foo
+    t.text :foo
+    t.integer :foo
+    t.bigint :foo
+    t.float :foo
+    t.decimal :foo
+    t.numeric :foo
+    t.datetime :foo
+    t.timestamp :foo
+    t.time :foo
+    t.date :foo
+    t.binary :foo
+    t.boolean :foo
+    t.json :foo
+    t.virtual :foo
+
+    t.index [:foo, :bar], name: "index_foo_bar", unique: true
+  end
+end

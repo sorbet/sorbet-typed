@@ -71,7 +71,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     params(
       table_name: T.any(String, Symbol),
       bulk: T::Boolean,
-      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
+      blk: T.proc.params(t: ActiveRecord::ConnectionAdapters::Table).void
     ).void
   end
   def change_table(
@@ -270,6 +270,20 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     validate: true
   ); end
 
+  sig do
+    params(
+      from_table: T.any(String, Symbol),
+      to_table: T.any(String, Symbol),
+      name: T.any(String, Symbol),
+      column: T.any(String, Symbol),
+      options: T.untyped
+    ).returns(T::Boolean)
+  end
+  def foreign_key_exists?(from_table, to_table = nil, name: nil, column: nil, **options); end
+
+  sig { params(table_name: T.any(String, Symbol)).returns(T::Array[T.untyped]) }
+  def foreign_keys(table_name); end
+
   # Indices
 
   sig do
@@ -346,6 +360,21 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     old_name,
     new_name
   ); end
+
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      options: T.untyped
+    ).returns(T::Boolean)
+  end
+  def index_exists?(table_name, column_name, options = {}); end
+
+  sig { params(table_name: T.any(String, Symbol), index_name: T.any(String, Symbol)).returns(T::Boolean) }
+  def index_name_exists?(table_name, index_name); end
+
+  sig { params(table_name: T.any(String, Symbol)).returns(T::Array[T.untyped]) }
+  def indexes(table_name); end
 
   # References
 
