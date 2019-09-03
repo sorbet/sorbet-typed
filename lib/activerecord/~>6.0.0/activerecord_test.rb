@@ -80,6 +80,9 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
     remove_foreign_key :accounts, :branches
     remove_foreign_key :accounts, column: :owner_id
     remove_foreign_key :accounts, :branches, name: :special_fk_name
+    foreign_key_exists?(:accounts, :branches)
+    foreign_key_exists?(:accounts, column: :owner_id)
+    foreign_key_exists?(:accounts, name: "special_fk_name")
 
     execute <<-SQL
       ALTER TABLE distributors

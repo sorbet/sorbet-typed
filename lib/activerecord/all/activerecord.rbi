@@ -914,3 +914,487 @@ module ActiveRecord::Validations
 
   mixes_in_class_methods(ActiveModel::Validations::ClassMethods)
 end
+
+# Represents the schema of an SQL table in an abstract way. This class
+# provides methods for manipulating the schema representation.
+#
+# Inside migration files, the `t` object in `create_table`
+# is actually of this type:
+#
+# ```ruby
+# class SomeMigration < ActiveRecord::Migration[5.0]
+#   def up
+#     create_table :foo do |t|
+#       puts t.class  # => "ActiveRecord::ConnectionAdapters::TableDefinition"
+#     end
+#   end
+#
+#   def down
+#     # ...
+#   end
+# end
+# ```
+class ActiveRecord::ConnectionAdapters::TableDefinition
+  include ActiveRecord::ConnectionAdapters::ColumnMethods
+
+  # Returns an array of ColumnDefinition objects for the columns of the table.
+  sig { returns(T::Array[ActiveRecord::ConnectionAdapters::ColumnDefinition]) }
+  def columns; end
+
+  # Returns a ColumnDefinition for the column with name `name`.
+  sig { params(name: T.any(String, Symbol)).returns(ActiveRecord::ConnectionAdapters::ColumnDefinition) }
+  def [](name); end
+
+  sig do
+    params(
+      name: T.any(String, Symbol),
+      type: T.untyped,
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).returns(T.self_type)
+  end
+  def column(
+    name,
+    type,
+    index: nil,
+    default: nil,
+    **options
+  ); end
+
+  # Remove the column `name` from the table.
+  #
+  # ```ruby
+  # remove_column(:account_id)
+  # ```
+  sig { params(name: T.any(String, Symbol)).void }
+  def remove_column(name); end
+
+  # Adds index options to the indexes hash, keyed by column name
+  # This is primarily used to track indexes that need to be created after the table
+  #
+  # ```ruby
+  # index(:account_id, name: 'index_projects_on_account_id')
+  # ```
+  sig do
+    params(
+      column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      options: T.untyped
+    ).void
+  end
+  def index(column_name, options = {}); end
+
+  # Appends `:datetime` columns `:created_at` and
+  # `:updated_at` to the table.
+  #
+  # ```ruby
+  # t.timestamps null: false
+  # ```
+  sig { params(options: T.untyped).void }
+  def timestamps(**options); end
+
+  # Adds a reference.
+  #
+  # ```ruby
+  # t.references(:user)
+  # t.belongs_to(:supplier, foreign_key: true)
+  # t.belongs_to(:supplier, foreign_key: true, type: :integer)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def references(*args, **options); end
+
+  # Adds a reference.
+  #
+  # ```ruby
+  # t.references(:user)
+  # t.belongs_to(:supplier, foreign_key: true)
+  # t.belongs_to(:supplier, foreign_key: true, type: :integer)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def belongs_to(*args, **options); end
+end
+
+module ActiveRecord::ConnectionAdapters::ColumnMethods
+  # Appends a primary key definition to the table definition.
+  # Can be called multiple times, but this is probably not a good idea.
+  sig do
+    params(
+      name: T.any(String, Symbol),
+      type: T.any(String, Symbol),
+      options: T.untyped
+    ).void
+  end
+  def primary_key(name, type = :primary_key, **options); end
+
+  ########
+  # NOTE: The following methods are all generated dynamically and have the same parameters.
+  # See https://github.com/rails/rails/blob/v6.0.0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L217
+  ########
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def bigint(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def binary(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def boolean(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def date(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def datetime(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def decimal(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def numeric(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def float(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def integer(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def json(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def string(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def text(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def time(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def timestamp(*names, index: nil, default: nil, **options); end
+
+  sig do
+    params(
+      names: T.any(String, Symbol),
+      index: T.any(T::Hash[T.untyped, T.untyped], T::Boolean),
+      default: T.untyped,
+      options: T.untyped
+    ).void
+  end
+  def virtual(*names, index: nil, default: nil, **options); end
+end
+
+# Represents an SQL table in an abstract way for updating a table.
+#
+# Available transformations are:
+#
+# ```ruby
+# change_table :table do |t|
+#   t.primary_key
+#   t.column
+#   t.index
+#   t.rename_index
+#   t.timestamps
+#   t.change
+#   t.change_default
+#   t.rename
+#   t.references
+#   t.belongs_to
+#   t.string
+#   t.text
+#   t.integer
+#   t.bigint
+#   t.float
+#   t.decimal
+#   t.numeric
+#   t.datetime
+#   t.timestamp
+#   t.time
+#   t.date
+#   t.binary
+#   t.boolean
+#   t.foreign_key
+#   t.json
+#   t.virtual
+#   t.remove
+#   t.remove_foreign_key
+#   t.remove_references
+#   t.remove_belongs_to
+#   t.remove_index
+#   t.remove_timestamps
+# end
+# ```
+class ActiveRecord::ConnectionAdapters::Table
+  include ActiveRecord::ConnectionAdapters::ColumnMethods
+
+  # Adds a new column to the named table.
+  #
+  # ```ruby
+  # t.column(:name, :string)
+  # ```
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, options: T.untyped).void }
+  def column(column_name, type, **options); end
+
+  # Checks to see if a column exists.
+  #
+  # ```ruby
+  # t.string(:name) unless t.column_exists?(:name, :string)
+  # ```
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, options: T.untyped).returns(T::Boolean) }
+  def column_exists?(column_name, type = nil, options = {}); end
+
+  # Adds a new index to the table. `column_name` can be a single Symbol, or
+  # an Array of Symbols.
+  #
+  # ```ruby
+  # t.index(:name)
+  # t.index([:branch_id, :party_id], unique: true)
+  # t.index([:branch_id, :party_id], unique: true, name: 'by_branch_party')
+  # ```
+  sig do
+    params(
+      column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      options: T.untyped
+    ).void
+  end
+  def index(column_name, options = {}); end
+
+  # Checks to see if an index exists.
+  #
+  # ```ruby
+  # unless t.index_exists?(:branch_id)
+  #   t.index(:branch_id)
+  # end
+  # ```
+  sig { params(column_name: T.any(String, Symbol), options: T.untyped).returns(T::Boolean) }
+  def index_exists?(column_name, options = {}); end
+
+  # Renames the given index on the table.
+  #
+  # ```ruby
+  # t.rename_index(:user_id, :account_id)
+  # ```
+  sig { params(index_name: T.any(String, Symbol), new_index_name: T.any(String, Symbol)).void }
+  def rename_index(index_name, new_index_name); end
+
+  # Adds timestamps (`created_at` and `updated_at`) columns to the table.
+  #
+  # ```ruby
+  # t.timestamps(null: false)
+  # ```
+  def timestamps(options = {}); end
+
+  # Changes the column's definition according to the new options.
+  #
+  # ```ruby
+  # t.change(:name, :string, limit: 80)
+  # t.change(:description, :text)
+  # ```
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, options: T.untyped).void }
+  def change(column_name, type, options = {}); end
+
+  # Sets a new default value for a column.
+  #
+  # ```ruby
+  # t.change_default(:qualification, 'new')
+  # t.change_default(:authorized, 1)
+  # t.change_default(:status, from: nil, to: "draft")
+  # ```
+  sig { params(column_name: T.any(String, Symbol), default_or_changes: T.untyped).void }
+  def change_default(column_name, default_or_changes); end
+
+  # Removes the column(s) from the table definition.
+  #
+  # ```ruby
+  # t.remove(:qualification)
+  # t.remove(:qualification, :experience)
+  # ```
+  sig { params(column_names: T.any(String, Symbol)).void }
+  def remove(*column_names); end
+
+  # Removes the given index from the table.
+  #
+  # ```ruby
+  # t.remove_index(:branch_id)
+  # t.remove_index(column: [:branch_id, :party_id])
+  # t.remove_index(name: :by_branch_party)
+  # ```
+  sig { params(options: T.untyped).void }
+  def remove_index(options = {}); end
+
+  # Removes the timestamp columns (`created_at` and `updated_at`) from the table.
+  #
+  # ```ruby
+  # t.remove_timestamps
+  # ```
+  sig { params(options: T.untyped).void }
+  def remove_timestamps(options = {}); end
+
+  # Renames a column.
+  #
+  # ```ruby
+  # t.rename(:description, :name)
+  # ```
+  sig { params(column_name: T.any(String, Symbol), new_column_name: T.any(String, Symbol)).void }
+  def rename(column_name, new_column_name); end
+
+  # Adds a reference.
+  #
+  # ```ruby
+  # t.references(:user)
+  # t.belongs_to(:supplier, foreign_key: true)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def references(*args, **options); end
+
+  # Adds a reference.
+  #
+  # ```ruby
+  # t.references(:user)
+  # t.belongs_to(:supplier, foreign_key: true)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def belongs_to(*args, **options); end
+
+  # Removes a reference. Optionally removes a `type` column.
+  #
+  # ```ruby
+  # t.remove_references(:user)
+  # t.remove_belongs_to(:supplier, polymorphic: true)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def remove_references(*args, **options); end
+
+  # Removes a reference. Optionally removes a `type` column.
+  #
+  # ```ruby
+  # t.remove_references(:user)
+  # t.remove_belongs_to(:supplier, polymorphic: true)
+  # ```
+  sig { params(args: T.untyped, options: T.untyped).void }
+  def remove_belongs_to(*args, **options); end
+
+  # Adds a foreign key to the table using a supplied table name.
+  #
+  # ```ruby
+  # t.foreign_key(:authors)
+  # t.foreign_key(:authors, column: :author_id, primary_key: "id")
+  # ```
+  sig { params(args: T.untyped).void }
+  def foreign_key(*args); end
+
+  # Removes the given foreign key from the table.
+  #
+  # ```ruby
+  # t.remove_foreign_key(:authors)
+  # t.remove_foreign_key(column: :author_id)
+  # ```
+  sig { params(args: T.untyped).void }
+  def remove_foreign_key(*args); end
+
+  # Checks to see if a foreign key exists.
+  #
+  # ```ruby
+  # t.foreign_key(:authors) unless t.foreign_key_exists?(:authors)
+  # ```
+  sig { params(args: T.untyped).returns(T::Boolean) }
+  def foreign_key_exists?(*args); end
+end
