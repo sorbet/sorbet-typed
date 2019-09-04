@@ -1398,3 +1398,17 @@ class ActiveRecord::ConnectionAdapters::Table
   sig { params(args: T.untyped).returns(T::Boolean) }
   def foreign_key_exists?(*args); end
 end
+
+module ActiveRecord::Locking::Pessimistic
+  # Returns `nil` if `ActiveRecord::Rollback` is raised.
+  sig do
+    type_parameters(:U)
+      .params(
+        lock: T.any(String, TrueClass),
+        blk: T.proc.returns(T.type_parameter(:U)),
+      )
+      .returns(T.nilable(T.type_parameter(:U)))
+  end
+  def with_lock(lock = nil, &blk); end
+end
+
