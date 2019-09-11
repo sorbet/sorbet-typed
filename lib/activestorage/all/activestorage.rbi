@@ -9,6 +9,14 @@ module ActiveStorage
 end
 
 class ActiveStorage::Attached::One
+  # These aren't technically included, but Attached::One delegates any missing
+  # methods to Attachment, which in turn delegates to Blob. This is essentially
+  # a hack to make it easier to maintain the ActiveStorage signatures. We can't
+  #include Blob directly because it's a class, so `include`ing it doesn't work.
+  include ActiveStorage::Blob::Analyzable
+  include ActiveStorage::Blob::Identifiable
+  include ActiveStorage::Blob::Representable
+
   # Attaches an `attachable` to the record.
   #
   # If the record is persisted and unchanged, the attachment is saved to
@@ -58,6 +66,14 @@ class ActiveStorage::Attached::One
 end
 
 class ActiveStorage::Attached::Many
+  # These aren't technically included, but Attached::Many delegates any missing
+  # methods to Attachment, which in turn delegates to Blob. This is essentially
+  # a hack to make it easier to maintain the ActiveStorage signatures. We can't
+  # include Blob directly because it's a class, so `include`ing it doesn't work.
+  include ActiveStorage::Blob::Analyzable
+  include ActiveStorage::Blob::Identifiable
+  include ActiveStorage::Blob::Representable
+
   # Attaches one or more `attachables` to the record.
   #
   # If the record is persisted and unchanged, the attachments are saved to
@@ -103,4 +119,48 @@ class ActiveStorage::Attached::Many
   # Purges each associated attachment through the queuing system.
   sig { void }
   def purge_later; end
+end
+
+module ActiveStorage::Blob::Representable
+  # Returns an ActiveStorage::Variant instance with the set of `transformations` provided. This is only relevant for image
+  # files, and it allows any image to be transformed for size, colors, and the like. Example:
+  #
+  # ```ruby
+  # avatar.variant(resize_to_limit: [100, 100]).processed.service_url
+  # ```
+  #
+  # This will create and process a variant of the avatar blob that's constrained to a height and width of 100px.
+  # Then it'll upload said variant to the service according to a derivative key of the blob and the transformations.
+  #
+  # Frequently, though, you don't actually want to transform the variant right away. But rather simply refer to a
+  # specific variant that can be created by a controller on-demand. Like so:
+  #
+  # ```ruby
+  # <%= image_tag Current.user.avatar.variant(resize_to_limit: [100, 100]) %>
+  # ```
+  #
+  # This will create a URL for that specific blob with that specific variant, which the ActiveStorage::RepresentationsController
+  # can then produce on-demand.
+  #
+  # Raises ActiveStorage::InvariableError if ImageMagick cannot transform the blob. To determine whether a blob is
+  # variable, call ActiveStorage::Blob#variable?.
+  sig { params(transformations: T.untyped).returns(ActiveStorage::Variant) }
+  def variant(transformations); end
+end
+
+class ActiveStorage::Attachment < ActiveRecord::Base
+  # These aren't technically included, but Attachment delegates any missing
+  # methods to Blob, which means it effectively inherits methods from Blob.
+  # This is essentially a hack to make it easier to maintain the
+  # ActiveStorage signatures. We can't include Blob directly because
+  # it's a class, so `include`ing it doesn't work.
+  include ActiveStorage::Blob::Analyzable
+  include ActiveStorage::Blob::Identifiable
+  include ActiveStorage::Blob::Representable
+end
+
+class ActiveStorage::Blob < ActiveRecord::Base
+  include ActiveStorage::Blob::Analyzable
+  include ActiveStorage::Blob::Identifiable
+  include ActiveStorage::Blob::Representable
 end
