@@ -201,6 +201,13 @@ module ActionPackMimeRespondsTest
   # generated dynamically based on what mime types have been registered,
   # and we can't type those statically.
   respond_to do |format|
-    format
+    format.html
+    format.html { 1 }
+    format.js
+    format.js { 1 }
+    format.json
+    format.json { 1 }
+    format.xml
+    format.xml { 1 }
   end
 end
