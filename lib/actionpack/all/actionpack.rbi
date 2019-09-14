@@ -834,4 +834,15 @@ module ActionController::MimeResponds
 end
 
 class ActionController::MimeResponds::Collector
+  sig { params(block: T.nilable(T.proc.void)).void }
+  def html(&block); end
+
+  sig { params(block: T.nilable(T.proc.void)).void }
+  def js(&block); end
+
+  sig { params(block: T.nilable(T.proc.void)).void }
+  def json(&block); end
+
+  sig { params(block: T.nilable(T.proc.void)).void }
+  def xml(&block); end
 end
