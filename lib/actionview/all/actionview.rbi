@@ -266,3 +266,15 @@ module ActionView::Helpers::UrlHelper
   sig { params(options: T.untyped, check_parameters: T::Boolean).returns(T::Boolean) }
   def current_page?(options, check_parameters: false); end
 end
+
+module ActionView::Layouts
+  mixes_in_class_methods(ActionView::Layouts::ClassMethods)
+end
+
+module ActionView::Rendering
+  mixes_in_class_methods(ActionView::Rendering::ClassMethods)
+end
+
+module ActionView::ViewPaths
+  mixes_in_class_methods(ActionView::ViewPaths::ClassMethods)
+end
