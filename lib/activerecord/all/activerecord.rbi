@@ -866,7 +866,6 @@ module ActiveRecord
   class PreparedStatementCacheExpired < StatementInvalid; end
   class PreparedStatementInvalid < ActiveRecordError; end
   class ProtectedEnvironmentError < ActiveRecordError; end
-  class QueryCanceled < StatementInvalid; end
   class RangeError < StatementInvalid; end
   class ReadOnlyRecord < ActiveRecordError; end
   class RecordInvalid < ActiveRecordError; end
@@ -879,7 +878,6 @@ module ActiveRecord
   class SerializationTypeMismatch < ActiveRecordError; end
   class StaleObjectError < ActiveRecordError; end
   class StatementInvalid < ActiveRecordError; end
-  class StatementTimeout < StatementInvalid; end
   class SubclassNotFound < ActiveRecordError; end
   class ThroughCantAssociateThroughHasOneOrManyReflection < ActiveRecordError; end
   class ThroughNestedAssociationsAreReadonly < ActiveRecordError; end
