@@ -1,6 +1,7 @@
 # typed: strong
 
 class ActionController::Base < ActionController::Metal
+  include ActionView::Layouts
 end
 
 class AbstractController::Base < Object

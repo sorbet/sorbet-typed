@@ -286,6 +286,7 @@ module ActionView::Helpers::UrlHelper
 end
 
 module ActionView::Layouts
+  include ActionView::Rendering
   extend T::Helpers  
 
   module ClassMethods ; end
@@ -293,8 +294,26 @@ module ActionView::Layouts
   mixes_in_class_methods(ActionView::Layouts::ClassMethods)
 end
 
+module ActionView::ViewContext
+  extend T::Helpers
+  interface!
+
+  sig { abstract.params(lookup_context: T.untyped, assigns: T.untyped, controller: T.untyped).void }
+  def initialize(lookup_context, assigns, controller); end
+
+  sig { abstract.params(option: T.untyped).returns(String) }
+  def render(option); end
+end
+
+class ActionView::Base
+  include ActionView::ViewContext
+end
+
 module ActionView::Rendering
   mixes_in_class_methods(ActionView::Rendering::ClassMethods)
+
+  sig { returns(ActionView::ViewContext) }
+  def view_context; end
 end
 
 module ActionView::ViewPaths
