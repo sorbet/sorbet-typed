@@ -605,7 +605,6 @@ class Time
   def at_middle_of_day; end
 
   # https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date_and_time/zones.rb
-  # technically this can also return a `Time`, but in practice that seems like a bad idea?
-  sig { returns(ActiveSupport::TimeWithZone) }
-  def in_time_zone; end
+  sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
+  def in_time_zone(zone = ::Time.zone); end
 end
