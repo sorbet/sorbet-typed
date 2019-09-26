@@ -534,3 +534,77 @@ module ActiveSupport::Inflector
   sig { params(string: String).returns(String) }
   def upcase_first(string); end
 end
+
+
+# defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time/calculations.rb
+# these get added to Time, but are available on TimeWithZone thanks to https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/time_with_zone.rb#L520
+# this is not a complete definition!
+class ActiveSupport::TimeWithZone
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def midnight; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def beginning_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_midnight; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_beginning_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def middle_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def midday; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def noon; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_midday; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_noon; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_middle_of_day; end
+end
+
+# defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time/calculations.rb
+# this is not a complete definition!
+class Time
+  sig { returns(Time) }
+  def midnight; end
+
+  sig { returns(Time) }
+  def beginning_of_day; end
+
+  sig { returns(Time) }
+  def at_midnight; end
+
+  sig { returns(Time) }
+  def at_beginning_of_day; end
+
+  sig { returns(Time) }
+  def middle_of_day; end
+
+  sig { returns(Time) }
+  def midday; end
+
+  sig { returns(Time) }
+  def noon; end
+
+  sig { returns(Time) }
+  def at_midday; end
+
+  sig { returns(Time) }
+  def at_noon; end
+
+  sig { returns(Time) }
+  def at_middle_of_day; end
+
+  # https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date_and_time/zones.rb
+  sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
+  def in_time_zone(zone = ::Time.zone); end
+end
