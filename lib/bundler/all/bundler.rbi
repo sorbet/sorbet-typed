@@ -1242,6 +1242,7 @@ class Bundler::Dsl::DSLError < Bundler::GemfileError
 end
 
 class Bundler::EndpointSpecification < Gem::Specification
+  include T::Enumerable
   ILLFORMED_MESSAGE = ::T.let(nil, T.untyped)
 
   sig do
