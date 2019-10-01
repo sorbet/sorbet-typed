@@ -1242,6 +1242,8 @@ class Bundler::Dsl::DSLError < Bundler::GemfileError
 end
 
 class Bundler::EndpointSpecification < Gem::Specification
+  # we need this because Gem::Specification extends Enumerable
+  Elem = type_template
   ILLFORMED_MESSAGE = ::T.let(nil, T.untyped)
 
   sig do
