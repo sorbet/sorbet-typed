@@ -414,5 +414,7 @@ end
 
 # this is added manually. it enables you to do self.class.post(URL) in a Client class that includes HTTParty.
 module HTTParty
+  extend T::Helpers
+
   mixes_in_class_methods(HTTParty::ClassMethods)
 end
