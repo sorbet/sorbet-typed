@@ -341,6 +341,16 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig { params(table_name: T.any(String, Symbol), index_name: T.any(String, Symbol)).returns(T::Boolean) }
   def index_name_exists?(table_name, index_name); end
 
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      column_name: T.any(String, Symbol),
+      type: T.nilable(T.any(String, Symbol)),
+      options: T.untyped
+    ).returns(T::Boolean)
+  end
+  def column_exists?(table_name, column_name, type = nil, options = {}); end
+
   sig { params(table_name: T.any(String, Symbol)).returns(T::Array[T.untyped]) }
   def indexes(table_name); end
 
