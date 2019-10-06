@@ -418,38 +418,6 @@ module ActiveSupport::NumberHelper
   def number_to_rounded(number, locale: :en, precision: 3, significant: false, separator: ".", delimiter: "", strip_insignificant_zeros: false); end
 end
 
-class Hash
-  sig { returns(T.self_type) }
-  def deep_stringify_keys; end
-
-  sig { returns(T.self_type) }
-  def deep_stringify_keys!; end
-
-  sig { returns(T.self_type) }
-  def deep_symbolize_keys; end
-
-  sig { returns(T.self_type) }
-  def deep_symbolize_keys!; end
-
-  sig { returns(T.self_type) }
-  def deep_transform_keys; end
-
-  sig { returns(T.self_type) }
-  def deep_transform_keys!; end
-
-  sig { returns(T.self_type) }
-  def stringify_keys; end
-
-  sig { returns(T.self_type) }
-  def stringify_keys!; end
-
-  sig { returns(T.self_type) }
-  def symbolize_keys; end
-
-  sig { returns(T.self_type) }
-  def symbolize_keys!; end
-end
-
 module ActiveSupport::Inflector
   sig do
     params(
@@ -616,13 +584,34 @@ class Hash
   def stringify_keys; end
 
   sig { returns(T::Hash[String, T.untyped]) }
+  def stringify_keys!; end
+
+  sig { returns(T::Hash[String, T.untyped]) }
   def deep_stringify_keys; end
+
+  sig { returns(T::Hash[String, T.untyped]) }
+  def deep_stringify_keys!; end
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
   def symbolize_keys; end
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
+  def symbolize_keys!; end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
   def deep_symbolize_keys; end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def deep_symbolize_keys!; end
+
+  # in an ideal world, `arg` would be the type of all keys, the 1st `T.untyped` would be
+  # the type of keys your block returns, and the 2nd `T.untyped` would be the type of values
+  # that the hash had.
+  sig { params(block: T.proc.params(arg: T.untyped).void).returns(T::Hash[T.untyped, T.untyped]) }
+  def deep_transform_keys(&block); end
+
+  sig { params(block: T.proc.params(arg: T.untyped).void).returns(T::Hash[T.untyped, T.untyped]) }
+  def deep_transform_keys!(&block); end
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
   def to_options; end
