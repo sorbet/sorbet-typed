@@ -571,7 +571,7 @@ class ActiveSupport::TimeWithZone
   def at_middle_of_day; end
 end
 
-# defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time/calculations.rb
+# defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time
 # this is not a complete definition!
 class Time
   sig { returns(Time) }
@@ -607,4 +607,23 @@ class Time
   # https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date_and_time/zones.rb
   sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
   def in_time_zone(zone = ::Time.zone); end
+end
+
+# defines some of the methods at https://github.com/rails/rails/tree/v6.0.0/activesupport/lib/active_support/core_ext/hash
+# this is not a complete definition!
+class Hash
+  sig { returns(T::Hash[String, T.untyped]) }
+  def stringify_keys; end
+
+  sig { returns(T::Hash[String, T.untyped]) }
+  def deep_stringify_keys; end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def symbolize_keys; end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def deep_symbolize_keys; end
+
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def to_options; end
 end
