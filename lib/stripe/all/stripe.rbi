@@ -28,7 +28,7 @@ class Stripe::Card
   sig { params(other: String).returns(String) }
   def last4=(other); end
 
-  sig { params(id: String, opts: T.nilable(T::Hash)).returns(Stripe::Card) }
+  sig { params(id: String, opts: T.nilable(T::Hash[T.untyped, T.untyped])).returns(Stripe::Card) }
   def self.retrieve(id, opts={}); end
 end
 
@@ -36,7 +36,7 @@ class Stripe::Customer
   sig { returns(String) }
   def id; end
 
-  sig { params(id: String, opts: T.nilable(T::Hash)).returns(Stripe::Customer) }
+  sig { params(id: String, opts: T.nilable(T::Hash[T.untyped, T.untyped])).returns(Stripe::Customer) }
   def self.retrieve(id, opts={}); end
 
   sig { returns(String) }
@@ -47,7 +47,7 @@ class Stripe::Refund
   sig { returns(String) }
   def id; end
 
-  sig { params(id: String, opts: T.nilable(T::Hash)).returns(Stripe::Refund) }
+  sig { params(id: String, opts: T.nilable(T::Hash[T.untyped, T.untyped])).returns(Stripe::Refund) }
   def self.retrieve(id, opts={}); end
 
   sig { returns(String) }
@@ -58,7 +58,7 @@ class Stripe::Charge
   sig { returns(String) }
   def id; end
 
-  sig { params(id: String, opts: T.nilable(T::Hash)).returns(Stripe::Charge) }
+  sig { params(id: String, opts: T.nilable(T::Hash[T.untyped, T.untyped])).returns(Stripe::Charge) }
   def self.retrieve(id, opts={}); end
 
   sig { returns(String) }
@@ -78,7 +78,7 @@ class Stripe::Payout
   sig { returns(Integer) }
   def amount; end
 
-  sig { params(id: String, opts: T.nilable(T::Hash)).returns(Stripe::Payout) }
+  sig { params(id: String, opts: T.nilable(T::Hash[T.untyped, T.untyped])).returns(Stripe::Payout) }
   def self.retrieve(id, opts={}); end
 end
 
@@ -104,6 +104,6 @@ class Stripe::BalanceTransaction
   sig { returns(Integer) }
   def created; end
 
-  sig { params(id: String, opts: T.nilable(T::Hash)).returns(Stripe::BalanceTransaction) }
+  sig { params(id: String, opts: T.nilable(T::Hash[T.untyped, T.untyped])).returns(Stripe::BalanceTransaction) }
   def self.retrieve(id, opts={}); end
 end
