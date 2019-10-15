@@ -539,6 +539,13 @@ class ActiveSupport::TimeWithZone
   def at_middle_of_day; end
 end
 
+# defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date
+# this is not a complete definition!
+class Date
+  sig { params(options: T::Hash[Symbol, Integer]).returns(Date) }
+  def advance(options); end
+end
+
 # defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time
 # this is not a complete definition!
 class Time
@@ -547,6 +554,9 @@ class Time
 
   sig { returns(Time) }
   def beginning_of_day; end
+
+  sig { params(options: T::Hash[Symbol, Integer]).returns(Time) }
+  def advance(options); end
 
   sig { returns(Time) }
   def at_midnight; end
