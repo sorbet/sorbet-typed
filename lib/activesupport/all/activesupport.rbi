@@ -542,7 +542,7 @@ end
 # defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date
 # this is not a complete definition!
 class Date
-  sig { returns(Date) }
+  sig { params(options: Hash).returns(Date) }
   def advance(options)
   end
 end
