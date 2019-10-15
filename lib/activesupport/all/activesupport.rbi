@@ -556,7 +556,7 @@ class Time
   sig { returns(Time) }
   def beginning_of_day; end
 
-  sig { returns(Time) }
+  sig { params(options: Hash).returns(Time) }
   def advance(options)
   end
 
