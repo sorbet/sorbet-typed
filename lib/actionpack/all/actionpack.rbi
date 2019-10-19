@@ -232,10 +232,10 @@ class ActionController::Parameters
   sig { params(keys: T.any(String, Symbol)).returns(ActionController::Parameters) }
   def slice(*keys); end
 
-  sig { returns(T.nilable(ActiveSupport::HashWithIndifferentAccess)) }
+  sig { returns(ActiveSupport::HashWithIndifferentAccess) }
   def to_h; end
 
-  sig { returns(T.nilable(T::Hash[T.untyped, T.untyped])) }
+  sig { returns(T::Hash[T.untyped, T.untyped]) }
   def to_hash; end
 
   # to_param is an alias of to_query
