@@ -203,7 +203,7 @@ end
 module ActiveRecord::NestedAttributes::ClassMethods
   sig do
     params(
-      attr_names: T.any(T.any(Symbol, String), T::Array[T.any(Symbol, String)]),
+      attr_names: T.any(Symbol, String),
       allow_destroy: T.nilable(T::Boolean),
       reject_if: T.any(Symbol, T.proc.returns(T::Boolean)),
       limit: T.any(Integer, Symbol, T.proc.returns(Integer)),
@@ -211,7 +211,7 @@ module ActiveRecord::NestedAttributes::ClassMethods
     ).void
   end
   def accepts_nested_attributes_for(
-    attr_names,
+    *attr_names,
     allow_destroy: nil,
     reject_if: nil,
     limit: nil,
