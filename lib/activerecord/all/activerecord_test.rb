@@ -67,6 +67,15 @@ class ActiveRecordCallbacksTest < ApplicationRecord
   after_validation :validation_teardown, on: [:create, :update]
 end
 
+class ActiveRecordNestedAttributeTest < ApplicationRecord
+  # creates avatar_attributes=
+  accepts_nested_attributes_for :avatar, reject_if: proc { |attributes| attributes['name'].blank? }
+  # creates avatar_attributes=
+  accepts_nested_attributes_for :avatar, reject_if: :all_blank
+  # # creates avatar_attributes= and posts_attributes=
+  accepts_nested_attributes_for :avatar, :posts, allow_destroy: true
+end
+
 class ActiveRecordMigrationsTest
   def test_table
     # Hack around the fact that change_table isn't included in the all/activerecord.rbi.
