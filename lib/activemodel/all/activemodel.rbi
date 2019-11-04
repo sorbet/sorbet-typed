@@ -181,6 +181,7 @@ module ActiveModel::Validations::HelperMethods
         String,
         T::Array[T.any(String, Symbol)],
         T::Range[Integer],
+        T::Array[T::Boolean],
         T.proc.params(arg0: T.untyped).returns(T::Boolean)
       )
     )
