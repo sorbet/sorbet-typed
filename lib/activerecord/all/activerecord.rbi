@@ -512,6 +512,9 @@ class ActiveRecord::Base
     unless: nil,
     on: nil
   ); end
+
+  sig { params(comparison_object: T.untyped).returns(T::Boolean) }
+  def ==(comparison_object); end
 end
 
 module ActiveRecord::Inheritance::ClassMethods
