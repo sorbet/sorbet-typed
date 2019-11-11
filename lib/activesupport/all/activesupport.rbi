@@ -657,3 +657,16 @@ class Numeric
   sig { returns(T.self_type) }
   def in_milliseconds; end
 end
+
+module Enumerable
+  # https://github.com/rails/rails/blob/v5.2.3/activesupport/lib/active_support/core_ext/enumerable.rb#L64..L72
+  # the case where a block isn't given isn't handled - that seems like an unlikely case
+  sig do
+    type_parameters(:key).params(
+      block: T.proc.params(o: Enumerable::Elem).returns(T.type_parameter(:key))
+    ).returns(
+      T::Hash[T.type_parameter(:key), Enumerable::Elem]
+    )
+  end
+  def index_by(&block); end
+end
