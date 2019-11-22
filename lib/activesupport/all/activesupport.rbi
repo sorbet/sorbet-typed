@@ -670,3 +670,14 @@ module Enumerable
   end
   def index_by(&block); end
 end
+
+class ActiveSupport::Duration
+  sig { returns(Integer) }
+  def to_i; end
+
+  sig { returns(Float) }
+  def to_f; end
+
+  sig { returns(String) }
+  def to_s; end
+end
