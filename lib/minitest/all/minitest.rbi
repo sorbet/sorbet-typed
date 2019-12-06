@@ -1,6 +1,9 @@
 # typed: strong
 
 module Minitest
+  class Runnable
+  end
+
   class Test < Runnable
     include Minitest::Assertions
   end
