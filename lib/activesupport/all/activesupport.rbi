@@ -537,6 +537,12 @@ class ActiveSupport::TimeWithZone
 
   sig { returns(ActiveSupport::TimeWithZone) }
   def at_middle_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def end_of_day; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_end_of_day; end
 end
 
 # defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date
