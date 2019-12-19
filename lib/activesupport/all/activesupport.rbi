@@ -633,6 +633,30 @@ class Hash
   def to_options; end
 end
 
+class Integer
+  # Returns a Duration instance matching the number of months provided.
+  #
+  # ```ruby
+  # 2.months # => 2 months
+  # ```
+  sig { returns(ActiveSupport::Duration) }
+  def months; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def month; end
+
+  # Returns a Duration instance matching the number of years provided.
+  #
+  # ```ruby
+  # 2.years # => 2 years
+  # ```
+  sig { returns(ActiveSupport::Duration) }
+  def years; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def year; end
+end
+
 class Numeric
   sig { returns(ActiveSupport::Duration) }
   def second; end
@@ -688,12 +712,103 @@ module Enumerable
 end
 
 class ActiveSupport::Duration
+  # Returns the number of seconds that this Duration represents.
+  #
+  # ```ruby
+  # 1.minute.to_i   # => 60
+  # 1.hour.to_i     # => 3600
+  # 1.day.to_i      # => 86400
+  # ```
+  #
+  # Note that this conversion makes some assumptions about the
+  # duration of some periods, e.g. months are always 1/12 of year
+  # and years are 365.2425 days:
+  #
+  # ```ruby
+  # # equivalent to (1.year / 12).to_i
+  # 1.month.to_i    # => 2629746
+  #
+  # # equivalent to 365.2425.days.to_i
+  # 1.year.to_i     # => 31556952
+  # ```
+  #
+  # In such cases, Ruby's core
+  # [Date](https://ruby-doc.org/stdlib/libdoc/date/rdoc/Date.html) and
+  # [Time](https://ruby-doc.org/stdlib/libdoc/time/rdoc/Time.html) should be used for precision
+  # date and time arithmetic.
   sig { returns(Integer) }
   def to_i; end
 
   sig { returns(Float) }
   def to_f; end
 
+  # Returns the amount of seconds a duration covers as a string.
+  # For more information check to_i method.
+  #
+  # ```ruby
+  # 1.day.to_s # => "86400"
+  # ```
   sig { returns(String) }
   def to_s; end
+
+  # Creates a new Duration from string formatted according to ISO 8601 Duration.
+  #
+  # See [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Durations) for more information.
+  # This method allows negative parts to be present in pattern.
+  # If invalid string is provided, it will raise `ActiveSupport::Duration::ISO8601Parser::ParsingError`.
+  sig { params(iso8601duration: String).returns(ActiveSupport::Duration) }
+  def self.parse(iso8601duration); end
+
+  # Creates a new Duration from a seconds value that is converted
+  # to the individual parts:
+  #
+  # ```ruby
+  # ActiveSupport::Duration.build(31556952).parts # => {:years=>1}
+  # ActiveSupport::Duration.build(2716146).parts  # => {:months=>1, :days=>1}
+  # ```
+  sig { params(value: Numeric).returns(ActiveSupport::Duration) }
+  def self.build(value); end
+
+  # Returns `true` if `other` is also a Duration instance, which has the
+  # same parts as this one.
+  sig { params(other: T.untyped).returns(T::Boolean) }
+  def eql?(other); end
+
+  # Compares one Duration with another or a Numeric to this Duration.
+  # Numeric values are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(Integer) }
+  def <=>(other); end
+
+  # Adds another Duration or a Numeric to this Duration. Numeric values
+  # are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(ActiveSupport::Duration) }
+  def +(other); end
+
+  # Subtracts another Duration or a Numeric from this Duration. Numeric
+  # values are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(ActiveSupport::Duration) }
+  def -(other); end
+
+  # Multiplies this Duration by a Numeric and returns a new Duration.
+  sig { params(other: Numeric).returns(ActiveSupport::Duration) }
+  def *(other); end
+
+  # Divides this Duration by a Numeric and returns a new Duration.
+  sig { params(other: Numeric).returns(ActiveSupport::Duration) }
+  def /(other); end
+
+  # Returns the modulo of this Duration by another Duration or Numeric.
+  # Numeric values are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(ActiveSupport::Duration) }
+  def %(other); end
+
+  # Returns `true` if `other` is also a Duration instance with the
+  # same `value`, or if `other == value`.
+  sig { params(other: T.untyped).returns(T::Boolean) }
+  def ==(other); end
+
+  # Build ISO 8601 Duration string for this duration.
+  # The `precision` parameter can be used to limit seconds' precision of duration.
+  sig { params(precision: T.nilable(Integer)).returns(String) }
+  def iso8601(precision: nil); end
 end
