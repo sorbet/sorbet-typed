@@ -767,7 +767,7 @@ class ActiveSupport::Duration
   # ActiveSupport::Duration.build(2716146).parts  # => {:months=>1, :days=>1}
   # ```
   sig { params(value: Numeric).returns(ActiveSupport::Duration) }
-  def self.build(value)
+  def self.build(value); end
 
   # Returns `true` if `other` is also a Duration instance, which has the
   # same parts as this one.
@@ -790,8 +790,22 @@ class ActiveSupport::Duration
   def -(other); end
 
   # Multiplies this Duration by a Numeric and returns a new Duration.
-  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(ActiveSupport::Duration) }
+  sig { params(other: Numeric).returns(ActiveSupport::Duration) }
   def *(other); end
+
+  # Divides this Duration by a Numeric and returns a new Duration.
+  sig { params(other: Numeric).returns(ActiveSupport::Duration) }
+  def /(other); end
+
+  # Returns the modulo of this Duration by another Duration or Numeric.
+  # Numeric values are treated as seconds.
+  sig { params(other: T.any(ActiveSupport::Duration, Numeric)).returns(ActiveSupport::Duration) }
+  def %(other); end
+
+  # Returns `true` if `other` is also a Duration instance with the
+  # same `value`, or if `other == value`.
+  sig { params(other: T.untyped).returns(T::Boolean) }
+  def ==(other); end
 
   # Build ISO 8601 Duration string for this duration.
   # The `precision` parameter can be used to limit seconds' precision of duration.
