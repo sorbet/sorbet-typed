@@ -210,3 +210,19 @@ module ActionPackMimeRespondsTest
     format.xml { 1 }
   end
 end
+
+# Test various ActionDispatch::Request methods.
+module ActionDispatchRequestTest
+  request = ActionDispatch::Request.new
+  T.assert_type!(request.media_type, String)
+  T.assert_type!(request.headers, ActionDispatch::Http::Headers)
+  T.assert_type!(request.original_fullpath, String)
+  T.assert_type!(request.fullpath, String)
+  T.assert_type!(request.original_url, String)
+  T.assert_type!(request.content_length, Integer)
+  T.assert_type!(request.ip, String)
+  T.assert_type!(request.remote_ip, String)
+  T.assert_type!(request.request_id, String)
+  T.assert_type!(request.key?(:key_name), T::Boolean)
+  T.assert_type!(request.local?, T::Boolean)
+end
