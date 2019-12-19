@@ -633,6 +633,30 @@ class Hash
   def to_options; end
 end
 
+class Integer
+  # Returns a Duration instance matching the number of months provided.
+  #
+  # ```ruby
+  # 2.months # => 2 months
+  # ```
+  sig { returns(ActiveSupport::Duration) }
+  def months; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def month; end
+
+  # Returns a Duration instance matching the number of years provided.
+  #
+  # ```ruby
+  # 2.years # => 2 years
+  # ```
+  sig { returns(ActiveSupport::Duration) }
+  def years; end
+
+  sig { returns(ActiveSupport::Duration) }
+  def year; end
+end
+
 class Numeric
   sig { returns(ActiveSupport::Duration) }
   def second; end
