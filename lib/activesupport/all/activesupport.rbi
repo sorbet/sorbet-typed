@@ -812,3 +812,338 @@ class ActiveSupport::Duration
   sig { params(precision: T.nilable(Integer)).returns(String) }
   def iso8601(precision: nil); end
 end
+
+# Implements a hash where keys `:foo` and `"foo"` are considered
+# to be the same.
+#
+# ```ruby
+# rgb = ActiveSupport::HashWithIndifferentAccess.new
+#
+# rgb[:black] = '#000000'
+# rgb[:black]  # => '#000000'
+# rgb['black'] # => '#000000'
+#
+# rgb['white'] = '#FFFFFF'
+# rgb[:white]  # => '#FFFFFF'
+# rgb['white'] # => '#FFFFFF'
+# ```
+#
+# Internally symbols are mapped to strings when used as keys in the entire
+# writing interface (calling `[]=`, `merge`, etc). This
+# mapping belongs to the public interface. For example, given:
+#
+# ```ruby
+# hash = ActiveSupport::HashWithIndifferentAccess.new(a: 1)
+# ```
+#
+# You are guaranteed that the key is returned as a string:
+#
+# ```ruby
+# hash.keys # => ["a"]
+# ```
+#
+# Technically other types of keys are accepted:
+#
+# ```ruby
+# hash = ActiveSupport::HashWithIndifferentAccess.new(a: 1)
+# hash[0] = 0
+# hash # => {"a"=>1, 0=>0}
+# ```
+#
+# but this class is intended for use cases where strings or symbols are the
+# expected keys and it is convenient to understand both as the same. For
+# example the `params` hash in Ruby on Rails.
+#
+# Note that core extensions define `Hash#with_indifferent_access`:
+#
+# ```ruby
+# rgb = { black: '#000000', white: '#FFFFFF' }.with_indifferent_access
+# ```
+#
+# which may be handy.
+#
+# To access this class outside of Rails, require the core extension with:
+#
+# ```ruby
+# require "active_support/core_ext/hash/indifferent_access"
+# ```
+#
+# which will, in turn, require this file.
+class ActiveSupport::HashWithIndifferentAccess < Hash
+  include Enumerable
+
+  extend T::Generic
+  K = type_member(:out)
+  V = type_member(:out)
+  Elem = type_member(:out)
+
+  sig { params(key: T.any(String, Symbol)).returns(T.untyped) }
+  def [](key); end
+
+  # Assigns a new value to the hash:
+  #
+  # ```ruby
+  # hash = ActiveSupport::HashWithIndifferentAccess.new
+  # hash[:key] = 'value'
+  # ```
+  #
+  # This value can be later fetched using either `:key` or `'key'`.
+  sig { params(key: T.any(String, Symbol), value: T.untyped).returns(T.untyped) }
+  def []=(key, value); end
+
+  # Same as `Hash#assoc` where the key passed as argument can be
+  # either a string or a symbol:
+  #
+  # ```ruby
+  # counters = ActiveSupport::HashWithIndifferentAccess.new
+  # counters[:foo] = 1
+  #
+  # counters.assoc('foo') # => ["foo", 1]
+  # counters.assoc(:foo)  # => ["foo", 1]
+  # counters.assoc(:zoo)  # => nil
+  # ```
+  sig { params(key: T.any(String, Symbol)).returns(T.untyped) }
+  def assoc(key); end
+
+  sig { returns(T.untyped) }
+  def compact; end
+
+  sig { returns(T.untyped) }
+  def deep_stringify_keys!; end
+
+  sig { returns(T.untyped) }
+  def deep_stringify_keys; end
+
+  sig { returns(T.untyped) }
+  def deep_symbolize_keys; end
+
+  # Same as `Hash#default` where the key passed as argument can be
+  # either a string or a symbol:
+  #
+  # ```ruby
+  # hash = ActiveSupport::HashWithIndifferentAccess.new(1)
+  # hash.default                   # => 1
+  #
+  # hash = ActiveSupport::HashWithIndifferentAccess.new { |hash, key| key }
+  # hash.default                   # => nil
+  # hash.default('foo')            # => 'foo'
+  # hash.default(:foo)             # => 'foo'
+  # ```
+  sig { params(args: T.untyped).returns(T.untyped) }
+  def default(*args); end
+
+  # Removes the specified key from the hash.
+  sig { params(key: T.untyped).returns(T.untyped) }
+  def delete(key); end
+
+  # Same as `Hash#dig` where the key passed as argument can be
+  # either a string or a symbol:
+  #
+  # ```ruby
+  # counters = ActiveSupport::HashWithIndifferentAccess.new
+  # counters[:foo] = { bar: 1 }
+  #
+  # counters.dig('foo', 'bar')     # => 1
+  # counters.dig(:foo, :bar)       # => 1
+  # counters.dig(:zoo)             # => nil
+  # ```
+  sig { params(args: T.untyped).returns(T.untyped) }
+  def dig(*args); end
+
+  # Returns a shallow copy of the hash.
+  #
+  # ```ruby
+  # hash = ActiveSupport::HashWithIndifferentAccess.new({ a: { b: 'b' } })
+  # dup  = hash.dup
+  # dup[:a][:c] = 'c'
+  #
+  # hash[:a][:c] # => "c"
+  # dup[:a][:c]  # => "c"
+  # ```
+  sig { returns(T.untyped) }
+  def dup; end
+
+  sig { params(keys: T.any(String, Symbol)).returns(T.untyped) }
+  def except(*keys); end
+
+  # Returns `true` so that `Array#extract_options!` finds members of
+  # this class.
+  sig { returns(TrueClass) }
+  def extractable_options?; end
+
+  # Same as `Hash#fetch` where the key passed as argument can be
+  # either a string or a symbol:
+  #
+  # ```
+  # counters = ActiveSupport::HashWithIndifferentAccess.new
+  # counters[:foo] = 1
+  #
+  # counters.fetch('foo')          # => 1
+  # counters.fetch(:bar, 0)        # => 0
+  # counters.fetch(:bar) { |key| 0 } # => 0
+  # counters.fetch(:zoo)           # => KeyError: key not found: "zoo"
+  # ```
+  sig { params(key: T.any(String, Symbol), extras: T.untyped).returns(T.untyped) }
+  def fetch(key, *extras); end
+
+  # Returns an array of the values at the specified indices, but also
+  # raises an exception when one of the keys can't be found.
+  #
+  # ```ruby
+  # hash = ActiveSupport::HashWithIndifferentAccess.new
+  # hash[:a] = 'x'
+  # hash[:b] = 'y'
+  # hash.fetch_values('a', 'b') # => ["x", "y"]
+  # hash.fetch_values('a', 'c') { |key| 'z' } # => ["x", "z"]
+  # hash.fetch_values('a', 'c') # => KeyError: key not found: "c"
+  # ```
+  sig { params(indices: T.any(String, Symbol), block: T.untyped).returns(T.untyped) }
+  def fetch_values(*indices, &block); end
+
+  sig { params(constructor: T.untyped).void }
+  def initialize(constructor = {}); end
+
+  # Checks the hash for a key matching the argument passed in:
+  #
+  # ```ruby
+  # hash = ActiveSupport::HashWithIndifferentAccess.new
+  # hash['key'] = 'value'
+  # hash.key?(:key)  # => true
+  # hash.key?('key') # => true
+  # ```
+  sig { params(key: T.any(String, Symbol)).returns(T::Boolean) }
+  def key?(key); end
+
+  # This method has the same semantics of `update`, except it does not
+  # modify the receiver but rather returns a new hash with indifferent
+  # access with the result of the merge.
+  sig { params(hash: T.untyped, block: T.untyped).returns(T.untyped) }
+  def merge(hash, &block); end
+
+  sig { params(args: T.untyped, block: T.untyped).returns(T.untyped) }
+  def reject(*args, &block); end
+
+  # Replaces the contents of this hash with other_hash.
+  #
+  # ```ruby
+  # h = { "a" => 100, "b" => 200 }
+  # h.replace({ "c" => 300, "d" => 400 }) # => {"c"=>300, "d"=>400}
+  # ```
+  sig { params(other_hash: T.untyped).returns(T.untyped) }
+  def replace(other_hash); end
+
+  # Same semantics as `reverse_merge` but modifies the receiver in-place.
+  sig { params(other_hash: T.untyped).returns(T.untyped) }
+  def reverse_merge!(other_hash); end
+
+  # Like `merge` but the other way around: Merges the receiver into the
+  # argument and returns a new hash with indifferent access as result:
+  #
+  # ```ruby
+  # hash = ActiveSupport::HashWithIndifferentAccess.new
+  # hash['a'] = nil
+  # hash.reverse_merge(a: 0, b: 1) # => {"a"=>nil, "b"=>1}
+  # ```
+  sig { params(other_hash: T.untyped).returns(T.untyped) }
+  def reverse_merge(other_hash); end
+
+  sig { params(args: T.untyped, block: T.untyped).returns(T.untyped) }
+  def select(*args, &block); end
+
+  sig { params(args: T.untyped).returns(T.untyped) }
+  def self.[](*args); end
+
+  sig { params(keys: T.any(String, Symbol)).returns(T.untyped) }
+  def slice!(*keys); end
+
+  sig { params(keys: T.any(String, Symbol)).returns(T.untyped) }
+  def slice(*keys); end
+
+  sig { returns(T.untyped) }
+  def stringify_keys!; end
+
+  sig { returns(T.untyped) }
+  def stringify_keys; end
+
+  sig { returns(T.untyped) }
+  def symbolize_keys; end
+
+  # Convert to a regular hash with string keys.
+  sig { returns(T::Hash[String, T.untyped]) }
+  def to_hash; end
+
+  sig { returns(T.untyped) }
+  def to_options!; end
+
+  sig { returns(T.untyped) }
+  def transform_keys!; end
+
+  sig { params(args: T.untyped, block: T.untyped).returns(T.untyped) }
+  def transform_keys(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.untyped).returns(T.untyped) }
+  def transform_values(*args, &block); end
+
+  # Updates the receiver in-place, merging in the hash passed as argument:
+  #
+  # ```ruby
+  # hash_1 = ActiveSupport::HashWithIndifferentAccess.new
+  # hash_1[:key] = 'value'
+  #
+  # hash_2 = ActiveSupport::HashWithIndifferentAccess.new
+  # hash_2[:key] = 'New Value!'
+  #
+  # hash_1.update(hash_2) # => {"key"=>"New Value!"}
+  # ```
+  #
+  # The argument can be either an
+  # `ActiveSupport::HashWithIndifferentAccess` or a regular `Hash`.
+  # In either case the merge respects the semantics of indifferent access.
+  #
+  # If the argument is a regular hash with keys `:key` and `"key"` only one
+  # of the values end up in the receiver, but which one is unspecified.
+  #
+  # When given a block, the value for duplicated keys will be determined
+  # by the result of invoking the block with the duplicated key, the value
+  # in the receiver, and the value in `other_hash`. The rules for duplicated
+  # keys follow the semantics of indifferent access:
+  #
+  # ```ruby
+  # hash_1[:key] = 10
+  # hash_2['key'] = 12
+  # hash_1.update(hash_2) { |key, old, new| old + new } # => {"key"=>22}
+  # ```
+  sig do
+    params(
+      other_hash: T.any(ActiveSupport::HashWithIndifferentAccess[T.untyped, T.untyped], T::Hash[T.untyped, T.untyped]),
+      block: T.untyped
+    ).returns(T.untyped)
+  end
+  def update(other_hash, &block); end
+
+  # Returns an array of the values at the specified indices:
+  #
+  # ```ruby
+  # hash = ActiveSupport::HashWithIndifferentAccess.new
+  # hash[:a] = 'x'
+  # hash[:b] = 'y'
+  # hash.values_at('a', 'b') # => ["x", "y"]
+  # ```
+  sig { params(keys: T.any(String, Symbol)).returns(T.untyped) }
+  def values_at(*keys); end
+
+  sig { returns(T.untyped) }
+  def with_indifferent_access; end
+
+  ### Aliases
+
+  def has_key?(key); end
+  def include?(key); end
+  def member?(key); end
+  def merge!(other_hash); end
+  def store(key, value); end
+  def to_options; end
+  def with_defaults!(other_hash); end
+  def with_defaults(other_hash); end
+  def without(*keys); end
+end
