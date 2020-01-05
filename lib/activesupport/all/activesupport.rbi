@@ -873,9 +873,9 @@ class ActiveSupport::HashWithIndifferentAccess < Hash
   include Enumerable
 
   extend T::Generic
-  K = type_member(:out)
-  V = type_member(:out)
-  Elem = type_member(:out)
+  K = type_member
+  V = type_member
+  Elem = type_member
 
   sig { params(key: T.any(String, Symbol)).returns(T.untyped) }
   def [](key); end
@@ -974,7 +974,7 @@ class ActiveSupport::HashWithIndifferentAccess < Hash
   # Same as `Hash#fetch` where the key passed as argument can be
   # either a string or a symbol:
   #
-  # ```
+  # ```ruby
   # counters = ActiveSupport::HashWithIndifferentAccess.new
   # counters[:foo] = 1
   #
@@ -1000,8 +1000,8 @@ class ActiveSupport::HashWithIndifferentAccess < Hash
   sig { params(indices: T.any(String, Symbol), block: T.untyped).returns(T.untyped) }
   def fetch_values(*indices, &block); end
 
-  sig { params(constructor: T.untyped).void }
-  def initialize(constructor = {}); end
+  sig { params(constructor: T.untyped, block: T.untyped).void }
+  def initialize(constructor = {}, &block); end
 
   # Checks the hash for a key matching the argument passed in:
   #
