@@ -1,19 +1,30 @@
 # typed: strong
 
 VariadicUntypedFunction = T.type_alias { Proc }
+AssociationCallback = T.type_alias do
+  # docs in https://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html - jump to "Association callbacks"
+  T.nilable(
+    T.any(
+      Symbol, # reference to a method
+      String, # reference to a method? not clear: no string examples in docs
+      T.proc.void, # a proc that contains the callback
+      T::Array[T.any(Symbol, Proc)] # multiple callbacks
+    )
+  )
+end
 
 module ActiveRecord::Associations::ClassMethods
   sig do
     params(
       name: Symbol,
       scope: T.nilable(T.proc.void),
-      after_add: T.nilable(T.any(Symbol, String, T.proc.void)),
-      after_remove: T.nilable(T.any(Symbol, String, T.proc.void)),
+      after_add: AssociationCallback,
+      after_remove: AssociationCallback,
       anonymous_class: T.nilable(T.any(Symbol, String)),
       as: T.nilable(T.any(Symbol, String)),
       autosave: T.nilable(T::Boolean),
-      before_add: T.nilable(T.any(Symbol, String, T.proc.void)),
-      before_remove: T.nilable(T.any(Symbol, String, T.proc.void)),
+      before_add: AssociationCallback,
+      before_remove: AssociationCallback,
       class_name: T.nilable(T.any(Symbol, String)),
       counter_cache: T.nilable(T.any(Symbol, String)),
       dependent: T.nilable(T.any(Symbol, String)),
@@ -144,12 +155,12 @@ module ActiveRecord::Associations::ClassMethods
     params(
       name: T.nilable(T.any(Symbol, String)),
       scope: T.nilable(T.proc.void),
-      after_add: T.nilable(T.any(Symbol, String, T.proc.void)),
-      after_remove: T.nilable(T.any(Symbol, String, T.proc.void)),
+      after_add: AssociationCallback,
+      after_remove: AssociationCallback,
       association_foreign_key: T.nilable(T.any(Symbol, String)),
       autosave: T.nilable(T::Boolean),
-      before_add: T.nilable(T.any(Symbol, String, T.proc.void)),
-      before_remove: T.nilable(T.any(Symbol, String, T.proc.void)),
+      before_add: AssociationCallback,
+      before_remove: AssociationCallback,
       class_name: T.nilable(T.any(Symbol, String)),
       extend: T.nilable(T.any(Module, T::Array[Module])),
       foreign_key: T.nilable(T.any(Symbol, String)),
