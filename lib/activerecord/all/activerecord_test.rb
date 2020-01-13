@@ -19,9 +19,9 @@ module ActiveRecordAssociationsTest
   has_one :primary_address, -> { true }, through: :addressables, source: :addressable
   has_one :credit_card, required: true
 
-  has_and_belongs_to_many :projects
+  has_and_belongs_to_many :projects, after_add: [:foo, Proc.new { }]
   has_and_belongs_to_many :projects, -> { true }
-  has_and_belongs_to_many :nations, class_name: "Country"
+  has_and_belongs_to_many :nations, class_name: "Country", after_add: :foo
   has_and_belongs_to_many :categories, join_table: "prods_cats"
 
   belongs_to :firm, foreign_key: "client_of"
