@@ -7,8 +7,9 @@ AssociationCallback = T.type_alias do
     T.any(
       Symbol, # reference to a method
       String, # reference to a method? not clear: no string examples in docs
-      T.proc.void, # a proc that contains the callback
-      T::Array[T.any(Symbol, Proc)] # multiple callbacks
+      T.proc.void, # a lambda that contains the callback
+      Proc, # a proc that contains the callback
+      T::Array[T.any(Symbol, Proc, T.proc.void)] # multiple callbacks
     )
   )
 end
