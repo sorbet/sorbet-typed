@@ -16,6 +16,8 @@ module ActiveModel::Dirty
 end
 
 module ActiveModel::Validations
+  mixes_in_class_methods(ClassMethods)
+
   module ClassMethods
     # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L136-L154
     sig do
