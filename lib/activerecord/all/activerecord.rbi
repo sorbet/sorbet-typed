@@ -584,7 +584,7 @@ module ActiveRecord::Persistence
   sig do
     params(
       args: T.untyped,
-      blk: T.proc.void,
+      blk: T.nilable(T.proc.void),
     ).returns(TrueClass)
   end
   def save!(*args, &blk); end
@@ -592,7 +592,7 @@ module ActiveRecord::Persistence
   sig do
     params(
       args: T.untyped,
-      blk: T.proc.void,
+      blk: T.nilable(T.proc.void),
     ).returns(T::Boolean)
   end
   def save(*args, &blk); end
@@ -913,12 +913,6 @@ module ActiveRecord::Validations
   include ActiveModel::Validations
 
   mixes_in_class_methods(ActiveModel::Validations::ClassMethods)
-
-  sig { params(options: T.untyped).returns(T::Boolean) }
-  def save(options = nil); end
-
-  sig { params(options: T.untyped).returns(TrueClass) }
-  def save!(options = nil); end
 end
 
 # Represents the schema of an SQL table in an abstract way. This class
