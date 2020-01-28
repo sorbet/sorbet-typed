@@ -122,9 +122,6 @@ class ActionController::Parameters
   sig { params(other: ActionController::Parameters).returns(T::Boolean) }
   def ==(other); end
 
-  sig { params(key: T.any(String, Symbol)).returns(T.untyped) }
-  def [](key); end
-
   sig { params(key: T.any(String, Symbol), value: T.untyped).void }
   def []=(key, value); end
 
