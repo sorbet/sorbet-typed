@@ -812,3 +812,10 @@ class ActiveSupport::Duration
   sig { params(precision: T.nilable(Integer)).returns(String) }
   def iso8601(precision: nil); end
 end
+
+module Benchmark
+  extend T::Sig
+
+  sig { params(block: T.proc.void).returns(Float) }
+  def self.ms(&block); end
+end
