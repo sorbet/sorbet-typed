@@ -65,6 +65,16 @@ class ActiveRecordCallbacksTest < ApplicationRecord
   before_validation :validation_setup, on: :create
   after_validation :validation_teardown
   after_validation :validation_teardown, on: [:create, :update]
+
+  def do_the_thing
+    if new_record? || persisted?
+      save
+      save(validate: false, touch: false)
+      save!
+      touch
+      update!(did_the_thing: true)
+    end
+  end
 end
 
 class ActiveRecordMigrationsTest
