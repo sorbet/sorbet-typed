@@ -37,7 +37,7 @@ module ActiveSupportDurationTest
   T.assert_type!(ActiveSupport::Duration.build(123456), ActiveSupport::Duration)
 
   # For example, "P3Y6M4DT12H30M5S" represents a duration of "three years, six
-  # months, four days, twelve hours, thirty minutes, and five seconds". 
+  # months, four days, twelve hours, thirty minutes, and five seconds".
   T.assert_type!(ActiveSupport::Duration.parse("P3Y6M4DT12H30M5S"), ActiveSupport::Duration)
 
   T.assert_type!(2.years.eql?(123), T::Boolean)
@@ -62,4 +62,9 @@ module ActiveSupportDurationTest
 
   T.assert_type!(3.years % 5, ActiveSupport::Duration)
   T.assert_type!(3.years % 5.days, ActiveSupport::Duration)
+
+  # see https://github.com/sorbet/sorbet-typed/pull/190
+  T.assert_type!(Date.today - 4.weeks, Date)
+  T.assert_type!(Date.today - Date.today, Rational)
+  T.assert_type!(Date.today - 4, Date)
 end
