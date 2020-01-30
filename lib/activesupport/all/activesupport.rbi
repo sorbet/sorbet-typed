@@ -601,6 +601,27 @@ class Time
   # https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date_and_time/zones.rb
   sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
   def in_time_zone(zone = ::Time.zone); end
+
+  # these are the sigs for Time- in the stdlib
+  # https://github.com/sorbet/sorbet/blob/c3691753e4ce545e1eb66cbd3e55de67d8879b98/rbi/core/time.rbi#L347
+  # note that if more sigs are added to sorbet you should replicate them here
+  # check sorbet master: https://github.com/sorbet/sorbet/blob/master/rbi/core/time.rbi#L347
+  sig do
+    params(
+        arg0: Time,
+    )
+    .returns(Float)
+  end
+  sig do
+    params(
+        arg0: Numeric,
+    )
+    .returns(Time)
+  end
+  def -(arg0); end
+  # these sigs are added for activesupport users
+  sig {params(arg0: ActiveSupport::Duration).returns(Time)}
+  def -(arg0); end
 end
 
 # defines some of the methods at https://github.com/rails/rails/tree/v6.0.0/activesupport/lib/active_support/core_ext/hash
