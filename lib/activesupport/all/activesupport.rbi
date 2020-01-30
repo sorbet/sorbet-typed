@@ -618,7 +618,6 @@ class Time
     )
     .returns(Time)
   end
-  def -(arg0); end
   # these sigs are added for activesupport users
   sig {params(arg0: ActiveSupport::Duration).returns(Time)}
   def -(arg0); end

@@ -69,6 +69,6 @@ module ActiveSupportDurationTest
   T.assert_type!(Date.today - 4, Date)
 
   T.assert_type!(Time.now - 4.weeks, Time)
-  T.assert_type!(Time.now - Time.now, Rational)
+  T.assert_type!(Time.now - Time.now, Float)
   T.assert_type!(Time.now - 4, Time)
 end
