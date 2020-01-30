@@ -63,5 +63,8 @@ module ActiveSupportDurationTest
   T.assert_type!(3.years % 5, ActiveSupport::Duration)
   T.assert_type!(3.years % 5.days, ActiveSupport::Duration)
 
+  # see https://github.com/sorbet/sorbet-typed/pull/190
   T.assert_type!(Date.today - 4.weeks, Date)
+  T.assert_type!(Date.today - Date.today, Rational)
+  T.assert_type!(Date.today - 4, Date)
 end
