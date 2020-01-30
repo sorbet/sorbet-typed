@@ -550,6 +550,16 @@ end
 class Date
   sig { params(options: T::Hash[Symbol, Integer]).returns(Date) }
   def advance(options); end
+
+  # these are the sigs for Date- in the stdlib
+  # https://github.com/sorbet/sorbet/blob/3910f6cfd9935c9b42e2135e32e15ab8a6e5b9be/rbi/stdlib/date.rbi#L373
+  # note that if more sigs are added to sorbet you should replicate them here
+  # check sorbet master: https://github.com/sorbet/sorbet/blob/master/rbi/stdlib/date.rbi
+  sig {params(arg0: Numeric).returns(T.self_type)}
+  sig {params(arg0: Date).returns(Rational)}
+  # these sigs are added for activesupport users
+  sig {params(arg0: ActiveSupport::Duration).returns(T.self_type)}
+  def -(arg0); end
 end
 
 # defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/time
