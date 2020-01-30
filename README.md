@@ -2,6 +2,8 @@
 
 # sorbet-typed
 
+test
+
 > A central repository for sharing type definitions for Ruby gems
 
 Inspired by [definitelytyped.org](https://definitelytyped.org/).
