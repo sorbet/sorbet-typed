@@ -154,6 +154,7 @@ class String
   def humanize(capitalize: true, keep_id_suffix: false); end
 
   sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
+  sig { params(zone: NilClass).returns(Time) }
   def in_time_zone(zone = ::Time.zone); end
 
   sig { params(amount: Integer, indent_string: T.nilable(String), indent_empty_lines: T::Boolean).returns(T.nilable(String)) }
@@ -590,6 +591,7 @@ class Time
 
   # https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date_and_time/zones.rb
   sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
+  sig { params(zone: NilClass).returns(Time) }
   def in_time_zone(zone = ::Time.zone); end
 end
 
