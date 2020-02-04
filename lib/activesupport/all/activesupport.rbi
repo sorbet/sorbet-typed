@@ -153,7 +153,8 @@ class String
   sig { params(capitalize: T::Boolean, keep_id_suffix: T::Boolean).returns(String) }
   def humanize(capitalize: true, keep_id_suffix: false); end
 
-  sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
+  # returns Time in the case zone is passed nil and ActiveSupport::TimeWithZone otherwise
+  sig { params(zone: T.nilable(T.any(String, ActiveSupport::TimeZone))).returns(T.any(ActiveSupport::TimeWithZone, Time)) }
   def in_time_zone(zone = ::Time.zone); end
 
   sig { params(amount: Integer, indent_string: T.nilable(String), indent_empty_lines: T::Boolean).returns(T.nilable(String)) }
@@ -599,7 +600,8 @@ class Time
   def at_middle_of_day; end
 
   # https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date_and_time/zones.rb
-  sig { params(zone: String).returns(T.any(Time, ActiveSupport::TimeWithZone)) }
+  # returns Time in the case zone is passed nil and ActiveSupport::TimeWithZone otherwise
+  sig { params(zone: T.nilable(T.any(String, ActiveSupport::TimeZone))).returns(T.any(ActiveSupport::TimeWithZone, Time)) }
   def in_time_zone(zone = ::Time.zone); end
 
   # these are the sigs for Time- in the stdlib
