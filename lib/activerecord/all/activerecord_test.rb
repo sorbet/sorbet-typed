@@ -44,7 +44,7 @@ class ActiveRecordCallbacksTest < ApplicationRecord
   around_save :log_save_action
   after_save :log_save_action
 
-  before_destroy :log_destroy_action
+  before_destroy :log_destroy_action, prepend: true
   around_destroy :log_destroy_action
   after_destroy :log_destroy_action
 
