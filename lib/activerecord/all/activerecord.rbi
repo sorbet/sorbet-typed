@@ -461,14 +461,14 @@ class ActiveRecord::Base
       arg: T.nilable(Symbol),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      prepend: T.nilable(T::Boolean)
+      prepend: T::Boolean
     ).void
   end
   def self.before_destroy(
     arg = nil,
     if: nil,
     unless: nil,
-    prepend: nil
+    prepend: false
   ); end
 
   sig do
