@@ -155,4 +155,12 @@ class ActiveRecordMigrationsTest
 
     t.index [:foo, :bar], name: "index_foo_bar", unique: true
   end
+
+  def test_transactions
+    ActiveRecordCallbacksTest.transaction do
+    end
+
+    ActiveRecordCallbacksTest.transaction(requires_new: true) do
+    end
+  end
 end
