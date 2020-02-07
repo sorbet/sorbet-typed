@@ -40,6 +40,9 @@ module ActiveModelTest
 
   validates :card_number, presence: true, if: :paid_with_card?
 
+  validates :custom_validator, foo: true
+  validates :custom_validator, foo: { option: 1 }
+
   # TODO: These are valid but currently fail typechecking.
   # validates :password, confirmation: true, unless: Proc.new { |a| a.password.blank? }
   # validates :name, presence: { strict: true }
