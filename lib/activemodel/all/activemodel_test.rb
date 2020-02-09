@@ -40,8 +40,12 @@ module ActiveModelTest
 
   validates :card_number, presence: true, if: :paid_with_card?
 
+  # Allow custom validators to be added from other gems.
   validates :custom_validator, foo: true
   validates :custom_validator, foo: { option: 1 }
+  validates :custom_validator, foo: ['bar']
+  validates :custom_validator, foo: 'bar'
+  validates :custom_validator, foo: :bar
 
   # TODO: These are valid but currently fail typechecking.
   # validates :password, confirmation: true, unless: Proc.new { |a| a.password.blank? }
