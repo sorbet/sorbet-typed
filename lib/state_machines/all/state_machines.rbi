@@ -18,9 +18,9 @@ class StateMachines::Machine
   sig do
     params(
       methods: Symbol,
-      from: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      from: T.any(String, Symbol, StateMachines::Matcher, T::Array[T.any(String, Symbol)]),
       on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
-      to: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      to: T.any(String, Symbol, StateMachines::Matcher, T::Array[T.any(String, Symbol)]),
       do: T.any(Symbol, T.proc.params(arg0: T.untyped).void),
       blk: T.any(NilClass, T.proc.params(arg0: T.untyped, arg1: T.untyped).void),
     ).void
@@ -30,9 +30,9 @@ class StateMachines::Machine
   sig do
     params(
       methods: Symbol,
-      from: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      from: T.any(String, Symbol, StateMachines::Matcher, T::Array[T.any(String, Symbol)]),
       on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
-      to: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      to: T.any(String, Symbol, StateMachines::Matcher, T::Array[T.any(String, Symbol)]),
       do: T.any(Symbol, T.proc.params(arg0: T.untyped).void),
       blk: T.any(NilClass, T.proc.params(arg0: T.untyped, arg1: T.untyped).void),
     ).void
