@@ -2,6 +2,7 @@
 
 class SomeObject
   extend StateMachines::MacroMethods
+  extend T::Sig
 
   STATES = T.let([
     STATE_A = 'A',
