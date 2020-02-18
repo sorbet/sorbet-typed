@@ -50,7 +50,7 @@ module Rainbow
       sig { params(value: Numeric).returns(Integer) }
       def to_ansi_domain(value); end
 
-      sig { params(ground: Symbol, values: Integer).returns(RGB) } 
+      sig { params(ground: Symbol, values: Integer).returns(RGB) }
       def initialize(ground, *values); end
 
       sig { returns(T::Array[Integer]) }
@@ -88,7 +88,16 @@ module Rainbow
     def color(*values); end
 
     sig { params(values: T.any([Integer], [Integer, Integer, Integer])).returns(NullPresenter) }
+    def foreground(*values); end
+
+    sig { params(values: T.any([Integer], [Integer, Integer, Integer])).returns(NullPresenter) }
+    def fg(*values); end
+
+    sig { params(values: T.any([Integer], [Integer, Integer, Integer])).returns(NullPresenter) }
     def background(*values); end
+
+    sig { params(values: T.any([Integer], [Integer, Integer, Integer])).returns(NullPresenter) }
+    def bg(*values); end
 
     sig { returns(NullPresenter) }
     def reset; end
@@ -141,12 +150,14 @@ module Rainbow
     sig { returns(NullPresenter) }
     def white; end
 
-    alias foreground color
-    alias fg color
-    alias bg background
-    alias bold bright
-    alias dark faint
-    alias strike cross_out
+    sig { returns(NullPresenter) }
+    def bold; end
+
+    sig { returns(NullPresenter) }
+    def dark; end
+
+    sig { returns(NullPresenter) }
+    def strike; end
   end
 
   class Presenter < String
@@ -156,7 +167,16 @@ module Rainbow
     def color(*values); end
 
     sig { params(values: T.any([Integer], [Integer, Integer, Integer])).returns(Presenter) }
+    def foreground(*values); end
+
+    sig { params(values: T.any([Integer], [Integer, Integer, Integer])).returns(Presenter) }
+    def fg(*values); end
+
+    sig { params(values: T.any([Integer], [Integer, Integer, Integer])).returns(Presenter) }
     def background(*values); end
+
+    sig { params(values: T.any([Integer], [Integer, Integer, Integer])).returns(Presenter) }
+    def bg(*values); end
 
     sig { returns(Presenter) }
     def reset; end
@@ -209,12 +229,14 @@ module Rainbow
     sig { returns(Presenter) }
     def white; end
 
-    alias foreground color
-    alias fg color
-    alias bg background
-    alias bold bright
-    alias dark faint
-    alias strike cross_out
+    sig { returns(Presenter) }
+    def bold; end
+
+    sig { returns(Presenter) }
+    def dark; end
+
+    sig { returns(Presenter) }
+    def strike; end
   end
 
   class StringUtils
@@ -233,7 +255,7 @@ module Rainbow
 
     sig { params(enabled: T::Boolean).returns(Wrapper) }
     def initialize(enabled = true); end
-  
+
     sig { params(string: String).returns(T.any(Rainbow::Presenter, Rainbow::NullPresenter)) }
     def wrap(string); end
   end
