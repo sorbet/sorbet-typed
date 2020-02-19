@@ -97,8 +97,28 @@ module ActiveModel::Validations
   end
 end
 
-class ActiveModel::Type::Boolean
+class ActiveModel::Type::Value
+  extend T::Sig
+
+  sig { params(precision: T.untyped, limit: T.untyped, scale: T.untyped).void }
+  def initialize(precision: nil, limit: nil, scale: nil); end
+
+  sig { params(value: T.untyped).returns(T.untyped) }
+  def cast(value); end
+end
+
+class ActiveModel::Type::Boolean < ActiveModel::Type::Value
   sig { params(arg0: T.untyped).returns(T.nilable(T::Boolean))}
+  def cast(arg0); end
+end
+
+class ActiveModel::Type::ImmutableString < ActiveModel::Type::Value
+  sig { params(arg0: T.untyped).returns(T.nilable(String))}
+  def cast(arg0); end
+end
+
+class ActiveModel::Type::String < ActiveModel::Type::ImmutableString
+  sig { params(arg0: T.untyped).returns(T.nilable(String))}
   def cast(arg0); end
 end
 

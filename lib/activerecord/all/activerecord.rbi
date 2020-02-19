@@ -812,25 +812,9 @@ end
 
 class ActiveRecord::Result; end
 
-class ActiveRecord::Type::Value
-  extend T::Sig
-
-  sig { params(args: T.untyped).void }
-  def initialize(args); end
-
-  sig { params(value: T.untyped).returns(T.untyped) }
-  def cast(value); end
-end
-
-class ActiveRecord::Type::Boolean < ActiveRecord::Type::Value
-  extend T::Sig
-
-  sig { params(args: T.untyped).void }
-  def initialize(args = nil); end
-
-  sig { params(value: T.untyped).returns(T.nilable(T::Boolean)) }
-  def cast(value); end
-end
+ActiveRecord::Type::Value = ActiveModel::Type::Value
+ActiveRecord::Type::Boolean = ActiveModel::Type::Boolean
+ActiveRecord::Type::String = ActiveModel::Type::String
 
 module ActiveRecord
   class ActiveRecordError < StandardError; end
@@ -902,7 +886,7 @@ module ActiveRecord
   class TransactionIsolationError < ActiveRecordError; end
   class TransactionRollbackError < StatementInvalid; end
   class TypeConflictError < StandardError; end
-  class UnknownAttributeError < NoMethodError; end
+  UnknownAttributeError = ActiveModel::UnknownAttributeError
   class UnknownAttributeReference < ActiveRecordError; end
   class UnknownMigrationVersionError < MigrationError; end
   class UnknownPrimaryKey < ActiveRecordError; end
