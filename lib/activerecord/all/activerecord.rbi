@@ -270,7 +270,7 @@ class ActiveRecord::Base
   include ActiveRecord::AttributeAssignment
   include ActiveModel::Conversion
   include ActiveRecord::Integration
-  include ActiveRecord::Validations
+  include ActiveModel::Validations
   include ActiveRecord::CounterCache
   include ActiveRecord::Attributes
   include ActiveRecord::AttributeDecorators
@@ -923,10 +923,6 @@ end
 
 module ActiveRecord::Associations
   mixes_in_class_methods(ActiveRecord::Associations::ClassMethods)
-end
-
-module ActiveRecord::Validations
-  include ActiveModel::Validations
 end
 
 # Represents the schema of an SQL table in an abstract way. This class
