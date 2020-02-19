@@ -1,8 +1,8 @@
 # typed: true
 
 module ActiveModelTest
-  extend ActiveModel::Validations::HelperMethods
-  extend ActiveModel::Validations::ClassMethods
+  include ActiveModel::Validations
+  include ActiveModel::Validations::HelperMethods
 
   validates :bio, length: { maximum: 1000,
     too_long: "%{count} characters is the maximum allowed" }

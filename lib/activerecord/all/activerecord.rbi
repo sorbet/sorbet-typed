@@ -927,8 +927,6 @@ end
 
 module ActiveRecord::Validations
   include ActiveModel::Validations
-
-  mixes_in_class_methods(ActiveModel::Validations::ClassMethods)
 end
 
 # Represents the schema of an SQL table in an abstract way. This class
