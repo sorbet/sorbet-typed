@@ -376,6 +376,8 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     polymorphic: false,
     null: nil
   ); end
+  
+  alias add_belongs_to add_reference
 
   sig do
     params(
