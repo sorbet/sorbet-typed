@@ -80,6 +80,7 @@ end
 class ActiveRecordValidationTest < ApplicationRecord
   # this is defined in ActiveModel::Validations, but we test here to ensure that it's actually accessible from an AR model
   validate :run_validation_method, :if => :should_validate?, prepend: true
+  validates_absence_of :foo
 end
 
 class ActiveRecordMigrationsTest

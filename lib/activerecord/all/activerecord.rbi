@@ -271,6 +271,7 @@ class ActiveRecord::Base
   include ActiveModel::Conversion
   include ActiveRecord::Integration
   include ActiveModel::Validations
+  include ActiveModel::Validations::HelperMethods
   include ActiveRecord::CounterCache
   include ActiveRecord::Attributes
   include ActiveRecord::AttributeDecorators
