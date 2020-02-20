@@ -168,5 +168,10 @@ class ActiveRecordMigrationsTest
     relation = ActiveRecord::Relation.new
     T.assert_type!(relation.blank?, T::Boolean)
     T.assert_type!(relation.empty?, T::Boolean)
+    T.assert_type!(relation.any?, T::Boolean)
+    T.assert_type!(relation.many?, T::Boolean)
+    T.assert_type!(relation.one?, T::Boolean)
+    T.assert_type!(relation.none?, T::Boolean)
+    T.assert_type!(relation.size, Integer)
   end
 end
