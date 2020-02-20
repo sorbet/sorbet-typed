@@ -1415,4 +1415,10 @@ end
 class ActiveRecord::Relation
   sig { returns(Integer) }
   def delete_all; end
+
+  sig { returns(T::Boolean) }
+  def blank?; end
+
+  sig { returns(T::Boolean) }
+  def empty?; end
 end
