@@ -208,10 +208,10 @@ class Grape::API
   sig do
     params(
       error_string: String,
-      status_code: Integer
+      status_code: T.nilable(Integer)
     ).void
   end
-  def self.error!(error_string, status_code)
+  def self.error!(error_string, status_code = nil)
   end
 
   sig do
