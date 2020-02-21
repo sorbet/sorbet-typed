@@ -728,6 +728,125 @@ class Numeric
 
   sig { returns(T.self_type) }
   def in_milliseconds; end
+
+  KILOBYTE = T.let(1024, Integer)
+  MEGABYTE = T.let(KILOBYTE * 1024, Integer)
+  GIGABYTE = T.let(MEGABYTE * 1024, Integer)
+  TERABYTE = T.let(GIGABYTE * 1024, Integer)
+  PETABYTE = T.let(TERABYTE * 1024, Integer)
+  EXABYTE  = T.let(PETABYTE * 1024, Integer)
+
+  # Enables the use of byte calculations and declarations, like 45.bytes + 2.6.megabytes
+  #
+  # ```ruby
+  # 2.bytes # => 2
+  # ```
+  sig { returns(T.self_type) }
+  def byte; end
+
+  # Enables the use of byte calculations and declarations, like 45.bytes + 2.6.megabytes
+  #
+  # ```ruby
+  # 2.bytes # => 2
+  # ```
+  sig { returns(T.self_type) }
+  def bytes; end
+
+  # Returns the number of bytes equivalent to the kilobytes provided.
+  #
+  # ```ruby
+  # 2.kilobytes # => 2048
+  # ```
+  sig { returns(T.self_type) }
+  def kilobyte; end
+
+  # Returns the number of bytes equivalent to the kilobytes provided.
+  #
+  # ```ruby
+  # 2.kilobytes # => 2048
+  # ```
+  sig { returns(T.self_type) }
+  def kilobytes; end
+
+  # Returns the number of bytes equivalent to the megabytes provided.
+  #
+  # ```ruby
+  # 2.megabytes # => 2_097_152
+  # ```
+  sig { returns(T.self_type) }
+  def megabyte; end
+
+  # Returns the number of bytes equivalent to the megabytes provided.
+  #
+  # ```ruby
+  # 2.megabytes # => 2_097_152
+  # ```
+  sig { returns(T.self_type) }
+  def megabytes; end
+
+  # Returns the number of bytes equivalent to the gigabytes provided.
+  #
+  # ```ruby
+  # 2.gigabytes # => 2_147_483_648
+  # ```
+  sig { returns(T.self_type) }
+  def gigabyte; end
+
+  # Returns the number of bytes equivalent to the gigabytes provided.
+  #
+  # ```ruby
+  # 2.gigabytes # => 2_147_483_648
+  # ```
+  sig { returns(T.self_type) }
+  def gigabytes; end
+
+  # Returns the number of bytes equivalent to the terabytes provided.
+  #
+  # ```ruby
+  # 2.terabytes # => 2_199_023_255_552
+  # ```
+  sig { returns(T.self_type) }
+  def terabyte; end
+
+  # Returns the number of bytes equivalent to the terabytes provided.
+  #
+  # ```ruby
+  # 2.terabytes # => 2_199_023_255_552
+  # ```
+  sig { returns(T.self_type) }
+  def terabytes; end
+
+  # Returns the number of bytes equivalent to the petabytes provided.
+  #
+  # ```ruby
+  # 2.petabytes # => 2_251_799_813_685_248
+  # ```
+  sig { returns(T.self_type) }
+  def petabyte; end
+
+  # Returns the number of bytes equivalent to the petabytes provided.
+  #
+  # ```ruby
+  # 2.petabytes # => 2_251_799_813_685_248
+  # ```
+  sig { returns(T.self_type) }
+  def petabytes; end
+
+  # Returns the number of bytes equivalent to the exabytes provided.
+  #
+  # ```ruby
+  # 2.exabytes # => 2_305_843_009_213_693_952
+  # ```
+  sig { returns(T.self_type) }
+  def exabyte; end
+
+  # Returns the number of bytes equivalent to the exabytes provided.
+  #
+  # ```ruby
+  # 2.exabytes # => 2_305_843_009_213_693_952
+  # ```
+  sig { returns(T.self_type) }
+  def exabytes; end
 end
 
 module Enumerable
