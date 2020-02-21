@@ -209,7 +209,7 @@ class Grape::API
     params(
       error_string: String,
       status_code: T.nilable(Integer)
-    ).void
+    ).returns(T.noreturn)
   end
   def self.error!(error_string, status_code = nil)
   end
