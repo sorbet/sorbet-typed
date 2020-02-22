@@ -1,0 +1,3 @@
+# Used for communicating to Sorbet what version of sorbet-typed we're on, in
+# case we need to make breaking changes to the structure of this repo.
+version: 1
