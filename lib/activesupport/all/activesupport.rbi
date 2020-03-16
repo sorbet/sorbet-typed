@@ -119,7 +119,7 @@ class String
   sig { returns(String) }
   def classify; end
 
-  sig { returns(Class) }
+  sig { returns(Module) }
   def constantize; end
 
   sig { returns(String) }
