@@ -14,6 +14,7 @@ module ActionPackRoutesTest
   resources :cows, only: [:show, :index]
   resources :cows, except: :show
   resources :cows, except: [:show, :index]
+  resources :cows, defaults: { t: 21 }, constraints: { format: 'txt' }
 
   resources :games do
     get :search, on: :collection

@@ -707,8 +707,10 @@ module ActionDispatch::Routing::Mapper::Resources
     params(
       resources: T.any(String, Symbol),
       as: T.nilable(T.any(String, Symbol)),
+      constraints: T.untyped,
       controller: T.nilable(T.any(String, Symbol)),
       concerns: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      defaults: T.untyped,
       param: T.nilable(Symbol),
       path_names: T.untyped,
       path: T.untyped,
@@ -732,8 +734,10 @@ module ActionDispatch::Routing::Mapper::Resources
   def resources(
     *resources,
     as: nil,
+    constraints: nil,
     controller: nil,
     concerns: nil,
+    defaults: nil,
     param: nil,
     path_names: nil,
     path: nil,
