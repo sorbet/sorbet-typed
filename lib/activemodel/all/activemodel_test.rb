@@ -77,3 +77,24 @@ module ActiveModelTest
   validates_numericality_of :width, greater_than: :minimum_weight, on: [:create, :update]
   validates_presence_of :first_name, on: [:create, :update]
 end
+
+class Person
+  include ActiveModel::Validations
+end
+
+class ActiveModelErrorsTest
+  person = Person.new
+  person.errors.add(:name)
+  person.errors.add(:name, :invalid, strict: true)
+  person.errors.add(:name, :invalid, strict: NameIsInvalid)
+  person.errors.add(:name, :too_long, { count: 25 })
+  person.errors.add(:base, :name_or_email_blank, message: "either name or email must be present")
+  person.errors.of_kind?(:age)
+  person.errors.of_kind?(:name, :too_long)
+  person.errors.of_kind?(:name, "is too long (maximum is 25 characters)")
+  person.errors.full_messages
+  person.errors.added?(:name, :too_long, count: 25)
+  person.errors.added?(:name, "is too long (maximum is 25 characters)")
+  person.errors.added?(:name, :too_long, count: 24)
+  person.errors.added?(:name, "is too long")
+end
