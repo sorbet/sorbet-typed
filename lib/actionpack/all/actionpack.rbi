@@ -707,8 +707,10 @@ module ActionDispatch::Routing::Mapper::Resources
     params(
       resources: T.any(String, Symbol),
       as: T.nilable(T.any(String, Symbol)),
+      constraints: T.untyped,
       controller: T.nilable(T.any(String, Symbol)),
       concerns: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      defaults: T.untyped,
       param: T.nilable(Symbol),
       path_names: T.untyped,
       path: T.untyped,
@@ -732,8 +734,10 @@ module ActionDispatch::Routing::Mapper::Resources
   def resources(
     *resources,
     as: nil,
+    constraints: nil,
     controller: nil,
     concerns: nil,
+    defaults: nil,
     param: nil,
     path_names: nil,
     path: nil,
@@ -748,8 +752,8 @@ module ActionDispatch::Routing::Mapper::Resources
 
   # Technically, path doesn't have a default value set. However, this is
   # necessary to allow code like `root to: 'home#index'`.
-  sig { params(path: T.nilable(String), to: T.untyped).returns(T.untyped) }
-  def root(path = T.unsafe(nil), to: nil); end
+  sig { params(path: T.nilable(String), to: T.untyped, as: T.nilable(Symbol)).returns(T.untyped) }
+  def root(path = T.unsafe(nil), to: nil, as: nil); end
 
   sig { returns(T.untyped) }
   def shallow; end

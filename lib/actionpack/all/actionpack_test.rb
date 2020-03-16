@@ -6,6 +6,7 @@ module ActionPackRoutesTest
 
   root 'home#index'
   root to: "home#index"
+  root to: 'alternative#index', as: :alternative_root
   get 'home/index'
 
   resources :posts, path_names: { new: "brand_new" }
@@ -14,6 +15,7 @@ module ActionPackRoutesTest
   resources :cows, only: [:show, :index]
   resources :cows, except: :show
   resources :cows, except: [:show, :index]
+  resources :cows, defaults: { t: 21 }, constraints: { format: 'txt' }
 
   resources :games do
     get :search, on: :collection
