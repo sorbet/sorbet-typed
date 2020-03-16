@@ -752,8 +752,8 @@ module ActionDispatch::Routing::Mapper::Resources
 
   # Technically, path doesn't have a default value set. However, this is
   # necessary to allow code like `root to: 'home#index'`.
-  sig { params(path: T.nilable(String), to: T.untyped).returns(T.untyped) }
-  def root(path = T.unsafe(nil), to: nil); end
+  sig { params(path: T.nilable(String), to: T.untyped, as: T.nilable(Symbol)).returns(T.untyped) }
+  def root(path = T.unsafe(nil), to: nil, as: nil); end
 
   sig { returns(T.untyped) }
   def shallow; end

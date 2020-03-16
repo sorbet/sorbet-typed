@@ -6,6 +6,7 @@ module ActionPackRoutesTest
 
   root 'home#index'
   root to: "home#index"
+  root to: 'alternative#index', as: :alternative_root
   get 'home/index'
 
   resources :posts, path_names: { new: "brand_new" }
