@@ -512,9 +512,6 @@ class ActiveSupport::TimeWithZone
   sig { returns(ActiveSupport::TimeWithZone) }
   def midnight; end
 
-  sig { returns(T::Boolean) }
-  def midnight?; end
-
   sig { returns(ActiveSupport::TimeWithZone) }
   def beginning_of_day; end
 
