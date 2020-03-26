@@ -80,7 +80,7 @@ module ActiveModel::Validations
         length: T.any(T::Range[T.untyped], T::Hash[T.untyped, T.untyped]),
         numericality: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
         on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
-        presence: T::Boolean,
+        presence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
         size: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
         strict: T::Boolean,
         uniqueness: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),

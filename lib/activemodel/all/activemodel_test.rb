@@ -38,6 +38,7 @@ module ActiveModelTest
   validates :age, numericality: true, on: [:create, :update]
 
   validates :token, presence: true, uniqueness: true, strict: TokenGenerationException
+  validates :password, presence: { if: :password_required?, message: 'is forgotten.' }, confirmation: true
 
   validates :card_number, presence: true, if: :paid_with_card?
 
