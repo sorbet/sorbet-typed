@@ -24,4 +24,18 @@ module Sidekiq::Worker::ClassMethods
     unique_for: nil
   )
   end
+  
+  sig do
+    params(
+      blk: T.proc.params(count: Integer, exception: Exception).returns(Integer)
+    ).returns(Integer)
+  end
+  def sidekiq_retry_in(&blk); end
+
+  sig do
+    params(
+      blk: T.proc.params(msg: T::Hash[String, T.untyped], exception: Exception).void
+    ).returns(Integer)
+  end
+  def sidekiq_retries_exhausted(&blk); end
 end
