@@ -9,7 +9,7 @@ module Sidekiq::Worker::ClassMethods
 
   sig do
     params(
-      queue: T.nilable(Symbol),
+      queue: T.nilable(T.any(String, Symbol)),
       retry: T.nilable(T.any(Integer, T::Boolean)),
       backtrace: T.nilable(T.any(Integer, T::Boolean)),
       pool: T.nilable(Symbol),
