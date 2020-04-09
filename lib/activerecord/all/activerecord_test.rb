@@ -181,3 +181,9 @@ class ActiveRecordMigrationsTest
     T.assert_type!(relation.size, Integer)
   end
 end
+
+class ActiveRecordBaseTest
+  def sanitize_sql_test
+    ActiveRecord::Base.sanitize_sql(["where id IN ?", [1, 2, 3]])
+  end
+end
