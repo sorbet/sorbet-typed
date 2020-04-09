@@ -266,7 +266,6 @@ class ActiveRecord::Base
   extend ActiveRecord::Scoping::Default::ClassMethods # via ActiveRecord::Scoping::Default Concern inclusion
   include ActiveRecord::Scoping::Named # via ActiveRecord::Scoping#included hook
   extend ActiveRecord::Scoping::Named::ClassMethods # via ActiveRecord::Scoping::Named Concern inclusion
-  include ActiveRecord::Sanitization
   include ActiveRecord::AttributeAssignment
   include ActiveModel::Conversion
   include ActiveRecord::Integration
