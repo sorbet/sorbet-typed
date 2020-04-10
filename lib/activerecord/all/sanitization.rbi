@@ -1,26 +1,21 @@
-# typed: stict
+# typed: strong
 
-class ActiveRecord::Base
-  include ActiveRecord::Sanitization
-  extend ActiveRecord::Sanitization::ClassMethods # via ActiveRecord::Sanitization concern
-end
-
-# @see https://github.com/rails/rails/blob/eca6c273fe2729b9634907562c2717cf86443b6b/activerecord/lib/active_record/sanitization.rb
+# https://github.com/rails/rails/blob/5-2-stable/activerecord/lib/active_record/sanitization.rb
 module ActiveRecord::Sanitization::ClassMethods
-  sig { params(condition: T.any(T.nilable(String), Array)).returns(T.nilable(String)) }
+  sig { params(condition: T.any(T.nilable(String), T::Array[T.untyped])).returns(T.nilable(String)) }
   def sanitize_sql_for_conditions(condition)
   end
   alias :sanitize_sql :sanitize_sql_for_conditions
 
-  sig { params(assignments: T.any(Array, Hash, String), default_table_name: String).returns(String) }
+  sig { params(assignments: T.any(T::Array[T.untyped], T::Hash[T.untyped, T.untyped], String), default_table_name: String).returns(String) }
   def sanitize_sql_for_assignment(assignments, default_table_name)
   end
 
-  sig { params(condition: T.any(Array, String)).returns(String) }
+  sig { params(condition: T.any(T::Array[T.untyped], String)).returns(String) }
   def sanitize_sql_for_order(condition)
   end
 
-  sig { params(attrs: Hash, table: String).returns(String) }
+  sig { params(attrs: T::Hash[T.untyped, T.untyped], table: String).returns(String) }
   def sanitize_sql_hash_for_assignment(attrs, table)
   end
 
@@ -28,7 +23,7 @@ module ActiveRecord::Sanitization::ClassMethods
   def sanitize_sql_like(string, escape_character = "\\")
   end
 
-  sig { params(ary: Array).returns(String) }
+  sig { params(ary: T::Array[T.untyped]).returns(String) }
   def sanitize_sql_array(ary)
   end
 end

@@ -260,6 +260,9 @@ class ActiveRecord::Base
   include ActiveRecord::Persistence
   include ActiveRecord::ReadonlyAttributes
   include ActiveRecord::ModelSchema
+  extend ActiveRecord::ModelSchema::ClassMethods # via ActiveRecord::ModelSchema concern inclusion
+  include ActiveRecord::Sanitization
+  extend ActiveRecord::Sanitization::ClassMethods # via ActiveRecord::Sanitization concern inclusion
   include ActiveRecord::Inheritance
   include ActiveRecord::Scoping
   include ActiveRecord::Scoping::Default # via ActiveRecord::Scoping#included hook
