@@ -182,8 +182,15 @@ class ActiveRecordMigrationsTest
   end
 end
 
-class ActiveRecordBaseTest
-  def sanitize_sql_test
+class ActiveRecordBaseTest < ApplicationRecord
+  self.inheritance_column = "typ"
+  self.ignored_columns = ["foo"]
+
+  def test_sanitize_sql
     ActiveRecord::Base.sanitize_sql(["where id IN ?", [1, 2, 3]])
+  end
+
+  def test_column_defaults
+    self.class.column_defaults
   end
 end
