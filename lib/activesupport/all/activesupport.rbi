@@ -544,10 +544,46 @@ class ActiveSupport::TimeWithZone
   sig { returns(ActiveSupport::TimeWithZone) }
   def at_end_of_day; end
 
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def end_of_year; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_end_of_year; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def beginning_of_year; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_beginning_of_year; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def end_of_month; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_end_of_month; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def beginning_of_month; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_beginning_of_month; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def end_of_hour; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_end_of_hour; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def beginning_of_hour; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def at_beginning_of_hour; end
+
   # Returns a `Time` instance that represents the time in `time_zone`.
   sig { returns(Time) }
   def time; end
-  
+
   # Returns a `Time` instance of the simultaneous time in the UTC timezone.
   sig { returns(Time) }
   def utc; end
