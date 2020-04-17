@@ -71,4 +71,7 @@ module ActiveSupportDurationTest
   T.assert_type!(Time.now - 4.weeks, Time)
   T.assert_type!(Time.now - Time.now, Float)
   T.assert_type!(Time.now - 4, Time)
+
+  T.assert_type!(1.hour.from_now, ActiveSupport::TimeWithZone)
+  T.assert_type!(1.hour.ago, ActiveSupport::TimeWithZone)
 end

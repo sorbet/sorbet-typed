@@ -547,7 +547,7 @@ class ActiveSupport::TimeWithZone
   # Returns a `Time` instance that represents the time in `time_zone`.
   sig { returns(Time) }
   def time; end
-  
+
   # Returns a `Time` instance of the simultaneous time in the UTC timezone.
   sig { returns(Time) }
   def utc; end
@@ -1361,6 +1361,12 @@ class ActiveSupport::Duration
   # The `precision` parameter can be used to limit seconds' precision of duration.
   sig { params(precision: T.nilable(Integer)).returns(String) }
   def iso8601(precision: nil); end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def from_now; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def ago; end
 end
 
 module Benchmark
