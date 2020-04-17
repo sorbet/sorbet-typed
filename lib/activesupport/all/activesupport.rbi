@@ -193,7 +193,7 @@ class String
   sig { params(locale: Symbol).returns(String) }
   def singularize(locale = :en); end
 
-  sig { returns(T.untyped) }
+  sig { returns(String) }
   def squish!; end
 
   sig { returns(String) }
