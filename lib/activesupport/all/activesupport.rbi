@@ -1397,6 +1397,12 @@ class ActiveSupport::Duration
   # The `precision` parameter can be used to limit seconds' precision of duration.
   sig { params(precision: T.nilable(Integer)).returns(String) }
   def iso8601(precision: nil); end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def from_now; end
+
+  sig { returns(ActiveSupport::TimeWithZone) }
+  def ago; end
 end
 
 module Benchmark
