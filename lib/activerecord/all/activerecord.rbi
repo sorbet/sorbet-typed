@@ -33,7 +33,7 @@ module ActiveRecord::Associations::ClassMethods
       foreign_key: T.nilable(T.any(Symbol, String)),
       foreign_type: T.nilable(T.any(Symbol, String)),
       index_errors: T.nilable(T::Boolean),
-      inverse_of: T.nilable(T.any(Symbol, String)),
+      inverse_of: T.nilable(T.any(Symbol, String, FalseClass)),
       join_table: T.nilable(T.any(Symbol, String)),
       primary_key: T.nilable(T.any(Symbol, String)),
       source: T.nilable(T.any(Symbol, String)),
