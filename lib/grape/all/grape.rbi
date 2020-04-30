@@ -72,6 +72,14 @@ class Grape::API
 
   sig do
     params(
+      block: T.nilable(T.proc.void)
+    ).returns(T::Hash[T.untyped, T.untyped])
+  end
+  def params(&block)
+  end
+
+  sig do
+    params(
       route: String,
       block: T.nilable(T.proc.void)
     ).void
