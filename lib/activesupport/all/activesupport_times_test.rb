@@ -18,6 +18,7 @@ module ActiveSupportTimesTest
   Time.zone = ActiveSupport::TimeZone["Hawaii"]
   Time.zone = -5.hours
   Time.zone.now
+  Time.zone.now.advance(hours: 2)
   Time.zone.now.to_a
   Time.zone.now.to_r
   Time.zone.now.to_i
