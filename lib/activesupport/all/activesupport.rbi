@@ -888,6 +888,14 @@ class ActiveSupport::TimeWithZone
   # of `ActiveSupport.to_time_preserves_timezone`.
   sig { returns(Time) }
   def to_time; end
+
+  # Uses Date to provide precise Time calculations for years, months, and days according to the proleptic Gregorian calendar.
+  # The result is returned as a new `TimeWithZone` object.
+  # The options parameter takes a hash with any of these keys: :years, :months, :weeks, :days, :hours, :minutes, :seconds.
+  # If advancing by a value of variable length (i.e., years, weeks, months, days), move forward from `time`, otherwise move forward
+  # from utc, for accuracy when moving across DST boundaries.
+  sig { params(options: T::Hash[Symbol, Integer]).returns(ActiveSupport::TimeWithZone) }
+  def advance(options); end
 end
 
 # defines some of the methods at https://github.com/rails/rails/blob/v6.0.0/activesupport/lib/active_support/core_ext/date
