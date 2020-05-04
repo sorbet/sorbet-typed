@@ -894,7 +894,7 @@ class ActiveSupport::TimeWithZone
   # The options parameter takes a hash with any of these keys: :years, :months, :weeks, :days, :hours, :minutes, :seconds.
   # If advancing by a value of variable length (i.e., years, weeks, months, days), move forward from `time`, otherwise move forward
   # from utc, for accuracy when moving across DST boundaries.
-  sig { params(options: T::Hash[Symbol, Integer]).returns(ActiveSupport::TimeWithZone) }
+  sig { params(options: T::Hash[Symbol, T.any(Integer, Float)]).returns(ActiveSupport::TimeWithZone) }
   def advance(options); end
 end
 
