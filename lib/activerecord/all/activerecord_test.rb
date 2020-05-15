@@ -4,6 +4,9 @@ module ActiveRecordAssociationsTest
   extend ActiveRecord::Associations::ClassMethods
 
   has_many :people
+  has_many :people, inverse_of: "person"
+  has_many :people, inverse_of: :person
+  has_many :people, inverse_of: false
   has_many :people, -> { true }, class_name: "Person"
   has_many :tracks, dependent: :destroy
   has_many :comments, dependent: :nullify
@@ -11,6 +14,9 @@ module ActiveRecordAssociationsTest
   has_many :subscribers, through: :subscriptions, source: :user
 
   has_one :credit_card
+  has_one :credit_card, inverse_of: "credit_card"
+  has_one :credit_card, inverse_of: :credit_card
+  has_one :credit_card, inverse_of: false
   has_one :credit_card, dependent: :destroy
   has_one :credit_card, dependent: :nullify
   has_one :last_comment, class_name: "Comment"
@@ -24,7 +30,9 @@ module ActiveRecordAssociationsTest
   has_and_belongs_to_many :nations, class_name: "Country", after_add: :foo
   has_and_belongs_to_many :categories, join_table: "prods_cats"
 
-  belongs_to :firm, foreign_key: "client_of"
+  belongs_to :firm, foreign_key: "client_of", inverse_of: false
+  belongs_to :firm, foreign_key: "client_of", inverse_of: "firms"
+  belongs_to :firm, foreign_key: "client_of", inverse_of: :firms
   belongs_to :person, primary_key: "name", foreign_key: "person_name"
   belongs_to :author, class_name: "Person", foreign_key: "author_id"
   belongs_to :attachable, polymorphic: true
