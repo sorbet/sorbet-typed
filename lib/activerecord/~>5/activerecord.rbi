@@ -1,4 +1,4 @@
-# typed: strong
+# typed: strict
 
 class ActiveRecord::Base
 
