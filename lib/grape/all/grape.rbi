@@ -1,11 +1,6 @@
 # typed: strong
 
-class Virtus::Attribute::Boolean
-end
-
 class Grape::API
-  Boolean = Virtus::Attribute::Boolean
-
   sig do
     params(
       name: Symbol,
