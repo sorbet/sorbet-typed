@@ -874,6 +874,9 @@ class ActiveSupport::TimeWithZone
   sig { returns(Rational) }
   def to_r; end
 
+  sig { returns(Date) }
+  def to_date; end
+
   # Returns an instance of DateTime with the timezone's UTC offset
   #
   # ```ruby
