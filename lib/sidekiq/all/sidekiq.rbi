@@ -39,3 +39,18 @@ module Sidekiq::Worker::ClassMethods
   end
   def sidekiq_retries_exhausted(&blk); end
 end
+
+module Sidekiq
+  class CLI
+    sig { returns(Sidekiq::CLI) }
+    def self.instance; end
+
+    sig { returns(Sidekiq::Launcher) }
+    def launcher; end
+  end
+
+  class Launcher
+    sig { returns(T::Boolean) }
+    def stopping?; end
+  end
+end
