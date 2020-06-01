@@ -23,6 +23,7 @@ module ActiveSupportTimesTest
   Time.zone.now.to_r
   Time.zone.now.to_i
   Time.zone.now.to_f
+  Time.zone.now.to_date
   Time.zone.now.to_datetime
   Time.zone.now.to_time
   Time.zone.today
