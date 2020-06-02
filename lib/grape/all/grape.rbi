@@ -233,4 +233,7 @@ class Grape::API
   end
   def self.rescue_from(exception, &block)
   end
+
+  sig { params(middleware_class: T.untyped, args: T.untyped, block: T.untyped).void }
+  def self.use(middleware_class, *args, &block); end
 end

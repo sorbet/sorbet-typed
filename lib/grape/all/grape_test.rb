@@ -1,7 +1,11 @@
 # typed: strict
 
+module Middleware; end
+
 class GrapeTest < Grape::API
   extend T::Sig
+
+  use Middleware
 
   params do
     requires :nothing
