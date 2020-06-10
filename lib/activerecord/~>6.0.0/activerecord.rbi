@@ -466,3 +466,11 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
   sig { params(sql: String, name: T.nilable(String)).returns(T.untyped) }
   def execute(sql, name = nil); end
 end
+
+module ActiveRecord::Core
+  sig { returns(T::Boolean) }
+  def blank?; end
+
+  sig { returns(T::Boolean) }
+  def present?; end
+end

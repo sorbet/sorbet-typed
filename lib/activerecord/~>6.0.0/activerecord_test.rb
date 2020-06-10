@@ -122,3 +122,9 @@ class ActiveRecordOldMigrationsTest < ActiveRecord::Migration::Compatibility::V5
     end
   end
 end
+
+class ActiveRecordCoreTest < ApplicationRecord
+end
+obj = ActiveRecordCoreTest.new
+T.assert_type!(obj.present?, T::Boolean)
+T.assert_type!(obj.blank?, T::Boolean)
