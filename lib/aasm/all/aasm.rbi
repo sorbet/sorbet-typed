@@ -37,13 +37,15 @@ module AASM::ClassMethods
     params(
       from: T.any(T.nilable(Symbol), T::Array[Symbol]),
       to: T.nilable(Symbol),
-      guard: T.nilable(Symbol)
+      guard: T.nilable(Symbol),
+      after: T.nilable(Symbol)
     ).void
   end
   def transitions(
     from: nil,
     to: nil,
-    guard: nil
+    guard: nil,
+    after: nil
   )
   end
 
