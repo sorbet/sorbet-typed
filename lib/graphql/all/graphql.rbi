@@ -16,10 +16,8 @@ class GraphQL::Schema::Object < GraphQL::Schema::Member
   extend GraphQL::Schema::Member::HasArguments
 end
 
-module Types::BaseInterface
-   # srb rbi gems does *not* add the next line, which means arguments don't work out of the box
-  # Note this isn't strictly correct. see https://github.com/sorbet/sorbet-typed/pull/166
-  extend GraphQL::Schema::Member::HasFields
+module GraphQL::Schema::Interface
+  mixes_in_class_methods(::GraphQL::Schema::Member::HasFields)
 end
 
 class GraphQL::Schema::Enum < GraphQL::Schema::Member
