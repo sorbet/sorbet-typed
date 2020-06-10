@@ -9,6 +9,11 @@ module GraphqlTest
       argument :id, ID, "The ID of the user to find", required: true
     end
   end
+  
+  module BaseInterface
+    include GraphQL::Schema::Interface
+    field_class Types::BaseField
+  end
 
   class CardinalDirectionType < GraphQL::Schema::Enum
     value "NORTH", value: 'north'
