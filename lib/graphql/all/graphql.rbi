@@ -16,6 +16,14 @@ class GraphQL::Schema::Object < GraphQL::Schema::Member
   extend GraphQL::Schema::Member::HasArguments
 end
 
+module GraphQL::Schema::Member::HasFields
+  def field_class(new_field_class = nil); end
+end
+
+module GraphQL::Schema::Interface
+  mixes_in_class_methods(::GraphQL::Schema::Member::HasFields)
+end
+
 class GraphQL::Schema::Enum < GraphQL::Schema::Member
   # Define a value for this enum
   #
