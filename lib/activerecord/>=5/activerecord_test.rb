@@ -10,4 +10,6 @@ class ActiveRecordCallbacksTest < ApplicationRecord
 
   after_destroy_commit :log_destroy_commit_action
   after_destroy_commit :log_user_deleted_from_db, if: :author_wants_emails?, unless: Proc.new { |comment| comment.article.ignore_comments? }
+
+  has_secure_token :secure_token
 end
