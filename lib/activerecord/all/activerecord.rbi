@@ -1441,3 +1441,7 @@ class ActiveRecord::Relation
   sig { returns(T::Boolean) }
   def many?; end
 end
+
+module ActiveRecord::Batches; end
+
+class ActiveRecord::Batches::BatchEnumerator; end
