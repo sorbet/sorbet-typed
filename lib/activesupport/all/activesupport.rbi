@@ -297,7 +297,7 @@ class Array
 
   # to_default_s is an alias of the core method 'to_s'
   sig {returns(String)}
-  def to_defaul_s; end
+  def to_default_s; end
 
   sig { params(format: Symbol).returns(String) }
   def to_formatted_s(format = :default); end
