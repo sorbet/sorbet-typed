@@ -251,10 +251,10 @@ class Array
   sig { returns(T::Hash[T.untyped, T.untyped]) }
   def extract_options!; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def fifth; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def forty_two; end
 
   sig { returns(Elem) }
@@ -272,10 +272,10 @@ class Array
   sig { returns(T.untyped) }
   def inquiry; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def second; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def second_to_last; end
 
   sig do
@@ -286,10 +286,10 @@ class Array
   end
   def split(value = nil, &blk); end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def third; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def third_to_last; end
 
   sig { params(position: Integer).returns(T::Array[T.untyped]) }
