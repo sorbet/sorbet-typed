@@ -1019,7 +1019,7 @@ class ActiveSupport::TimeZone
   # numeric value it is either the hour offset, or the second offset, of the
   # timezone to find. (The first one with that offset will be returned.)
   # Returns `nil` if no such time zone is known to the system.
-  sig { params(arg: T.any(String, Numeric, ActiveSupport::Duration)).returns(ActiveSupport::TimeZone) }
+  sig { params(arg: T.any(String, Numeric, ActiveSupport::Duration)).returns(T.nilable(ActiveSupport::TimeZone)) }
   def self.[](arg); end
 
   # Returns an array of all TimeZone objects. There are multiple
