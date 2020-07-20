@@ -251,13 +251,13 @@ class Array
   sig { returns(T::Hash[T.untyped, T.untyped]) }
   def extract_options!; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def fifth; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def forty_two; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def fourth; end
 
   sig { params(position: Integer).returns(T::Array[T.untyped]) }
@@ -272,10 +272,10 @@ class Array
   sig { returns(T.untyped) }
   def inquiry; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def second; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def second_to_last; end
 
   sig do
@@ -286,10 +286,10 @@ class Array
   end
   def split(value = nil, &blk); end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def third; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def third_to_last; end
 
   sig { params(position: Integer).returns(T::Array[T.untyped]) }
@@ -297,7 +297,7 @@ class Array
 
   # to_default_s is an alias of the core method 'to_s'
   sig {returns(String)}
-  def to_defaul_s; end
+  def to_default_s; end
 
   sig { params(format: Symbol).returns(String) }
   def to_formatted_s(format = :default); end
