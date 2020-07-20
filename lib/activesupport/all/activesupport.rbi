@@ -257,7 +257,7 @@ class Array
   sig { returns(T.nilable(Elem)) }
   def forty_two; end
 
-  sig { returns(Elem) }
+  sig { returns(T.nilable(Elem)) }
   def fourth; end
 
   sig { params(position: Integer).returns(T::Array[T.untyped]) }
