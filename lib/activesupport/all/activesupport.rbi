@@ -1409,10 +1409,10 @@ class ActiveSupport::Duration
   sig { params(precision: T.nilable(Integer)).returns(String) }
   def iso8601(precision: nil); end
 
-  sig { params(time: ActiveSupport::TimeWithZone).returns(ActiveSupport::TimeWithZone) }
+  sig { params(time: T.any(ActiveSupport::TimeWithZone, Date)).returns(ActiveSupport::TimeWithZone) }
   def from_now(time = Time.current); end
 
-  sig { params(time: ActiveSupport::TimeWithZone).returns(ActiveSupport::TimeWithZone) }
+  sig { params(time: T.any(ActiveSupport::TimeWithZone, Date)).returns(ActiveSupport::TimeWithZone) }
   def ago(time = Time.current); end
 end
 
