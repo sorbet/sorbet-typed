@@ -593,7 +593,7 @@ class ActiveSupport::TimeWithZone
   def period; end
 
   # Returns the simultaneous time in `Time.zone`, or the specified zone.
-  sig { params(new_zone: T.untyped).returns(Time) }
+  sig { params(new_zone: T.untyped).returns(ActiveSupport::TimeWithZone) }
   def in_time_zone(new_zone = ::Time.zone); end
 
   # Returns a `Time` instance of the simultaneous time in the system timezone.
