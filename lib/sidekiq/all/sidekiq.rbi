@@ -27,8 +27,8 @@ module Sidekiq::Worker::ClassMethods
   
   sig do
     params(
-      blk: T.proc.params(count: Integer, exception: Exception).returns(Integer)
-    ).returns(T.nilable(Integer))
+      blk: T.proc.params(count: Integer, exception: Exception).returns(T.nilable(Integer))
+    ).void
   end
   def sidekiq_retry_in(&blk); end
 
