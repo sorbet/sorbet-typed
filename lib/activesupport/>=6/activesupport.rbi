@@ -20,10 +20,11 @@ module Enumerable
   # the case where a block isn't given isn't handled - that seems like an unlikely case
   sig do
     type_parameters(:key).params(
+      default: T.untyped,
       block: T.proc.params(o: Enumerable::Elem).returns(T.type_parameter(:key))
     ).returns(
       T::Hash[Enumerable::Elem, T.type_parameter(:key)]
     )
   end
-  def index_with(&block); end
+  def index_with(default = T.unsafe(nil), &block); end
 end
