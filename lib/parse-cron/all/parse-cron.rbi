@@ -15,12 +15,12 @@ class CronParser
   def interpret_vixieisms(spec); end
 
   # returns the next occurence after the given date
-  sig { params(now: Time, num: Integer).returns(T.any(Time, T::Array[Time]))  }
-  def next(now = @time_source.now, num = 1); end
+  sig { params(now: Time).returns(Time)  }
+  def next(now = @time_source.now); end
 
   # returns the last occurence before the given date
-  sig { params(now: Time, num: Integer).returns(T.any(Time, T::Array[Time]))  }
-  def last(now = @time_source.now, num=1); end
+  sig { params(now: Time).returns(Time)  }
+  def last(now = @time_source.now); end
 
   SUBELEMENT_REGEX = T.let(%r{}, Regexp)
 
