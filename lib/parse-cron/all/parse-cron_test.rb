@@ -13,7 +13,7 @@ module ParseCronTest
   result_time = cron.last
   result_time = cron.last(reference_time)
 
-  # Generic usage
+  # Custom Time class
   ExtendedTime = Class.new(Time)
   result_time = CronParser.new("* * * * *", ExtendedTime).next
 end
