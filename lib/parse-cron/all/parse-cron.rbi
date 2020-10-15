@@ -6,37 +6,21 @@ class CronParser
   extend T::Sig
   extend T::Generic
 
-  # NOTE: Make these variant if you use the alternate sigs for later methods.
-  SourceClass = type_member(fixed: T.class_of(Time))
-  Source = type_member(fixed: Time)
-
   SYMBOLS = T.let({}, T::Hash[String, String])
 
-  sig { params(source: String).void }
-  def initialize(source); end
-
-  # # NOTE: This is the more complete signature of initialize:
-  # sig { params(source: String, time_source: SourceClass).void }
-  # def initialize(source, time_source = Time); end
+  sig { params(source: String, time_source: T.class_of(Time)).void }
+  def initialize(source, time_source = Time); end
 
   sig { params(spec: String).returns(String) }
   def interpret_vixieisms(spec); end
 
   # returns the next occurence after the given date
-  sig { params(now: Source).returns(Source) }
-  def next(now = @time_source.now); end
-
-  # # NOTE: This is the more complete signature of next:
-  # sig { params(now: Source, num: Integer).returns(T.any(Source, T::Array[Source])) }
-  # def next(now = @time_source.now, num = 1); end
+  sig { params(now: Time, num: Integer).returns(T.any(Time, T::Array[Time]))  }
+  def next(now = @time_source.now, num = 1); end
 
   # returns the last occurence before the given date
-  sig { params(now: Source).returns(Source) }
-  def last(now = @time_source.now); end
-
-  # # NOTE: This is the more complete signature of last:
-  # sig { params(now: Source, num: Integer).returns(T.any(Source, T::Array[Source])) }
-  # def last(now = @time_source.now, num = 1); end
+  sig { params(now: Time, num: Integer).returns(T.any(Time, T::Array[Time]))  }
+  def last(now = @time_source.now, num=1); end
 
   SUBELEMENT_REGEX = T.let(%r{}, Regexp)
 
@@ -50,7 +34,7 @@ class CronParser
 
   protected
 
-  sig { params(meth: Symbol, time: Source, num: Integer).returns(T::Array[Source])  }
+  sig { params(meth: Symbol, time: Time, num: Integer).returns(T::Array[Time])  }
   def recursive_calculate(meth,time,num); end
 
   # returns a list of days which do both match time_spec[:dom] or time_spec[:dow]
@@ -60,28 +44,28 @@ class CronParser
   sig { params(year: Integer, month: Integer).returns([T::Set[Integer], T::Array[Integer]])  }
   def interpolate_weekdays_without_cache(year, month); end
 
-  sig { params(t: InternalTime[SourceClass, Source], dir: Symbol).returns(Integer)  }
+  sig { params(t: InternalTime[T.class_of(Time), Time], dir: Symbol).returns(Integer)  }
   def nudge_year(t, dir = :next); end
 
-  sig { params(t: InternalTime[SourceClass, Source], dir: Symbol).returns(Integer)  }
+  sig { params(t: InternalTime[T.class_of(Time), Time], dir: Symbol).returns(Integer)  }
   def nudge_month(t, dir = :next); end
 
-  sig { params(t: InternalTime[SourceClass, Source], dir: Symbol).returns(T::Boolean)  }
+  sig { params(t: InternalTime[T.class_of(Time), Time], dir: Symbol).returns(T::Boolean)  }
   def date_valid?(t, dir = :next); end
 
   sig do
     params(
-      t: InternalTime[SourceClass, Source],
+      t: InternalTime[T.class_of(Time), Time],
       dir: Symbol,
       can_nudge_month: T::Boolean,
     ).returns(T.nilable(Integer))
   end
   def nudge_date(t, dir = :next, can_nudge_month = true); end
 
-  sig { params(t: InternalTime[SourceClass, Source], dir: Symbol).returns(T.nilable(Integer))  }
+  sig { params(t: InternalTime[T.class_of(Time), Time], dir: Symbol).returns(T.nilable(Integer))  }
   def nudge_hour(t, dir = :next); end
 
-  sig { params(t: InternalTime[SourceClass, Source], dir: Symbol).returns(T.nilable(Integer))  }
+  sig { params(t: InternalTime[T.class_of(Time), Time], dir: Symbol).returns(T.nilable(Integer))  }
   def nudge_minute(t, dir = :next); end
 
   sig { returns(T::Hash[Symbol, [T::Set[Integer], T::Array[Integer], String]]) }
@@ -113,19 +97,16 @@ class CronParser::InternalTime
   extend T::Sig
   extend T::Generic
 
-  SourceClass = type_member
-  Source = type_member
-
   sig { returns(Integer) }
   attr_accessor :year, :month, :day, :hour, :min
 
-  sig { returns(SourceClass) }
+  sig { returns(T.class_of(Time)) }
   attr_accessor :time_source
 
-  sig { params(time: Source, time_source: SourceClass).void }
+  sig { params(time: Time, time_source: T.class_of(Time)).void }
   def initialize(time, time_source = Time); end
 
-  sig { returns(Source) }
+  sig { returns(Time) }
   def to_time; end
 
   sig { returns(String) }
