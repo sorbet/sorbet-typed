@@ -451,7 +451,7 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
       module: T.nilable(T.any(String, Symbol)),
       as: T.nilable(T.any(String, Symbol)),
       via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      to: T.nilable(T.any(String, Symbol, T.proc.returns(T.untyped))),
+      to: T.nilable(T.any(String, Symbol, T.proc.params(arg0: T.untyped).returns(T.untyped))),
       on: T.nilable(Symbol),
       constraints: T.untyped,
       defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
