@@ -73,7 +73,7 @@ module Stripe
     sig { returns(String) }
     def id; end
 
-    sig { returns(val: T::Hash[Symbol, T.untyped]) }
+    sig { returns(T::Hash[Symbol, T.untyped]) }
     def metadata; end
 
     sig { void.params(val: T::Hash[Symbol, T.untyped]) }
