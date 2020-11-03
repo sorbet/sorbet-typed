@@ -474,3 +474,10 @@ module ActiveRecord::Core
   sig { returns(T::Boolean) }
   def present?; end
 end
+
+module ActiveRecord::ConnectionHandling
+  def connected_to(database: T.unsafe(nil), role: T.unsafe(nil), prevent_writes: T.unsafe(nil), &blk); end
+  def connected_to?(role:); end
+  def connects_to(database: T.unsafe(nil)); end
+  def current_role; end
+end
