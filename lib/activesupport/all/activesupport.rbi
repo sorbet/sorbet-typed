@@ -1714,6 +1714,10 @@ module Benchmark
   def self.ms(&block); end
 end
 
+module ActiveSupport::Benchmarkable
+  def benchmark(message = T.unsafe(nil), options = T.unsafe(nil)); end
+end
+
 class ActiveSupport::Cache::Store
   def initialize(options = T.unsafe(nil)); end
 
@@ -2320,6 +2324,53 @@ class ActiveSupport::JSON::Encoding::JSONGemEncoder
   def stringify(jsonified); end
 end
 
+class ActiveSupport::LogSubscriber < ::ActiveSupport::Subscriber
+  def colorize_logging; end
+  def colorize_logging=(obj); end
+  def debug(progname = T.unsafe(nil), &block); end
+  def error(progname = T.unsafe(nil), &block); end
+  def fatal(progname = T.unsafe(nil), &block); end
+  def finish(name, id, payload); end
+  def info(progname = T.unsafe(nil), &block); end
+  def logger; end
+  def start(name, id, payload); end
+  def unknown(progname = T.unsafe(nil), &block); end
+  def warn(progname = T.unsafe(nil), &block); end
+
+  private
+
+  def color(text, color, bold = T.unsafe(nil)); end
+
+  class << self
+    def colorize_logging; end
+    def colorize_logging=(obj); end
+    def flush_all!; end
+    def log_subscribers; end
+    def logger; end
+    def logger=(_); end
+  end
+end
+
+ActiveSupport::LogSubscriber::BLACK = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::BLUE = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::BOLD = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::CLEAR = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::CYAN = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::GREEN = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::MAGENTA = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::RED = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::WHITE = T.let(T.unsafe(nil), String)
+
+ActiveSupport::LogSubscriber::YELLOW = T.let(T.unsafe(nil), String)
+
 class ActiveSupport::Logger < ::Logger
   include(::ActiveSupport::LoggerSilence)
   include(::ActiveSupport::LoggerThreadSafeLevel)
@@ -2683,6 +2734,37 @@ class ActiveSupport::StringInquirer < ::String
 
   def method_missing(method_name, *arguments); end
   def respond_to_missing?(method_name, include_private = T.unsafe(nil)); end
+end
+
+class ActiveSupport::Subscriber
+  def initialize; end
+
+  def finish(name, id, payload); end
+  def patterns; end
+  def start(name, id, payload); end
+
+  private
+
+  def event_stack; end
+
+  class << self
+    def attach_to(namespace, subscriber = T.unsafe(nil), notifier = T.unsafe(nil)); end
+    def detach_from(namespace, notifier = T.unsafe(nil)); end
+    def method_added(event); end
+    def subscribers; end
+
+    private
+
+    def add_event_subscriber(event); end
+    def find_attached_subscriber; end
+    def invalid_event?(event); end
+    def namespace; end
+    def notifier; end
+    def pattern_subscribed?(pattern); end
+    def prepare_pattern(event); end
+    def remove_event_subscriber(event); end
+    def subscriber; end
+  end
 end
 
 module ActiveSupport::TaggedLogging
