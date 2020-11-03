@@ -1714,6 +1714,19 @@ module Benchmark
   def self.ms(&block); end
 end
 
+module ActiveSupport::Autoload
+  def autoload(const_name, path = T.unsafe(nil)); end
+  def autoload_at(path); end
+  def autoload_under(path); end
+  def autoloads; end
+  def eager_autoload; end
+  def eager_load!; end
+
+  class << self
+    def extended(base); end
+  end
+end
+
 module ActiveSupport::Benchmarkable
   def benchmark(message = T.unsafe(nil), options = T.unsafe(nil)); end
 end
@@ -2714,6 +2727,18 @@ class ActiveSupport::Reloader < ::ActiveSupport::ExecutionWrapper
     def wrap; end
   end
 end
+
+class ActiveSupport::SafeBuffer < ::String
+  def initialize(str = T.unsafe(nil)); end
+end
+
+class ActiveSupport::SafeBuffer::SafeConcatError < ::StandardError
+  def initialize; end
+end
+
+ActiveSupport::SafeBuffer::UNSAFE_STRING_METHODS = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+ActiveSupport::SafeBuffer::UNSAFE_STRING_METHODS_WITH_BACKREF = T.let(T.unsafe(nil), T::Array[T.untyped])
 
 module ActiveSupport::SecurityUtils
 
