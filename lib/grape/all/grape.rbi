@@ -197,13 +197,13 @@ class Grape::API
   end
 
   sig do
-    params().returns(String)
+    returns(String)
   end
   def self.request_user_ip
   end
 
   sig do
-    params().returns(String)
+    returns(String)
   end
   def self.request_user_id
   end
