@@ -1,5 +1,0 @@
-language: 'ruby'
-rvm:
-  - '2.5.7'
-script:
-  - 'ruby .ci/run.rb'
