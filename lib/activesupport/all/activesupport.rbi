@@ -2685,6 +2685,33 @@ class ActiveSupport::OrderedOptions < ::Hash
   Elem = type_member(fixed: T.untyped)
 end
 
+class ActiveSupport::ParameterFilter
+  def initialize(filters = T.unsafe(nil), mask: T.unsafe(nil)); end
+
+  def filter(params); end
+  def filter_param(key, value); end
+
+  private
+
+  def compiled_filter; end
+end
+
+class ActiveSupport::ParameterFilter::CompiledFilter
+  def initialize(regexps, deep_regexps, blocks, mask:); end
+
+  def blocks; end
+  def call(params, parents = T.unsafe(nil), original_params = T.unsafe(nil)); end
+  def deep_regexps; end
+  def regexps; end
+  def value_for_key(key, value, parents = T.unsafe(nil), original_params = T.unsafe(nil)); end
+
+  class << self
+    def compile(filters, mask:); end
+  end
+end
+
+ActiveSupport::ParameterFilter::FILTERED = T.let(T.unsafe(nil), String)
+
 class ActiveSupport::Reloader < ::ActiveSupport::ExecutionWrapper
   def initialize; end
 
@@ -2726,6 +2753,26 @@ class ActiveSupport::Reloader < ::ActiveSupport::ExecutionWrapper
     def to_prepare(*args, &block); end
     def wrap; end
   end
+end
+
+module ActiveSupport::Rescuable
+  extend(::ActiveSupport::Concern)
+
+  mixes_in_class_methods(::ActiveSupport::Rescuable::ClassMethods)
+
+  def handler_for_rescue(exception); end
+  def rescue_with_handler(exception); end
+end
+
+module ActiveSupport::Rescuable::ClassMethods
+  def handler_for_rescue(exception, object: T.unsafe(nil)); end
+  def rescue_from(*klasses, with: T.unsafe(nil), &block); end
+  def rescue_with_handler(exception, object: T.unsafe(nil), visited_exceptions: T.unsafe(nil)); end
+
+  private
+
+  def constantize_rescue_handler_class(class_or_name); end
+  def find_rescue_handler(exception); end
 end
 
 class ActiveSupport::SafeBuffer < ::String
