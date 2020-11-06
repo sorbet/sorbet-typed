@@ -1029,7 +1029,7 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: Symbol,
+      arg: T.any(Symbol, T.proc.returns(T.untyped)),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       on: T.nilable(T.any(Symbol, T::Array[Symbol])),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
