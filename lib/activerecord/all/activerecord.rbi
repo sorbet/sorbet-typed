@@ -207,6 +207,7 @@ module ActiveRecord::Associations::ClassMethods
       class_name: T.nilable(T.any(Symbol, String)),
       extend: T.nilable(T.any(Module, T::Array[Module])),
       foreign_key: T.nilable(T.any(Symbol, String)),
+      inverse_of: T.nilable(T.any(Symbol, String, FalseClass)),
       join_table: T.nilable(T.any(Symbol, String)),
       validate: T.nilable(T::Boolean),
       blk: T.nilable(T.proc.void)
@@ -224,6 +225,7 @@ module ActiveRecord::Associations::ClassMethods
     class_name: nil,
     extend: nil,
     foreign_key: nil,
+    inverse_of: nil,
     join_table: nil,
     validate: nil,
     &blk
