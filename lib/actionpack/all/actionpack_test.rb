@@ -79,10 +79,20 @@ module ActionPackRoutesTest
 end
 
 module ActionPackProtectFromForgeryTest
+  include ActionController::RequestForgeryProtection
   extend ActionController::RequestForgeryProtection::ClassMethods
+
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
   protect_from_forgery prepend: true, with: :exception
   protect_from_forgery except: :index
+
+  def test_protect_against_forgery
+    protect_against_forgery?
+  end
+
+  def test_form_authenticity_token
+    form_authenticity_token
+  end
 end
 
 module ActionPackFlashTest
@@ -158,7 +168,7 @@ module ActionPackCallbacksTest
   prepend_after_action(:action_name, only: :show)  { |controller| puts controller }
   after_action(:action_name, only: :show)          { |controller| puts controller }
   append_after_action(:action_name, only: :show)   { |controller| puts controller }
-  
+
   # Test proc for `if`, symbol for `only`, symbol array for `except`.
   prepend_before_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
   before_action :action_name, if: -> { true }, only: :show, except: [:edit, :delete]
