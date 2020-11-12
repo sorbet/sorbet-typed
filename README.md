@@ -1,4 +1,4 @@
-[![BuildStatus](https://travis-ci.org/sorbet/sorbet-typed.svg?branch=master)](https://travis-ci.org/sorbet/sorbet-typed)
+![Ruby](https://github.com/sorbet/sorbet-typed/workflows/Ruby/badge.svg)
 
 # sorbet-typed
 
