@@ -2766,7 +2766,11 @@ end
 
 module ActiveSupport::Rescuable::ClassMethods
   def handler_for_rescue(exception, object: T.unsafe(nil)); end
+
+  # https://github.com/rails/rails/blob/5-2-stable/activesupport/lib/active_support/rescuable.rb#L51
+  sig { params(klasses: Class, with: T.nilable(Symbol), block: T.nilable(T.proc.void)).void }
   def rescue_from(*klasses, with: T.unsafe(nil), &block); end
+
   def rescue_with_handler(exception, object: T.unsafe(nil), visited_exceptions: T.unsafe(nil)); end
 
   private
