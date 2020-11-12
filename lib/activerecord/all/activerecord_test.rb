@@ -199,6 +199,10 @@ class ActiveRecordBaseTest < ApplicationRecord
     ActiveRecord::Base.sanitize_sql(["where id IN ?", [1, 2, 3]])
   end
 
+  def test_sanitize_sql_for_assignment
+    ActiveRecord::Base.sanitize_sql_for_assignment(['(?)', 1])
+  end
+
   def test_column_defaults
     self.class.column_defaults
   end
