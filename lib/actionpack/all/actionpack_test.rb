@@ -220,6 +220,8 @@ module ActionPackMimeRespondsTest
     format.json { 1 }
     format.xml
     format.xml { 1 }
+    format.all
+    format.all { 1 }
   end
 end
 
@@ -237,4 +239,11 @@ module ActionDispatchRequestTest
   T.assert_type!(request.request_id, String)
   T.assert_type!(request.key?(:key_name), T::Boolean)
   T.assert_type!(request.local?, T::Boolean)
+end
+
+class ActionControllerBaseTest < ActionController::Base
+  rescue_from StandardError, with: :error_render_method
+  rescue_from NotImplementedError do
+    STDERR.puts "🔥"
+  end
 end
