@@ -93,3 +93,7 @@ module ActiveStorage::Attached::Model::ClassMethods
   end
   def has_many_attached(name, dependent: :purge_later, service: nil); end
 end
+
+module ActiveStorage::Attached::Model
+  mixes_in_class_methods(ActiveStorage::Attached::Model::ClassMethods)
+end
