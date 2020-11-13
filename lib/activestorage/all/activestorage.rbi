@@ -164,7 +164,3 @@ class ActiveStorage::Blob < ActiveRecord::Base
   include ActiveStorage::Blob::Identifiable
   include ActiveStorage::Blob::Representable
 end
-
-module ActiveStorage::Attached::Model
-  mixes_in_class_methods(ActiveStorage::Attached::Model::ClassMethods)
-end
