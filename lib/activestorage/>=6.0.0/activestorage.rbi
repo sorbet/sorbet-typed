@@ -10,4 +10,3 @@ class ActiveStorage::Attached::Many
   sig { returns(T::Array[T.untyped]) }
   def blobs; end
 end
-
