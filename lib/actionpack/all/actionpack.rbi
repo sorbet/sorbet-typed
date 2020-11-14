@@ -1,5 +1,9 @@
 # typed: strong
 
+# https://github.com/rails/rails/blob/5-2-stable/actionpack/lib/action_controller.rb
+module ActionController
+end
+
 class AbstractController::Base < Object
 end
 
@@ -833,6 +837,18 @@ module ActionController::Rendering::ClassMethods
 end
 
 ActionController::Rendering::RENDER_FORMATS_IN_PRIORITY = T.let(T.unsafe(nil), T::Array[T.untyped])
+
+module ActionController::RequestForgeryProtection
+  private
+
+  # https://github.com/rails/rails/blob/5-2-stable/actionpack/lib/action_controller/metal/request_forgery_protection.rb#L435
+  sig { returns(T::Boolean) }
+  def protect_against_forgery?; end
+
+  # https://github.com/rails/rails/blob/5-2-stable/actionpack/lib/action_controller/metal/request_forgery_protection.rb#L307
+  sig { params(form_options: T::Hash[T.untyped, T.untyped]).returns(String)  }
+  def form_authenticity_token(form_options: {}); end
+end
 
 module ActionController::RequestForgeryProtection::ClassMethods
   sig do
