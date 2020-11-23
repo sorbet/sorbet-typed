@@ -265,6 +265,9 @@ end
 class ActionController::ActionControllerError < ::StandardError
 end
 
+class ActionController::API < ::ActionController::Metal
+end
+
 module ::AbstractController::Rendering; end
 module ::AbstractController::Translation; end
 module ::AbstractController::AssetPaths; end
@@ -950,6 +953,8 @@ end
 ActionDispatch::RemoteIp::TRUSTED_PROXIES = T.let(T.unsafe(nil), T::Array[T.untyped])
 
 class ActionDispatch::Request
+  def body; end
+
   # Provides access to the request's HTTP headers, for example:
   #
   # ```ruby
