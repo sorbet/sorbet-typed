@@ -243,7 +243,6 @@ end
 
 module ActiveRecord::AttributeMethods
   extend(::ActiveSupport::Concern)
-  extend(::FilterEncryptedAttributes)
 
   include(::ActiveModel::AttributeMethods)
   include(::ActiveRecord::AttributeMethods::Read)
