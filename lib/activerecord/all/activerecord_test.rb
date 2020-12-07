@@ -69,6 +69,7 @@ class ActiveRecordCallbacksTest < ApplicationRecord
   after_commit :log_commit_action
   after_commit :log_user_saved_to_db, on: :create
   after_commit :log_user_saved_to_db, on: [:create, :update]
+  after_commit -> { :log_user_saved_to_db }, on: [:create, :update]
 
   before_validation :validation_setup
   before_validation :validation_setup, on: :create
@@ -197,6 +198,10 @@ class ActiveRecordBaseTest < ApplicationRecord
 
   def test_sanitize_sql
     ActiveRecord::Base.sanitize_sql(["where id IN ?", [1, 2, 3]])
+  end
+
+  def test_sanitize_sql_for_assignment
+    ActiveRecord::Base.sanitize_sql_for_assignment(['(?)', 1])
   end
 
   def test_column_defaults

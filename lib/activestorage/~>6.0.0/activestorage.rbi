@@ -1,5 +1,10 @@
 # typed: strong
 
+###
+# This exists because Rails 6.1 changes the method signatures for
+# has_one_attached and has_many_attached.
+###
+
 module ActiveStorage::Attached::Model::ClassMethods
   # Specifies the relation between a single attachment and the model.
   #
@@ -72,4 +77,30 @@ module ActiveStorage::Attached::Model::ClassMethods
     ).void
   end
   def has_many_attached(name, dependent: :purge_later); end
+end
+
+module ActiveStorage::Attached::Model
+  mixes_in_class_methods(ActiveStorage::Attached::Model::ClassMethods)
+end
+
+###
+# This part of the file exists because Rails 6.1 changes the parent class of
+# Attachment and Blob, so this is preserved for users still on Rails 6.0.
+###
+
+class ActiveStorage::Attachment < ActiveRecord::Base
+  # These aren't technically included, but Attachment delegates any missing
+  # methods to Blob, which means it effectively inherits methods from Blob.
+  # This is essentially a hack to make it easier to maintain the
+  # ActiveStorage signatures. We can't include Blob directly because
+  # it's a class, so `include`ing it doesn't work.
+  include ActiveStorage::Blob::Analyzable
+  include ActiveStorage::Blob::Identifiable
+  include ActiveStorage::Blob::Representable
+end
+
+class ActiveStorage::Blob < ActiveRecord::Base
+  include ActiveStorage::Blob::Analyzable
+  include ActiveStorage::Blob::Identifiable
+  include ActiveStorage::Blob::Representable
 end

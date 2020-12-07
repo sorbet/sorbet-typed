@@ -11,11 +11,12 @@ gems = Dir.glob("lib/*").reject { |p| exclude.include?(p) }
 
 # some gems cross-reference constants from other gems. this is typical of Rails gems.
 # it's assumed that you'll never use just the one gem in isolation.
-# while this should be avoied, if absolutely necessary you can define dependencies here.
+# while this should be avoided, if absolutely necessary you can define dependencies here.
 # when running tests, all the values will also be required when testing the key.
 # (note that this is hard to identify when tests run because error 5002 (missing const) is ignored)
 deps = {
-  "lib/activerecord" => ["lib/activemodel", "lib/activesupport"]
+  "lib/activerecord" => ["lib/activemodel", "lib/activesupport"],
+  "lib/actionpack" => ["lib/activesupport"]
 }
 
 results =
