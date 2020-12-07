@@ -510,14 +510,6 @@ class Doorkeeper::OAuth::Authorization::Code
   def pkce_supported?; end
 end
 
-class Doorkeeper::OAuth::Authorization::Context
-  def initialize(client, grant_type, scopes); end
-
-  def client; end
-  def grant_type; end
-  def scopes; end
-end
-
 class Doorkeeper::OAuth::Authorization::Token
   def initialize(pre_auth, resource_owner); end
 
