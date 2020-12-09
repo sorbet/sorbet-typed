@@ -797,6 +797,30 @@ class ActiveRecord::Enum::EnumType < ::ActiveModel::Type::Value
   def subtype; end
 end
 
+class ActiveRecord::Generators::Base < ::Rails::Generators::NamedBase
+  include ActiveRecord::Generators::Migration
+
+  class << self
+    def base_root; end
+  end
+end
+
+module ActiveRecord::Generators::Migration
+  extend ActiveSupport::Concern
+  include Rails::Generators::Migration
+
+  private
+
+  def primary_key_type; end
+  def db_migrate_path; end
+  def default_migrate_path; end
+  def configured_migrate_path; end
+end
+
+module ActiveRecord::Generators::Migration::ClassMethods
+  def next_migration_number(dirname); end
+end
+
 ActiveRecord::Migration::MigrationFilenameRegexp = T.let(T.unsafe(nil), Regexp)
 
 class ActiveRecord::MigrationProxy < ::Struct

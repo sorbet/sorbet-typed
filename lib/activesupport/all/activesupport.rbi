@@ -336,6 +336,11 @@ class Array
   def self.wrap(object); end
 end
 
+class ActiveSupport::BacktraceCleaner
+  sig { params(backtrace: T::Array[String], kind: Symbol).returns(T::Array[String]) }
+  def clean(backtrace, kind = :silent); end
+end
+
 module ActiveSupport::NumberHelper
   extend(::ActiveSupport::NumberHelper)
 
