@@ -8,6 +8,7 @@ module ActiveRecordAssociationsTest
   has_many :people, inverse_of: :person
   has_many :people, inverse_of: false
   has_many :people, -> { true }, class_name: "Person"
+  has_many :people_where_scope_is_called_with_instance, ->(instance) { true }, dependent: :destroy
   has_many :tracks, dependent: :destroy
   has_many :comments, dependent: :nullify
   has_many :tags, as: :taggable

@@ -60,7 +60,7 @@ module ActiveRecord::Associations::ClassMethods
   sig do
     params(
       name: Symbol,
-      scope: T.nilable(T.proc.void),
+      scope: T.any(T.nilable(T.proc.void), T.nilable(T.proc.params(arg: T.untyped).void)),
       after_add: AssociationCallback,
       after_remove: AssociationCallback,
       anonymous_class: T.nilable(T.any(Symbol, String)),
