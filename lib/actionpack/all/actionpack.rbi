@@ -4,7 +4,45 @@
 module ActionController
 end
 
-class AbstractController::Base < Object
+class AbstractController::Base
+  include(::ActiveSupport::Configurable)
+  extend(::ActiveSupport::Configurable::ClassMethods)
+  extend(::ActiveSupport::DescendantsTracker)
+
+  def action_methods; end
+  def action_name; end
+  def action_name=(_arg0); end
+  def available_action?(action_name); end
+  def controller_path; end
+  def formats; end
+  def formats=(_arg0); end
+  def performed?; end
+  def process(action, *args); end
+  def response_body; end
+  def response_body=(_arg0); end
+  def send_action(*_arg0); end
+
+  private
+
+  def _find_action_name(action_name); end
+  def _handle_action_missing(*args); end
+  def _valid_action_name?(action_name); end
+  def action_method?(name); end
+  def method_for_action(action_name); end
+  def process_action(method_name, *args); end
+
+  class << self
+    def abstract; end
+    def abstract!; end
+    def abstract?; end
+    def action_methods; end
+    def clear_action_methods!; end
+    def controller_path; end
+    def inherited(klass); end
+    def internal_methods; end
+    def method_added(name); end
+    def supports_path?; end
+  end
 end
 
 # https://api.rubyonrails.org/classes/AbstractController/Callbacks/ClassMethods.html
