@@ -16,7 +16,8 @@ gems = Dir.glob("lib/*").reject { |p| exclude.include?(p) }
 # (note that this is hard to identify when tests run because error 5002 (missing const) is ignored)
 deps = {
   "lib/activerecord" => ["lib/activemodel", "lib/activesupport"],
-  "lib/actionpack" => ["lib/activesupport"]
+  "lib/actionpack" => ["lib/activesupport"],
+  "lib/rspec-core" => ["lib/rake"],
 }
 
 results =
