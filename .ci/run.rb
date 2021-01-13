@@ -18,6 +18,7 @@ deps = {
   "lib/activerecord" => ["lib/activemodel", "lib/activesupport"],
   "lib/actionpack" => ["lib/activesupport"],
   "lib/rspec-core" => ["lib/rake"],
+  "lib/rubocop" => ["lib/rake"],
 }
 
 results =
