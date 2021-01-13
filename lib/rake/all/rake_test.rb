@@ -1,0 +1,3 @@
+# typed: strict
+
+::Rake::TaskLib
