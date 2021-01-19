@@ -45,6 +45,7 @@ class ActiveRecordMigrationsTest < ActiveRecord::Migration::Current
 
     add_column :products, :price, :decimal, precision: 5, scale: 2
     add_column :articles, :status, :string, limit: 20, default: 'draft', null: false
+    add_column :articles, :tags, :string, array: true, default: []
     add_column :answers, :bill_gates_money, :decimal, precision: 15, scale: 2
     add_column :measurements, :sensor_reading, :decimal, precision: 30, scale: 20
     add_column :measurements, :huge_integer, :decimal, precision: 30
