@@ -485,3 +485,11 @@ module ActiveRecord::ConnectionHandling
   def connects_to(database: T.unsafe(nil)); end
   def current_role; end
 end
+
+# In ActiveRecord >= 6.1, the parent classes of these errors have changed.
+# https://github.com/rails/rails/commit/730d810b0dd24e80c1e88d56a5e6960363a25dbb
+module ActiveRecord
+  class StatementTimeout < QueryAborted; end
+  class QueryCanceled < QueryAborted; end
+  class QueryAborted < StatementInvalid; end
+end
