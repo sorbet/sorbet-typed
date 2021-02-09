@@ -633,6 +633,6 @@ module Rake::Backtrace
   def self.collapse(backtrace); end
 end
 class Rake::TaskLib
-  include Cloneable
+  include Rake::Cloneable
   include Rake::DSL
 end
