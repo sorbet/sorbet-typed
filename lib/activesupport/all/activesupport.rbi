@@ -85,8 +85,14 @@ class Method
 end
 
 class NilClass
-  sig { returns(T::Boolean) }
+  sig { returns(TrueClass) }
   def duplicable?; end
+
+  sig { returns(NilClass) }
+  def dup; end
+
+  sig { returns(NilClass) }
+  def deep_dup; end
 
   sig do
     params(
@@ -105,6 +111,18 @@ class NilClass
     ).returns(NilClass)
   end
   def try!(method_name = nil, *args, &b); end
+
+  sig { returns(NilClass) }
+  def presence; end
+
+  sig { returns(FalseClass) }
+  def present?; end
+
+  sig { returns(TrueClass) }
+  def blank?; end
+
+  sig { returns(NilClass) }
+  def to_param; end
 end
 
 class String
