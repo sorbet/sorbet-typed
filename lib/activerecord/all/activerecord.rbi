@@ -132,6 +132,7 @@ module ActiveRecord::Associations::ClassMethods
       source_type: T.nilable(T.any(Symbol, String)),
       through: T.nilable(T.any(Symbol, String)),
       validate: T.nilable(T::Boolean),
+      touch: T.nilable(T.any(T::Boolean, Symbol)),
       blk: T.nilable(T.proc.void)
     ).void
   end
@@ -151,6 +152,7 @@ module ActiveRecord::Associations::ClassMethods
     source: nil,
     source_type: nil,
     through: nil,
+    touch: nil,
     validate: nil,
     &blk
   ); end
