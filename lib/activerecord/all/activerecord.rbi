@@ -152,8 +152,8 @@ module ActiveRecord::Associations::ClassMethods
     source: nil,
     source_type: nil,
     through: nil,
-    touch: nil,
     validate: nil,
+    touch: nil,
     &blk
   ); end
 
