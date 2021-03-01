@@ -5,7 +5,7 @@ exclude = []
 
 srb_cmd = 'tc'
 
-srb_flags = '--error-black-list 5002'
+srb_flags = '--suppress-error-code 5002'
 
 gems = Dir.glob("lib/*").reject { |p| exclude.include?(p) }
 
