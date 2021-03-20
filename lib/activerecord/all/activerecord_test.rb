@@ -189,6 +189,11 @@ class ActiveRecordMigrationsTest
     T.assert_type!(relation.one?, T::Boolean)
     T.assert_type!(relation.none?, T::Boolean)
     T.assert_type!(relation.size, Integer)
+
+    relation.any? { |record| true }
+    relation.many? { |record| true }
+    relation.one? { |record| true }
+    relation.none? { |record| true }
   end
 end
 

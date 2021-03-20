@@ -2429,20 +2429,20 @@ class ActiveRecord::Relation
   def empty?; end
 
   # Returns true if there are no records.
-  sig { returns(T::Boolean) }
-  def none?; end
+  sig { params(block: T.nilable(T.proc.params(arg0: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def none?(&block); end
 
   # Returns true if there are any records.
-  sig { returns(T::Boolean) }
-  def any?; end
+  sig { params(block: T.nilable(T.proc.params(arg0: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def any?(&block); end
 
   # Returns true if there is exactly one record.
-  sig { returns(T::Boolean) }
-  def one?; end
+  sig { params(block: T.nilable(T.proc.params(arg0: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def one?(&block); end
 
   # Returns true if there is more than one record.
-  sig { returns(T::Boolean) }
-  def many?; end
+  sig { params(block: T.nilable(T.proc.params(arg0: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def many?(&block); end
 end
 
 module ActiveRecord::Store
