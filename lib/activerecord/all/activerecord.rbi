@@ -1054,82 +1054,19 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.any(Symbol, T.proc.returns(T.untyped)),
+      arg: T.nilable(T.any(Symbol, T.proc.returns(T.untyped))),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       on: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
     ).void
   end
   def self.after_commit(
-    arg,
+    arg = nil,
     if: nil,
     on: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.after_create(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.after_destroy(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.after_rollback(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.after_save(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.after_update(
-    arg = nil,
-    if: nil,
-    unless: nil
+    unless: nil,
+    &block
   ); end
 
   sig do
@@ -1137,79 +1074,91 @@ class ActiveRecord::Base
       arg: T.nilable(Symbol),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      on: T.nilable(T.any(Symbol, T::Array[Symbol]))
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.after_create(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.after_destroy(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.after_rollback(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.after_save(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.after_update(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      on: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      block: T.nilable(T.proc.void)
     ).void
   end
   def self.after_validation(
     arg = nil,
     if: nil,
     unless: nil,
-    on: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.around_create(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.around_destroy(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.around_save(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.around_update(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.before_create(
-    arg = nil,
-    if: nil,
-    unless: nil
+    on: nil,
+    &block
   ); end
 
   sig do
@@ -1217,40 +1166,91 @@ class ActiveRecord::Base
       arg: T.nilable(Symbol),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      prepend: T::Boolean
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.around_create(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.around_destroy(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.around_save(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.around_update(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.before_create(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      prepend: T::Boolean,
+      block: T.nilable(T.proc.void)
     ).void
   end
   def self.before_destroy(
     arg = nil,
     if: nil,
     unless: nil,
-    prepend: false
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.before_save(
-    arg = nil,
-    if: nil,
-    unless: nil
-  ); end
-
-  sig do
-    params(
-      arg: T.nilable(Symbol),
-      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-    ).void
-  end
-  def self.before_update(
-    arg = nil,
-    if: nil,
-    unless: nil
+    prepend: false,
+    &block
   ); end
 
   sig do
@@ -1258,14 +1258,46 @@ class ActiveRecord::Base
       arg: T.nilable(Symbol),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      on: T.nilable(T.any(Symbol, T::Array[Symbol]))
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.before_save(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def self.before_update(
+    arg = nil,
+    if: nil,
+    unless: nil,
+    &block
+  ); end
+
+  sig do
+    params(
+      arg: T.nilable(Symbol),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      on: T.nilable(T.any(Symbol, T::Array[Symbol])),
+      block: T.nilable(T.proc.void)
     ).void
   end
   def self.before_validation(
     arg = nil,
     if: nil,
     unless: nil,
-    on: nil
+    on: nil,
+    &block
   ); end
 
   sig { params(comparison_object: T.untyped).returns(T::Boolean) }
@@ -2429,20 +2461,20 @@ class ActiveRecord::Relation
   def empty?; end
 
   # Returns true if there are no records.
-  sig { returns(T::Boolean) }
-  def none?; end
+  sig { params(block: T.nilable(T.proc.params(arg0: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def none?(&block); end
 
   # Returns true if there are any records.
-  sig { returns(T::Boolean) }
-  def any?; end
+  sig { params(block: T.nilable(T.proc.params(arg0: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def any?(&block); end
 
   # Returns true if there is exactly one record.
-  sig { returns(T::Boolean) }
-  def one?; end
+  sig { params(block: T.nilable(T.proc.params(arg0: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def one?(&block); end
 
   # Returns true if there is more than one record.
-  sig { returns(T::Boolean) }
-  def many?; end
+  sig { params(block: T.nilable(T.proc.params(arg0: Elem).returns(T::Boolean))).returns(T::Boolean) }
+  def many?(&block); end
 end
 
 module ActiveRecord::Store
