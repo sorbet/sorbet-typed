@@ -1,122 +1,22 @@
 # typed: strong
 
-module ActiveModel::AttributeAssignment
-  include(::ActiveModel::ForbiddenAttributesProtection)
-
-  def assign_attributes(new_attributes); end
-  def attributes=(new_attributes); end
-
-  private
-
-  def _assign_attribute(k, v); end
-  def _assign_attributes(attributes); end
-end
-
 module ActiveModel::AttributeMethods
-  extend(::ActiveSupport::Concern)
-
   mixes_in_class_methods(::ActiveModel::AttributeMethods::ClassMethods)
-
-  def attribute_missing(match, *args, &block); end
-  def method_missing(method, *args, &block); end
-  def respond_to?(method, include_private_methods = T.unsafe(nil)); end
-  def respond_to_without_attributes?(*_); end
-
-  private
-
-  def _read_attribute(attr); end
-  def attribute_method?(attr_name); end
-  def matched_attribute_method(method_name); end
-  def missing_attribute(attr_name, stack); end
 end
 
-module ActiveModel::AttributeMethods::AttrNames
-  class << self
-    def define_attribute_accessor_method(mod, attr_name, writer: T.unsafe(nil)); end
-  end
-end
+module ActiveModel::AttributeMethods::ClassMethods; end
 
 ActiveModel::AttributeMethods::AttrNames::DEF_SAFE_NAME = T.let(T.unsafe(nil), Regexp)
 
 ActiveModel::AttributeMethods::CALL_COMPILABLE_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-module ActiveModel::AttributeMethods::ClassMethods
-  def alias_attribute(new_name, old_name); end
-  def attribute_alias(name); end
-  def attribute_alias?(new_name); end
-  def attribute_method_affix(*affixes); end
-  def attribute_method_prefix(*prefixes); end
-  def attribute_method_suffix(*suffixes); end
-  def define_attribute_method(attr_name); end
-  def define_attribute_methods(*attr_names); end
-  def undefine_attribute_methods; end
-
-  private
-
-  def attribute_method_matchers_cache; end
-  def attribute_method_matchers_matching(method_name); end
-  def define_proxy_call(include_private, mod, name, target, *extra); end
-  def generated_attribute_methods; end
-  def instance_method_already_implemented?(method_name); end
-end
-
-class ActiveModel::AttributeMethods::ClassMethods::AttributeMethodMatcher
-  def initialize(options = T.unsafe(nil)); end
-
-  def match(method_name); end
-  def method_name(attr_name); end
-  def plain?; end
-  def prefix; end
-  def suffix; end
-  def target; end
-end
-
-class ActiveModel::AttributeMethods::ClassMethods::AttributeMethodMatcher::AttributeMethodMatch < ::Struct
-  Elem = type_member(fixed: T.untyped)
-
-  def attr_name; end
-  def attr_name=(_); end
-  def target; end
-  def target=(_); end
-
-  class << self
-    def [](*_); end
-    def inspect; end
-    def members; end
-    def new(*_); end
-  end
-end
-
 ActiveModel::AttributeMethods::NAME_COMPILABLE_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-module ActiveModel::Callbacks
-  def define_model_callbacks(*callbacks); end
-
-  private
-
-  def _define_after_model_callback(klass, callback); end
-  def _define_around_model_callback(klass, callback); end
-  def _define_before_model_callback(klass, callback); end
-
-  class << self
-    def extended(base); end
-  end
-end
-
 module ActiveModel::Conversion
-  extend(::ActiveSupport::Concern)
-
   mixes_in_class_methods(::ActiveModel::Conversion::ClassMethods)
-
-  def to_key; end
-  def to_model; end
-  def to_param; end
-  def to_partial_path; end
 end
 
-module ActiveModel::Conversion::ClassMethods
-  def _to_partial_path; end
-end
+module ActiveModel::Conversion::ClassMethods; end
 
 module ActiveModel::Dirty
   include(::ActiveModel::AttributeMethods)
@@ -127,49 +27,20 @@ module ActiveModel::Dirty
   sig { params(attr_name: Symbol).returns(T::Boolean) }
   def attribute_changed_in_place?(attr_name); end
 
-  sig { params(attr_name: Symbol).returns(T::Boolean) }
-  def attribute_previously_changed?(attr_name); end
-
-  def attribute_was(attr_name); end
-  def changed; end
+  sig { params(attr_name: Symbol, options: T.untyped).returns(T::Boolean) }
+  def attribute_previously_changed?(attr_name, **options); end
 
   sig { returns(T::Boolean) }
   def changed?; end
 
-  def changed_attributes; end
-  def changes; end
-  def changes_applied; end
-  def clear_attribute_changes(attr_names); end
-  def clear_changes_information; end
-
   sig { returns(T::Hash[T.any(Symbol, String), T.untyped]) }
   def previous_changes; end
-
-  def restore_attributes(attr_names = T.unsafe(nil)); end
-end
-
-class ActiveModel::EachValidator < ::ActiveModel::Validator
-  def initialize(options); end
-
-  def attributes; end
-  def check_validity!; end
-  def validate(record); end
-  def validate_each(record, attribute, value); end
 end
 
 class ActiveModel::ForbiddenAttributesError < ::StandardError
 end
 
-module ActiveModel::ForbiddenAttributesProtection
-
-  private
-
-  def sanitize_for_mass_assignment(attributes); end
-  def sanitize_forbidden_attributes(attributes); end
-end
-
 module ActiveModel::Model
-  include(::ActiveModel::ForbiddenAttributesProtection)
   include(::ActiveModel::AttributeAssignment)
   extend(::ActiveSupport::Concern)
 
@@ -177,60 +48,6 @@ module ActiveModel::Model
   include(::ActiveModel::Validations::HelperMethods)
   include(::ActiveModel::Validations)
   include(::ActiveModel::Conversion)
-
-  def initialize(attributes = T.unsafe(nil)); end
-
-  def persisted?; end
-end
-
-class ActiveModel::Name
-  include(::Comparable)
-
-  def initialize(klass, namespace = T.unsafe(nil), name = T.unsafe(nil)); end
-
-  def !~(*_, &_); end
-  def <=>(*_, &_); end
-  def ==(arg); end
-  def ===(arg); end
-  def =~(*_, &_); end
-  def as_json(*_, &_); end
-  def cache_key; end
-  def collection; end
-  def element; end
-  def eql?(*_, &_); end
-  def human(options = T.unsafe(nil)); end
-  def i18n_key; end
-  def match?(*_, &_); end
-  def name; end
-  def param_key; end
-  def plural; end
-  def route_key; end
-  def singular; end
-  def singular_route_key; end
-  def to_s(*_, &_); end
-  def to_str(*_, &_); end
-
-  private
-
-  def _singularize(string); end
-end
-
-module ActiveModel::Naming
-  def model_name; end
-
-  class << self
-    def extended(base); end
-    def param_key(record_or_class); end
-    def plural(record_or_class); end
-    def route_key(record_or_class); end
-    def singular(record_or_class); end
-    def singular_route_key(record_or_class); end
-    def uncountable?(record_or_class); end
-
-    private
-
-    def model_name_from_record_or_class(record_or_class); end
-  end
 end
 
 module ActiveModel::Validations
@@ -262,27 +79,11 @@ module ActiveModel::Validations
   sig { params(context: T.untyped).returns(T::Boolean) }
   def invalid?(context = T.unsafe(nil)); end
 
-  def read_attribute_for_validation(*_); end
-
   sig { params(context: T.untyped).returns(T::Boolean) }
   def valid?(context = T.unsafe(nil)); end
-
-  def validate(context = T.unsafe(nil)); end
-  def validate!(context = T.unsafe(nil)); end
-  def validates_with(*args, &block); end
-
-  private
-
-  def initialize_dup(other); end
-  def raise_validation_error; end
-  def run_validations!; end
 end
 
 module ActiveModel::Validations::ClassMethods
-  def attribute_method?(attribute); end
-  def clear_validators!; end
-  def inherited(base); end
-
   # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L136-L154
   sig do
     params(
@@ -358,59 +159,15 @@ module ActiveModel::Validations::ClassMethods
     **kwargs
   )
   end
-
-  def validates!(*attributes); end
-  def validates_each(*attr_names, &block); end
-  def validates_with(*args, &block); end
-  def validators; end
-  def validators_on(*attributes); end
-
-  private
-
-  def _parse_validates_options(options); end
-  def _validates_default_keys; end
 end
 
 ActiveModel::Validations::ClassMethods::VALID_OPTIONS_FOR_VALIDATE = T.let(T.unsafe(nil), T::Array[T.untyped])
 
-module ActiveModel::Validations::HelperMethods
-  def validates_absence_of(*attr_names); end
-  def validates_acceptance_of(*attr_names); end
-  def validates_confirmation_of(*attr_names); end
-  def validates_equality_within_tolerance_of(*attr_names); end
-  def validates_exclusion_of(*attr_names); end
-  def validates_format_of(*attr_names); end
-  def validates_inclusion_of(*attr_names); end
-  def validates_length_of(*attr_names); end
-  def validates_numericality_of(*attr_names); end
-  def validates_positive_whole_cents_of(*attr_names); end
-  def validates_presence_of(*attr_names); end
-  def validates_size_of(*attr_names); end
-  def validates_whole_cents_of(*attr_names); end
-
-  private
-
-  def _merge_attributes(attr_names); end
-end
-
 module ActiveModel::SecurePassword
-  extend(::ActiveSupport::Concern)
-
   mixes_in_class_methods(::ActiveModel::SecurePassword::ClassMethods)
-
-  class << self
-    def min_cost; end
-    def min_cost=(_); end
-  end
 end
 
-module ActiveModel::SecurePassword::ClassMethods
-  def has_secure_password(attribute = T.unsafe(nil), validations: T.unsafe(nil)); end
-end
-
-class ActiveModel::SecurePassword::InstanceMethodsOnActivation < ::Module
-  def initialize(attribute); end
-end
+module ActiveModel::SecurePassword::ClassMethods; end
 
 ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED = T.let(T.unsafe(nil), Integer)
 
@@ -466,30 +223,11 @@ class ActiveModel::Type::DateTime < ::ActiveModel::Type::Value
   def cast(arg0); end
 end
 
-
-class ActiveModel::UnknownAttributeError < ::NoMethodError
-  def initialize(record, attribute); end
-
-  def attribute; end
-  def record; end
-end
-
 module ActiveModel::Validations::Callbacks
-  extend(::ActiveSupport::Concern)
-
-  include(::ActiveSupport::Callbacks)
-
   mixes_in_class_methods(::ActiveModel::Validations::Callbacks::ClassMethods)
-
-  private
-
-  def run_validations!; end
 end
 
-module ActiveModel::Validations::Callbacks::ClassMethods
-  def after_validation(*args, &block); end
-  def before_validation(*args, &block); end
-end
+module ActiveModel::Validations::Callbacks::ClassMethods; end
 
 module ActiveModel::Validations::HelperMethods
   # A type alias for the in/within parameters on the
@@ -813,21 +551,6 @@ module ActiveModel::Validations::HelperMethods
   mixes_in_class_methods(ClassMethods)
 end
 
-class ActiveModel::Validations::NumericalityValidator < ::ActiveModel::EachValidator
-  def check_validity!; end
-  def validate_each(record, attr_name, value); end
-
-  private
-
-  def allow_only_integer?(record); end
-  def filtered_options(value); end
-  def is_hexadecimal_literal?(raw_value); end
-  def is_integer?(raw_value); end
-  def is_number?(raw_value); end
-  def parse_as_number(raw_value); end
-  def record_attribute_changed_in_place?(record, attr_name); end
-end
-
 ActiveModel::Validations::NumericalityValidator::CHECKS = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
 
 ActiveModel::Validations::NumericalityValidator::HEXADECIMAL_REGEX = T.let(T.unsafe(nil), Regexp)
@@ -835,22 +558,6 @@ ActiveModel::Validations::NumericalityValidator::HEXADECIMAL_REGEX = T.let(T.uns
 ActiveModel::Validations::NumericalityValidator::INTEGER_REGEX = T.let(T.unsafe(nil), Regexp)
 
 ActiveModel::Validations::NumericalityValidator::RESERVED_OPTIONS = T.let(T.unsafe(nil), T::Array[T.untyped])
-
-class ActiveModel::Validations::PresenceValidator < ::ActiveModel::EachValidator
-  def validate_each(record, attr_name, value); end
-end
-
-class ActiveModel::Validator
-  def initialize(options = T.unsafe(nil)); end
-
-  def kind; end
-  def options; end
-  def validate(record); end
-
-  class << self
-    def kind; end
-  end
-end
 
 class ActiveModel::Errors
   include Enumerable
@@ -989,11 +696,11 @@ class ActiveModel::Errors
   sig { returns(T::Hash[Symbol, T::Array[String]]) }
   def messages; end
 
-  sig { returns(T::Boolean) }
-  def empty?; end
+  sig { params(args: T.untyped, block: T.untyped).returns(T::Boolean) }
+  def empty?(*args, &block); end
 
-  sig { returns(T::Hash[Symbol, T::Array[String]]) }
-  def to_hash; end
+  sig { params(full_messages: T::Boolean).returns(T::Hash[Symbol, T::Array[String]]) }
+  def to_hash(full_messages = false); end
 end
 
 ActiveModel::Errors::CALLBACKS_OPTIONS = T.let(T.unsafe(nil), T::Array[T.untyped])
