@@ -46,6 +46,21 @@ module ActiveRecordAssociationsTest
 end
 
 class ApplicationRecord < ActiveRecord::Base; end
+class AcceptsNestedAttributesTest < ApplicationRecord
+  has_many :people
+  accepts_nested_attributes_for :people
+  accepts_nested_attributes_for :people, update_only: true
+  accepts_nested_attributes_for :people, reject_if: :all_blank
+  accepts_nested_attributes_for :people, reject_if: :calculate_reject_if
+  accepts_nested_attributes_for :people, reject_if: ->(p) { p[:title].blank? }
+  accepts_nested_attributes_for :people, reject_if: Proc.new { |p| p[:title].blank? }
+  accepts_nested_attributes_for :people, allow_destroy: true
+  accepts_nested_attributes_for :people, :places
+  accepts_nested_attributes_for :people, limit: 1
+  accepts_nested_attributes_for :people, limit: :calculate_limit
+  accepts_nested_attributes_for :people, limit: -> { rand(1..10) }
+  accepts_nested_attributes_for :people, limit: Proc.new { rand(1..10) }
+end
 class ActiveRecordCallbacksTest < ApplicationRecord
   before_save :normalize_card_number, if: :paid_with_card?
   before_save :normalize_card_number, if: Proc.new { |order| order.paid_with_card? }

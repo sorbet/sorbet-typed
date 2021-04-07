@@ -302,15 +302,20 @@ ActiveRecord::Migrator::MIGRATOR_SALT = T.let(T.unsafe(nil), Integer)
 module ActiveRecord::NestedAttributes::ClassMethods
   sig do
     params(
-      attr_names: T.any(T.any(Symbol, String), T::Array[T.any(Symbol, String)]),
+      attr_names: T.any(Symbol, String),
       allow_destroy: T.nilable(T::Boolean),
-      reject_if: T.any(Symbol, T.proc.returns(T::Boolean)),
-      limit: T.any(Integer, Symbol, T.proc.returns(Integer)),
+      reject_if: T.any(Symbol, Proc, T.proc.params(
+        attributes: T.any(
+          T::Hash[T.any(Symbol, String), T.untyped],
+          ActionController::Parameters
+        )
+      ).returns(T::Boolean)),
+      limit: T.any(Integer, Symbol, Proc, T.proc.returns(Integer)),
       update_only: T.nilable(T::Boolean),
     ).void
   end
   def accepts_nested_attributes_for(
-    attr_names,
+    *attr_names,
     allow_destroy: nil,
     reject_if: nil,
     limit: nil,
