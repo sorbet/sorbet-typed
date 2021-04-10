@@ -1601,6 +1601,8 @@ end
 ActiveRecord::LogSubscriber::IGNORE_PAYLOAD_NAMES = T.let(T.unsafe(nil), T::Array[T.untyped])
 
 class ActiveRecord::Relation
+  Elem = type_member(fixed: T.untyped)
+
   sig { returns(Integer) }
   def delete_all; end
 
