@@ -17,6 +17,7 @@ gems = Dir.glob("lib/*").reject { |p| exclude.include?(p) }
 deps = {
   "lib/activerecord" => ["lib/activemodel", "lib/activesupport"],
   "lib/actionpack" => ["lib/activesupport"],
+  "lib/bundler-audit" => ["lib/rake"],
   "lib/rspec-core" => ["lib/rake"],
   "lib/rubocop" => ["lib/rake"],
 }
