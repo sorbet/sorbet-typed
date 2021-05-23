@@ -769,6 +769,7 @@ class YARD::Handlers::Base
   def ensure_loaded!(object, max_retries = nil); end
   def extra_state; end
   def globals; end
+  def handlers; end
   def initialize(source_parser, stmt); end
   def namespace; end
   def namespace=(v); end
@@ -840,6 +841,8 @@ module YARD::Handlers::Ruby::StructHandlerMethods
   def return_type_from_tag(member_tag); end
   include YARD::CodeObjects
 end
+class YARD::Handlers::Ruby::AttributeHandler < YARD::Handlers::Ruby::Base
+end
 class YARD::Handlers::Ruby::ClassHandler < YARD::Handlers::Ruby::Base
   def create_struct_superclass(superclass, superclass_def); end
   def extract_parameters(superclass); end
@@ -848,6 +851,8 @@ class YARD::Handlers::Ruby::ClassHandler < YARD::Handlers::Ruby::Base
   def struct_superclass_name(superclass); end
   include Anonymous_Module_4
   include YARD::Handlers::Ruby::StructHandlerMethods
+end
+class YARD::Handlers::Ruby::MethodHandler < YARD::Handlers::Ruby::Base
 end
 module Anonymous_Module_4
   def process; end
