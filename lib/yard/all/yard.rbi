@@ -21,6 +21,8 @@ end
 module YARD::CodeObjects
   extend YARD::CodeObjects::NamespaceMapper
 end
+class YARD::CodeObjects::ConstantObject < YARD::CodeObjects::Base
+end
 class YARD::CodeObjects::NamespaceObject < YARD::CodeObjects::Base
 end
 class YARD::CodeObjects::ClassObject < YARD::CodeObjects::NamespaceObject
