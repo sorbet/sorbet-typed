@@ -11,3 +11,5 @@ YARD::Handlers::Ruby::AttributeHandler.handlers
 
 YARD::Handlers::Ruby::MethodHandler.handlers
 # => [:def, :defs]
+namespace = YARD::CodeObjects::ClassObject.new(:root, :Suit)
+YARD::CodeObjects::ConstantObject.new(namespace, 'Spades')
