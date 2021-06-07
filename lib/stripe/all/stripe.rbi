@@ -133,6 +133,9 @@ module Stripe
 
     sig { returns(String) }
     def status; end
+
+    sig { returns(PaymentIntent).params(id: T.any(String, T::Hash[Symbol, T.any(String, T::Array[String])]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
+    def self.retrieve(id, opts = nil); end
   end
 
   class Invoice < APIResource
