@@ -185,6 +185,9 @@ module Stripe
     sig { returns(Stripe::StripeObject) }
     def data; end
 
+    sig { returns(T::Boolean) }
+    def livemode; end
+
     sig { returns(Event).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
     def self.retrieve(id, opts = nil); end
   end
