@@ -3,42 +3,48 @@
 class ActiveRecord::Base
 
   sig do
-  params(
-    arg: T.any(Symbol, T.proc.returns(T.untyped)),
-    if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-    unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-  ).void
+    params(
+      args: T.any(Symbol, T.proc.returns(T.untyped)),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
   end
   def self.after_create_commit(
-    arg,
+    *args,
     if: nil,
-    unless: nil
+    unless: nil,
+    &block
   ); end
 
   sig do
-  params(
-    arg: T.any(Symbol, T.proc.returns(T.untyped)),
-    if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-    unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-  ).void
+    params(
+      args: T.any(Symbol, T.proc.returns(T.untyped)),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
   end
   def self.after_update_commit(
-    arg,
+    *args,
     if: nil,
-    unless: nil
+    unless: nil,
+    &block
   ); end
 
   sig do
-  params(
-    arg: T.any(Symbol, T.proc.returns(T.untyped)),
-    if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-    unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean))))
-  ).void
+    params(
+      args: T.any(Symbol, T.proc.returns(T.untyped)),
+      if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
+      block: T.nilable(T.proc.void)
+    ).void
   end
   def self.after_destroy_commit(
-    arg,
+    *args,
     if: nil,
-    unless: nil
+    unless: nil,
+    &block
   ); end
 
   sig { params(attribute: T.any(Symbol, String)).void }
