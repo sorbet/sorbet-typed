@@ -5,16 +5,20 @@ module AASM
 end
 
 module AASM::ClassMethods
+  def aasm(*args, &block); end
+
   sig do
     params(
       name: Symbol,
       before_enter: T.nilable(Symbol),
+      after_enter: T.nilable(Symbol),
       initial: T.nilable(T::Boolean)
     ).void
   end
   def state(
-    name,
+    *name,
     before_enter: nil,
+    after_enter: nil,
     initial: nil
   )
   end
@@ -23,13 +27,15 @@ module AASM::ClassMethods
     params(
       name: Symbol,
       after_commit: T.nilable(Symbol),
-      guard: T.nilable(Symbol)
+      guard: T.nilable(Symbol),
+      block: T.proc.void
     ).void
   end
   def event(
     name,
     after_commit: nil,
-    guard: nil
+    guard: nil,
+    &block
   )
   end
 
@@ -51,21 +57,57 @@ module AASM::ClassMethods
 
   sig do
     params(
-      name: Symbol
+      name: Symbol,
+      block: T.proc.void
     ).void
   end
   def before(
-    name
+    *name,
+    &block
   )
   end
 
   sig do
     params(
-      name: Symbol
+      name: Symbol,
+      block: T.proc.void
     ).void
   end
   def after(
-    name
+    *name,
+    &block
   )
   end
+
+  sig do
+    params(
+      callbacks: Symbol,
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def after_all_transitions(*callbacks, &block); end
+
+  sig do
+    params(
+      callbacks: Symbol,
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def after_all_transactions(*callbacks, &block); end
+
+  sig do
+    params(
+      callbacks: Symbol,
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def before_all_transactions(*callbacks, &block); end
+
+  sig do
+    params(
+      callbacks: Symbol,
+      block: T.nilable(T.proc.void)
+    ).void
+  end
+  def before_all_events(*callbacks, &block); end
 end
