@@ -1076,7 +1076,7 @@ end
 
 module ActiveRecord::AttributeMethods::Dirty
   extend T::Sig
-  sig { params(attr_name: Symbol, options: T.untyped).returns(T::Boolean) }
+  sig { params(attr_name: T.any(String, Symbol), options: T.untyped).returns(T::Boolean) }
   def saved_change_to_attribute?(attr_name, **options); end
 end
 
