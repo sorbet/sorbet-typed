@@ -7,7 +7,7 @@ class ActiveRecord::Base
       args: T.any(Symbol, T.proc.returns(T.untyped)),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      block: T.nilable(T.proc.void)
+      block: T.nilable(T.proc.bind(T.untyped).void)
     ).void
   end
   def self.after_create_commit(
@@ -22,7 +22,7 @@ class ActiveRecord::Base
       args: T.any(Symbol, T.proc.returns(T.untyped)),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      block: T.nilable(T.proc.void)
+      block: T.nilable(T.proc.bind(T.untyped).void)
     ).void
   end
   def self.after_update_commit(
@@ -37,7 +37,7 @@ class ActiveRecord::Base
       args: T.any(Symbol, T.proc.returns(T.untyped)),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
-      block: T.nilable(T.proc.void)
+      block: T.nilable(T.proc.bind(T.untyped).void)
     ).void
   end
   def self.after_destroy_commit(
