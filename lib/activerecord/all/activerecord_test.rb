@@ -65,44 +65,59 @@ class ActiveRecordCallbacksTest < ApplicationRecord
   before_save :normalize_card_number, if: :paid_with_card?
   before_save :normalize_card_number, if: Proc.new { |order| order.paid_with_card? }
   before_save :log_save_action
+  before_save :first_action, :second_action
   before_save { puts 'foo' }
   around_save :log_save_action
+  around_save :first_action, :second_action
   around_save { puts 'foo' }
   after_save :log_save_action
+  after_save :first_action, :second_action
   after_save { puts 'foo' }
 
   before_destroy :log_destroy_action, prepend: true
+  before_destroy :first_action, :second_action
   before_destroy { puts 'foo' }
   around_destroy :log_destroy_action
+  around_destroy :first_action, :second_action
   around_destroy { puts 'foo' }
   after_destroy :log_destroy_action
+  after_destroy :first_action, :second_action
   after_destroy { puts 'foo' }
 
   before_update :log_update_action
+  before_update :first_action, :second_action
   before_update { puts 'foo' }
   around_update :log_update_action
+  around_update :first_action, :second_action
   around_update { puts 'foo' }
   after_update :log_update_action
+  after_update :first_action, :second_action
   after_update { puts 'foo' }
 
   before_create :log_create_action
+  before_create :first_action, :second_action
   before_create { puts 'foo' }
   around_create :log_create_action
+  around_create :first_action, :second_action
   around_create { puts 'foo' }
   after_create :log_create_action
+  after_create :first_action, :second_action
   after_create { puts 'foo' }
   after_create :send_email_to_author, if: :author_wants_emails?, unless: Proc.new { |comment| comment.article.ignore_comments? }
 
   after_commit :log_commit_action
+  after_commit :first_action, :second_action
   after_commit { puts 'foo' }
   after_commit :log_user_saved_to_db, on: :create
   after_commit :log_user_saved_to_db, on: [:create, :update]
   after_commit -> { :log_user_saved_to_db }, on: [:create, :update]
 
   before_validation :validation_setup
+  before_validation :first_action, :second_action
   before_validation { puts 'foo' }
   before_validation :validation_setup, on: :create
   after_validation :validation_teardown
+  after_validation :first_action, :second_action
   after_validation { puts 'foo' }
   after_validation :validation_teardown, on: [:create, :update]
 

@@ -413,7 +413,7 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(T.any(Symbol, T.proc.returns(T.untyped))),
+      args: T.any(Symbol, T.proc.returns(T.untyped)),
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       on: T.nilable(T.any(Symbol, T::Array[Symbol])),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
@@ -421,7 +421,7 @@ class ActiveRecord::Base
     ).void
   end
   def self.after_commit(
-    arg = nil,
+    *args,
     if: nil,
     on: nil,
     unless: nil,
@@ -430,14 +430,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.after_create(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -445,14 +445,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.after_destroy(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -460,14 +460,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.after_rollback(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -475,14 +475,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.after_save(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -490,14 +490,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.after_update(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -505,7 +505,7 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       on: T.nilable(T.any(Symbol, T::Array[Symbol])),
@@ -513,7 +513,7 @@ class ActiveRecord::Base
     ).void
   end
   def self.after_validation(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     on: nil,
@@ -522,14 +522,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.around_create(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -537,14 +537,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.around_destroy(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -552,14 +552,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.around_save(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -567,14 +567,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.around_update(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -582,14 +582,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.before_create(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -597,7 +597,7 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       prepend: T::Boolean,
@@ -605,7 +605,7 @@ class ActiveRecord::Base
     ).void
   end
   def self.before_destroy(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     prepend: false,
@@ -614,14 +614,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.before_save(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -629,14 +629,14 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       block: T.nilable(T.proc.void)
     ).void
   end
   def self.before_update(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     &block
@@ -644,7 +644,7 @@ class ActiveRecord::Base
 
   sig do
     params(
-      arg: T.nilable(Symbol),
+      args: Symbol,
       if: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       unless: T.nilable(T.any(Symbol, Proc, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))),
       on: T.nilable(T.any(Symbol, T::Array[Symbol])),
@@ -652,7 +652,7 @@ class ActiveRecord::Base
     ).void
   end
   def self.before_validation(
-    arg = nil,
+    *args,
     if: nil,
     unless: nil,
     on: nil,
