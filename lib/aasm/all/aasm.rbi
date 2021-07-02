@@ -28,7 +28,7 @@ module AASM::ClassMethods
       name: Symbol,
       after_commit: T.nilable(Symbol),
       guard: T.nilable(Symbol),
-      block: T.proc.void
+      block: T.proc.bind(T.untyped).void
     ).void
   end
   def event(
@@ -58,7 +58,7 @@ module AASM::ClassMethods
   sig do
     params(
       name: Symbol,
-      block: T.proc.void
+      block: T.proc.bind(T.untyped).void
     ).void
   end
   def before(
@@ -70,7 +70,7 @@ module AASM::ClassMethods
   sig do
     params(
       name: Symbol,
-      block: T.proc.void
+      block: T.proc.bind(T.untyped).void
     ).void
   end
   def after(
@@ -82,7 +82,7 @@ module AASM::ClassMethods
   sig do
     params(
       callbacks: Symbol,
-      block: T.nilable(T.proc.void)
+      block: T.nilable(T.proc.bind(T.untyped).void)
     ).void
   end
   def after_all_transitions(*callbacks, &block); end
@@ -90,7 +90,7 @@ module AASM::ClassMethods
   sig do
     params(
       callbacks: Symbol,
-      block: T.nilable(T.proc.void)
+      block: T.nilable(T.proc.bind(T.untyped).void)
     ).void
   end
   def after_all_transactions(*callbacks, &block); end
@@ -98,7 +98,7 @@ module AASM::ClassMethods
   sig do
     params(
       callbacks: Symbol,
-      block: T.nilable(T.proc.void)
+      block: T.nilable(T.proc.bind(T.untyped).void)
     ).void
   end
   def before_all_transactions(*callbacks, &block); end
@@ -106,7 +106,7 @@ module AASM::ClassMethods
   sig do
     params(
       callbacks: Symbol,
-      block: T.nilable(T.proc.void)
+      block: T.nilable(T.proc.bind(T.untyped).void)
     ).void
   end
   def before_all_events(*callbacks, &block); end
