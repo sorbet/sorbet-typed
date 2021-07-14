@@ -99,6 +99,9 @@ module Stripe
   class Customer
     extend T::Sig
 
+    sig { returns(String) }
+    def id; end
+
     sig { void.params(token: String) }
     def payment_method=(token); end
 
@@ -113,7 +116,7 @@ module Stripe
 
     sig { returns(T.nilable(Stripe::Address)) }
     def address; end
-    
+
     sig { returns(String) }
     def id; end
 
@@ -127,6 +130,9 @@ module Stripe
 
   class PaymentIntent < APIResource
     extend T::Sig
+
+    sig { returns(Stripe::ListObject) }
+    def charges; end
 
     sig { returns(String) }
     def client_secret; end
@@ -253,6 +259,30 @@ class Stripe::Refund
 end
 
 class Stripe::Charge
+  sig { returns(T.nilable(Stripe::Card)) }
+  def source; end
+
+  sig { returns(T::Boolean) }
+  def captured; end
+
+  sig { returns(T::Boolean) }
+  def refunded; end
+
+  sig { returns(Integer) }
+  def created; end
+
+  sig { returns(T.nilable(T.any(String, Stripe::ApplicationFee))) }
+  def application_fee; end
+
+  sig { returns(T.nilable(Stripe::BalanceTransaction)) }
+  def balance_transaction; end
+
+  sig { returns(T::Boolean) }
+  def paid; end
+
+  sig { returns(T::Boolean) }
+  def paid; end
+
   sig { returns(String) }
   def id; end
 
@@ -304,4 +334,9 @@ class Stripe::BalanceTransaction
 
   sig { params(id: String, opts: T.nilable(T::Hash[T.untyped, T.untyped])).returns(Stripe::BalanceTransaction) }
   def self.retrieve(id, opts={}); end
+end
+
+class Stripe::ApplicationFee
+  sig { returns(String) }
+  def id; end
 end
