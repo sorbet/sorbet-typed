@@ -162,6 +162,9 @@ module AbstractController::Callbacks::ClassMethods
   def skip_before_action(*names, except: nil, only: nil, if: nil, unless: nil, raise: true); end
 end
 
+class AbstractController::Base
+end
+
 module AbstractController::Helpers
   mixes_in_class_methods(::AbstractController::Helpers::ClassMethods)
 end
@@ -178,7 +181,9 @@ class ActionController::Base < ::ActionController::Metal
   include(::ActiveSupport::Rescuable)
 end
 
-ActionController::API::MODULES = T.let(T.unsafe(nil), T::Array[T.untyped])
+class ActionController::API
+  MODULES = T.let(T.unsafe(nil), T::Array[T.untyped])
+end
 
 ActionController::Base::MODULES = T.let(T.unsafe(nil), T::Array[T.untyped])
 
