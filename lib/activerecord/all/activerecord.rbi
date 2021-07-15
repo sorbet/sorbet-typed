@@ -295,8 +295,6 @@ end
 
 module ActiveRecord::Delegation::ClassSpecificRelation::ClassMethods; end
 
-ActiveRecord::Migration::MigrationFilenameRegexp = T.let(T.unsafe(nil), Regexp)
-
 ActiveRecord::Migrator::MIGRATOR_SALT = T.let(T.unsafe(nil), Integer)
 
 module ActiveRecord::NestedAttributes::ClassMethods
@@ -1067,6 +1065,10 @@ module ActiveRecord
   class UnknownPrimaryKey < ActiveRecordError; end
   class ValueTooLong < StatementInvalid; end
   class WrappedDatabaseException < StatementInvalid; end
+end
+
+class ActiveRecord::Migration
+  MigrationFilenameRegexp = T.let(T.unsafe(nil), Regexp)
 end
 
 class ActiveRecord::Schema < ActiveRecord::Migration::Current

@@ -20,6 +20,7 @@ deps = {
   "lib/bundler-audit" => ["lib/rake"],
   "lib/rspec-core" => ["lib/rake"],
   "lib/rubocop" => ["lib/rake"],
+  "lib/doorkeeper" => ["lib/activesupport", "lib/actionpack"],
 }
 
 results =
