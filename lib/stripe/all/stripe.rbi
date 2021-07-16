@@ -76,7 +76,7 @@ module Stripe
     sig { returns(T::Hash[Symbol, T.untyped]) }
     def metadata; end
 
-    sig { void.params(val: T::Hash[Symbol, T.untyped]) }
+    sig { void.params(val: T::Hash[T.any(String, Symbol), T.untyped]) }
     def metadata=(val); end
 
     sig { returns(APIResource).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
@@ -96,11 +96,8 @@ module Stripe
     def default_payment_method; end
   end
 
-  class Customer
+  class Customer < APIResource
     extend T::Sig
-
-    sig { returns(String) }
-    def id; end
 
     sig { void.params(token: String) }
     def payment_method=(token); end
@@ -111,14 +108,8 @@ module Stripe
     sig { returns(T.any(T::Hash[Symbol, T.untyped], Stripe::InvoiceSettings)) }
     def invoice_settings; end
 
-    sig { returns(T::Hash[Symbol, T.untyped]) }
-    def metadata; end
-
     sig { returns(T.nilable(Stripe::Address)) }
     def address; end
-
-    sig { returns(String) }
-    def id; end
 
     sig { returns(String) }
     def name; end
