@@ -81,7 +81,7 @@ module Stripe
     sig { returns(String) }
     def id; end
 
-    sig { returns(T::Hash[Symbol, T.untyped]) }
+    sig { returns(T::Hash[T.any(String, Symbol), T.untyped]) }
     def metadata; end
 
     sig { void.params(val: T::Hash[T.any(String, Symbol), T.untyped]) }
@@ -171,6 +171,8 @@ module Stripe
 
     sig { returns(T.any(String, Stripe::Charge)) }
     def charge; end
+
+    def status_transitions; end
   end
 
   class InvoiceItem < APIResource
