@@ -46,6 +46,11 @@ ActionView::Helpers::DateTimeSelector::POSITION = T.let(T.unsafe(nil), T::Hash[T
 
 ActionView::Helpers::JavaScriptHelper::JS_ESCAPE_MAP = T.let(T.unsafe(nil), T::Hash[T.untyped, T.untyped])
 
+class ActionView::Helpers::FormBuilder
+  sig { returns(T.untyped) }
+  def object; end
+end
+
 module ActionView::Helpers::NumberHelper
   # These will return nil if given nil and a string otherwise. Ideally we'd be able to encode
   # that via sig overload but that's only supported for ruby stdlib.
