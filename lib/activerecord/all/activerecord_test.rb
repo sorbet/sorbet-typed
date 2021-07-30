@@ -258,3 +258,15 @@ class ActiveRecordBaseTest < ApplicationRecord
     self.class.column_defaults
   end
 end
+
+class ActiveRecordStoreTest < ApplicationRecord
+  store_accessor :options, :value1
+  store_accessor :options, [:value1, :value2]
+  store_accessor :options, :value1, prefix: true, suffix: true
+  store_accessor :options, :value1, prefix: 'pref', suffix: 'suf'
+  store_accessor :options, :value1, prefix: :pref, suffix: :suf
+
+  store :options, accessors: :value1
+
+  stored_attributes
+end

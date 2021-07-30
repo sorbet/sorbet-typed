@@ -1641,4 +1641,27 @@ module ActiveRecord::Store
   mixes_in_class_methods(::ActiveRecord::Store::ClassMethods)
 end
 
-module ActiveRecord::Store::ClassMethods; end
+module ActiveRecord::Store::ClassMethods
+  sig do
+    params(
+      store_attribute: T.any(Symbol, String),
+      options: T::Hash[Symbol, T.untyped]
+    ).void
+  end
+  def store(store_attribute, options = {}); end
+
+  sig do
+    params(
+      store_attribute: T.any(Symbol, String),
+      keys: T.any(T::Array[T.any(Symbol, String)], Symbol, String),
+      prefix: T.nilable(T.any(T::Boolean, Symbol, String)),
+      suffix: T.nilable(T.any(T::Boolean, Symbol, String))
+    ).void
+  end
+  def store_accessor(store_attribute, *keys, prefix: nil, suffix: nil); end
+
+  sig do
+    returns(T::Hash[Symbol, T::Array[Symbol]])
+  end
+  def stored_attributes; end
+end
