@@ -17,7 +17,7 @@ To add `.rbi` files for a particular gem:
 1. Add a subdirectory to `lib` with the same name as the gem.
 2. Add a subdirectory to the gem subdirectory with a name matching the version you are adding signatures to. (See [Version Constraints](#version-constraints) below for a more thorough explanation)
 3. Create the `<GEM_NAME>.rbi` file in the version directory you've chosen.
-4. Optional, but encouraged: Add a test file in `lib/gem_name/version/gem_name_test.rb`. See the [Testing section](#testing) for details.
+4. Optional, but encouraged: Add a test file in `lib/gem_name/version/gem_name_test.rb`. See the [Tests section](#tests) for details.
 
 ### Version Constraints
 
