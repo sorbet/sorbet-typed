@@ -7237,7 +7237,7 @@ module Faker
     sig { returns(T.untyped) }
     def email; end
 
-    sig { params(name: T.untyped, email: T.untyped).returns(Omniauth) }
+    sig { params(name: T.untyped, email: T.untyped).void }
     def initialize(name: nil, email: nil); end
 
     # rubocop:disable Metrics/ParameterLists
@@ -7779,7 +7779,7 @@ module Faker
     sig { returns(T.untyped) }
     def self.marked_unique; end
 
-    sig { params(generator: T.untyped, max_retries: T.untyped).returns(UniqueGenerator) }
+    sig { params(generator: T.untyped, max_retries: T.untyped).void }
     def initialize(generator, max_retries); end
 
     # rubocop:disable Style/MethodMissingSuper
