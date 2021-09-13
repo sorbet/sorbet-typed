@@ -1485,7 +1485,7 @@ module Discordrb
         redact_token: T.untyped,
         ignore_bots: T.untyped,
         compress_mode: T.untyped
-      ).returns(Bot)
+      ).void
     end
     def initialize(log_mode: :normal, token: nil, client_id: nil, type: nil, name: '', fancy_log: false, suppress_ready: false, parse_self: false, shard_id: nil, num_shards: nil, redact_token: true, ignore_bots: false, compress_mode: :stream); end
 
@@ -2819,7 +2819,7 @@ module Discordrb
         type: T.untyped,
         allow: T.untyped,
         deny: T.untyped
-      ).returns(Overwrite)
+      ).void
     end
     def initialize(object = nil, type: nil, allow: 0, deny: 0); end
 
@@ -4077,7 +4077,7 @@ module Discordrb
           server: T.untyped,
           bot: T.untyped,
           data: T.untyped
-        ).returns(Entry)
+        ).void
       end
       def initialize(logs, server, bot, data); end
 
@@ -4125,7 +4125,7 @@ module Discordrb
           server: T.untyped,
           bot: T.untyped,
           logs: T.untyped
-        ).returns(Change)
+        ).void
       end
       def initialize(data, server, bot, logs); end
 
@@ -4197,7 +4197,7 @@ module Discordrb
         type: T.untyped,
         attributes: T.untyped,
         block: T.untyped
-      ).returns(Await)
+      ).void
     end
     def initialize(bot, key, type, attributes, block = nil); end
 
@@ -4547,7 +4547,7 @@ module Discordrb
         token: T.untyped,
         shard_key: T.untyped,
         compress_mode: T.untyped
-      ).returns(Gateway)
+      ).void
     end
     def initialize(bot, token, shard_key = nil, compress_mode = :stream); end
 
@@ -4743,7 +4743,7 @@ module Discordrb
           provider: T.untyped,
           author: T.untyped,
           fields: T.untyped
-        ).returns(T.untyped)
+        ).void
       end
       def initialize(title: nil, description: nil, url: nil, timestamp: nil, colour: nil, color: nil, footer: nil, image: nil, thumbnail: nil, video: nil, provider: nil, author: nil, fields: []); end
 
@@ -4926,7 +4926,7 @@ module Discordrb
           tts: T.untyped,
           file: T.untyped,
           embeds: T.untyped
-        ).returns(Builder)
+        ).void
       end
       def initialize(content: '', username: nil, avatar_url: nil, tts: false, file: nil, embeds: []); end
 
@@ -5684,7 +5684,7 @@ module Discordrb
           old_emoji: T.untyped,
           emoji: T.untyped,
           bot: T.untyped
-        ).returns(ServerEmojiUpdateEvent)
+        ).void
       end
       def initialize(server, old_emoji, emoji, bot); end
 
@@ -7502,7 +7502,7 @@ module Discordrb
           token: String,
           session: String,
           endpoint: String
-        ).returns(VoiceWS)
+        ).void
       end
       def initialize(channel, bot, token, session, endpoint); end
 
@@ -7601,7 +7601,7 @@ module Discordrb
           session: T.untyped,
           endpoint: T.untyped,
           encrypted: T.untyped
-        ).returns(VoiceBot)
+        ).void
       end
       def initialize(channel, bot, token, session, endpoint, encrypted); end
 
@@ -8478,7 +8478,7 @@ module Discordrb
         message_handler: T.untyped,
         close_handler: T.untyped,
         error_handler: T.untyped
-      ).returns(WebSocket)
+      ).void
     end
     def initialize(endpoint, open_handler, message_handler, close_handler, error_handler); end
 
