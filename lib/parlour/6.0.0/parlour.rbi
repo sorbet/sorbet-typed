@@ -115,7 +115,7 @@ module Parlour
     sig { returns(Parser::Source::Range) }
     attr_reader :range
 
-    sig { params(buffer: T.untyped, range: T.untyped).returns(T.untyped) }
+    sig { params(buffer: T.untyped, range: T.untyped).void }
     def initialize(buffer, range); end
   end
 
@@ -667,7 +667,7 @@ module Parlour
       extend T::Sig
       extend T::Helpers
 
-      sig { returns(T.untyped) }
+      sig { void }
       def initialize; end
 
       sig { returns(T::Array[[String, TypedObject]]) }
@@ -697,7 +697,7 @@ module Parlour
   class RbiGenerator < Generator
     Options = Parlour::Options
 
-    sig { params(hash: T.untyped).returns(T.untyped) }
+    sig { params(hash: T.untyped).void }
     def initialize(**hash); end
 
     sig { returns(RbiGenerator::Namespace) }
@@ -1428,7 +1428,7 @@ module Parlour
   end
 
   class RbsGenerator < Generator
-    sig { params(hash: T.untyped).returns(T.untyped) }
+    sig { params(hash: T.untyped).void }
     def initialize(**hash); end
 
     sig { returns(RbsGenerator::Namespace) }
