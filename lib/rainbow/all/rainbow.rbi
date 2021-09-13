@@ -23,7 +23,7 @@ module Rainbow
       sig { returns(Integer) }
       attr_reader :num
 
-      sig { params(ground: Symbol, num: Integer).returns(Indexed) }
+      sig { params(ground: Symbol, num: Integer).void }
       def initialize(ground, num); end
 
       sig { returns(T::Array[Integer]) }
@@ -39,7 +39,7 @@ module Rainbow
       sig { returns(String) }
       def self.valid_names; end
 
-      sig { params(ground: Symbol, name: Symbol).returns(Named) }
+      sig { params(ground: Symbol, name: Symbol).void }
       def initialize(ground, name); end
     end
 
@@ -50,7 +50,7 @@ module Rainbow
       sig { params(value: Numeric).returns(Integer) }
       def to_ansi_domain(value); end
 
-      sig { params(ground: Symbol, values: Integer).returns(RGB) }
+      sig { params(ground: Symbol, values: Integer).void }
       def initialize(ground, *values); end
 
       sig { returns(T::Array[Integer]) }
@@ -66,7 +66,7 @@ module Rainbow
       sig { returns(String) }
       def self.valid_names; end
 
-      sig { params(ground: Symbol, name: Symbol).returns(X11Named) }
+      sig { params(ground: Symbol, name: Symbol).void }
       def initialize(ground, name); end
     end
   end
@@ -253,7 +253,7 @@ module Rainbow
     sig { returns(T::Boolean) }
     attr_accessor :enabled
 
-    sig { params(enabled: T::Boolean).returns(Wrapper) }
+    sig { params(enabled: T::Boolean).void }
     def initialize(enabled = true); end
 
     sig { params(string: String).returns(T.any(Rainbow::Presenter, Rainbow::NullPresenter)) }

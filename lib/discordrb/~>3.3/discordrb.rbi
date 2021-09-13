@@ -2017,7 +2017,7 @@ module Discordrb
     sig { returns(T.nilable(T.any(String, Integer))) }
     def stream_type; end
 
-    sig { params(data: T.untyped, bot: T.untyped).returns(User) }
+    sig { params(data: T.untyped, bot: T.untyped).void }
     def initialize(data, bot); end
 
     sig { params(content: T.untyped).returns(T.untyped) }
@@ -2102,7 +2102,7 @@ module Discordrb
     sig { returns(User) }
     def owner; end
 
-    sig { params(data: T.untyped, bot: T.untyped).returns(Application) }
+    sig { params(data: T.untyped, bot: T.untyped).void }
     def initialize(data, bot); end
 
     sig { returns(T.nilable(String)) }
@@ -2168,7 +2168,7 @@ module Discordrb
     sig { returns(Channel) }
     def voice_channel; end
 
-    sig { params(user_id: T.untyped).returns(VoiceState) }
+    sig { params(user_id: T.untyped).void }
     def initialize(user_id); end
 
     sig do
@@ -2208,7 +2208,7 @@ module Discordrb
     sig { returns(T::Boolean) }
     def custom; end
 
-    sig { params(data: T.untyped).returns(VoiceRegion) }
+    sig { params(data: T.untyped).void }
     def initialize(data); end
   end
 
@@ -2231,7 +2231,7 @@ module Discordrb
     sig { returns(Channel) }
     def voice_channel; end
 
-    sig { params(data: T.untyped, server: T.untyped, bot: T.untyped).returns(Member) }
+    sig { params(data: T.untyped, server: T.untyped, bot: T.untyped).void }
     def initialize(data, server, bot); end
 
     sig { returns(T::Boolean) }
@@ -2406,7 +2406,7 @@ module Discordrb
     sig { returns(Channel) }
     def channel; end
 
-    sig { params(user: T.untyped, channel: T.untyped, bot: T.untyped).returns(Recipient) }
+    sig { params(user: T.untyped, channel: T.untyped, bot: T.untyped).void }
     def initialize(user, channel, bot); end
 
     sig { returns(T.untyped) }
@@ -2498,7 +2498,7 @@ module Discordrb
   end
 
   class Profile < User
-    sig { params(data: T.untyped, bot: T.untyped).returns(Profile) }
+    sig { params(data: T.untyped, bot: T.untyped).void }
     def initialize(data, bot); end
 
     sig { returns(T::Boolean) }
@@ -2631,7 +2631,7 @@ module Discordrb
     sig { returns(Integer) }
     def position; end
 
-    sig { params(data: T.untyped, bot: T.untyped, server: T.untyped).returns(Role) }
+    sig { params(data: T.untyped, bot: T.untyped, server: T.untyped).void }
     def initialize(data, bot, server = nil); end
 
     sig { returns(String) }
@@ -2683,7 +2683,7 @@ module Discordrb
     def creation_time; end
 
     class RoleWriter
-      sig { params(role: T.untyped, token: T.untyped).returns(RoleWriter) }
+      sig { params(role: T.untyped, token: T.untyped).void }
       def initialize(role, token); end
 
       sig { params(bits: Integer).returns(T.untyped) }
@@ -2703,7 +2703,7 @@ module Discordrb
     sig { returns(Integer) }
     def type; end
 
-    sig { params(data: T.untyped, bot: T.untyped).returns(InviteChannel) }
+    sig { params(data: T.untyped, bot: T.untyped).void }
     def initialize(data, bot); end
 
     sig { returns(Integer) }
@@ -2725,7 +2725,7 @@ module Discordrb
     sig { returns(T.nilable(String)) }
     def splash_hash; end
 
-    sig { params(data: T.untyped, bot: T.untyped).returns(InviteServer) }
+    sig { params(data: T.untyped, bot: T.untyped).void }
     def initialize(data, bot); end
 
     sig { returns(Integer) }
@@ -2772,7 +2772,7 @@ module Discordrb
     sig { returns(T.nilable(Time)) }
     def created_at; end
 
-    sig { params(data: T.untyped, bot: T.untyped).returns(Invite) }
+    sig { params(data: T.untyped, bot: T.untyped).void }
     def initialize(data, bot); end
 
     sig { params(other: T.untyped).returns(T.untyped) }
@@ -2884,7 +2884,7 @@ module Discordrb
     sig { returns(T.nilable(Recipient)) }
     def recipient; end
 
-    sig { params(data: T.untyped, bot: T.untyped, server: T.untyped).returns(Channel) }
+    sig { params(data: T.untyped, bot: T.untyped, server: T.untyped).void }
     def initialize(data, bot, server = nil); end
 
     sig { returns(T::Boolean) }
@@ -3162,7 +3162,7 @@ module Discordrb
     sig { returns(T.nilable(T::Array[EmbedField])) }
     def fields; end
 
-    sig { params(data: T.untyped, message: T.untyped).returns(Embed) }
+    sig { params(data: T.untyped, message: T.untyped).void }
     def initialize(data, message); end
   end
 
@@ -3179,7 +3179,7 @@ module Discordrb
     sig { returns(String) }
     def proxy_icon_url; end
 
-    sig { params(data: T.untyped, embed: T.untyped).returns(EmbedFooter) }
+    sig { params(data: T.untyped, embed: T.untyped).void }
     def initialize(data, embed); end
   end
 
@@ -3199,7 +3199,7 @@ module Discordrb
     sig { returns(Integer) }
     def height; end
 
-    sig { params(data: T.untyped, embed: T.untyped).returns(EmbedImage) }
+    sig { params(data: T.untyped, embed: T.untyped).void }
     def initialize(data, embed); end
   end
 
@@ -3216,7 +3216,7 @@ module Discordrb
     sig { returns(Integer) }
     def height; end
 
-    sig { params(data: T.untyped, embed: T.untyped).returns(EmbedVideo) }
+    sig { params(data: T.untyped, embed: T.untyped).void }
     def initialize(data, embed); end
   end
 
@@ -3236,7 +3236,7 @@ module Discordrb
     sig { returns(Integer) }
     def height; end
 
-    sig { params(data: T.untyped, embed: T.untyped).returns(EmbedThumbnail) }
+    sig { params(data: T.untyped, embed: T.untyped).void }
     def initialize(data, embed); end
   end
 
@@ -3250,7 +3250,7 @@ module Discordrb
     sig { returns(T.nilable(String)) }
     def url; end
 
-    sig { params(data: T.untyped, embed: T.untyped).returns(EmbedProvider) }
+    sig { params(data: T.untyped, embed: T.untyped).void }
     def initialize(data, embed); end
   end
 
@@ -3270,7 +3270,7 @@ module Discordrb
     sig { returns(T.nilable(String)) }
     def proxy_icon_url; end
 
-    sig { params(data: T.untyped, embed: T.untyped).returns(EmbedAuthor) }
+    sig { params(data: T.untyped, embed: T.untyped).void }
     def initialize(data, embed); end
   end
 
@@ -3287,7 +3287,7 @@ module Discordrb
     sig { returns(T::Boolean) }
     def inline; end
 
-    sig { params(data: T.untyped, embed: T.untyped).returns(EmbedField) }
+    sig { params(data: T.untyped, embed: T.untyped).void }
     def initialize(data, embed); end
   end
 
@@ -3315,7 +3315,7 @@ module Discordrb
     sig { returns(T.nilable(Integer)) }
     def height; end
 
-    sig { params(data: T.untyped, message: T.untyped, bot: T.untyped).returns(Attachment) }
+    sig { params(data: T.untyped, message: T.untyped, bot: T.untyped).void }
     def initialize(data, message, bot); end
 
     sig { returns(T::Boolean) }
@@ -3382,7 +3382,7 @@ module Discordrb
     sig { returns(T.nilable(Integer)) }
     def webhook_id; end
 
-    sig { params(data: T.untyped, bot: T.untyped).returns(Message) }
+    sig { params(data: T.untyped, bot: T.untyped).void }
     def initialize(data, bot); end
 
     sig { params(content: T.untyped).returns(T.untyped) }
@@ -3468,7 +3468,7 @@ module Discordrb
     sig { returns(String) }
     def name; end
 
-    sig { params(data: T.untyped).returns(Reaction) }
+    sig { params(data: T.untyped).void }
     def initialize(data); end
 
     sig { returns(String) }
@@ -3490,7 +3490,7 @@ module Discordrb
     sig { returns(T::Boolean) }
     def animated; end
 
-    sig { params(data: T.untyped, bot: T.untyped, server: T.untyped).returns(Emoji) }
+    sig { params(data: T.untyped, bot: T.untyped, server: T.untyped).void }
     def initialize(data, bot, server); end
 
     sig { returns(String) }
@@ -3536,7 +3536,7 @@ module Discordrb
     sig { returns(Integer) }
     def id; end
 
-    sig { params(data: T.untyped).returns(IntegrationAccount) }
+    sig { params(data: T.untyped).void }
     def initialize(data); end
   end
 
@@ -3579,7 +3579,7 @@ module Discordrb
     sig { returns(Integer) }
     def expire_grace_period; end
 
-    sig { params(data: T.untyped, bot: T.untyped, server: T.untyped).returns(Integration) }
+    sig { params(data: T.untyped, bot: T.untyped, server: T.untyped).void }
     def initialize(data, bot, server); end
 
     sig { returns(T.untyped) }
@@ -3629,7 +3629,7 @@ module Discordrb
     sig { returns(T::Hash[Integer, VoiceState]) }
     def voice_states; end
 
-    sig { params(data: T.untyped, bot: T.untyped, exists: T.untyped).returns(Server) }
+    sig { params(data: T.untyped, bot: T.untyped, exists: T.untyped).void }
     def initialize(data, bot, exists = true); end
 
     sig { params(send_messages: T::Boolean).returns(T.nilable(Channel)) }
@@ -3933,7 +3933,7 @@ module Discordrb
     sig { returns(Server) }
     def server; end
 
-    sig { params(server: T.untyped, user: T.untyped, reason: T.untyped).returns(ServerBan) }
+    sig { params(server: T.untyped, user: T.untyped, reason: T.untyped).void }
     def initialize(server, user, reason); end
 
     sig { params(reason: String).returns(T.untyped) }
@@ -3961,7 +3961,7 @@ module Discordrb
     sig { returns(T.nilable(T.any(Member, User))) }
     def owner; end
 
-    sig { params(data: T.untyped, bot: T.untyped).returns(Webhook) }
+    sig { params(data: T.untyped, bot: T.untyped).void }
     def initialize(data, bot); end
 
     sig { params(avatar: T.any(String, T.untyped)).returns(T.untyped) }
@@ -4020,7 +4020,7 @@ module Discordrb
     sig { returns(T::Array[Entry]) }
     def entries; end
 
-    sig { params(server: T.untyped, bot: T.untyped, data: T.untyped).returns(AuditLogs) }
+    sig { params(server: T.untyped, bot: T.untyped, data: T.untyped).void }
     def initialize(server, bot, data); end
 
     sig { returns(Entry) }
@@ -4152,7 +4152,7 @@ module Discordrb
       sig { returns(Symbol) }
       def type; end
 
-      sig { params(data: T.untyped, server: T.untyped).returns(RoleChange) }
+      sig { params(data: T.untyped, server: T.untyped).void }
       def initialize(data, server); end
 
       sig { returns(Role) }
@@ -4173,7 +4173,7 @@ module Discordrb
     sig { returns(Integer) }
     def combined; end
 
-    sig { params(combined: T.any(Integer, String)).returns(ColourRGB) }
+    sig { params(combined: T.any(Integer, String)).void }
     def initialize(combined); end
 
     sig { returns(String) }
@@ -4257,7 +4257,7 @@ module Discordrb
       include IDObject
       include UserAttributes
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(LightProfile) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(String) }
@@ -4298,7 +4298,7 @@ module Discordrb
       include IDObject
       include ServerAttributes
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(UltraLightServer) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(String) }
@@ -4327,7 +4327,7 @@ module Discordrb
       sig { returns(Discordrb::Permissions) }
       def bot_permissions; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(LightServer) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(String) }
@@ -4350,7 +4350,7 @@ module Discordrb
     end
 
     class LightBot
-      sig { params(token: String).returns(LightBot) }
+      sig { params(token: String).void }
       def initialize(token); end
 
       sig { returns(LightProfile) }
@@ -4382,7 +4382,7 @@ module Discordrb
       sig { returns(T::Array[T.untyped]) }
       def integrations; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(Connection) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
     end
 
@@ -4398,7 +4398,7 @@ module Discordrb
       sig { returns(Connection) }
       def integrated_connection; end
 
-      sig { params(data: T.untyped, integrated: T.untyped, bot: T.untyped).returns(T.untyped) }
+      sig { params(data: T.untyped, integrated: T.untyped, bot: T.untyped).void }
       def initialize(data, integrated, bot); end
 
       sig { returns(Integer) }
@@ -4437,7 +4437,7 @@ module Discordrb
       sig { returns(Integer) }
       def self.code; end
 
-      sig { params(message: String).returns(CodeError) }
+      sig { params(message: String).void }
       def initialize(message); end
 
       sig { returns(Integer) }
@@ -4461,7 +4461,7 @@ module Discordrb
     sig { params(value: T.any(T::Array[IO], T::Array[T.untyped])).returns(T.any(T::Array[IO], T::Array[T.untyped])) }
     def streams=(value); end
 
-    sig { params(fancy: T::Boolean, streams: T.any(T::Array[IO], T::Array[T.untyped])).returns(T.untyped) }
+    sig { params(fancy: T::Boolean, streams: T.any(T::Array[IO], T::Array[T.untyped])).void }
     def initialize(fancy = false, streams = [STDOUT]); end
 
     sig { params(value: T::Boolean).returns(T.untyped) }
@@ -4512,7 +4512,7 @@ module Discordrb
     sig { params(value: T.untyped).returns(T.untyped) }
     def sequence=(value); end
 
-    sig { params(session_id: T.untyped).returns(Session) }
+    sig { params(session_id: T.untyped).void }
     def initialize(session_id); end
 
     sig { returns(T.untyped) }
@@ -4711,7 +4711,7 @@ module Discordrb
 
   module Webhooks
     class Client
-      sig { params(url: T.untyped, id: T.untyped, token: T.untyped).returns(Client) }
+      sig { params(url: T.untyped, id: T.untyped, token: T.untyped).void }
       def initialize(url: nil, id: nil, token: nil); end
 
       sig { params(builder: T.nilable(Builder), wait: T::Boolean).returns(T.untyped) }
@@ -4830,7 +4830,7 @@ module Discordrb
       sig { params(value: T.nilable(String)).returns(T.nilable(String)) }
       def icon_url=(value); end
 
-      sig { params(text: T.untyped, icon_url: T.untyped).returns(T.untyped) }
+      sig { params(text: T.untyped, icon_url: T.untyped).void }
       def initialize(text: nil, icon_url: nil); end
 
       sig { returns(T::Hash[T.untyped, T.untyped]) }
@@ -4844,7 +4844,7 @@ module Discordrb
       sig { params(value: T.nilable(String)).returns(T.nilable(String)) }
       def url=(value); end
 
-      sig { params(url: T.nilable(String)).returns(T.untyped) }
+      sig { params(url: T.nilable(String)).void }
       def initialize(url: nil); end
 
       sig { returns(T::Hash[T.untyped, T.untyped]) }
@@ -4858,7 +4858,7 @@ module Discordrb
       sig { params(value: T.nilable(String)).returns(T.nilable(String)) }
       def url=(value); end
 
-      sig { params(url: T.nilable(String)).returns(T.untyped) }
+      sig { params(url: T.nilable(String)).void }
       def initialize(url: nil); end
 
       sig { returns(T::Hash[T.untyped, T.untyped]) }
@@ -4884,7 +4884,7 @@ module Discordrb
       sig { params(value: T.nilable(String)).returns(T.nilable(String)) }
       def icon_url=(value); end
 
-      sig { params(name: T.untyped, url: T.untyped, icon_url: T.untyped).returns(T.untyped) }
+      sig { params(name: T.untyped, url: T.untyped, icon_url: T.untyped).void }
       def initialize(name: nil, url: nil, icon_url: nil); end
 
       sig { returns(T::Hash[T.untyped, T.untyped]) }
@@ -4910,7 +4910,7 @@ module Discordrb
       sig { params(value: T::Boolean).returns(T::Boolean) }
       def inline=(value); end
 
-      sig { params(name: T.untyped, value: T.untyped, inline: T.untyped).returns(T.untyped) }
+      sig { params(name: T.untyped, value: T.untyped, inline: T.untyped).void }
       def initialize(name: nil, value: nil, inline: false); end
 
       sig { returns(T::Hash[T.untyped, T.untyped]) }
@@ -5133,7 +5133,7 @@ module Discordrb
       sig { returns(T::Hash[T.untyped, T.untyped]) }
       def data; end
 
-      sig { params(type: T.untyped, data: T.untyped, bot: T.untyped).returns(RawEvent) }
+      sig { params(type: T.untyped, data: T.untyped, bot: T.untyped).void }
       def initialize(type, data, bot); end
 
       sig { returns(Bot) }
@@ -5147,7 +5147,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5170,7 +5170,7 @@ module Discordrb
       sig { returns(T::Hash[T.untyped, T.untyped]) }
       def data; end
 
-      sig { params(type: T.untyped, data: T.untyped, bot: T.untyped).returns(RawEvent) }
+      sig { params(type: T.untyped, data: T.untyped, bot: T.untyped).void }
       def initialize(type, data, bot); end
 
       sig { returns(Bot) }
@@ -5184,7 +5184,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5207,7 +5207,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(UserBanEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -5221,7 +5221,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5244,7 +5244,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(UserBanEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -5258,7 +5258,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5290,7 +5290,7 @@ module Discordrb
       sig { returns(T::Hash[T.untyped, T.untyped]) }
       def attributes; end
 
-      sig { params(await: T.untyped, event: T.untyped, bot: T.untyped).returns(AwaitEvent) }
+      sig { params(await: T.untyped, event: T.untyped, bot: T.untyped).void }
       def initialize(await, event, bot); end
 
       sig { returns(Bot) }
@@ -5304,7 +5304,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5330,7 +5330,7 @@ module Discordrb
       sig { returns(String) }
       def name; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerRoleCreateEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -5344,7 +5344,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5367,7 +5367,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerRoleDeleteEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -5381,7 +5381,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5407,7 +5407,7 @@ module Discordrb
       sig { returns(String) }
       def name; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerRoleCreateEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -5421,7 +5421,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5441,7 +5441,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { params(data: T.untyped, bot: T.untyped).returns(T.untyped) }
@@ -5458,7 +5458,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5478,7 +5478,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { params(data: T.untyped, bot: T.untyped).returns(T.untyped) }
@@ -5495,7 +5495,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5515,7 +5515,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { params(data: T.untyped, bot: T.untyped).returns(T.untyped) }
@@ -5532,7 +5532,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5555,7 +5555,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -5569,7 +5569,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5592,7 +5592,7 @@ module Discordrb
       sig { returns(T::Array[Emoji]) }
       def emoji; end
 
-      sig { params(server: T.untyped, data: T.untyped, bot: T.untyped).returns(ServerEmojiChangeEvent) }
+      sig { params(server: T.untyped, data: T.untyped, bot: T.untyped).void }
       def initialize(server, data, bot); end
 
       sig { params(data: T.untyped).returns(T.untyped) }
@@ -5615,7 +5615,7 @@ module Discordrb
       sig { returns(Emoji) }
       def emoji; end
 
-      sig { params(server: T.untyped, emoji: T.untyped, bot: T.untyped).returns(ServerEmojiCDEvent) }
+      sig { params(server: T.untyped, emoji: T.untyped, bot: T.untyped).void }
       def initialize(server, emoji, bot); end
 
       sig { params(data: T.untyped, bot: T.untyped).returns(T.untyped) }
@@ -5635,7 +5635,7 @@ module Discordrb
       sig { returns(Emoji) }
       def emoji; end
 
-      sig { params(server: T.untyped, emoji: T.untyped, bot: T.untyped).returns(ServerEmojiCDEvent) }
+      sig { params(server: T.untyped, emoji: T.untyped, bot: T.untyped).void }
       def initialize(server, emoji, bot); end
 
       sig { params(data: T.untyped, bot: T.untyped).returns(T.untyped) }
@@ -5655,7 +5655,7 @@ module Discordrb
       sig { returns(Emoji) }
       def emoji; end
 
-      sig { params(server: T.untyped, emoji: T.untyped, bot: T.untyped).returns(ServerEmojiCDEvent) }
+      sig { params(server: T.untyped, emoji: T.untyped, bot: T.untyped).void }
       def initialize(server, emoji, bot); end
 
       sig { params(data: T.untyped, bot: T.untyped).returns(T.untyped) }
@@ -5702,7 +5702,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5722,7 +5722,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5742,7 +5742,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5762,7 +5762,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5782,7 +5782,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5810,7 +5810,7 @@ module Discordrb
       sig { returns(Time) }
       def timestamp; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(TypingEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { params(content: String, tts: T::Boolean, embed: T.nilable(T.any(T::Hash[T.untyped, T.untyped], Discordrb::Webhooks::Embed))).returns(Discordrb::Message) }
@@ -5842,7 +5842,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5862,7 +5862,7 @@ module Discordrb
       sig { returns(T.untyped) }
       def object; end
 
-      sig { params(object: T.untyped).returns(Negated) }
+      sig { params(object: T.untyped).void }
       def initialize(object); end
     end
 
@@ -5875,7 +5875,7 @@ module Discordrb
     end
 
     class EventHandler
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(_: T.untyped).returns(T::Boolean) }
@@ -5898,7 +5898,7 @@ module Discordrb
       sig { params(_: T.untyped).returns(T::Boolean) }
       def matches?(_); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5924,7 +5924,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerMemberEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { params(data: T.untyped, _: T.untyped).returns(T.untyped) }
@@ -5944,7 +5944,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -5970,7 +5970,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerMemberEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { params(data: T.untyped, _: T.untyped).returns(T.untyped) }
@@ -5990,7 +5990,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6016,7 +6016,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerMemberEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { params(data: T.untyped, _: T.untyped).returns(T.untyped) }
@@ -6036,7 +6036,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6065,7 +6065,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ServerMemberEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { params(data: T.untyped, _: T.untyped).returns(T.untyped) }
@@ -6082,7 +6082,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6148,7 +6148,7 @@ module Discordrb
       sig { returns(T.nilable(Server)) }
       def server; end
 
-      sig { params(message: T.untyped, bot: T.untyped).returns(MessageEvent) }
+      sig { params(message: T.untyped, bot: T.untyped).void }
       def initialize(message, bot); end
 
       sig { params(file: File, caption: T.untyped).returns(Discordrb::Message) }
@@ -6198,7 +6198,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T.untyped) }
       def after_call(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6236,7 +6236,7 @@ module Discordrb
       sig { returns(T.nilable(Server)) }
       def server; end
 
-      sig { params(message: T.untyped, bot: T.untyped).returns(MessageEvent) }
+      sig { params(message: T.untyped, bot: T.untyped).void }
       def initialize(message, bot); end
 
       sig { params(file: File, caption: T.untyped).returns(Discordrb::Message) }
@@ -6286,7 +6286,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T.untyped) }
       def after_call(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6324,7 +6324,7 @@ module Discordrb
       sig { returns(T.nilable(Server)) }
       def server; end
 
-      sig { params(message: T.untyped, bot: T.untyped).returns(MessageEvent) }
+      sig { params(message: T.untyped, bot: T.untyped).void }
       def initialize(message, bot); end
 
       sig { params(file: File, caption: T.untyped).returns(Discordrb::Message) }
@@ -6374,7 +6374,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T.untyped) }
       def after_call(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6393,7 +6393,7 @@ module Discordrb
       sig { returns(Integer) }
       def id; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(MessageIDEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Channel) }
@@ -6428,7 +6428,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6469,7 +6469,7 @@ module Discordrb
       sig { returns(T.nilable(Server)) }
       def server; end
 
-      sig { params(message: T.untyped, bot: T.untyped).returns(MessageEvent) }
+      sig { params(message: T.untyped, bot: T.untyped).void }
       def initialize(message, bot); end
 
       sig { params(file: File, caption: T.untyped).returns(Discordrb::Message) }
@@ -6519,7 +6519,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T.untyped) }
       def after_call(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6536,7 +6536,7 @@ module Discordrb
       sig { returns(Integer) }
       def id; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(MessageIDEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Channel) }
@@ -6571,7 +6571,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6609,7 +6609,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ChannelCreateEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -6623,7 +6623,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6661,7 +6661,7 @@ module Discordrb
       sig { returns(T.nilable(Integer)) }
       def owner_id; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ChannelDeleteEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -6675,7 +6675,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6698,7 +6698,7 @@ module Discordrb
       sig { returns(Recipient) }
       def recipient; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ChannelRecipientEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -6712,7 +6712,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6735,7 +6735,7 @@ module Discordrb
       sig { returns(Recipient) }
       def recipient; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ChannelRecipientEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -6749,7 +6749,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6772,7 +6772,7 @@ module Discordrb
       sig { returns(Recipient) }
       def recipient; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ChannelRecipientEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -6786,7 +6786,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6824,7 +6824,7 @@ module Discordrb
       sig { returns(Server) }
       def server; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ChannelCreateEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -6838,7 +6838,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6855,7 +6855,7 @@ module Discordrb
     end
 
     class LifetimeEvent < Event
-      sig { params(bot: T.untyped).returns(LifetimeEvent) }
+      sig { params(bot: T.untyped).void }
       def initialize(bot); end
 
       sig { returns(Bot) }
@@ -6866,7 +6866,7 @@ module Discordrb
     end
 
     class ReadyEvent < LifetimeEvent
-      sig { params(bot: T.untyped).returns(LifetimeEvent) }
+      sig { params(bot: T.untyped).void }
       def initialize(bot); end
 
       sig { returns(Bot) }
@@ -6880,7 +6880,7 @@ module Discordrb
       sig { params(_: T.untyped).returns(T::Boolean) }
       def matches?(_); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6897,7 +6897,7 @@ module Discordrb
     end
 
     class DisconnectEvent < LifetimeEvent
-      sig { params(bot: T.untyped).returns(LifetimeEvent) }
+      sig { params(bot: T.untyped).void }
       def initialize(bot); end
 
       sig { returns(Bot) }
@@ -6911,7 +6911,7 @@ module Discordrb
       sig { params(_: T.untyped).returns(T::Boolean) }
       def matches?(_); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6928,7 +6928,7 @@ module Discordrb
     end
 
     class HeartbeatEvent < LifetimeEvent
-      sig { params(bot: T.untyped).returns(LifetimeEvent) }
+      sig { params(bot: T.untyped).void }
       def initialize(bot); end
 
       sig { returns(Bot) }
@@ -6942,7 +6942,7 @@ module Discordrb
       sig { params(_: T.untyped).returns(T::Boolean) }
       def matches?(_); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -6968,7 +6968,7 @@ module Discordrb
       sig { returns(Symbol) }
       def status; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(PresenceEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -6982,7 +6982,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -7017,7 +7017,7 @@ module Discordrb
       sig { returns(Integer) }
       def type; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(PlayingEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -7031,7 +7031,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -7054,7 +7054,7 @@ module Discordrb
       sig { returns(Channel) }
       def channel; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(WebhookUpdateEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Bot) }
@@ -7068,7 +7068,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -7090,7 +7090,7 @@ module Discordrb
       sig { returns(Emoji) }
       def emoji; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ReactionEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(T.any(User, Member)) }
@@ -7134,7 +7134,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -7154,7 +7154,7 @@ module Discordrb
       sig { returns(Emoji) }
       def emoji; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ReactionEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(T.any(User, Member)) }
@@ -7198,7 +7198,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -7218,7 +7218,7 @@ module Discordrb
       sig { returns(Emoji) }
       def emoji; end
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ReactionEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(T.any(User, Member)) }
@@ -7262,7 +7262,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -7281,7 +7281,7 @@ module Discordrb
     class ReactionRemoveAllEvent < Event
       include Respondable
 
-      sig { params(data: T.untyped, bot: T.untyped).returns(ReactionRemoveAllEvent) }
+      sig { params(data: T.untyped, bot: T.untyped).void }
       def initialize(data, bot); end
 
       sig { returns(Channel) }
@@ -7319,7 +7319,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -7369,7 +7369,7 @@ module Discordrb
       sig { returns(T.nilable(Channel)) }
       def old_channel; end
 
-      sig { params(data: T.untyped, old_channel_id: T.untyped, bot: T.untyped).returns(VoiceStateUpdateEvent) }
+      sig { params(data: T.untyped, old_channel_id: T.untyped, bot: T.untyped).void }
       def initialize(data, old_channel_id, bot); end
 
       sig { returns(Bot) }
@@ -7383,7 +7383,7 @@ module Discordrb
       sig { params(event: T.untyped).returns(T::Boolean) }
       def matches?(event); end
 
-      sig { params(attributes: T.untyped, block: T.untyped).returns(EventHandler) }
+      sig { params(attributes: T.untyped, block: T.untyped).void }
       def initialize(attributes, block); end
 
       sig { params(event: Object).returns(T.untyped) }
@@ -7413,7 +7413,7 @@ module Discordrb
     sig { params(list: T::Array[Symbol]).returns(Integer) }
     def self.bits(list); end
 
-    sig { params(bits: T.any(Integer, T::Array[Symbol]), writer: Discordrb::Role::RoleWriter).returns(Permissions) }
+    sig { params(bits: T.any(Integer, T::Array[Symbol]), writer: Discordrb::Role::RoleWriter).void }
     def initialize(bits = 0, writer = nil); end
 
     sig { params(other: T.untyped).returns(T.untyped) }
@@ -7434,7 +7434,7 @@ module Discordrb
       sig { params(value: Integer).returns(Integer) }
       def filter_volume=(value); end
 
-      sig { returns(Encoder) }
+      sig { void }
       def initialize; end
 
       sig { params(value: Integer).returns(T.untyped) }
@@ -7469,7 +7469,7 @@ module Discordrb
       sig { params(value: T.untyped).returns(T.untyped) }
       def secret_key=(value); end
 
-      sig { returns(VoiceUDP) }
+      sig { void }
       def initialize; end
 
       sig { params(endpoint: String, port: Integer, ssrc: Integer).returns(T.untyped) }
@@ -7690,7 +7690,7 @@ module Discordrb
       sig { returns(T.nilable(Server)) }
       def server; end
 
-      sig { params(message: T.untyped, bot: T.untyped).returns(Discordrb::Events::MessageEvent) }
+      sig { params(message: T.untyped, bot: T.untyped).void }
       def initialize(message, bot); end
 
       sig { params(file: File, caption: T.untyped).returns(Discordrb::Message) }
@@ -7737,7 +7737,7 @@ module Discordrb
       sig { returns(Symbol) }
       def name; end
 
-      sig { params(name: T.untyped, attributes: T.untyped, block: T.untyped).returns(Command) }
+      sig { params(name: T.untyped, attributes: T.untyped, block: T.untyped).void }
       def initialize(name, attributes = {}, &block); end
 
       sig do
@@ -7758,12 +7758,12 @@ module Discordrb
       sig { returns(Command) }
       def aliased_command; end
 
-      sig { params(name: T.untyped, aliased_command: T.untyped).returns(CommandAlias) }
+      sig { params(name: T.untyped, aliased_command: T.untyped).void }
       def initialize(name, aliased_command); end
     end
 
     class CommandChain
-      sig { params(chain: String, bot: CommandBot, subchain: T::Boolean).returns(CommandChain) }
+      sig { params(chain: String, bot: CommandBot, subchain: T::Boolean).void }
       def initialize(chain, bot, subchain = false); end
 
       sig { params(event: CommandEvent).returns(String) }
@@ -7816,7 +7816,7 @@ module Discordrb
       sig { returns(T.any(String, T::Array[String], T.untyped)) }
       def prefix; end
 
-      sig { params(attributes: T::Hash[T.untyped, T.untyped]).returns(CommandBot) }
+      sig { params(attributes: T::Hash[T.untyped, T.untyped]).void }
       def initialize(attributes = {}); end
 
       sig { params(name: Symbol).returns(T::Array[CommandAlias]) }
@@ -8411,7 +8411,7 @@ module Discordrb
     end
 
     class Bucket
-      sig { params(limit: T.nilable(Integer), time_span: T.nilable(Integer), delay: T.nilable(Integer)).returns(Bucket) }
+      sig { params(limit: T.nilable(Integer), time_span: T.nilable(Integer), delay: T.nilable(Integer)).void }
       def initialize(limit, time_span, delay); end
 
       sig { params(rate_limit_time: Time).returns(T.untyped) }
@@ -8441,7 +8441,7 @@ module Discordrb
     class SimpleRateLimiter
       include RateLimiter
 
-      sig { returns(SimpleRateLimiter) }
+      sig { void }
       def initialize; end
 
       sig { params(key: Symbol, attributes: T::Hash[T.untyped, T.untyped]).returns(Bucket) }
