@@ -13,6 +13,10 @@ on:
   pull_request:
     branches: [ master ]
 
+  # Daily job that runs at 7AM UTC to test with the newest sorbet.
+  schedule:
+    - cron: '0 7 * * *'
+
 jobs:
   test:
 
