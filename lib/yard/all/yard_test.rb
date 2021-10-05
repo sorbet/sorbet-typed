@@ -14,5 +14,5 @@ YARD::Handlers::Ruby::MethodHandler.handlers
 namespace = YARD::CodeObjects::ClassObject.new(:root, :Suit)
 YARD::CodeObjects::ConstantObject.new(namespace, 'Spades')
 
-YARD::CodeObjects::Proxy.new(namespace, mixin.source)
-YARD::CodeObjects::Proxy.new(namespace, obj.value, :module)
+YARD::CodeObjects::Proxy.new(namespace, 'C')
+YARD::CodeObjects::Proxy.new(namespace, 'M', :module)
