@@ -959,6 +959,9 @@ class YARD::CodeObjects::MethodObject < YARD::CodeObjects::Base
   def sep; end
   def writer?; end
 end
+class YARD::CodeObjects::Proxy
+  def initialize(namespace, name, type = nil); end
+end
 class YARD::DocstringParser
   def call_after_parse_callbacks; end
   def call_directives_after_parse; end
