@@ -4,6 +4,7 @@ class YARD::CodeObjects::Base
   def initialize(namespace, name, *arg2); end
 end
 class YARD::CodeObjects::NamespaceObject < YARD::CodeObjects::Base
+  def mixins(*scopes); end
 end
 class YARD::CodeObjects::ClassObject < YARD::CodeObjects::NamespaceObject
 end
