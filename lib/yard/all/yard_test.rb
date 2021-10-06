@@ -13,3 +13,6 @@ YARD::Handlers::Ruby::MethodHandler.handlers
 # => [:def, :defs]
 namespace = YARD::CodeObjects::ClassObject.new(:root, :Suit)
 YARD::CodeObjects::ConstantObject.new(namespace, 'Spades')
+
+YARD::CodeObjects::Proxy.new(namespace, 'C')
+YARD::CodeObjects::Proxy.new(namespace, 'M', :module)
