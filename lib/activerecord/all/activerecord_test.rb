@@ -218,11 +218,17 @@ class ActiveRecordMigrationsTest
   end
 
   def test_transactions
-    ActiveRecordCallbacksTest.transaction do
+    first_result = ActiveRecordCallbacksTest.transaction do
+      1
     end
 
-    ActiveRecordCallbacksTest.transaction(requires_new: true) do
+    T.assert_type!(first_result, Integer)
+
+    second_result = ActiveRecordCallbacksTest.transaction(requires_new: true) do
+      ['2']
     end
+
+    T.assert_type!(second_result, T::Array[String])
   end
 
   def test_activerecord_instance_methods
