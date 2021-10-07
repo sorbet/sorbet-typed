@@ -671,10 +671,11 @@ end
 
 module ActiveRecord::Transactions::ClassMethods
   sig do
-    params(
+    type_parameters(:T)
+    .params(
       options: T.nilable(T::Hash[T.any(Symbol, String), T.untyped]),
-      block: T.proc.returns(T.untyped)
-    ).returns(T.untyped)
+      block: T.proc.returns(T.type_parameter(:T))
+    ).returns(T.type_parameter(:T))
   end
   def transaction(options = {}, &block); end
 end
