@@ -497,7 +497,7 @@ ActionDispatch::Http::Headers::DEFAULT = T.let(T.unsafe(nil), Object)
 ActionDispatch::Http::Headers::HTTP_HEADER = T.let(T.unsafe(nil), Regexp)
 
 class ActionController::Parameters
-  sig { params(other: ActionController::Parameters).returns(T::Boolean) }
+  sig { params(other: T.any(String, ActionController::Parameters)).returns(T::Boolean) }
   def ==(other); end
 
   sig { params(key: T.any(String, Symbol), value: T.untyped).void }
