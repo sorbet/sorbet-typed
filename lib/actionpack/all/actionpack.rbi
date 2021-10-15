@@ -320,6 +320,15 @@ module ActionDispatch::Http::Parameters
   def params(); end
 end
 
+# these methods are delegated out, sorbet gets confused with them
+class ActionDispatch::IntegrationTest
+  sig { returns(ActionDispatch::Flash::FlashHash) }
+  def flash; end
+
+  sig { returns(ActionDispatch::Request::Session) }
+  def session; end
+end
+
 class ActionDispatch::RemoteIp::IpSpoofAttackError < ::StandardError
 end
 
