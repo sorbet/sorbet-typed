@@ -591,7 +591,7 @@ module Sidekiq::Worker::ClassMethods
       unique_for: T.nilable(ActiveSupport::Duration),
       unique_until: T.nilable(Symbol),
       options: T.untyped
-    ).returns(Hash)
+    ).returns(T::Hash[String, T.untyped])
   end
   def sidekiq_options(queue: nil, retry: nil, backtrace: nil, pool: nil, unique_for: nil, unique_until: nil, **options); end
 
