@@ -92,6 +92,7 @@ module Stripe
     sig { returns(String) }
     def id; end
 
+    # not all objects, at all times have metadata (deleted customers for instance)
     sig { returns(T::Hash[T.any(String, Symbol), T.untyped]) }
     def metadata; end
 
@@ -117,10 +118,7 @@ module Stripe
   end
 
   class InvoiceSettings < StripeObject
-    sig { returns(T.nilable(PaymentMethod)) }
-    def default_payment_method; end
-
-    sig { returns(String) }
+    sig { returns(T.nilable(T.any(String, PaymentMethod))) }
     def default_payment_method; end
 
     sig { params(arg: String).void }
@@ -171,6 +169,19 @@ module Stripe
     def self.retrieve(id, opts = nil); end
   end
 
+  class Discount
+    sig { returns(Stripe::Coupon) }
+    def coupon; end
+  end
+
+  class Coupon
+    sig { params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])).returns(Stripe::Coupon) }
+    def self.retrieve(id, opts = nil); end
+
+    sig { returns(T.nilable(String)) }
+    def name; end
+  end
+
   class PaymentIntent < APIResource
     sig { returns(String) }
     def client_secret; end
@@ -216,6 +227,18 @@ module Stripe
     sig { returns(T.any(String, Stripe::Charge)) }
     def charge; end
 
+    sig { returns(T::Boolean)}
+    def paid; end
+
+    sig { params(other: T::Boolean).void }
+    def paid=(other); end
+
+    sig { returns(String) }
+    def billing; end
+
+    sig { returns(Integer) }
+    def subtotal; end
+
     def status_transitions; end
   end
 
@@ -229,6 +252,12 @@ module Stripe
     sig { returns(T.nilable(String))}
     def description; end
 
+    sig { returns(T.any(Stripe::Customer, String))}
+    def customer; end
+
+    sig { returns(T.any(Stripe::Invoice, String))}
+    def invoice; end
+
     # unsure how to represent a StripeObject with specific keys/mmethods without causing typing errors
     def period; end
   end
@@ -236,6 +265,37 @@ module Stripe
   class Plan < APIResource
     # unsure how to represent a StripeObject with specific keys/mmethods without causing typing errors
     def period; end
+
+    sig { returns(T.any(String, Stripe::Product))}
+    def product; end
+
+    sig { returns(Stripe::Plan).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
+    def self.retrieve(id, opts={}); end
+  end
+
+  class Product
+    sig { returns(Stripe::Product).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
+    def self.retrieve(id, opts={}); end
+
+    sig { returns(String) }
+    def name; end
+
+    sig { returns(T.nilable(String)) }
+    def description; end
+
+    sig { returns(T::Boolean) }
+    def shippable; end
+  end
+
+  class TaxRate
+    sig { returns(T.nilable(String)) }
+    def description; end
+
+    sig { returns(String) }
+    def display_name; end
+
+    sig { returns(Integer) }
+    def percentage; end
   end
 
   class Subscription < APIResource
@@ -528,10 +588,7 @@ class Stripe::Charge < Stripe::APIResource
   def customer; end
 end
 
-class Stripe::Payout
-  sig { returns(String) }
-  def id; end
-
+class Stripe::Payout < Stripe::APIResource
   sig { returns(Integer) }
   def created; end
 
@@ -545,14 +602,15 @@ class Stripe::Payout
   def self.retrieve(id, opts={}); end
 end
 
-class Stripe::BalanceTransaction
-  sig { returns(String) }
-  def id; end
-
+class Stripe::BalanceTransaction < Stripe::APIResource
   sig { returns(String) }
   def type; end
 
-  sig { returns(String) }
+  sig { returns(String)}
+  def currency; end
+
+  # if resource is expanded, the actual object is returned
+  sig { returns(T.any(String, Stripe::Charge, Stripe::Refund))}
   def source; end
 
   sig { returns(Integer) }
