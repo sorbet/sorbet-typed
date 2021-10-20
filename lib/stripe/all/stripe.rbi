@@ -23,8 +23,6 @@ module Stripe
   end
 
   class Address < StripeObject
-    extend T::Sig
-
     sig { returns(String) }
     def city; end
 
@@ -69,7 +67,7 @@ module Stripe
     def self.retrieve(id, opts = nil); end
   end
 
-  class Card < Stripe::APIResource
+  class Card < APIResource
     sig { returns(String) }
     def country; end
 
@@ -174,7 +172,7 @@ module Stripe
     def coupon; end
   end
 
-  class Coupon
+  class Coupon < APIResource
     sig { params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])).returns(Stripe::Coupon) }
     def self.retrieve(id, opts = nil); end
 
@@ -273,7 +271,7 @@ module Stripe
     def self.retrieve(id, opts={}); end
   end
 
-  class Product
+  class Product < APIResource
     sig { returns(Stripe::Product).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
     def self.retrieve(id, opts={}); end
 
@@ -287,7 +285,7 @@ module Stripe
     def shippable; end
   end
 
-  class TaxRate
+  class TaxRate < APIResource
     sig { returns(T.nilable(String)) }
     def description; end
 
@@ -443,10 +441,7 @@ class Stripe::Token
   def bank_account; end
 end
 
-class Stripe::Card
-  sig { returns(String) }
-  def id; end
-
+class Stripe::Card < Stripe::APIResource
   sig { returns(String) }
   def brand; end
 
@@ -629,7 +624,7 @@ class Stripe::BalanceTransaction < Stripe::APIResource
   def self.retrieve(id, opts={}); end
 end
 
-class Stripe::ApplicationFee
+class Stripe::ApplicationFee < Stripe::APIResource
   sig { returns(String) }
   def id; end
 end
