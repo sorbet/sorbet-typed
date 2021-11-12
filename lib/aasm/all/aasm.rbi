@@ -28,13 +28,30 @@ module AASM::ClassMethods
       name: Symbol,
       after_commit: T.nilable(Symbol),
       guard: T.nilable(Symbol),
+      after: T.nilable(Symbol),
+      after_transition: T.nilable(Symbol),
+      before: T.nilable(Symbol),
+      before_transaction: T.nilable(Symbol),
+      ensure: T.nilable(Symbol),
+      error: T.nilable(Symbol),
+      before_success: T.nilable(Symbol),
+      success: T.nilable(Symbol),
       block: T.proc.bind(T.untyped).void
     ).void
   end
   def event(
     name,
-    after_commit: nil,
     guard: nil,
+    unless: nil,
+    after: nil,
+    after_commit: nil,
+    after_transition: nil,
+    before: nil,
+    before_transaction: nil,
+    ensure: nil,
+    error: nil,
+    before_success: nil,
+    success: nil,
     &block
   )
   end
