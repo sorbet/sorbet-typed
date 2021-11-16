@@ -26,8 +26,17 @@ module AASM::ClassMethods
   sig do
     params(
       name: Symbol,
-      after_commit: T.nilable(Symbol),
-      guard: T.nilable(Symbol),
+      after_commit: T.nilable(T::Array[Symbol]),
+      guard: T.nilable(T::Array[Symbol]),
+      unless: T.nilable(T::Array[Symbol]),
+      after: T.nilable(T::Array[Symbol]),
+      after_transition: T.nilable(T::Array[Symbol]),
+      before: T.nilable(T::Array[Symbol]),
+      before_transaction: T.nilable(T::Array[Symbol]),
+      ensure: T.nilable(T::Array[Symbol]),
+      error: T.nilable(T::Array[Symbol]),
+      before_success: T.nilable(T::Array[Symbol]),
+      success: T.nilable(T::Array[Symbol]),
       block: T.proc.bind(T.untyped).void
     ).void
   end
@@ -35,6 +44,15 @@ module AASM::ClassMethods
     name,
     after_commit: nil,
     guard: nil,
+    unless: nil,
+    after: nil,
+    after_transition: nil,
+    before: nil,
+    before_transaction: nil,
+    ensure: nil,
+    error: nil,
+    before_success: nil,
+    success: nil,
     &block
   )
   end
