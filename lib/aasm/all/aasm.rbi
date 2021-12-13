@@ -26,17 +26,17 @@ module AASM::ClassMethods
   sig do
     params(
       name: Symbol,
-      after_commit: T.nilable(T::Array[Symbol]),
-      guard: T.nilable(T::Array[Symbol]),
-      unless: T.nilable(T::Array[Symbol]),
-      after: T.nilable(T::Array[Symbol]),
-      after_transition: T.nilable(T::Array[Symbol]),
-      before: T.nilable(T::Array[Symbol]),
-      before_transaction: T.nilable(T::Array[Symbol]),
-      ensure: T.nilable(T::Array[Symbol]),
-      error: T.nilable(T::Array[Symbol]),
-      before_success: T.nilable(T::Array[Symbol]),
-      success: T.nilable(T::Array[Symbol]),
+      after_commit: T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      guard: T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      unless: T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      after: T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      after_transition: T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      before:  T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      before_transaction: T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      ensure:  T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      error:  T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      before_success:  T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
+      success:  T.any(T.nilable(T::Array[Symbol]), T.nilable(Symbol)),
       block: T.proc.bind(T.untyped).void
     ).void
   end
