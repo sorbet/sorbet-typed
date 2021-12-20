@@ -480,9 +480,9 @@ module ActiveRecord::Core
 end
 
 module ActiveRecord::ConnectionHandling
-  def connected_to(database: T.unsafe(nil), role: T.unsafe(nil), prevent_writes: T.unsafe(nil), &blk); end
-  def connected_to?(role:); end
-  def connects_to(database: T.unsafe(nil)); end
+  def connected_to(database: T.unsafe(nil), role: T.unsafe(nil), shard: T.unsafe(nil), prevent_writes: T.unsafe(nil), &blk); end
+  def connected_to?(role: nil, shard: nil); end
+  def connects_to(database: T.unsafe({}), shards: T.unsafe({})); end
   def current_role; end
 end
 
@@ -492,4 +492,8 @@ module ActiveRecord
   class StatementTimeout < QueryAborted; end
   class QueryCanceled < QueryAborted; end
   class QueryAborted < StatementInvalid; end
+end
+
+module ActiveRecord::TouchLater
+  def touch_later(*names); end
 end
