@@ -1,5 +1,6 @@
 # typed: strong
 
+class ActiveRecord::Migration::Compatibility::V5_0 < ActiveRecord::Migration::Compatibility::V5_1; end
 class ActiveRecord::Migration::Compatibility::V5_1 < ActiveRecord::Migration::Compatibility::V5_2; end
 
 # 5.2 has a different definition for create_table because 6.0 adds a new option.
