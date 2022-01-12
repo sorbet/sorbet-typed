@@ -57,29 +57,14 @@ module ActiveRecord::SecureToken
   mixes_in_class_methods(::ActiveRecord::SecureToken::ClassMethods)
 end
 
-module ActiveRecord::Suppressor
-  extend(::ActiveSupport::Concern)
-
-  mixes_in_class_methods(::ActiveRecord::Suppressor::ClassMethods)
-
-  def save(*arg0, **arg1); end
-  def save!(*arg0, **arg1); end
-end
-
 module ActiveRecord::Suppressor::ClassMethods
   def suppress(&block); end
-end
-
-module ActiveRecord::SecureToken::ClassMethods
-  def generate_unique_secure_token; end
-  def has_secure_token(attribute = T.unsafe(nil)); end
 end
 
 module ActiveRecord::TouchLater
   extend(::ActiveSupport::Concern)
 
   def touch(*names, time: T.unsafe(nil)); end
-  def touch_later(*names, **arg1); end
 
   private
 
