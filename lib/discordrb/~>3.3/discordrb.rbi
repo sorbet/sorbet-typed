@@ -1498,7 +1498,7 @@ module Discordrb
     sig { params(id: T.untyped).returns(T.untyped) }
     def emoji(id = nil); end
 
-    sig { params(name: String).returns(T.nilable(T.untyped)) }
+    sig { params(name: String).returns(T.untyped) }
     def find_emoji(name); end
 
     sig { returns(Profile) }
@@ -4777,28 +4777,28 @@ module Discordrb
       sig { params(value: T.nilable(T.any(Integer, String, T.untyped))).returns(T.untyped) }
       def colour=(value); end
 
-      sig { returns(T.nilable(T.untyped)) }
+      sig { returns(T.untyped) }
       def footer; end
 
-      sig { params(value: T.nilable(T.untyped)).returns(T.nilable(T.untyped)) }
+      sig { params(value: T.untyped).returns(T.untyped) }
       def footer=(value); end
 
-      sig { returns(T.nilable(T.untyped)) }
+      sig { returns(T.untyped) }
       def image; end
 
-      sig { params(value: T.nilable(T.untyped)).returns(T.nilable(T.untyped)) }
+      sig { params(value: T.untyped).returns(T.untyped) }
       def image=(value); end
 
-      sig { returns(T.nilable(T.untyped)) }
+      sig { returns(T.untyped) }
       def thumbnail; end
 
-      sig { params(value: T.nilable(T.untyped)).returns(T.nilable(T.untyped)) }
+      sig { params(value: T.untyped).returns(T.untyped) }
       def thumbnail=(value); end
 
-      sig { returns(T.nilable(T.untyped)) }
+      sig { returns(T.untyped) }
       def author; end
 
-      sig { params(value: T.nilable(T.untyped)).returns(T.nilable(T.untyped)) }
+      sig { params(value: T.untyped).returns(T.untyped) }
       def author=(value); end
 
       sig { params(field: T.untyped).returns(T.untyped) }
@@ -4960,7 +4960,7 @@ module Discordrb
       sig { params(embed: T.untyped).returns(T.untyped) }
       def <<(embed); end
 
-      sig { params(embed: T.nilable(T.untyped)).returns(T.untyped) }
+      sig { params(embed: T.untyped).returns(T.untyped) }
       def add_embed(embed = nil); end
 
       sig { returns(T.nilable(File)) }
@@ -7950,7 +7950,7 @@ module Discordrb
       sig { params(id: T.untyped).returns(T.untyped) }
       def emoji(id = nil); end
 
-      sig { params(name: String).returns(T.nilable(T.untyped)) }
+      sig { params(name: String).returns(T.untyped) }
       def find_emoji(name); end
 
       sig { returns(Profile) }
