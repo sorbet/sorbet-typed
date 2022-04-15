@@ -840,7 +840,7 @@ end
 
 class Net::SSH::HostKeys
   include(::Enumerable)
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   def initialize(host_keys, host, known_hosts, options = T.unsafe(nil)); end
 
@@ -965,7 +965,7 @@ class Net::SSH::Service::Forward
 end
 
 class Net::SSH::Service::Forward::Remote < ::Struct
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   def host; end
   def host=(_); end
