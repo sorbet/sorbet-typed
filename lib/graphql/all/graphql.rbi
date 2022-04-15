@@ -10,7 +10,7 @@ end
 class GraphQL::Backtrace
   include(::Enumerable)
   extend(::Forwardable)
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 end
 
 class GraphQL::Schema

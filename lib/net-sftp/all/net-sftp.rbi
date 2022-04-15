@@ -321,7 +321,7 @@ end
 Net::SFTP::Operations::Download::DEFAULT_READ_SIZE = T.let(T.unsafe(nil), Integer)
 
 class Net::SFTP::Operations::Download::Entry < ::Struct
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   def directory; end
   def directory=(_); end
@@ -412,7 +412,7 @@ end
 Net::SFTP::Operations::Upload::DEFAULT_READ_SIZE = T.let(T.unsafe(nil), Integer)
 
 class Net::SFTP::Operations::Upload::LiveFile < ::Struct
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   def handle; end
   def handle=(_); end
@@ -642,7 +642,7 @@ class Net::SFTP::Protocol::V04::Attributes < ::Net::SFTP::Protocol::V01::Attribu
 end
 
 class Net::SFTP::Protocol::V04::Attributes::ACL < ::Struct
-  Elem = type_member(fixed: T.untyped)
+  Elem = type_member {{fixed: T.untyped}}
 
   def flag; end
   def flag=(_); end

@@ -117,9 +117,9 @@ HTTParty::ConnectionAdapter::OPTION_DEFAULTS = T.let(T.unsafe(nil), T::Hash[T.un
 HTTParty::ConnectionAdapter::StripIpv6BracketsRegex = T.let(T.unsafe(nil), Regexp)
 
 class HTTParty::CookieHash < ::Hash
-  K = type_member(fixed: T.untyped)
-  V = type_member(fixed: T.untyped)
-  Elem = type_member(fixed: T.untyped)
+  K = type_member {{fixed: T.untyped}}
+  V = type_member {{fixed: T.untyped}}
+  Elem = type_member {{fixed: T.untyped}}
 
   def add_cookies(data); end
   def to_cookie_string; end
