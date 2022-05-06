@@ -1826,6 +1826,9 @@ class ActiveSupport::OrderedOptions < ::Hash
   Elem = type_member {{fixed: T.untyped}}
 end
 
+class ActiveSupport::Logger < ::Logger
+end
+
 ActiveSupport::ParameterFilter::FILTERED = T.let(T.unsafe(nil), String)
 
 module ActiveSupport::Rescuable
