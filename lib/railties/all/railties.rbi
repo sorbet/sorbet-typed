@@ -14,7 +14,7 @@ module Rails
     sig { returns(ActiveSupport::StringInquirer) }
     def env; end
 
-    sig { returns(Logger) }
+    sig { returns(ActiveSupport::Logger) }
     def logger; end
 
     sig { returns(Pathname) }
