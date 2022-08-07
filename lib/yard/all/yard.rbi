@@ -1,5 +1,8 @@
 # typed: true
 
+sig { returns(YARD::Logger) }
+def log; end
+
 class YARD::CodeObjects::Base
   def initialize(namespace, name, *arg2); end
 end

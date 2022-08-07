@@ -16,3 +16,5 @@ YARD::CodeObjects::ConstantObject.new(namespace, 'Spades')
 
 YARD::CodeObjects::Proxy.new(namespace, 'C')
 YARD::CodeObjects::Proxy.new(namespace, 'M', :module)
+
+log.warn('test')
