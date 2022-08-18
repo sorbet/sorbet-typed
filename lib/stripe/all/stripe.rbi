@@ -420,7 +420,7 @@ module Stripe
     def self.retrieve(id, opts={}); end
   end
 
-  class Stripe::SubscriptionItem < Stripe::APIResource
+  class SubscriptionItem < Stripe::APIResource
     sig { params(arg:Hash).returns(Stripe::SubscriptionItem)}
     def self.construct_from(arg); end
 
