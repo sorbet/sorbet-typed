@@ -7,7 +7,7 @@ module Stripe
   class StripeObject
     extend T::Sig
 
-    sig { returns(T.any(Stripe::Subscription, Stripe::Customer, Stripe::Invoice)) }
+    sig {returns(T.any(Stripe::Subscription, Stripe::Customer, Stripe::Invoice, Stripe::InvoiceItem))}
     def object; end
 
     sig { returns(T.untyped).params(key: T.any(String, Symbol)) }
@@ -23,6 +23,9 @@ module Stripe
   end
 
   class Address < StripeObject
+    sig { returns(T.nilable(String)) }
+    def phone; end
+
     sig { returns(String) }
     def city; end
 
@@ -124,6 +127,18 @@ module Stripe
   end
 
   class Customer < APIResource
+    sig { returns(String) }
+    def currency; end
+
+    sig { returns(String) }
+    def description; end
+
+    sig { returns(T.nilable(String))}
+    def test_clock; end
+
+    sig { returns(T.nilable(String)) }
+    def phone; end
+
     sig { returns(String) }
     def default_source; end
 
@@ -256,6 +271,9 @@ module Stripe
     sig { returns(T.any(Stripe::Invoice, String))}
     def invoice; end
 
+    sig { returns(T.any(String, Stripe::Subscription))}
+    def subscription; end
+
     # unsure how to represent a StripeObject with specific keys/mmethods without causing typing errors
     def period; end
   end
@@ -269,6 +287,58 @@ module Stripe
 
     sig { returns(Stripe::Plan).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
     def self.retrieve(id, opts={}); end
+  end
+
+  class Price < APIResource
+    sig { returns(Stripe::Price).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
+    def self.retrieve(id, opts={}); end
+
+    sig { returns(Stripe::Price).params(params: T.nilable(T::Hash[Symbol, T.untyped])) }
+    def self.construct_from(params={}); end
+
+    sig { returns(Integer) }
+    def unit_amount; end
+
+    sig { returns(String) }
+    def unit_amount_decimal; end
+
+    sig { params(arg: T.any(String, BigDecimal)).void }
+    def unit_amount_decimal=(arg); end
+
+    sig { returns(String) }
+    def billing_scheme; end
+
+    sig { returns(String) }
+    def type; end
+
+    sig { returns(String) }
+    def currency; end
+
+    sig { returns(String) }
+    def tiers_mode; end
+
+    sig { returns(Array) }
+    def tiers; end
+
+    sig { returns(T.any(Stripe::Product, String)) }
+    def product; end
+
+    sig { returns(T.nilable(String))}
+    def lookup_key; end
+
+    sig { returns(T.nilable(String))}
+    def nickname; end
+
+    sig { returns(String)}
+    def tax_behavior; end
+
+    def transform_quantity; end
+
+    sig { returns(T::Boolean)}
+    def active; end
+
+    sig { params(arg: T::Boolean).void}
+    def active=(arg); end
   end
 
   class Product < APIResource
@@ -316,6 +386,49 @@ module Stripe
 
     sig { returns(Subscription).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
     def self.retrieve(id, opts = nil); end
+  end
+
+  class SubscriptionSchedule < APIResource
+    sig { returns(Stripe::SubscriptionScheduleSettings) }
+    def default_settings; end
+
+    sig { returns(T.any(Stripe::Subscription, String))}
+    def subscription; end
+
+    sig { returns(T.any(Stripe::Customer, String))}
+    def customer; end
+
+    sig { returns(T.any(Stripe::Subscription, String))}
+    def subscription; end
+
+    sig { returns(T::Array[Stripe::SubscriptionSchedulePhase])}
+    def phases; end
+
+    sig { params(arg: T::Array[Stripe::SubscriptionSchedulePhase]).void }
+    def phases=(arg); end
+
+    sig { returns(String) }
+    def status; end
+
+    sig { returns(String) }
+    def proration_behavior; end
+
+    sig { params(arg: String).void }
+    def proration_behavior=(arg); end
+
+    sig { returns(Stripe::SubscriptionSchedule).params(id: T.any(String, T::Hash[Symbol, T.untyped]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
+    def self.retrieve(id, opts={}); end
+  end
+
+  class SubscriptionItem < Stripe::APIResource
+    sig { params(arg:Hash).returns(Stripe::SubscriptionItem)}
+    def self.construct_from(arg); end
+
+    sig { returns(Integer)}
+    def quantity; end
+
+    sig { params(arg:Integer).void}
+    def quantity=(arg); end
   end
 
   class CreditNote < APIResource
