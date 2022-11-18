@@ -71,9 +71,9 @@ class Money
   sig { returns(Integer) }
   def to_i; end
 
-    sig do
+  sig do
     params(
-      new_currency: T.nilable(T.any(Money::Currency, String, Symbol))
+      given_currency: T.nilable(T.any(Money::Currency, String, Symbol))
     )
     .returns(Money)
   end
