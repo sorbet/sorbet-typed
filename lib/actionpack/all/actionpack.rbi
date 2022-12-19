@@ -181,7 +181,7 @@ class ActionController::Base < ::ActionController::Metal
   include(::ActiveSupport::Rescuable)
 end
 
-class ActionController::API
+class ActionController::API < ::ActionController::Metal
   MODULES = T.let(T.unsafe(nil), T::Array[T.untyped])
 end
 
