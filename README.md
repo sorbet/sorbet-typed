@@ -1,5 +1,16 @@
 ![Ruby](https://github.com/sorbet/sorbet-typed/workflows/Ruby/badge.svg)
 
+> &nbsp;
+>
+> **NOTE**: [Tapioca is the recommended way to generate RBIs for Sorbet](https://sorbet.org/blog/2022/07/27/srb-tapioca).\
+> Tapioca uses [rbi-central](https://github.com/Shopify/rbi-central) instead of sorbet-typed for high-quality type annotations for third-party libraries.
+>
+> Unless your project continues to use `srb rbi` instead of `tapioca`, contributing to sorbet-typed will not let you use those types in your own project.
+>
+> We continue to accept contributions to this repo, for anyone who can't or prefers not to use Tapioca.
+>
+> &nbsp;
+
 # sorbet-typed
 
 > A central repository for sharing type definitions for Ruby gems
