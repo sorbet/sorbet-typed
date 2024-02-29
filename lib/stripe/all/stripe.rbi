@@ -196,20 +196,61 @@ module Stripe
   end
 
   class PaymentIntent < APIResource
-    sig { returns(String) }
-    def client_secret; end
+    sig {returns(Integer)}
+    def amount_received; end
 
-    sig { returns(String) }
-    def status; end
+    sig {returns(T.nilable(String))}
+    def application; end
 
     sig { returns(Stripe::ListObject) }
     def charges; end
 
+    sig { returns(String) }
+    def client_secret; end
+
+    sig { returns(Integer)}
+    def created; end
+
+    sig { returns(String) }
+    def currency; end
+
+    sig {returns(T.nilable(StripeError))}
+    def last_payment_error; end
+
     sig { returns(Stripe::ListObject) }
     def line_items; end
 
+    sig {returns(T.nilable(PaymentIntentNextAction))}
+    def next_action; end
+
+    sig {returns(T.nilable(PaymentIntentPaymentMethodOptions))}
+    def payment_method_options; end
+
+    sig { returns(String) }
+    def status; end
+
     sig { returns(PaymentIntent).params(id: T.any(String, T::Hash[Symbol, T.any(String, T::Array[String])]), opts: T.nilable(T::Hash[Symbol, T.untyped])) }
     def self.retrieve(id, opts = nil); end
+  end
+
+  class PaymentIntentNextAction < StripeObject
+    sig {returns(String)}
+    def type; end
+  end
+
+  class PaymentIntentNextActionRedirectToUrl < StripeObject
+    sig {returns(T.nilable(String))}
+    def url; end
+  end
+
+  class PaymentIntentPaymentMethodOptions < StripeObject
+    sig {returns(T.nilable(String))}
+    def card; end
+  end
+
+  class PaymentIntentPaymentMethodOptionsCard < StripeObject
+    sig {returns(T.nilable(String))}
+    def capture_method; end
   end
 
   class Invoice < APIResource
