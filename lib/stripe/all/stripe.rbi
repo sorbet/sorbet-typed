@@ -563,6 +563,9 @@ module Stripe
     extend T::Sig
 
     sig { returns(String) }
+    def account; end
+
+    sig { returns(String) }
     def type; end
 
     sig { returns(Stripe::StripeObject) }
@@ -587,6 +590,17 @@ module Stripe
 
     sig { returns(String) }
     def last4; end
+  end
+
+  class Refund < APIResource
+    sig {returns(T.nilable(String))}
+    def failure_reason; end
+
+    sig {returns(T.nilable(String))}
+    def payment_intent; end
+
+    sig {returns(T.nilable(String))}
+    def status; end
   end
 
   class StripeError
